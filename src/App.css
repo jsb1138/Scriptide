@@ -1,5 +1,107 @@
+ul {
+  list-style-type: none;
+  background-color: grey;
+  width: 7vw;
+  height: 50vh;
+  padding-top: 1px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  margin-left: -1vw;
+
+}
+
+
+#root {
+  max-width: 100vw;
+  max-height: 100vh;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.Toastify {
+  max-width: 2vw;
+  max-height: 2vh;
+  top: 0;
+  right: 0;
+  margin-bottom: 150px;
+}
+
+.editor {
+  border-radius: 10px;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+  a:nth-of-type(3) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.sideBar {
+  position: relative;
+  Width: 5vw;
+  transition: all 1s ease;
+  -webkit-transition: all 1.5s ease;
+  right: 14vw;
+}
+
+.mainContainer {
+  /* display: flex; */
+}
+
+.notActiveSideBar {
+  position: relative;
+  width: 5vw;
+  right: 22.5vw;
+  transition: all 1s ease;
+  -webkit-transition: all 1.5s ease;
+
+
+}
+
+#sideBarButton {
+  background-color: transparent;
+}
+
+#sideBarItems {
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
 .App {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   /* background-color: rgb(185, 134, 134); */
   text-align: center;
@@ -141,7 +243,10 @@ button {
   height: 93%;
   margin-left: 0px;
   margin-top: 0px;
-  background-color: rgb(63, 254, 168);
+  background-color: rgb(128 128 128 );
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 9999;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
   overflow: hidden;
@@ -157,6 +262,7 @@ button {
   height: 140px;
   border-radius: 50%;
   background-color: rgb(63, 254, 168);
+  overflow: hidden;
   z-index: 10000;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }

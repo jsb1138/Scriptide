@@ -1,8 +1,10 @@
 import { createContext, useContext, useState, useEffect } from "react";
+// import  languageOptions  from '../constants/languageOptions'
 
 const ScriptideContext = createContext(null);
 
 export default function ScriptideProvider({children}){
+
   const languageOptions = [
     {
       id: 63,
@@ -24,18 +26,16 @@ export default function ScriptideProvider({children}){
     },
   ];
 
-  const [clicked, setClicked] = useState(false);
+  const javascriptDefault = "//happy coding";
+
   const [camActive, setCamActive] = useState(true);
   const [ideActive, setIdeActive] = useState(false);
   const [gridActive, setGridActive] = useState(false);
-  const [code, setCode] = useState('//happy coding');
+  const [code, setCode] = useState(javascriptDefault);
   const [outputDetails, setOutputDetails] = useState(null);
   const [processing, setProcessing] = useState(null);
   const [theme, setTheme] = useState("vs-dark");
   const [language, setLanguage] = useState(languageOptions[0]);
-
-
-
 
   async function getAndSet (){
   }
@@ -47,7 +47,7 @@ export default function ScriptideProvider({children}){
   }, [] )
 
   return (
-    <ScriptideContext.Provider value={{ clicked, setClicked, camActive, setCamActive, ideActive, setIdeActive, gridActive, setGridActive, processing, setProcessing, language, setLanguage, code, setCode, theme, setTheme, outputDetails, setOutputDetails }}>
+    <ScriptideContext.Provider value={{ camActive, setCamActive, ideActive, setIdeActive, gridActive, setGridActive, processing, setProcessing, language, setLanguage, code, setCode, theme, setTheme, outputDetails, setOutputDetails }}>
       {children}
     </ScriptideContext.Provider>
 
@@ -56,4 +56,4 @@ export default function ScriptideProvider({children}){
 
 }
 
-export const useScriptideContext = ()=> useContext(ScriptideContext);
+export const useScriptideContext = () => useContext(ScriptideContext);
