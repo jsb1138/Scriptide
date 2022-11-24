@@ -1,21 +1,19 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Amplify } from "aws-amplify";
-import awsExports from "./aws-exports";
+// import awsExports from "./aws-exports";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { useState } from "react";
+import { useScriptideContext } from "./contexts/ScriptideProvider";
 
 import "@aws-amplify/ui-react/styles.css";
-Amplify.configure(awsExports);
+// Amplify.configure(awsExports);
 
 const startMeeting = () => {};
 
 function App({ signOut, user }) {
-  const [clicked, setClicked] = useState(false);
-  const [camActive, setCamActive] = useState(true);
-  const [ideActive, setIdeActive] = useState(false);
-  const [gridActive, setGridActive] = useState(false);
 
+  const { clicked, setClicked, camActive, setCamActive, ideActive, setIdeActive, gridActive, setGridActive  } = useScriptideContext();
+  
   const handleCamClick = () => {
     if (ideActive) {
       setIdeActive(!ideActive);
