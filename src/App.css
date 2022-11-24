@@ -1,5 +1,9 @@
 .App {
+  width: 100%;
+  height: 100vh;
+  /* background-color: rgb(185, 134, 134); */
   text-align: center;
+  overflow-y: hidden;
 }
 
 .App-logo {
@@ -14,25 +18,173 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  background-color: rgb(243, 243, 243);
+  width: 100%;
+  height: 70px;
+  /* min-height: 100vh; */
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: white;
+  opacity: 0.5;
 }
 
 .App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+#App-main {
+  height: 100%;
+  width: 100%;
+  padding: 0 20px 0 20px;
+  background-color: #cdf4ff;
+  background-color: #daf3ff;
+  /* overflow-y: hidden; */
+  /* display: flex;
+  justify-content: space-around; */
+}
+
+#menu-container {
+  z-index: 100000;
+  /* background-color: aliceblue; */
+  width: 200px;
+  height: 80%;
+  border-radius: 4px;
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  display: flex;
+}
+
+#menu {
+  z-index: 10;
+  background-color: rgb(77, 104, 128);
+  width: 90px;
+  height: 80%;
+  border-radius: 4px;
+  /* position: relative; */
+  top: 20px;
+  left: 20px;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.7;
+}
+
+#menu-btn {
+  z-index: 10;
+  background-color: transparent;
+  border: none;
+  border-radius: 20px;
+  font-size: 30px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  margin-top: 40px;
+  margin-left: -20px;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.7;
+  color: white;
+}
+
+.open {
+  /* background-color: aliceblue; */
+  width: 200px;
+  height: 80%;
+  border-radius: 4px;
+  position: relative;
+  top: 20px;
+  display: flex;
+  left: 200px
+}
+
+button {
+  margin: 10px;
+  font-size: 16px;
+}
+
+#cam-view-open {
+  position: absolute;
+  right: 0px;
+  top: 70px;
+  width: 100%;
+  height: 93%;
+  margin-left: 0px;
+  margin-top: 0px;
+  background-color: rgb(178, 63, 254);
+  z-index: 9999;
+  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  overflow: hidden;
+}
+
+#cam-view-closed {
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 50px;
+  right: 60px;
+  /* top: 7%; */
+  top: 60px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: rgb(178, 63, 254);
+  z-index: 10000;
+  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+#ide-view-open {
+  position: absolute;
+  right: 0px;
+  top: 70px;
+  width: 100%;
+  height: 93%;
+  margin-left: 0px;
+  margin-top: 0px;
+  background-color: rgb(63, 254, 168);
+  z-index: 9999;
+  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  overflow: hidden;
+}
+
+#ide-view-closed {
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 50px;
+  right: 60px;
+  top: 220px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: rgb(63, 254, 168);
+  z-index: 10000;
+  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+#grid-view-open {
+  position: absolute;
+  right: 0px;
+  top: 70px;
+  width: 100%;
+  height: 93%;
+  margin-left: 0px;
+  margin-top: 0px;
+  background-color: rgb(255, 119, 189);
+  z-index: 9999;
+  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  overflow: hidden;
+}
+
+#grid-view-closed {
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 50px;
+  right: 60px;
+  top: 380px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: rgb(255, 119, 189);
+  z-index: 10000;
+  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }

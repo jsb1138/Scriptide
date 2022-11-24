@@ -1,25 +1,92 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { Amplify } from "aws-amplify";
+import awsExports from "./aws-exports";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import { useState } from "react";
 
-function App() {
+import "@aws-amplify/ui-react/styles.css";
+Amplify.configure(awsExports);
+
+const startMeeting = () => {};
+
+function App({ signOut, user }) {
+  const [clicked, setClicked] = useState(false);
+  const [camActive, setCamActive] = useState(true);
+  const [ideActive, setIdeActive] = useState(false);
+  const [gridActive, setGridActive] = useState(false);
+
+  const handleCamClick = () => {
+    if (ideActive) {
+      setIdeActive(!ideActive);
+      setCamActive(!camActive);
+    }
+    if (gridActive) {
+      setGridActive(!gridActive);
+      setCamActive(!camActive);
+    } else {
+      setCamActive(!camActive);
+    }
+  };
+
+  const handleIdeClick = () => {
+    if (camActive) {
+      setIdeActive(!ideActive);
+      setCamActive(!camActive);
+    }
+    if (gridActive) {
+      setGridActive(!gridActive);
+      setIdeActive(!ideActive);
+    } else {
+      setIdeActive(!ideActive);
+    }
+  };
+
+  const handleGridClick = () => {
+    if (camActive) {
+      setGridActive(!gridActive);
+      setCamActive(!camActive);
+    }
+    if (ideActive) {
+      setGridActive(!gridActive);
+      setIdeActive(!ideActive);
+    } else {
+      setGridActive(!gridActive);
+    }
+  };
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={signOut}>Sign Out</button>
+        <button onClick={startMeeting}>Start Meeting</button>
       </header>
+      <div id="App-main">
+        <div id="menu-container">
+          <div id="menu">TEST</div>
+          <button id="menu-btn">▸</button>
+        </div>
+        <div
+          onClick={handleCamClick}
+          id={camActive ? "cam-view-open" : "cam-view-closed"}
+        >
+          <h1>CAM</h1>
+        </div>
+        <div
+          onClick={handleIdeClick}
+          id={ideActive ? "ide-view-open" : "ide-view-closed"}
+        >
+          <h1>IDE</h1>
+        </div>
+        <div
+          onClick={handleGridClick}
+          id={gridActive ? "grid-view-open" : "grid-view-closed"}
+        >
+          <h1>GRID</h1>
+        </div>
+      </div>
     </div>
   );
 }
 
-export default App;
+export default withAuthenticator(App);
