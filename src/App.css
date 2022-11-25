@@ -1,6 +1,6 @@
 ul {
   list-style-type: none;
-  background-color: grey;
+  /* background-color: grey; */
   width: 7vw;
   height: 50vh;
   padding-top: 1px;
@@ -71,7 +71,7 @@ ul {
 
 .sideBar {
   position: relative;
-  Width: 5vw;
+  width: 5vw;
   transition: all 1s ease;
   -webkit-transition: all 1.5s ease;
   right: 14vw;
@@ -120,9 +120,10 @@ ul {
 }
 
 .App-header {
-  background-color: rgb(243, 243, 243);
+  /* background-color: rgb(243, 243, 243); */
   width: 100%;
   height: 70px;
+  padding-top: 30px;
   /* min-height: 100vh; */
   display: flex;
   /* flex-direction: column; */
@@ -141,8 +142,8 @@ ul {
   height: 100%;
   width: 100%;
   padding: 0 20px 0 20px;
-  background-color: #cdf4ff;
-  background-color: #daf3ff;
+  /* background-color: #cdf4ff;
+  background-color: #daf3ff; */
   /* overflow-y: hidden; */
   /* display: flex;
   justify-content: space-around; */
@@ -162,14 +163,14 @@ ul {
 
 #menu {
   z-index: 10;
-  background-color: rgb(77, 104, 128);
+  /* background-color: rgb(77, 104, 128); */
   width: 90px;
   height: 80%;
   border-radius: 4px;
   /* position: relative; */
   top: 20px;
   left: 20px;
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
   opacity: 0.7;
 }
 
@@ -185,7 +186,7 @@ ul {
   margin: 0;
   margin-top: 40px;
   margin-left: -20px;
-  background-color: rgb(255, 255, 255);
+  /* background-color: rgb(255, 255, 255); */
   opacity: 0.7;
   color: white;
 }
@@ -214,7 +215,7 @@ button {
   height: 93%;
   margin-left: 0px;
   margin-top: 0px;
-  background-color: rgb(178, 63, 254);
+  /* background-color: rgb(178, 63, 254); */
   z-index: 9999;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
   overflow: hidden;
@@ -230,7 +231,7 @@ button {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  background-color: rgb(178, 63, 254);
+  /* background-color: rgb(178, 63, 254); */
   z-index: 10000;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
@@ -243,7 +244,7 @@ button {
   height: 93%;
   margin-left: 0px;
   margin-top: 0px;
-  background-color: rgb(128 128 128 );
+  /* background-color: rgb(128 128 128 ); */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -261,7 +262,7 @@ button {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  background-color: rgb(63, 254, 168);
+  /* background-color: rgb(63, 254, 168); */
   overflow: hidden;
   z-index: 10000;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
@@ -275,7 +276,7 @@ button {
   height: 93%;
   margin-left: 0px;
   margin-top: 0px;
-  background-color: rgb(255, 119, 189);
+  /* background-color: rgb(255, 119, 189); */
   z-index: 9999;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
   overflow: hidden;
@@ -290,7 +291,7 @@ button {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  background-color: rgb(255, 119, 189);
+  /* background-color: rgb(255, 119, 189); */
   z-index: 10000;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }

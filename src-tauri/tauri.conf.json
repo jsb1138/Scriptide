@@ -1,18 +1,25 @@
 {
   "$schema": "../node_modules/@tauri-apps/cli/schema.json",
   "build": {
-    "beforeBuildCommand": "bun run build",
-    "beforeDevCommand": "bun run dev",
+    "beforeBuildCommand": "npm run build",
+    "beforeDevCommand": "npm run dev",
     "devPath": "http://localhost:5173",
-    "distDir": "../build"
+    "distDir": "../dist"
   },
   "package": {
     "productName": "Scriptide",
     "version": "0.1.0"
   },
   "tauri": {
+    "macOSPrivateApi": true,
     "allowlist": {
-      "all": false
+      "all": false,
+      "globalShortcut": {
+        "all": true
+      },
+      "window": {
+        "startDragging": true
+      }
     },
     "bundle": {
       "active": true,
@@ -29,7 +36,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "Scriptide",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
@@ -56,13 +63,15 @@
     "windows": [
       {
         "fullscreen": false,
+        "transparent": true,
         "height": 600,
         "resizable": true,
         "title": "Scriptide",
+        "label": "main",
         "width": 800,
-        "label": "Scriptide",
         "tabbingIdentifier": "Scriptide",
-        "titleBarStyle": "Transparent"
+        "decorations": true,
+        "titleBarStyle": "Overlay"
       }
     ]
   }
