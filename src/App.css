@@ -71,7 +71,7 @@ ul {
 
 .sideBar {
   position: relative;
-  Width: 5vw;
+  width: 5vw;
   transition: all 1s ease;
   -webkit-transition: all 1.5s ease;
   right: 14vw;
