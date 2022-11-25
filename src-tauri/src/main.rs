@@ -10,7 +10,9 @@
 //   format!("Hello, {}!", name)
 // }
 
-use tauri::{ CustomMenuItem, Menu, MenuItem, Submenu, WindowMenuEvent, Manager };
+use tauri::{ CustomMenuItem, Menu, MenuItem, Submenu, Manager };
+mod tao;
+// use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
 
 // API call function to be invoked from app.tsx
 // #[tauri::command]
@@ -42,10 +44,13 @@ fn main() {
   .add_submenu(file_sub_menu)
   .add_submenu(edit_sub_menu)
   .add_submenu(view_sub_menu);
+  
+  #[allow(clippy::single_match)]
 
   // fix_path_env::fix();
   tauri::Builder::default()
     // .invoke_handler(tauri::generate_handler![greet])
+    .setup(tao::init)
     .menu(menu)
     .on_menu_event(|event| {
       match event.menu_item_id() {
@@ -62,4 +67,5 @@ fn main() {
     })
     .run(tauri::generate_context!())
     .expect("error while running tauri application");
+
 }

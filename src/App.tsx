@@ -18,7 +18,7 @@ import React, { useEffect, SetStateAction } from "react";
 import axios from "axios";
 import { invoke } from "@tauri-apps/api";
 import { ToastContainer, toast } from "react-toastify";
-
+import { window as tauriWindow } from "@tauri-apps/api";
 
 
 
@@ -44,6 +44,14 @@ export default function App() {
 
   const enterPress = useKeyPress("Enter");
   const ctrlPress = useKeyPress("Control");
+
+  const noDragSelector = "input, a, button";
+  document.addEventListener("mousedown", async (mouseDown: any) => {
+    if (mouseDown.target.closest(noDragSelector)) {
+      return;
+    }
+    await tauriWindow.appWindow.startDragging();
+  });
 
   function handleCompile() {
     //@ts-ignore
@@ -189,9 +197,9 @@ export default function App() {
 
 
   return (
-
+    // <div data-tauri-drag-region>
       <div className="App">
-      <header className="App-header">
+      <header data-tauri-drag-region className="App-header">
         <button>Sign Out</button>
         <button>Start Meeting</button>
       </header>
@@ -204,6 +212,8 @@ export default function App() {
 
         </div>
       </div>
+    // </div>
+      
 
 
   );

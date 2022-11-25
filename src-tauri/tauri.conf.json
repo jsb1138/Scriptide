@@ -11,10 +11,14 @@
     "version": "0.1.0"
   },
   "tauri": {
+    "macOSPrivateApi": true,
     "allowlist": {
       "all": false,
       "globalShortcut": {
         "all": true
+      },
+      "window": {
+        "startDragging": true
       }
     },
     "bundle": {
@@ -59,13 +63,15 @@
     "windows": [
       {
         "fullscreen": false,
+        "transparent": true,
         "height": 600,
         "resizable": true,
         "title": "Scriptide",
+        "label": "main",
         "width": 800,
-        "label": "Scriptide",
         "tabbingIdentifier": "Scriptide",
-        "titleBarStyle": "Transparent"
+        "decorations": true,
+        "titleBarStyle": "Overlay"
       }
     ]
   }
