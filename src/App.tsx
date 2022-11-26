@@ -20,6 +20,19 @@ import { invoke } from "@tauri-apps/api";
 import { ToastContainer, toast } from "react-toastify";
 import { window as tauriWindow } from "@tauri-apps/api";
 
+//chimeintegration -> TODO
+import { ThemeProvider } from 'styled-components';
+import {
+  MeetingProvider,
+  lightTheme
+} from 'amazon-chime-sdk-component-library-react';
+import Meeting from './components/Meeting';
+import MeetingForm from './components/MeetingForm';
+
+import { Amplify } from 'aws-amplify';
+import awsconfig from './aws-exports';
+// @ts-ignore
+Amplify.configure(awsconfig);
 
 
 //css
@@ -198,22 +211,28 @@ export default function App() {
   return (
     // <div data-tauri-drag-region>
       <div className="App">
-      <header data-tauri-drag-region className="App-header">
+
+      <ThemeProvider theme={lightTheme}>
+          <MeetingProvider>
+            <MeetingForm />
+        {/* <NavBar /> */}
+            <Meeting/>
+          </MeetingProvider>
+        </ThemeProvider>
+
+        {holes.map((hole, i) => <Porthole key={`${hole}+${i}`} hole={hole}/>)}
+
+      {/* <header data-tauri-drag-region className="App-header">
         <button>Sign Out</button>
         <button>Start Meeting</button>
       </header>
       <div id="App-main">
-            <NavBar />
-        {/* <div id="menu-container">
-          <div id="menu">
-          </div>
-          <button id="menu-btn">▸</button>
-        </div> */}
         {holes.map((hole, i) => <Porthole key={`${hole}+${i}`} hole={hole}/>)}
 
         </div>
-      </div>
-    // </div>
+      </div> */}
+
+     </div>
       
 
 
