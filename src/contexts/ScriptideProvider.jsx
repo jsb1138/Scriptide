@@ -3,8 +3,7 @@ import { createContext, useContext, useState, useEffect } from "react";
 
 const ScriptideContext = createContext(null);
 
-export default function ScriptideProvider({children}){
-
+export default function ScriptideProvider({ children }) {
   const languageOptions = [
     {
       id: 63,
@@ -28,7 +27,7 @@ export default function ScriptideProvider({children}){
 
   const javascriptDefault = "//happy coding";
 
-  const [camActive, setCamActive] = useState(true);
+  const [camActive, setCamActive] = useState(false);
   const [ideActive, setIdeActive] = useState(false);
   const [gridActive, setGridActive] = useState(false);
   const [code, setCode] = useState(javascriptDefault);
@@ -36,24 +35,42 @@ export default function ScriptideProvider({children}){
   const [processing, setProcessing] = useState(null);
   const [theme, setTheme] = useState("vs-dark");
   const [language, setLanguage] = useState(languageOptions[0]);
+  const [initiator, setInitiator] = useState("");
+  const testext = "this WOOOOOOOORRRRRRRRKKKKKSSSSS";
 
-  async function getAndSet (){
-  }
+  async function getAndSet() {}
 
   useEffect(() => {
-
-  getAndSet();
-
-  }, [] )
+    getAndSet();
+  }, []);
 
   return (
-    <ScriptideContext.Provider value={{ camActive, setCamActive, ideActive, setIdeActive, gridActive, setGridActive, processing, setProcessing, language, setLanguage, code, setCode, theme, setTheme, outputDetails, setOutputDetails }}>
+    <ScriptideContext.Provider
+      value={{
+        camActive,
+        setCamActive,
+        ideActive,
+        setIdeActive,
+        gridActive,
+        setGridActive,
+        processing,
+        setProcessing,
+        language,
+        setLanguage,
+        code,
+        setCode,
+        theme,
+        setTheme,
+        outputDetails,
+        setOutputDetails,
+        initiator,
+        setInitiator,
+        testext,
+      }}
+    >
       {children}
     </ScriptideContext.Provider>
-
-  )
-
-
+  );
 }
 
 export const useScriptideContext = () => useContext(ScriptideContext);

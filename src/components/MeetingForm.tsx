@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react';
+import { useScriptideContext }  from '../contexts/ScriptideProvider';
 
 import {
   Flex,
@@ -10,10 +11,12 @@ import {
 import { MeetingSessionConfiguration } from 'amazon-chime-sdk-js';
 import { addAttendeeToDB, addMeetingToDB, createMeeting, getAttendeeFromDB, getMeetingFromDB, joinMeeting } from '../utils/api';
 
-const MeetingForm: FC = ({ isInitiator, setIsInitiator}: any) => {
+const MeetingForm: FC = () => {
   const meetingManager = useMeetingManager();
   const [meetingTitle, setMeetingTitle] = useState('');
   const [attendeeName, setName] = useState('');
+
+  const {  initiator, setInitiator  } = useScriptideContext();
 
   function getAttendeeCallback() {
     return async (chimeAttendeeId: string, externalUserId?: string) => {
@@ -37,10 +40,11 @@ const clickedJoinMeeting = async (event: FormEvent) => {
   const meetingJson = meetingResponse.data.getMeeting;
   try {
     if (meetingJson) {
+      console.log("--------NOOOOOOOOOOOOOOOOOOOOO------");
       const meetingData = JSON.parse(meetingJson.data);
       const joinInfo = await joinMeeting(meetingData.MeetingId, name);
       console.log("meeting Data", meetingData);
-      console.log("is initiator NOT FIRST> --> ", isInitiator);
+      // console.log("is initiator NOT FIRST> --> ", isInitiator);
       await addAttendeeToDB(joinInfo.Attendee.AttendeeId, name);
       const meetingSessionConfiguration = new MeetingSessionConfiguration(
         meetingData,
@@ -48,12 +52,11 @@ const clickedJoinMeeting = async (event: FormEvent) => {
       );
       await meetingManager.join(meetingSessionConfiguration);
     } else {
+      console.log("----------------FIRST----------------");
       const joinInfo = await createMeeting(title, name, 'us-east-1');
       await addMeetingToDB(title, joinInfo.Meeting.MeetingId, JSON.stringify(joinInfo.Meeting));
       await addAttendeeToDB(joinInfo.Attendee.AttendeeId, name);
-      setIsInitiator(true)
-      console.log("is initiator FIRST> --> ", isInitiator);
-      console.log("attendee ID", joinInfo);
+      setInitiator(joinInfo.Attendee.AttendeeId) //sets the first person in meeting as "initiator"
       const meetingSessionConfiguration = new MeetingSessionConfiguration(
         joinInfo.Meeting,
         joinInfo.Attendee
