@@ -53,6 +53,12 @@ export default function App() {
     await tauriWindow.appWindow.startDragging();
   });
 
+  /**
+   * convert content of IDE to base64  
+   * compile via Judge0 
+   * return input  
+   * Will not work without logging the output
+   */
   function handleCompile() {
     //@ts-ignore
     setProcessing(true);
@@ -174,6 +180,11 @@ export default function App() {
     }
   }
 
+  /** @todo Implement this again, the themes folder in /lib has a bunch of themes  **/
+  /**
+   * 
+   * @param th Theme to change to
+   */
   function handleThemeChange(th: any) {
     const theme = th;
     console.log("theme: ", theme);
@@ -186,6 +197,9 @@ export default function App() {
   }
   const holes = ['cam', 'ide', 'grid']
 
+  /**
+   * Helper state to capture normally expected keybind functionality in IDE
+   */
   useEffect(() => {
     if (enterPress && ctrlPress) {
       console.log("enter: ", enterPress);
