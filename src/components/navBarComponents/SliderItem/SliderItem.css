@@ -1,0 +1,20 @@
+.item {
+  display: flex;
+  justify-content: center;
+  color: white;
+  width: 100%;
+  transition-property: opacity;
+  transition-duration: 0.2s;
+}
+.item:hover {
+  cursor: default;
+  background-color: #696868;
+}
+
+.shown {
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
+}

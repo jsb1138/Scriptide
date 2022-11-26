@@ -295,3 +295,11 @@ button {
   z-index: 10000;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
+
+
+/* CSS FOR NAVBAR */
+.main-container {
+  height: 100vh;
+  background-color: rgb(220, 213, 213);
+}
+

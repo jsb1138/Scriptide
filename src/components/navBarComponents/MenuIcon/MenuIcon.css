@@ -1,0 +1,15 @@
+.container {
+  margin: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  aspect-ratio: 1;
+  width: 80%;
+}
+.strip {
+  width: 80%;
+  height: 10%;
+  background-color: white;
+  margin-bottom: 15%;
+}
