@@ -21,5 +21,27 @@ describe("Landing screen", () => {
     cy.get('#menu-container').should('be.visible');
   })
 
+  it("Should successfully render porthole components", () => {
+    cy.get('#grid-view-closed').should('exist');
+    cy.get('#ide-view-closed').should('exist');
+    cy.get('#cam-view-open').should('exist');
+  })
 
+  it("Should open the IDE porthole on click", () => {
+    cy.get('#ide-view-closed').click().then(() => {
+      cy.get('#ide-view-open').should('exist');
+    })
+  })
+
+  it("Should open the IDE porthole on click", () => {
+    cy.get('#grid-view-closed').click().then(() => {
+      cy.get('#grid-view-open').should('exist');
+    })
+  })
+
+  it("Should open the IDE porthole on click", () => {
+    cy.get('#cam-view-open').click().then(() => {
+      cy.get('#cam-view-closed').should('exist');
+    })
+  })
 });
