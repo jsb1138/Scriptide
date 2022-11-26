@@ -194,8 +194,6 @@ export default function App() {
     }
   }, [ctrlPress, enterPress]);
 
-
-
   return (
     // <div data-tauri-drag-region>
       <div className="App">
