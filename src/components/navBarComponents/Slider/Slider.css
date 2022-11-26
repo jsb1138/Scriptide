@@ -26,6 +26,7 @@
   transition-timing-function: linear;
   background-color: #1c1b1b;
   position: relative;
+  border-radius: 0px;
 
 }
 
