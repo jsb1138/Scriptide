@@ -205,12 +205,12 @@ export default function App() {
         <button>Start Meeting</button>
       </header>
       <div id="App-main">
-        <div id="menu-container">
-          <div id="menu">
             <NavBar />
+        {/* <div id="menu-container">
+          <div id="menu">
           </div>
           <button id="menu-btn">▸</button>
-        </div>
+        </div> */}
         {holes.map((hole, i) => <Porthole key={`${hole}+${i}`} hole={hole}/>)}
 
         </div>
