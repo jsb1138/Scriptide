@@ -29,6 +29,7 @@ import "./App.css";
 import { languageOptions } from "./constants/languageOptions";
 import { defineTheme } from "./lib/defineTheme.js";
 import useKeyPress from "./hooks/useKeyPress";
+import NavBar from './components/navBarComponents/NavBar';
 
 //constants
 const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
@@ -202,10 +203,12 @@ export default function App() {
         <button>Start Meeting</button>
       </header>
       <div id="App-main">
-        <div id="menu-container">
-          <div id="menu">TEST</div>
+            <NavBar />
+        {/* <div id="menu-container">
+          <div id="menu">
+          </div>
           <button id="menu-btn">▸</button>
-        </div>
+        </div> */}
         {holes.map((hole, i) => <Porthole key={`${hole}+${i}`} hole={hole}/>)}
 
         </div>

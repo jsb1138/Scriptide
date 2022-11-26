@@ -1,0 +1,49 @@
+.main-slider-container {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  justify-content: flex-start;
+  z-index: 1000000000000;
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  width: 45px;
+  border-radius: 0 30% 30% 0;
+  background-color: #1c1b1b;
+  z-index: 1000000000000;
+
+}
+
+.slider-container {
+  z-index: 1000000000000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  height: 100vh;
+  transition-property: min-width, max-width;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
+  background-color: #1c1b1b;
+  position: relative;
+  border-radius: 0px;
+
+}
+
+.open {
+  min-width: 35%;
+  max-width: 310px;
+  left: 0px;
+  top: 0px;
+  z-index: 1000000000000;
+  
+}
+
+.closed {
+  z-index: 1000000000000;
+  min-width: 0;
+  max-width: 0;
+}
