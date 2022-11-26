@@ -10,7 +10,7 @@ export default function Slider() {
   }
 
   return (
-    <div className='main-container'>
+    <div className='main-slider-container'>
       <div className={`slider-container ${isOpen ? 'open' : 'closed'}`}>
         {Object.keys(components).map((item, index) => (
           <SliderItem
