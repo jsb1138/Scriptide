@@ -71,6 +71,7 @@ const {hole} = props
           id={active ? `${hole}-view-open` : `${hole}-view-closed`}
           >
 
+          {/* {hole === 'cam' ? <LocalVideo/> : <h1>{hole.toUpperCase()}</h1>} */}
           {hole === 'ide' ? <IDE /> : <h1>{hole.toUpperCase()}</h1>}
         </div>
   )

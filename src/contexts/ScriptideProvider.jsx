@@ -36,7 +36,7 @@ export default function ScriptideProvider({ children }) {
   const [theme, setTheme] = useState("vs-dark");
   const [language, setLanguage] = useState(languageOptions[0]);
   const [initiator, setInitiator] = useState("");
-  const testext = "this WOOOOOOOORRRRRRRRKKKKKSSSSS";
+  const [meetingActive, setMeetingActive] = useState(false);
 
   async function getAndSet() {}
 
@@ -65,7 +65,8 @@ export default function ScriptideProvider({ children }) {
         setOutputDetails,
         initiator,
         setInitiator,
-        testext,
+        meetingActive,
+        setMeetingActive,
       }}
     >
       {children}

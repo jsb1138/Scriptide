@@ -16,7 +16,7 @@ const MeetingForm: FC = () => {
   const [meetingTitle, setMeetingTitle] = useState('');
   const [attendeeName, setName] = useState('');
 
-  const {  initiator, setInitiator  } = useScriptideContext();
+  const {  initiator, setInitiator, setMeetingActive  } = useScriptideContext();
 
   function getAttendeeCallback() {
     return async (chimeAttendeeId: string, externalUserId?: string) => {
@@ -40,6 +40,7 @@ const clickedJoinMeeting = async (event: FormEvent) => {
   const meetingJson = meetingResponse.data.getMeeting;
   try {
     if (meetingJson) {
+      setMeetingActive(true);
       console.log("--------NOOOOOOOOOOOOOOOOOOOOO------");
       const meetingData = JSON.parse(meetingJson.data);
       const joinInfo = await joinMeeting(meetingData.MeetingId, name);
@@ -49,9 +50,10 @@ const clickedJoinMeeting = async (event: FormEvent) => {
       const meetingSessionConfiguration = new MeetingSessionConfiguration(
         meetingData,
         joinInfo.Attendee
-      );
-      await meetingManager.join(meetingSessionConfiguration);
-    } else {
+        );
+        await meetingManager.join(meetingSessionConfiguration);
+      } else {
+      setMeetingActive(true);
       console.log("----------------FIRST----------------");
       const joinInfo = await createMeeting(title, name, 'us-east-1');
       await addMeetingToDB(title, joinInfo.Meeting.MeetingId, JSON.stringify(joinInfo.Meeting));
@@ -73,6 +75,7 @@ const clickedJoinMeeting = async (event: FormEvent) => {
 };
 
   return (
+    <div className='form-container'>
     <form>
       <FormField
         field={Input}     
@@ -102,6 +105,7 @@ const clickedJoinMeeting = async (event: FormEvent) => {
           <PrimaryButton label="Join Meeting" onClick={clickedJoinMeeting} />
       {/* </Flex> */}
     </form>
+    </div>
   );
 };
 

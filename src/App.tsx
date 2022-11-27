@@ -53,7 +53,7 @@ const key = import.meta.env.VITE_RAPIDAPI_KEY;
 
 export default function App() {
 
-  const {  processing, setProcessing, language, setLanguage, code, setCode, theme, setTheme, outputDetails, setOutputDetails  } = useScriptideContext();
+  const {  processing, setProcessing, language, setLanguage, code, setCode, theme, setTheme, outputDetails, setOutputDetails, meetingActive  } = useScriptideContext();
 
 
   const enterPress = useKeyPress("Enter");
@@ -214,13 +214,13 @@ export default function App() {
 
       <ThemeProvider theme={lightTheme}>
           <MeetingProvider>
-            <MeetingForm />
+            {!meetingActive ? <div id="center-flex"><MeetingForm /></div> : <Meeting/>}
+            {/* <MeetingForm /> */}
         {/* <NavBar /> */}
-            <Meeting/>
           </MeetingProvider>
         </ThemeProvider>
 
-        {holes.map((hole, i) => <Porthole key={`${hole}+${i}`} hole={hole}/>)}
+        {/* {holes.map((hole, i) => <Porthole key={`${hole}+${i}`} hole={hole}/>)} */}
 
       {/* <header data-tauri-drag-region className="App-header">
         <button>Sign Out</button>

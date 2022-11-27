@@ -27,6 +27,9 @@ ul {
 }
 
 .editor {
+  display: flex;
+  justify-content: center;
+  /* background-color: blue; */
   border-radius: 10px;
 }
 
@@ -99,6 +102,7 @@ ul {
   width: 100vw;
   height: 100vh;
   /* background-color: rgb(185, 134, 134); */
+  background-color: white;
   text-align: center;
   overflow-y: hidden;
 }
@@ -112,21 +116,6 @@ ul {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
-}
-
-.App-header {
-  /* background-color: rgb(243, 243, 243); */
-  width: 100%;
-  height: 70px;
-  padding-top: 30px;
-  /* min-height: 100vh; */
-  display: flex;
-  /* flex-direction: column; */
-  align-items: center;
-  justify-content: space-between;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  opacity: 0.5;
 }
 
 .App-link {
@@ -202,6 +191,29 @@ button {
   font-size: 16px;
 }
 
+#center-flex {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  /* height: 50vh; */
+  /* top:50%; */
+  width: 20vw;
+  margin: auto;
+  /* background-color: blueviolet; */
+}
+
+#meeting-ctrls {
+  position: absolute;
+  bottom: 40px;
+  width: 100vw;
+  z-index: 10000000000000000;
+}
+
 #cam-view-open {
   position: absolute;
   right: 0px;
@@ -226,20 +238,22 @@ button {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  /* background-color: rgb(178, 63, 254); */
+  background-color: rgba(255, 255, 255, 0.2);
   z-index: 10000;
+  overflow: hidden;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 #ide-view-open {
   position: absolute;
   right: 0px;
+  margin-left: 0px;
+  margin-top: 0px;
   top: 70px;
   width: 100%;
   height: 93%;
-  margin-left: 0px;
-  margin-top: 0px;
-  /* background-color: rgb(128 128 128 ); */
+  border-radius: 0;
+  background-color: rgb(30 30 30);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -250,14 +264,18 @@ button {
 
 #ide-view-closed {
   position: absolute;
+  right: 60px;
   margin-left: 20px;
   margin-top: 50px;
-  right: 60px;
   top: 220px;
   width: 140px;
   height: 140px;
   border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
   /* background-color: rgb(63, 254, 168); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
   z-index: 10000;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
@@ -268,7 +286,7 @@ button {
   right: 0px;
   top: 70px;
   width: 100%;
-  height: 93%;
+  height: 100%;
   margin-left: 0px;
   margin-top: 0px;
   /* background-color: rgb(255, 119, 189); */
@@ -286,6 +304,8 @@ button {
   width: 140px;
   height: 140px;
   border-radius: 50%;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.2);
   /* background-color: rgb(255, 119, 189); */
   z-index: 10000;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
