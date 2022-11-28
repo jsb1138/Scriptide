@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { components } from '../../../contexts/NavigationProvider';
 import MenuIcon from '../MenuIcon';
 import SliderItem from '../SliderItem';
+import SendToNotion from '../SendToNotion/SendToNotion';
 import './Slider.css';
 export default function Slider() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,6 +20,7 @@ export default function Slider() {
             isOpen={isOpen}
           />
         ))}
+        <SendToNotion isOpen={isOpen}/>
       </div>
       <div>
         <div className='button' onClick={toggleSlider}>

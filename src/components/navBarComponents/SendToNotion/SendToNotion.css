@@ -1,0 +1,15 @@
+#notion-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  margin: 5px;
+  border: 2px solid white;
+}
+
+#notion-form label {
+  color: white;
+  padding: 10px 20px;
+  margin: 5px;
+}
