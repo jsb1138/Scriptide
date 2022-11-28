@@ -24,7 +24,8 @@ import { window as tauriWindow } from "@tauri-apps/api";
 import { ThemeProvider } from 'styled-components';
 import {
   MeetingProvider,
-  lightTheme
+  lightTheme,
+  // useLocalVideo
 } from 'amazon-chime-sdk-component-library-react';
 import Meeting from './components/Meeting';
 import MeetingForm from './components/MeetingForm';
@@ -55,6 +56,7 @@ export default function App() {
 
   const {  processing, setProcessing, language, setLanguage, code, setCode, theme, setTheme, outputDetails, setOutputDetails, meetingActive  } = useScriptideContext();
 
+  // const { tileId, isVideoEnabled, hasReachedVideoLimit, toggleVideo } = useLocalVideo();
 
   const enterPress = useKeyPress("Enter");
   const ctrlPress = useKeyPress("Control");
@@ -198,6 +200,19 @@ export default function App() {
       defineTheme(theme.value).then((_: any) => setTheme(theme.value));
     }
   }
+
+  const getLocalPreview = async () => {
+    try {
+      console.log("NAV",navigator)
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true,});
+      console.log("STREAM",stream)
+        return stream; 
+    } catch (error) {
+      //this is when user don't allow media devices
+      console.log(error);
+    }
+  };
+
   const holes = ['cam', 'ide', 'grid']
 
   useEffect(() => {
@@ -211,26 +226,15 @@ export default function App() {
   return (
     // <div data-tauri-drag-region>
       <div className="App">
-
+        <button onClick={()=>getLocalPreview()}>BUTTON</button>
+        {/* <NavBar /> */}
       <ThemeProvider theme={lightTheme}>
+      {/* @ts-ignore */}
           <MeetingProvider>
             {!meetingActive ? <div id="center-flex"><MeetingForm /></div> : <Meeting/>}
-            {/* <MeetingForm /> */}
-        {/* <NavBar /> */}
           </MeetingProvider>
         </ThemeProvider>
 
-        {/* {holes.map((hole, i) => <Porthole key={`${hole}+${i}`} hole={hole}/>)} */}
-
-      {/* <header data-tauri-drag-region className="App-header">
-        <button>Sign Out</button>
-        <button>Start Meeting</button>
-      </header>
-      <div id="App-main">
-        {holes.map((hole, i) => <Porthole key={`${hole}+${i}`} hole={hole}/>)}
-
-        </div>
-      </div> */}
 
      </div>
       

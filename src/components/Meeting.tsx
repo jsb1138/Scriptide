@@ -15,7 +15,10 @@ import {
   VideoTileGrid,
   RemoteVideos,
   LocalVideo,
-  useRosterState
+  useRosterState,
+  useLocalVideo,
+  useVideoInputs,
+  CameraSelection
 } from 'amazon-chime-sdk-component-library-react';
 import { endMeeting } from '../utils/api';
 
@@ -23,7 +26,9 @@ const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
   const meetingStatus = useMeetingStatus();
 
-  const {  initiator, camActive, setCamActive, ideActive, setIdeActive, gridActive, setGridActive  } = useScriptideContext();
+  const {  initiator, camActive, setCamActive, ideActive, setIdeActive, gridActive, setGridActive, thisUser, setThisUser  } = useScriptideContext();
+
+  const { isVideoEnabled, toggleVideo } = useLocalVideo();
 
   const clickedEndMeeting = async () => {
     const meetingId = meetingManager.meetingId;
@@ -40,6 +45,7 @@ const Meeting: FC = () => {
   const attendeeItems = attendees.splice(0,1).map(attendee => {
     const { chimeAttendeeId, name } = attendee;
     currentUserId = chimeAttendeeId;
+    // setThisUser(currentUserId);
   });
 
 
@@ -84,16 +90,50 @@ const Meeting: FC = () => {
       setGridActive(!gridActive);
     }
   };
+  const { devices, selectedDevice } = useVideoInputs();
+  function activateVid () {
+    console.log('devices',devices)
+    console.log('selected device',selectedDevice)
+    toggleVideo()
+  }
 
-  
+  const getLocalPreview = async () => {
+    try {
+        const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true,});
+        return stream; 
+    } catch (error) {
+      //this is when user don't allow media devices
+      console.log(error);
+    }
+  };
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     toggleVideo()
+  //     console.log("123Time");
+  //   }, 5000);
+  // },[])
+
+  meetingStatus === MeetingStatus.Succeeded ? ()=>{
+    setTimeout(() => {
+      toggleVideo()
+      console.log("TOGGLER")
+    }, 5000);
+  } 
+  : 
+  console.log("TOO SOON");
+
+  // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
+  // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER
   return (
-    <>
+    <> 
       <div style={{marginTop: '2rem', backgroundColor: "white", height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
           <div style={{margin: '0', backgroundColor: `${currentUserId.length > 0 && currentUserId === initiator ? "red" : "pink"}`, height: '4rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'absolute', top: '33px', zIndex: '10000000000'}}>
-            {currentUserId.length > 0 ? <h1>{currentUserId === initiator ? "Instructor" : "Student"}</h1>:<></>}
+            {currentUserId.length > 0 ? <h1 onClick={getLocalPreview}>{currentUserId === initiator ? "Instructor" : "Student"}{` >> vid enabled: ${isVideoEnabled}`}</h1>:<></>}
             </div>
         </div>
         <div id="meeting-ctrls">
+        
         {meetingStatus === MeetingStatus.Succeeded ? 
         <>
           <ControlBar layout="undocked-horizontal" showLabels>
@@ -139,20 +179,26 @@ const Meeting: FC = () => {
           </div>
         </>}
 
-        {!gridActive ? 
+        {/* {currentUserId.length > 0 && currentUserId === initiator ? <> */}
+          {!gridActive ? 
         <>
         <div onClick={handleGridClick} id="grid-view-closed"></div>
         <div onClick={handleGridClick} id={gridActive ? "grid-view-open" : "grid-view-closed"}>
-          <LocalVideo/>
+          <VideoTileGrid/>
         </div>
         </>
         :
         <>
         <div onClick={handleGridClick} id="grid-view-closed"></div>
         <div id={gridActive ? "grid-view-open" : "grid-view-closed"}>
-          <LocalVideo/>
+          <VideoTileGrid/>
         </div>
         </>}
+        {/* </>  */}
+        {/* // :  */}
+        {/* // <></>} */}
+
+        
         
 
       </>
