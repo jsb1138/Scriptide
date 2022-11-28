@@ -102,7 +102,7 @@ ul {
   width: 100vw;
   height: 100vh;
   /* background-color: rgb(185, 134, 134); */
-  background-color: white;
+  /* background-color: white; */
   text-align: center;
   overflow-y: hidden;
 }
@@ -204,7 +204,12 @@ button {
   /* top:50%; */
   width: 20vw;
   margin: auto;
-  /* background-color: blueviolet; */
+  background-color: white;
+  border-radius: 12px;
+  height: 260px;
+  width: 300px;
+  padding: 20px 20px;
+  /* opacity: 0.6; */
 }
 
 #meeting-ctrls {
