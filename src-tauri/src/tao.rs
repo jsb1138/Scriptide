@@ -7,7 +7,7 @@
 )]
 
 use tauri::{ App, Manager };
-use window_vibrancy::{ apply_vibrancy, apply_blur, NSVisualEffectMaterial, NSVisualEffectState };
+use window_vibrancy::{ apply_vibrancy, apply_blur, NSVisualEffectMaterial };
 
 /// setup
 pub fn init(app: &mut App) -> std::result::Result<(), Box<dyn std::error::Error>> {
