@@ -226,7 +226,6 @@ export default function App() {
   return (
     // <div data-tauri-drag-region>
       <div className="App">
-        <button onClick={()=>getLocalPreview()}>BUTTON</button>
         {/* <NavBar /> */}
       <ThemeProvider theme={lightTheme}>
       {/* @ts-ignore */}

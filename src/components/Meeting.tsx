@@ -129,7 +129,7 @@ const Meeting: FC = () => {
     <> 
       <div style={{marginTop: '2rem', backgroundColor: "white", height: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center'}}>
           <div style={{margin: '0', backgroundColor: `${currentUserId.length > 0 && currentUserId === initiator ? "red" : "pink"}`, height: '4rem', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', position: 'absolute', top: '33px', zIndex: '10000000000'}}>
-            {currentUserId.length > 0 ? <h1 onClick={getLocalPreview}>{currentUserId === initiator ? "Instructor" : "Student"}{` >> vid enabled: ${isVideoEnabled}`}</h1>:<></>}
+            {currentUserId.length > 0 ? <h1>{currentUserId === initiator ? "Instructor" : "Student"}</h1>:<></>}
             </div>
         </div>
         <div id="meeting-ctrls">
