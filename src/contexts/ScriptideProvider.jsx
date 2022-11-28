@@ -37,6 +37,7 @@ export default function ScriptideProvider({ children }) {
   const [language, setLanguage] = useState(languageOptions[0]);
   const [initiator, setInitiator] = useState("");
   const [meetingActive, setMeetingActive] = useState(false);
+  const [thisUser, setThisUser] = useState("");
 
   async function getAndSet() {}
 
@@ -67,6 +68,8 @@ export default function ScriptideProvider({ children }) {
         setInitiator,
         meetingActive,
         setMeetingActive,
+        thisUser,
+        setThisUser,
       }}
     >
       {children}

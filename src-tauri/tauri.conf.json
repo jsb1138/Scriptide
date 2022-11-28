@@ -30,6 +30,10 @@
       },
       "window": {
         "startDragging": true
+      },
+      "http": {
+        "all": true,
+        "request": true
       }
     },
     "bundle": {

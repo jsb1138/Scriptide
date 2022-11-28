@@ -18,7 +18,7 @@
       "function": {
         "scriptidedevlambda": {
           "deploymentBucketName": "amplify-scriptidechimeint-dev-160320-deployment",
-          "s3Key": "amplify-builds/scriptidedevlambda-33776175564f69677930-build.zip"
+          "s3Key": "amplify-builds/scriptidedevlambda-617a357758514a435a30-build.zip"
         }
       }
     }
