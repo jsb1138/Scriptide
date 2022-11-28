@@ -13,7 +13,7 @@
   "tauri": {
     "macOSPrivateApi": true,
     "allowlist": {
-      "all": false,
+      "all": true,
       "globalShortcut": {
         "all": true
       },
