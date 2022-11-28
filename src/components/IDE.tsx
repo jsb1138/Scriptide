@@ -24,17 +24,17 @@ export function IDE({ onChange, language, code, theme }:any ) {
   
 
   return (
-      <div className='editor'>
+        // <div id='center-flex'>
         <Editor
-        height="70vh"
-        width="70vw"
+        height="90vh"
+        width="75vw"
         onMount={handleEditorDidMount}
         onChange={handleChange}
         language={language || 'javascript'}
         value={value} theme='vs-dark'
         defaultValue='//happy coding'
         />
-      </div>
+      // </div>
   )
 }
 

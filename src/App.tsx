@@ -20,6 +20,20 @@ import { invoke } from "@tauri-apps/api";
 import { ToastContainer, toast } from "react-toastify";
 import { window as tauriWindow } from "@tauri-apps/api";
 
+//chimeintegration -> TODO
+import { ThemeProvider } from 'styled-components';
+import {
+  MeetingProvider,
+  lightTheme,
+  // useLocalVideo
+} from 'amazon-chime-sdk-component-library-react';
+import Meeting from './components/Meeting';
+import MeetingForm from './components/MeetingForm';
+
+import { Amplify } from 'aws-amplify';
+import awsconfig from './aws-exports';
+// @ts-ignore
+Amplify.configure(awsconfig);
 
 
 //css
@@ -40,8 +54,9 @@ const key = import.meta.env.VITE_RAPIDAPI_KEY;
 
 export default function App() {
 
-  const {  processing, setProcessing, language, setLanguage, code, setCode, theme, setTheme, outputDetails, setOutputDetails  } = useScriptideContext();
+  const {  processing, setProcessing, language, setLanguage, code, setCode, theme, setTheme, outputDetails, setOutputDetails, meetingActive  } = useScriptideContext();
 
+  // const { tileId, isVideoEnabled, hasReachedVideoLimit, toggleVideo } = useLocalVideo();
 
   const enterPress = useKeyPress("Enter");
   const ctrlPress = useKeyPress("Control");
@@ -185,6 +200,19 @@ export default function App() {
       defineTheme(theme.value).then((_: any) => setTheme(theme.value));
     }
   }
+
+  const getLocalPreview = async () => {
+    try {
+      console.log("NAV",navigator)
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true,});
+      console.log("STREAM",stream)
+        return stream; 
+    } catch (error) {
+      //this is when user don't allow media devices
+      console.log(error);
+    }
+  };
+
   const holes = ['cam', 'ide', 'grid']
 
   useEffect(() => {
@@ -198,22 +226,16 @@ export default function App() {
   return (
     // <div data-tauri-drag-region>
       <div className="App">
-      <header data-tauri-drag-region className="App-header">
-        <button>Sign Out</button>
-        <button>Start Meeting</button>
-      </header>
-      <div id="App-main">
-            <NavBar />
-        {/* <div id="menu-container">
-          <div id="menu">
-          </div>
-          <button id="menu-btn">▸</button>
-        </div> */}
-        {holes.map((hole, i) => <Porthole key={`${hole}+${i}`} hole={hole}/>)}
+        {/* <NavBar /> */}
+      <ThemeProvider theme={lightTheme}>
+      {/* @ts-ignore */}
+          <MeetingProvider>
+            {!meetingActive ? <div id="center-flex"><MeetingForm /></div> : <Meeting/>}
+          </MeetingProvider>
+        </ThemeProvider>
 
-        </div>
-      </div>
-    // </div>
+
+     </div>
       
 
 
