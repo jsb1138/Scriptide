@@ -13,6 +13,8 @@
 
 // use tauri::api::version;
 
+use tauri::Manager;
+
 mod tao;
 mod menu;
 // use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
@@ -52,6 +54,19 @@ fn main() {
   let builder = builder.menu(menu::menu());
 
   builder
+    .on_menu_event(|event| {
+      match event.menu_item_id() {
+        "quit" => {
+          let app = event.window().app_handle();
+          app.exit(0);
+        }
+        "close" => {
+          let window = event.window();
+          window.close().unwrap();
+        }
+        _ => {}
+      }
+    })
     .run(tauri::generate_context!())
     .expect("Error while running application");
 
