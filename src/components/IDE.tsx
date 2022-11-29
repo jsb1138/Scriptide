@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect, SetStateAction } from 'react'
 import { invoke } from '@tauri-apps/api'
 import Editor from '@monaco-editor/react'
@@ -44,9 +45,8 @@ export function IDE() {
     onChange('code', value);
   }
 
-  function handleEditorDidMount (editor: any , monaco: any) {
-    editorRef.current = monaco
-    
+  function handleEditorDidMount(editor: any, monaco: any) {
+    editorRef.current = monaco;
   }
 
   function onSelectChange(select: SetStateAction<any>) {
@@ -174,9 +174,8 @@ export function IDE() {
         value={value} theme='vs-dark'
         defaultValue='//happy coding'
         />
-        <button onClick={handleCompile}>execute</button>
-        <OutputWindow outputDetails={outputDetails}/>
+        //<button onClick={handleCompile}>execute</button>
+        //<OutputWindow outputDetails={outputDetails}/>
       </>
   )
 }
-
