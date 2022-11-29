@@ -13,8 +13,9 @@
 
 // use tauri::api::version;
 
-use ::tao::event::WindowEvent;
-use tauri::{Manager, WebviewAttributes, window::PlatformWebview, WindowEvent};
+// window event attempts for page refresh on keybind
+// use ::tao::event::WindowEvent;
+use tauri::{Manager, /*WebviewAttributes, window::PlatformWebview, WindowEvent */};
 
 mod tao;
 mod menu;
