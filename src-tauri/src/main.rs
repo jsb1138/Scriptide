@@ -17,6 +17,7 @@ use tauri::Manager;
 
 mod tao;
 mod menu;
+mod commands;
 // use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
 
 // API call function to be invoked from app.tsx
@@ -67,6 +68,7 @@ fn main() {
         _ => {}
       }
     })
+    .invoke_handler(tauri::generate_handler![commands::close_splash])
     .run(tauri::generate_context!())
     .expect("Error while running application");
 

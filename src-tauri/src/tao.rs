@@ -15,7 +15,7 @@ pub fn init(app: &mut App) -> std::result::Result<(), Box<dyn std::error::Error>
 
     
     #[cfg(target_os = "macos")]
-    apply_vibrancy(&win, NSVisualEffectMaterial::HudWindow, Some(window_vibrancy::NSVisualEffectState::Active), None)
+    apply_vibrancy(&win, NSVisualEffectMaterial::HudWindow, Some(window_vibrancy::NSVisualEffectState::Active), Some(5.0))
         .expect("Unsupported platform! 'apply_vibrancy' is only supported on macOS");
 
     
