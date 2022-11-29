@@ -230,7 +230,7 @@ export default function App() {
   return (
     // <div data-tauri-drag-region>
     <div className="App">
-      <NavBar />
+      {/* <NavBar /> */}
       <ThemeProvider theme={lightTheme}>
 
         {/* @ts-ignore */}

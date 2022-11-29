@@ -174,8 +174,8 @@ export function IDE() {
         value={value} theme='vs-dark'
         defaultValue='//happy coding'
         />
-        //<button onClick={handleCompile}>execute</button>
-        //<OutputWindow outputDetails={outputDetails}/>
+        <button onClick={handleCompile}>execute</button>
+        <OutputWindow outputDetails={outputDetails}/>
       </>
   )
 }
