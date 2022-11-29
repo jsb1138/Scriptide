@@ -1,31 +1,40 @@
-import React from 'react'
-import { useScriptideContext }  from '../contexts/ScriptideProvider';
+import React from "react";
+import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { IDE } from "./IDE";
 
 interface Props {
-  hole: string
+  hole: string;
 }
 
 export default function Porthole(props: Props) {
-  const {  camActive, setCamActive, ideActive, setIdeActive, gridActive, setGridActive } = useScriptideContext();
-const {hole} = props
+  const {
+    camActive,
+    setCamActive,
+    ideActive,
+    setIdeActive,
+    gridActive,
+    setGridActive,
+  } = useScriptideContext();
+  const { hole } = props;
 
-  const active = hole === 'cam' ? camActive : hole === 'grid' ? gridActive : ideActive
+  const active =
+    hole === "cam" ? camActive : hole === "grid" ? gridActive : ideActive;
 
- function handClick(){
-  switch (hole) {
-    case 'cam':
-      handleCamClick();
-      break;
-    case 'ide':
-      handleIdeClick();
-      break;
-    case 'grid':
-      handleGridClick();
-      break;
-      default: return false;
+  function handClick() {
+    switch (hole) {
+      case "cam":
+        handleCamClick();
+        break;
+      case "ide":
+        handleIdeClick();
+        break;
+      case "grid":
+        handleGridClick();
+        break;
+      default:
+        return false;
+    }
   }
- }
   const handleCamClick = () => {
     if (ideActive) {
       setIdeActive(!ideActive);
@@ -67,12 +76,10 @@ const {hole} = props
 
   return (
     <div
-          onClick={handClick}
-          id={active ? `${hole}-view-open` : `${hole}-view-closed`}
-          >
-
-          {/* {hole === 'cam' ? <LocalVideo/> : <h1>{hole.toUpperCase()}</h1>} */}
-          {hole === 'ide' ? <IDE /> : <h1>{hole.toUpperCase()}</h1>}
-        </div>
-  )
+      onClick={handClick}
+      id={active ? `${hole}-view-open` : `${hole}-view-closed`}
+    >
+      {hole === "ide" ? <IDE /> : <h1>{hole.toUpperCase()}</h1>}
+    </div>
+  );
 }
