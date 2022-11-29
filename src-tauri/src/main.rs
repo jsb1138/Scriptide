@@ -13,7 +13,8 @@
 
 // use tauri::api::version;
 
-use tauri::Manager;
+use ::tao::event::WindowEvent;
+use tauri::{Manager, WebviewAttributes, window::PlatformWebview, WindowEvent};
 
 mod tao;
 mod menu;
@@ -65,6 +66,10 @@ fn main() {
           let window = event.window();
           window.close().unwrap();
         }
+        // can't find reload functionality from tauri window events
+        // "reload" => {
+        //   WindowEvent::
+        // }
         _ => {}
       }
     })
