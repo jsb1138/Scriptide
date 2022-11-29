@@ -10,6 +10,10 @@ ul {
 
 }
 
+span {
+  font-family: 'Courier New', Courier, monospace;
+}
+
 #root {
   max-width: 100vw;
   max-height: 100vh;
@@ -133,6 +137,7 @@ ul {
   position: absolute;
   display: flex;
   align-items: center;
+  top: 0;
   left: -115px;
   transition: 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
 }

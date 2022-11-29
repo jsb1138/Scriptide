@@ -233,23 +233,9 @@ export default function App() {
   //   }
   // }, [ctrlPress, enterPress]);
 
-  const toggleMenu = () => {
-    setMenuState(!menuState);
-  };
-
   return (
     // <div data-tauri-drag-region>
     <div className="App">
-      {/** @todo: THIS RUDIMENTARY MENU CAN BE MADE INTO A COMPONENT --> *INCLUDE* "toggleMenu function" **/}
-      <div id={!menuState ? "menu-container-open" : "menu-container-closed"}>
-        <div id="menu"></div>
-        <div id="menu-btn-container" onClick={toggleMenu}>
-          <div className={menuState ? "menu-btn" : "menu-btn-mod"}>
-            {menuState ? "►" : "◄"}
-          </div>
-        </div>
-      </div>
-
       <ThemeProvider theme={lightTheme}>
         {/* @ts-ignore */}
         <MeetingProvider>

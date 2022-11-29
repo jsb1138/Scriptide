@@ -34,8 +34,9 @@ const Meeting: FC = () => {
     setIdeActive,
     gridActive,
     setGridActive,
-    thisUser,
-    setThisUser,
+    menuState,
+    setMenuState,
+    meetingIdentifier,
   } = useScriptideContext();
 
   const { isVideoEnabled, toggleVideo } = useLocalVideo();
@@ -119,6 +120,8 @@ const Meeting: FC = () => {
     }
   };
 
+  const ellipsis = () => {};
+
   // useEffect(() => {
   //   setTimeout(() => {
   //     toggleVideo()
@@ -126,6 +129,7 @@ const Meeting: FC = () => {
   //   }, 5000);
   // },[])
 
+  // DON'T DELETE
   meetingStatus === MeetingStatus.Succeeded
     ? () => {
         setTimeout(() => {
@@ -135,129 +139,157 @@ const Meeting: FC = () => {
       }
     : console.log("TOO SOON");
 
+  const toggleMenu = () => {
+    setMenuState(!menuState);
+  };
+
   // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
   // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER
   return (
     <>
-      <div
-        style={{
-          // backgroundColor: "white",
-          height: "100vh",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            margin: "0",
-            backgroundColor: `${
-              currentUserId.length > 0 && currentUserId === initiator
-                ? "red"
-                : "pink"
-            }`,
-            height: "4rem",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            position: "absolute",
-            top: "33px",
-            zIndex: "10000000000",
-          }}
-        >
-          {currentUserId.length > 0 ? (
-            <h1>{currentUserId === initiator ? "Instructor" : "Student"}</h1>
+      {meetingStatus === MeetingStatus.Succeeded ? (
+        <>
+          {/** @todo: THIS RUDIMENTARY MENU CAN BE MADE INTO A COMPONENT --> *INCLUDE* "toggleMenu function" **/}
+          <div
+            id={!menuState ? "menu-container-open" : "menu-container-closed"}
+          >
+            <div id="menu"></div>
+            <div id="menu-btn-container" onClick={toggleMenu}>
+              <div className={menuState ? "menu-btn" : "menu-btn-mod"}>
+                {menuState ? "►" : "◄"}
+              </div>
+            </div>
+          </div>
+          <div
+            style={{
+              // backgroundColor: "white",
+              height: "100vh",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div
+              style={{
+                margin: "0",
+                backgroundColor: `${
+                  currentUserId.length > 0 && currentUserId === initiator
+                    ? "red"
+                    : "pink"
+                }`,
+                height: "4rem",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                position: "absolute",
+                top: "33px",
+                zIndex: "10000000000",
+              }}
+            >
+              {currentUserId.length > 0 ? (
+                <h1>
+                  {currentUserId === initiator ? "Instructor" : "Student"}
+                </h1>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
+
+          <div id="meeting-ctrls">
+            {meetingStatus === MeetingStatus.Succeeded ? (
+              <>
+                <ControlBar layout="undocked-horizontal" showLabels>
+                  <AudioInputControl />
+                  <VideoInputControl />
+                  <AudioOutputControl />
+                  <ControlBarButton
+                    icon={<Phone />}
+                    onClick={clickedEndMeeting}
+                    label="End"
+                  />
+                </ControlBar>
+                <div />
+              </>
+            ) : (
+              <div />
+            )}
+          </div>
+
+          {!camActive ? (
+            <>
+              <div onClick={handleCamClick} id="cam-view-closed"></div>
+              <div
+                onClick={handleCamClick}
+                id={camActive ? "cam-view-open" : "cam-view-closed"}
+              >
+                <LocalVideo />
+              </div>
+            </>
           ) : (
-            <></>
+            <>
+              <div onClick={handleCamClick} id="cam-view-closed"></div>
+              <div id={camActive ? "cam-view-open" : "cam-view-closed"}>
+                <LocalVideo />
+              </div>
+            </>
           )}
+
+          {!ideActive ? (
+            <>
+              <div onClick={handleIdeClick} id="empty-porthole-invis"></div>
+              <div
+                onClick={handleIdeClick}
+                id={ideActive ? "ide-view-open" : "ide-view-closed"}
+              >
+                <div className="ide-pos-closed">
+                  <IDE />
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div onClick={handleIdeClick} id="empty-porthole"></div>
+              <div id={ideActive ? "ide-view-open" : "ide-view-closed"}>
+                <div className="ide-pos-open">
+                  <IDE />
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* {currentUserId.length > 0 && currentUserId === initiator ? <> */}
+          {!gridActive ? (
+            <>
+              <div onClick={handleGridClick} id="grid-view-closed"></div>
+              <div
+                onClick={handleGridClick}
+                id={gridActive ? "grid-view-open" : "grid-view-closed"}
+              >
+                <VideoTileGrid />
+              </div>
+            </>
+          ) : (
+            <>
+              <div onClick={handleGridClick} id="grid-view-closed"></div>
+              <div id={gridActive ? "grid-view-open" : "grid-view-closed"}>
+                {/* <VideoTileGrid /> */}
+              </div>
+            </>
+          )}
+          {/* </>  */}
+          {/* // :  */}
+          {/* // <></>} */}
+        </>
+      ) : (
+        <div id="center-flex">
+          <h3>
+            Joining <span>{meetingIdentifier}</span> meeting.
+          </h3>
         </div>
-      </div>
-      <div id="meeting-ctrls">
-        {meetingStatus === MeetingStatus.Succeeded ? (
-          <>
-            <ControlBar layout="undocked-horizontal" showLabels>
-              <AudioInputControl />
-              <VideoInputControl />
-              <AudioOutputControl />
-              <ControlBarButton
-                icon={<Phone />}
-                onClick={clickedEndMeeting}
-                label="End"
-              />
-            </ControlBar>
-            <div />
-          </>
-        ) : (
-          <div />
-        )}
-      </div>
-
-      {!camActive ? (
-        <>
-          <div onClick={handleCamClick} id="cam-view-closed"></div>
-          <div
-            onClick={handleCamClick}
-            id={camActive ? "cam-view-open" : "cam-view-closed"}
-          >
-            <LocalVideo />
-          </div>
-        </>
-      ) : (
-        <>
-          <div onClick={handleCamClick} id="cam-view-closed"></div>
-          <div id={camActive ? "cam-view-open" : "cam-view-closed"}>
-            <LocalVideo />
-          </div>
-        </>
       )}
-
-      {!ideActive ? (
-        <>
-          <div onClick={handleIdeClick} id="empty-porthole-invis"></div>
-          <div
-            onClick={handleIdeClick}
-            id={ideActive ? "ide-view-open" : "ide-view-closed"}
-          >
-            <div className="ide-pos-closed">
-              <IDE />
-            </div>
-          </div>
-        </>
-      ) : (
-        <>
-          <div onClick={handleIdeClick} id="empty-porthole"></div>
-          <div id={ideActive ? "ide-view-open" : "ide-view-closed"}>
-            <div className="ide-pos-open">
-              <IDE />
-            </div>
-          </div>
-        </>
-      )}
-
-      {/* {currentUserId.length > 0 && currentUserId === initiator ? <> */}
-      {!gridActive ? (
-        <>
-          <div onClick={handleGridClick} id="grid-view-closed"></div>
-          <div
-            onClick={handleGridClick}
-            id={gridActive ? "grid-view-open" : "grid-view-closed"}
-          >
-            <VideoTileGrid />
-          </div>
-        </>
-      ) : (
-        <>
-          <div onClick={handleGridClick} id="grid-view-closed"></div>
-          <div id={gridActive ? "grid-view-open" : "grid-view-closed"}>
-            {/* <VideoTileGrid /> */}
-          </div>
-        </>
-      )}
-      {/* </>  */}
-      {/* // :  */}
-      {/* // <></>} */}
     </>
   );
 };
