@@ -215,7 +215,7 @@ const Meeting: FC = () => {
 
       {!ideActive ? (
         <>
-          <div onClick={handleIdeClick} id="empty-porthole invis"></div>
+          <div onClick={handleIdeClick} id="empty-porthole-invis"></div>
           <div
             onClick={handleIdeClick}
             id={ideActive ? "ide-view-open" : "ide-view-closed"}

@@ -10,19 +10,21 @@ export default function Slider() {
   }
 
   return (
-    <div className="main-slider-container">
-      <div className={`slider-container ${isOpen ? "open" : "closed"}`}>
-        {Object.keys(components).map((item, index) => (
-          <SliderItem
-            key={`${item.toLowerCase()}-${index}`}
-            item={item}
-            isOpen={isOpen}
-          />
-        ))}
+    <>
+      <div className="main-slider-container">
+        <div className={`slider-container ${isOpen ? "open" : "closed"}`}>
+          {Object.keys(components).map((item, index) => (
+            <SliderItem
+              key={`${item.toLowerCase()}-${index}`}
+              item={item}
+              isOpen={isOpen}
+            />
+          ))}
+        </div>
+        <div className="button" onClick={toggleSlider}>
+          <MenuIcon />
+        </div>
       </div>
-      <div className="button" onClick={toggleSlider}>
-        <MenuIcon />
-      </div>
-    </div>
+    </>
   );
 }

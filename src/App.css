@@ -124,36 +124,90 @@ ul {
   height: 100%;
   width: 100%;
   padding: 0 20px 0 20px;
-  /* background-color: #cdf4ff;
-  background-color: #daf3ff; */
-  /* overflow-y: hidden; */
-  /* display: flex;
-  justify-content: space-around; */
 }
 
-#menu-container {
+#menu-container-closed {
   z-index: 100000;
-  /* background-color: aliceblue; */
   width: 200px;
-  height: 80%;
-  border-radius: 4px;
+  height: 100%;
   position: absolute;
-  top: 100px;
-  left: 20px;
   display: flex;
+  align-items: center;
+  left: -115px;
+  transition: 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+#menu-container-open {
+  z-index: 100000;
+  width: 200px;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  left: 0px;
+  transition: 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
 }
 
 #menu {
   z-index: 10;
-  /* background-color: rgb(77, 104, 128); */
+  background: rgba(255, 255, 255, 0.4);
   width: 90px;
-  height: 80%;
+  height: 75%;
   border-radius: 4px;
-  /* position: relative; */
-  top: 20px;
-  left: 20px;
-  /* background-color: rgb(255, 255, 255); */
+  position: relative;
+  left: 25px;
   opacity: 0.7;
+}
+#menu-open {
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.4);
+  width: 90px;
+  height: 75%;
+  border-radius: 4px;
+  position: relative;
+  left: 45px;
+  opacity: 0.7;
+}
+
+#menu-btn-container {
+  z-index: 10;
+  width: 90px;
+  height: 75%;
+  border-radius: 4px;
+  position: relative;
+  left: 30px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.menu-btn {
+  margin: 40px 0 0 10px;
+  padding: 2px 0 0 4px;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.menu-btn-mod {
+  margin: 40px 0 0 10px;
+  padding: 2px 4px 0 0;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
 }
 
 #menu-btn {
@@ -168,7 +222,6 @@ ul {
   margin: 0;
   margin-top: 40px;
   margin-left: -20px;
-  /* background-color: rgb(255, 255, 255); */
   opacity: 0.7;
   color: white;
 }
@@ -251,16 +304,18 @@ button {
   margin-left: 0px;
   margin-top: 0px;
   top: 0px;
+  padding: 150px 0 0 0;
   width: 100%;
   height: 100%;
   border-radius: 0;
   background-color: rgb(30 30 30);
-  background-color: rgb(114, 114, 114);
+  /* background-color: rgb(114, 114, 114); */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
   overflow: hidden;
 }
 
@@ -272,6 +327,7 @@ button {
   top: 190px;
   width: 140px;
   height: 140px;
+  padding: 0 0 0 0;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.2);
   background-color: rgb(30 30 30);
@@ -281,6 +337,7 @@ button {
   overflow: hidden;
   z-index: 10000;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  
 }
 
 #empty-porthole {

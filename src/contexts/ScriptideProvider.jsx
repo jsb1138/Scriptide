@@ -38,6 +38,7 @@ export default function ScriptideProvider({ children }) {
   const [initiator, setInitiator] = useState("");
   const [meetingActive, setMeetingActive] = useState(false);
   const [thisUser, setThisUser] = useState("");
+  const [menuState, setMenuState] = useState(false);
 
   async function getAndSet() {}
 
@@ -70,6 +71,8 @@ export default function ScriptideProvider({ children }) {
         setMeetingActive,
         thisUser,
         setThisUser,
+        menuState,
+        setMenuState,
       }}
     >
       {children}
