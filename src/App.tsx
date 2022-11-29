@@ -52,6 +52,9 @@ const key = import.meta.env.VITE_RAPIDAPI_KEY;
 
 
 
+
+
+
 export default function App() {
 
   const {  processing, setProcessing, language, setLanguage, code, setCode, theme, setTheme, outputDetails, setOutputDetails, meetingActive  } = useScriptideContext();
@@ -206,7 +209,7 @@ export default function App() {
       console.log("NAV",navigator)
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true,});
       console.log("STREAM",stream)
-        return stream; 
+        return stream;
     } catch (error) {
       //this is when user don't allow media devices
       console.log(error);
@@ -236,7 +239,7 @@ export default function App() {
 
 
      </div>
-      
+
 
 
   );
