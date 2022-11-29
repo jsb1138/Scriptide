@@ -1,26 +1,21 @@
+import React, { useState, useRef, useEffect, SetStateAction } from "react";
+import { invoke } from "@tauri-apps/api";
+import Editor from "@monaco-editor/react";
+import { useScriptideContext } from "../contexts/ScriptideProvider";
+import { toast } from "react-toastify";
+import axios from "axios";
 
-import React, { useState, useRef, useEffect, SetStateAction } from 'react'
-import { invoke } from '@tauri-apps/api'
-import Editor from '@monaco-editor/react'
-import { useScriptideContext }  from '../contexts/ScriptideProvider';
-import { toast } from 'react-toastify'
-import axios from 'axios';
-
-import '../App.css'
-import { OutputWindow } from './OutputWindow'
-import useKeyPress from '../hooks/useKeyPress'
-import { defineTheme } from '../lib/defineTheme.js'
-import { showSuccessToast, showErrorToast } from '../utils/apiServices.js';
-
-
-
+import "../App.css";
+import { OutputWindow } from "./OutputWindow";
+import useKeyPress from "../hooks/useKeyPress";
+import { defineTheme } from "../lib/defineTheme.js";
+import { showSuccessToast, showErrorToast } from "../utils/apiServices.js";
 
 export function IDE() {
-
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
   const host = import.meta.env.VITE_RAPIDAPI_HOST;
   const key = import.meta.env.VITE_RAPIDAPI_KEY;
-  
+
   const {
     processing,
     setProcessing,
@@ -31,18 +26,18 @@ export function IDE() {
     theme,
     setTheme,
     outputDetails,
-    setOutputDetails
+    setOutputDetails,
   } = useScriptideContext();
-  
-  const [value, setValue] = useState(code || '');
-  const editorRef = useRef<typeof Editor | null>(null)
+
+  const [value, setValue] = useState(code || "");
+  const editorRef = useRef<typeof Editor | null>(null);
 
   const enterPress = useKeyPress("Enter");
   const ctrlPress = useKeyPress("Control");
 
-  function handleChange (value: any) {
-    setValue(value)
-    onChange('code', value);
+  function handleChange(value: any) {
+    setValue(value);
+    onChange("code", value);
   }
 
   function handleEditorDidMount(editor: any, monaco: any) {
@@ -83,7 +78,7 @@ export function IDE() {
     const formData = {
       language_id: language.id,
       source_code: btoa(code),
-      stdin: btoa(''),
+      stdin: btoa(""),
     };
     console.log(formData);
     const options = {
@@ -101,13 +96,13 @@ export function IDE() {
 
     axios
       .request(options)
-      .then(function (response: { data: { token: any; }; }) {
+      .then(function (response: { data: { token: any } }) {
         console.log("res.data: ", response.data);
         const token = response.data.token;
         console.log("token: ", token);
         checkStatus(token);
       })
-      .catch((err: { response: { data: any; }; }) => {
+      .catch((err: { response: { data: any } }) => {
         console.log(options);
         let error = err.response ? err.response.data : err;
         //@ts-ignore
@@ -154,7 +149,7 @@ export function IDE() {
   }
 
   // invoke('greet', { name: 'World'}).then((response) => {console.log(response)})
-  
+
   useEffect(() => {
     if (enterPress && ctrlPress) {
       console.log("enter: ", enterPress);
@@ -162,20 +157,25 @@ export function IDE() {
       handleCompile();
     }
   }, [ctrlPress, enterPress]);
+
   return (
- 
-      <>
-        <Editor
+    <>
+      <Editor
         height="65vh"
         width="74vw"
         onMount={handleEditorDidMount}
         onChange={handleChange}
         language={language?.value}
-        value={value} theme='vs-dark'
-        defaultValue='//happy coding'
-        />
-        <button onClick={handleCompile}>execute</button>
-        <OutputWindow outputDetails={outputDetails}/>
-      </>
-  )
+        value={value}
+        theme="vs-dark"
+        defaultValue="// happy coding"
+      />
+      <div className="ide-output">
+        <button className="ide-run-btn" onClick={handleCompile}>
+          Run
+        </button>
+        <OutputWindow outputDetails={outputDetails} />
+      </div>
+    </>
+  );
 }

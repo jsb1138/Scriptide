@@ -274,13 +274,77 @@ button {
   height: 140px;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.2);
-  /* background-color: rgb(63, 254, 168); */
+  background-color: rgb(30 30 30);
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   z-index: 10000;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+#empty-porthole {
+  position: absolute;
+  right: 15px;
+  margin-left: 200px;
+  margin-top: 0px;
+  top: 190px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  /* background-color: white; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 100000;
+  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+#empty-porthole-invis {
+  position: absolute;
+  right: 15px;
+  margin-left: 200px;
+  margin-top: 0px;
+  top: 190px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0);
+  /* background-color: white; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 100000;
+  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.ide-pos-closed {
+  padding-top: 450px;
+  padding-left: 720px;
+  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.ide-pos-open {
+  padding-top: 00px;
+  padding-left: 00px;
+  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.ide-output {
+  position: relative;
+  padding: 0;
+  margin: 0;
+  height: 180px;
+  top: -180px;
+  /* background-color: #61dafb; */
+}
+
+.ide-run-btn {
+  margin: 0;
+  /* padding: 0; */
 }
 
 #grid-view-open {

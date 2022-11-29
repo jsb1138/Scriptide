@@ -215,19 +215,23 @@ const Meeting: FC = () => {
 
       {!ideActive ? (
         <>
-          <div onClick={handleIdeClick} id="ide-view-closed"></div>
+          <div onClick={handleIdeClick} id="empty-porthole invis"></div>
           <div
             onClick={handleIdeClick}
             id={ideActive ? "ide-view-open" : "ide-view-closed"}
           >
-            <IDE />
+            <div className="ide-pos-closed">
+              <IDE />
+            </div>
           </div>
         </>
       ) : (
         <>
-          <div onClick={handleIdeClick} id="ide-view-closed"></div>
+          <div onClick={handleIdeClick} id="empty-porthole"></div>
           <div id={ideActive ? "ide-view-open" : "ide-view-closed"}>
-            <IDE />
+            <div className="ide-pos-open">
+              <IDE />
+            </div>
           </div>
         </>
       )}
@@ -247,7 +251,7 @@ const Meeting: FC = () => {
         <>
           <div onClick={handleGridClick} id="grid-view-closed"></div>
           <div id={gridActive ? "grid-view-open" : "grid-view-closed"}>
-            <VideoTileGrid />
+            {/* <VideoTileGrid /> */}
           </div>
         </>
       )}

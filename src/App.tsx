@@ -1,14 +1,14 @@
-import { useState } from 'react'
-import { useScriptideContext }  from './contexts/ScriptideProvider';
+import { useState } from "react";
+import { useScriptideContext } from "./contexts/ScriptideProvider";
 
 // context
-import ScriptideProvider from './contexts/ScriptideProvider'
+import ScriptideProvider from "./contexts/ScriptideProvider";
 
 //components
 import { IDE } from "./components/IDE";
 import { OutputWindow } from "./components/OutputWindow";
 import { OutputDetails } from "./components/OutputDetails";
-import Porthole from './components/Porthole';
+import Porthole from "./components/Porthole";
 import { ThemeDropdown } from "./components/ThemeDropdown";
 import { LanguageDropdown } from "./components/LanguageDropdown";
 import { SideBar } from "./components/SideBar";
@@ -21,20 +21,19 @@ import { ToastContainer, toast } from "react-toastify";
 import { window as tauriWindow } from "@tauri-apps/api";
 
 //chimeintegration -> TODO
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from "styled-components";
 import {
   MeetingProvider,
   lightTheme,
   // useLocalVideo
-} from 'amazon-chime-sdk-component-library-react';
-import Meeting from './components/Meeting';
-import MeetingForm from './components/MeetingForm';
+} from "amazon-chime-sdk-component-library-react";
+import Meeting from "./components/Meeting";
+import MeetingForm from "./components/MeetingForm";
 
-import { Amplify } from 'aws-amplify';
-import awsconfig from './aws-exports';
+import { Amplify } from "aws-amplify";
+import awsconfig from "./aws-exports";
 // @ts-ignore
 Amplify.configure(awsconfig);
-
 
 //css
 import "./App.css";
@@ -43,19 +42,26 @@ import "./App.css";
 import { languageOptions } from "./constants/languageOptions";
 import { defineTheme } from "./lib/defineTheme.js";
 import useKeyPress from "./hooks/useKeyPress";
-import NavBar from './components/navBarComponents/NavBar';
-import { handleCompile } from './utils/apiServices.js'
+import NavBar from "./components/navBarComponents/NavBar";
+import { handleCompile } from "./utils/apiServices.js";
 
 //constants
 const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
 const host = import.meta.env.VITE_RAPIDAPI_HOST;
 const key = import.meta.env.VITE_RAPIDAPI_KEY;
 
-
-
 export default function App() {
-
-  const {  processing, setProcessing, language, setLanguage, code, setCode, theme, setTheme, meetingActive  } = useScriptideContext();
+  const {
+    processing,
+    setProcessing,
+    language,
+    setLanguage,
+    code,
+    setCode,
+    theme,
+    setTheme,
+    meetingActive,
+  } = useScriptideContext();
 
   // const { tileId, isVideoEnabled, hasReachedVideoLimit, toggleVideo } = useLocalVideo();
 
@@ -146,8 +152,6 @@ export default function App() {
   //   }
   // }
 
-
-
   // function showSuccessToast(message: string) {
   //   toast.success(message || "Compiled Successfuly", {
   //     position: "top-left",
@@ -204,17 +208,20 @@ export default function App() {
 
   const getLocalPreview = async () => {
     try {
-      console.log("NAV",navigator)
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: true,});
-      console.log("STREAM",stream)
-        return stream; 
+      console.log("NAV", navigator);
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: true,
+        video: true,
+      });
+      console.log("STREAM", stream);
+      return stream;
     } catch (error) {
       //this is when user don't allow media devices
       console.log(error);
     }
   };
 
-  const holes = ['cam', 'ide', 'grid']
+  const holes = ["cam", "ide", "grid"];
 
   // useEffect(() => {
   //   if (enterPress && ctrlPress) {
@@ -226,19 +233,20 @@ export default function App() {
 
   return (
     // <div data-tauri-drag-region>
-      <div className="App">
-        {/* <NavBar /> */}
+    <div className="App">
+      {/* <NavBar /> */}
       <ThemeProvider theme={lightTheme}>
-      {/* @ts-ignore */}
-          <MeetingProvider>
-            {!meetingActive ? <div id="center-flex"><MeetingForm /></div> : <Meeting/>}
-          </MeetingProvider>
-        </ThemeProvider>
-
-
-     </div>
-      
-
-
+        {/* @ts-ignore */}
+        <MeetingProvider>
+          {!meetingActive ? (
+            <div id="center-flex">
+              <MeetingForm />
+            </div>
+          ) : (
+            <Meeting />
+          )}
+        </MeetingProvider>
+      </ThemeProvider>
+    </div>
   );
 }
