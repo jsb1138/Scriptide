@@ -19,8 +19,17 @@ import {
   useLocalVideo,
   useVideoInputs,
   CameraSelection,
+  HandRaise,
+  RosterAttendeeType,
+  NotificationProvider,
+  useNotificationDispatch,
+  useNotificationState,
+  NotificationGroup,
+  ActionType,
+  Severity,
 } from "amazon-chime-sdk-component-library-react";
 import { endMeeting } from "../utils/api";
+import Notifications from "../containers/Notifications";
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
@@ -37,6 +46,8 @@ const Meeting: FC = () => {
     menuState,
     setMenuState,
     meetingIdentifier,
+    raisedHands,
+    setRaisedHand,
   } = useScriptideContext();
 
   const { isVideoEnabled, toggleVideo } = useLocalVideo();
@@ -51,12 +62,17 @@ const Meeting: FC = () => {
   };
 
   const { roster } = useRosterState();
+  console.log("roster", roster);
   const attendees = Object.values(roster);
-  let currentUserId = "";
+  console.log("attendees", attendees);
+  let currentUserId: string = "";
+  let currentUserName: string = "";
 
+  //redundant variable
   const attendeeItems = attendees.splice(0, 1).map((attendee) => {
     const { chimeAttendeeId, name } = attendee;
     currentUserId = chimeAttendeeId;
+    currentUserName = name;
     // setThisUser(currentUserId);
   });
 
@@ -121,8 +137,6 @@ const Meeting: FC = () => {
     }
   };
 
-  const ellipsis = () => {};
-
   // useEffect(() => {
   //   setTimeout(() => {
   //     toggleVideo()
@@ -133,10 +147,13 @@ const Meeting: FC = () => {
   // DON'T DELETE
   meetingStatus === MeetingStatus.Succeeded
     ? () => {
-        setTimeout(() => {
+        useEffect(() => {
           toggleVideo();
-          console.log("TOGGLER");
-        }, 5000);
+        }, []);
+        // setTimeout(() => {
+        //   toggleVideo();
+        //   console.log("TOGGLER");
+        // }, 5000);
       }
     : console.log("TOO SOON");
 
@@ -144,153 +161,328 @@ const Meeting: FC = () => {
     setMenuState(!menuState);
   };
 
+  // const handleHandRaise = (uid: any, name: string) => {
+  //   const user = { id: uid, name };
+  //   console.log("user", user);
+  //   console.log("name", name);
+  //   console.log("raised hands", raisedHands);
+  //   console.log("attendees", attendees);
+  //   const handRaiser = attendees.find((user) => user.name == name);
+  //   if (handRaiser) {
+  //     roster.hand = handRaiser as RosterAttendeeType;
+  //   }
+  //   console.log("hand raiser", handRaiser);
+  //   console.log("roster", roster);
+  //   setRaisedHand((raisedHands) => [...raisedHands, user]);
+  // };
+
+  interface Action {
+    type: ActionType;
+    payload?: any;
+  }
+
+  enum ActionType {
+    ADD,
+    REMOVE,
+    REMOVE_ALL,
+  }
+
+  // const AddNot = () => {
+  //   const dispatch = useNotificationDispatch();
+
+  //   // const payload: any = {
+  //   //   severity: Severity.INFO,
+  //   //   message: "It worked!",
+  //   // };
+
+  //   const addNotification = (e: any) => {
+  //     // console.log("notifications addnot", notifications);
+  //     // console.log("dispatch", dispatch);
+  //     console.log("pressed");
+  //     dispatch({
+  //       type: ActionType.ADD,
+  //       payload: "Payload",
+  //     });
+  //   };
+
+  //   return (
+  //     // <h1>WORKED</h1>
+  //     <div id="hand-raise-btn" onClick={addNotification}>
+  //       PRESS IT
+  //     </div>
+  //   );
+  // };
+
+  // const MyChild = () => {
+  //   // const { notifications } = useNotificationState();
+  //   const dispatch = useNotificationDispatch();
+
+  //   let notifications = [{ test: "One entry" }];
+
+  //   // const notificationItems = {notifications.map(({ id, ...rest }): any => (
+  //   //   <Notification
+  //   //     key={id}
+  //   //     {...rest}
+  //   //     onClose={() => dispatch({ type: ActionType.REMOVE, payload: id })}
+  //   //   />
+  //   // ))};
+
+  //   return <NotificationGroup>{notificationItems}</NotificationGroup>;
+  // };
+
+  // const NotificationGroup = () => {
+  //   // const { notifications } = useNotificationState();
+  //   const dispatch = useNotificationDispatch();
+  //   let notifications = [{ test: "One entry" }, { test: "Another entry" }];
+  //   console.log("notifications XXX", notifications);
+
+  //   // const notificationItems = {notifications.map(({ id, ...rest }): any => (
+  //   //   // @ts-ignore
+  //   //   <Notification
+  //   //     key={id}
+  //   //     {...rest}
+  //   //     onClose={() => dispatch({ type: ActionType.REMOVE, payload: id })}
+  //   //   />
+  //   // ))};
+
+  //   return (
+  //     <>
+  //       {/* <h1>note group</h1> */}
+  //       {notifications}
+  //     </>
+  //   );
+  // };
+
+  // const { notifications } = useNotificationState();
+  // console.log("notifications", notifications);
+
+  interface Action {
+    type: ActionType;
+    payload?: any;
+  }
+
+  const AddNotificationButton = () => {
+    const dispatch = useNotificationDispatch();
+
+    const payload: any = {
+      severity: Severity.INFO,
+      message: "Information",
+    };
+
+    const addNotification = (e: any) => {
+      dispatch({
+        type: ActionType.ADD,
+        payload: payload,
+      });
+    };
+
+    return (
+      <button onClick={addNotification}>
+        <h1>TEST</h1>
+      </button>
+    );
+  };
+
   // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
   // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER
   return (
     <>
-      {meetingStatus === MeetingStatus.Succeeded ? (
-        <>
-          {/** @todo: THIS RUDIMENTARY MENU CAN BE MADE INTO A COMPONENT --> *INCLUDE* "toggleMenu function" **/}
-          <div
-            id={!menuState ? "menu-container-open" : "menu-container-closed"}
-          >
-            <div id="menu"></div>
-            <div id="menu-btn-container" onClick={toggleMenu}>
-              <div className={menuState ? "menu-btn" : "menu-btn-mod"}>
-                {menuState ? "►" : "◄"}
+      <NotificationProvider>
+        {/* // @ts-ignore */}
+        <Notifications />
+        <AddNotificationButton />
+        {meetingStatus === MeetingStatus.Succeeded ? (
+          <>
+            {/** @todo: THIS RUDIMENTARY MENU CAN BE MADE INTO A COMPONENT --> *INCLUDE* "toggleMenu function" **/}
+            <div
+              id={!menuState ? "menu-container-open" : "menu-container-closed"}
+            >
+              <div id="menu"></div>
+              <div id="menu-btn-container" onClick={toggleMenu}>
+                <div className={menuState ? "menu-btn" : "menu-btn-mod"}>
+                  {menuState ? "►" : "◄"}
+                </div>
               </div>
             </div>
-          </div>
-          <div
-            style={{
-              // backgroundColor: "white",
-              height: "100vh",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
             <div
               style={{
-                margin: "0",
-                backgroundColor: `${
-                  currentUserId.length > 0 && currentUserId === initiator
-                    ? "red"
-                    : "pink"
-                }`,
-                height: "4rem",
+                // backgroundColor: "white",
+                height: "100vh",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
                 justifyContent: "center",
-                position: "absolute",
-                top: "33px",
-                zIndex: "10000000000",
               }}
             >
-              {currentUserId.length > 0 ? (
-                <h1>
-                  {currentUserId === initiator ? "Instructor" : "Student"}
-                </h1>
+              <div
+                style={{
+                  margin: "0",
+                  backgroundColor: `${
+                    currentUserId.length > 0 && currentUserId === initiator
+                      ? "red"
+                      : "pink"
+                  }`,
+                  height: "4rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "absolute",
+                  top: "33px",
+                  zIndex: "10000000000",
+                }}
+              >
+                {currentUserId.length > 0 ? (
+                  <h1>
+                    {currentUserId === initiator ? "Instructor" : "Student"}
+                  </h1>
+                ) : (
+                  <></>
+                )}
+              </div>
+            </div>
+
+            <div id="meeting-ctrls">
+              {meetingStatus === MeetingStatus.Succeeded ? (
+                <>
+                  <ControlBar layout="undocked-horizontal" showLabels>
+                    <AudioInputControl />
+                    <VideoInputControl />
+                    <AudioOutputControl />
+                    <ControlBarButton
+                      icon={<Phone />}
+                      onClick={clickedEndMeeting}
+                      label="End"
+                    />
+                  </ControlBar>
+                  <div />
+                </>
               ) : (
-                <></>
+                <div />
               )}
             </div>
-          </div>
 
-          <div id="meeting-ctrls">
-            {meetingStatus === MeetingStatus.Succeeded ? (
+            {!camActive ? (
               <>
-                <ControlBar layout="undocked-horizontal" showLabels>
-                  <AudioInputControl />
-                  <VideoInputControl />
-                  <AudioOutputControl />
-                  <ControlBarButton
-                    icon={<Phone />}
-                    onClick={clickedEndMeeting}
-                    label="End"
-                  />
-                </ControlBar>
-                <div />
+                <div onClick={handleCamClick} id="cam-view-closed"></div>
+                <div
+                  onClick={handleCamClick}
+                  id={camActive ? "cam-view-open" : "cam-view-closed"}
+                >
+                  <LocalVideo />
+                </div>
               </>
             ) : (
-              <div />
+              <>
+                <div onClick={handleCamClick} id="cam-view-closed"></div>
+                <div id={camActive ? "cam-view-open" : "cam-view-closed"}>
+                  <LocalVideo />
+                </div>
+              </>
             )}
+
+            {!ideActive ? (
+              <>
+                <div onClick={handleIdeClick} id="empty-porthole-invis"></div>
+                <div
+                  onClick={handleIdeClick}
+                  id={ideActive ? "ide-view-open" : "ide-view-closed"}
+                >
+                  <div className="ide-pos-closed">
+                    <IDE />
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <div onClick={handleIdeClick} id="empty-porthole"></div>
+                <div id={ideActive ? "ide-view-open" : "ide-view-closed"}>
+                  <div className="ide-pos-open">
+                    <IDE />
+                  </div>
+                </div>
+              </>
+            )}
+
+            {/* {currentUserId.length > 0 && currentUserId === initiator ? <> */}
+            {!gridActive ? (
+              <>
+                <div onClick={handleGridClick} id="grid-view-closed"></div>
+                <div
+                  onClick={handleGridClick}
+                  id={gridActive ? "grid-view-open" : "grid-view-closed"}
+                >
+                  <VideoTileGrid />
+                </div>
+              </>
+            ) : (
+              <>
+                <div onClick={handleGridClick} id="grid-view-closed"></div>
+                <div id={gridActive ? "grid-view-open" : "grid-view-closed"}>
+                  {/* <VideoTileGrid /> */}
+                </div>
+              </>
+            )}
+
+            {currentUserId.length > 0 && currentUserId !== initiator ? (
+              <>
+                {/* <AddNot /> */}
+                <div
+                  onClick={() => handleHandRaise(currentUserId, "Joel")}
+                  id="hand-raise-btn"
+                  className="cf"
+                >
+                  <h2>
+                    <HandRaise width="5rem" height="5rem" color="green" />
+                  </h2>
+                </div>
+              </>
+            ) : (
+              <>
+                <div
+                  id="hands"
+                  onClick={console.log("raised hands", raisedHands)}
+                >
+                  <h1>TEST</h1>
+                  {/* <NotificationGroupX /> */}
+                  {/* {raisedHands.map((student) => (
+                    <h4>{student.name}</h4>
+                  ))} */}
+                </div>
+              </>
+            )}
+
+            {currentUserId.length > 0 && currentUserId === initiator ? (
+              <>
+                {/* <div
+                id="hands"
+                onClick={console.log("raised hands", raisedHands)}
+              > */}
+                <h1>TEST</h1>
+                {/* <MyChild /> */}
+                {/* <NotificationGroup /> */}
+                {/* {raisedHands.map((student) => (
+                  <h4>{student.name}</h4>
+                ))} */}
+                {/* </div> */}
+              </>
+            ) : (
+              <></>
+            )}
+
+            {/* </>  */}
+            {/* // :  */}
+            {/* // <></>} */}
+          </>
+        ) : (
+          <div id="center-flex">
+            <h3>
+              Joining<code> {meetingIdentifier} </code>meeting
+            </h3>
+            <h3 className="ellipsis"></h3>
           </div>
-
-          {!camActive ? (
-            <>
-              <div onClick={handleCamClick} id="cam-view-closed"></div>
-              <div
-                onClick={handleCamClick}
-                id={camActive ? "cam-view-open" : "cam-view-closed"}
-              >
-                <LocalVideo />
-              </div>
-            </>
-          ) : (
-            <>
-              {/* <div onClick={handleCamClick} id="cam-view-closed"></div> */}
-              <div id={camActive ? "cam-view-open" : "cam-view-closed"}>
-                <LocalVideo />
-              </div>
-            </>
-          )}
-
-          {!ideActive ? (
-            <>
-              <div onClick={handleIdeClick} id="empty-porthole-invis"></div>
-              <div
-                onClick={handleIdeClick}
-                id={ideActive ? "ide-view-open" : "ide-view-closed"}
-              >
-                <div className="ide-pos-closed">
-                  <IDE />
-                </div>
-              </div>
-            </>
-          ) : (
-            <>
-              {/* <div onClick={handleIdeClick} id="empty-porthole"></div> */}
-              <div id={ideActive ? "ide-view-open" : "ide-view-closed"}>
-                <div className="ide-pos-open">
-                  <IDE />
-                </div>
-              </div>
-            </>
-          )}
-
-          {/* {currentUserId.length > 0 && currentUserId === initiator ? <> */}
-          {!gridActive ? (
-            <>
-              <div onClick={handleGridClick} id="grid-view-closed"></div>
-              <div
-                onClick={handleGridClick}
-                id={gridActive ? "grid-view-open" : "grid-view-closed"}
-              >
-                <VideoTileGrid />
-              </div>
-            </>
-          ) : (
-            <>
-              <div onClick={handleGridClick} id="grid-view-closed"></div>
-              <div id={gridActive ? "grid-view-open" : "grid-view-closed"}>
-                {/* <VideoTileGrid /> */}
-              </div>
-            </>
-          )}
-          {/* </>  */}
-          {/* // :  */}
-          {/* // <></>} */}
-        </>
-      ) : (
-        <div id="center-flex">
-          <h3>
-            Joining <code>{meetingIdentifier}</code> meeting.
-          </h3>
-        </div>
-      )}
+        )}
+      </NotificationProvider>
     </>
   );
 };

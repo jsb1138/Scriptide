@@ -25,6 +25,10 @@ import { ThemeProvider } from "styled-components";
 import {
   MeetingProvider,
   lightTheme,
+  NotificationProvider,
+  useNotificationDispatch,
+  ActionType,
+  Severity,
   // useLocalVideo
 } from "amazon-chime-sdk-component-library-react";
 import Meeting from "./components/Meeting";
