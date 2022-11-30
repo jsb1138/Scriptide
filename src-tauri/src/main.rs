@@ -69,7 +69,7 @@ fn main() {
         }
         // can't find reload functionality from tauri window events
         // "reload" => {
-        //   WindowEvent::
+        //   event.window().reload();
         // }
         _ => {}
       }
