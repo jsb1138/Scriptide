@@ -46,6 +46,7 @@ const Meeting: FC = () => {
     if (meetingId) {
       await endMeeting(meetingId);
       await meetingManager.leave();
+      location.reload();
     }
   };
 
@@ -230,7 +231,7 @@ const Meeting: FC = () => {
             </>
           ) : (
             <>
-              <div onClick={handleCamClick} id="cam-view-closed"></div>
+              {/* <div onClick={handleCamClick} id="cam-view-closed"></div> */}
               <div id={camActive ? "cam-view-open" : "cam-view-closed"}>
                 <LocalVideo />
               </div>
@@ -251,7 +252,7 @@ const Meeting: FC = () => {
             </>
           ) : (
             <>
-              <div onClick={handleIdeClick} id="empty-porthole"></div>
+              {/* <div onClick={handleIdeClick} id="empty-porthole"></div> */}
               <div id={ideActive ? "ide-view-open" : "ide-view-closed"}>
                 <div className="ide-pos-open">
                   <IDE />
@@ -286,7 +287,7 @@ const Meeting: FC = () => {
       ) : (
         <div id="center-flex">
           <h3>
-            Joining <span>{meetingIdentifier}</span> meeting.
+            Joining <code>{meetingIdentifier}</code> meeting.
           </h3>
         </div>
       )}
