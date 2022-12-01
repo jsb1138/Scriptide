@@ -66,7 +66,7 @@ const Meeting: FC = () => {
   const attendees = Object.values(roster);
   console.log("attendees", attendees);
   let currentUserId: string = "";
-  let currentUserName: string = "";
+  let currentUserName: string | undefined = "";
 
   //redundant variable
   const attendeeItems = attendees.splice(0, 1).map((attendee) => {
@@ -176,47 +176,48 @@ const Meeting: FC = () => {
   //   setRaisedHand((raisedHands) => [...raisedHands, user]);
   // };
 
-  interface Action {
-    type: ActionType;
-    payload?: any;
-  }
+  // interface Action {
+  //   type: ActionType;
+  //   payload?: any;
+  // }
 
-  enum ActionType {
-    ADD,
-    REMOVE,
-    REMOVE_ALL,
-  }
+  // enum ActionType {
+  //   ADD,
+  //   REMOVE,
+  //   REMOVE_ALL,
+  // }
 
-  const AddNotificationButton = () => {
-    const dispatch = useNotificationDispatch();
+  // const AddNotificationButton = () => {
+  //   const dispatch = useNotificationDispatch();
 
-    const payload: any = {
-      severity: Severity.INFO,
-      message: "Information",
-    };
+  //   const payload: any = {
+  //     severity: Severity.INFO,
+  //     message: "Information",
+  //   };
 
-    const addNotification = (e: any) => {
-      dispatch({
-        type: ActionType.ADD,
-        payload: payload,
-      });
-    };
+  //   const addNotification = (e: any) => {
+  //     dispatch({
+  //       type: ActionType.ADD,
+  //       payload: payload,
+  //     });
+  //   };
 
-    return (
-      <button onClick={addNotification}>
-        <h1>TEST</h1>
-      </button>
-    );
-  };
+  //   return (
+  //     <button onClick={addNotification}>
+  //       <h1>TEST</h1>
+  //     </button>
+  //   );
+  // };
 
   // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
   // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER
   return (
     <>
+      {/* @ts-ignore */}
       <NotificationProvider>
-        {/* // @ts-ignore */}
+        {/* @ts-ignore */}
         <Notifications />
-        <AddNotificationButton />
+        {/* <AddNotificationButton /> */}
         {meetingStatus === MeetingStatus.Succeeded ? (
           <>
             {/** @todo: THIS RUDIMENTARY MENU CAN BE MADE INTO A COMPONENT --> *INCLUDE* "toggleMenu function" **/}
@@ -350,10 +351,10 @@ const Meeting: FC = () => {
               </>
             )}
 
-            {currentUserId.length > 0 && currentUserId !== initiator ? (
+            {/* {currentUserId.length > 0 && currentUserId !== initiator ? (
               <>
                 {/* <AddNot /> */}
-                <div
+                {/* <div
                   onClick={() => handleHandRaise(currentUserId, "Joel")}
                   id="hand-raise-btn"
                   className="cf"
@@ -372,15 +373,15 @@ const Meeting: FC = () => {
                   <h1>TEST</h1>
                 </div>
               </>
-            )}
+            )} */ }
 
-            {currentUserId.length > 0 && currentUserId === initiator ? (
+            {/* {currentUserId.length > 0 && currentUserId === initiator ? (
               <>
                 <h1>TEST</h1>
               </>
             ) : (
               <></>
-            )}
+            )} */}
 
             {/* </>  */}
             {/* // :  */}
