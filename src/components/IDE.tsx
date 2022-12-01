@@ -1,3 +1,4 @@
+
 import React, { useState, useRef, useEffect, SetStateAction } from "react";
 import { invoke } from "@tauri-apps/api";
 import Editor from "@monaco-editor/react";
@@ -148,7 +149,16 @@ export function IDE() {
     }
   }
 
+  function handleChange (value: any) {
+  const newState = value
+  setValue(newState)
+  }
+
+
+
+
   // invoke('greet', { name: 'World'}).then((response) => {console.log(response)})
+
 
   useEffect(() => {
     if (enterPress && ctrlPress) {
@@ -157,6 +167,7 @@ export function IDE() {
       handleCompile();
     }
   }, [ctrlPress, enterPress]);
+
 
   return (
     <>

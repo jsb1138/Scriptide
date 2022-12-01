@@ -1,5 +1,6 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
 // import  languageOptions  from '../constants/languageOptions'
+import { io } from 'socket.io-client'
 
 const ScriptideContext = createContext(null);
 
@@ -26,6 +27,10 @@ export default function ScriptideProvider({ children }) {
   ];
 
   const javascriptDefault = "//happy coding";
+
+  //socket
+
+  const socket = io('http://127.0.0.1:3000')
 
   const [camActive, setCamActive] = useState(false);
   const [ideActive, setIdeActive] = useState(false);

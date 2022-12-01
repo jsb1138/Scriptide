@@ -6,12 +6,16 @@ use tauri::MenuItem::{ Undo, Redo, Copy, Paste, About };
 pub(crate) fn menu () -> Menu {
 
   let quit = CustomMenuItem::new(
-    "quit".to_string(), "Quit")
+    String::from("quit"), "Quit")
     .accelerator("CmdOrCtrl+q");
 
   let close = CustomMenuItem::new(
-    "close".to_string(), "Close")
-  .accelerator("CmdOrCtrl+w");
+    String::from("close"), "Close")
+    .accelerator("CmdOrCtrl+w");
+
+  let reload = CustomMenuItem::new(
+    String::from("reload"), "Reload")
+    .accelerator("CmdOrCtrl+r");
 
   // let app_name = String::from("Scriptide");
   // let team = vec![String::from("Brent Curriden, Joel Boychuk, Konstantin Richter, Alex Scharpf, Nicholas Larson")];
@@ -41,6 +45,7 @@ pub(crate) fn menu () -> Menu {
     Menu::new()
     .add_item(quit)
     .add_item(close)
+    .add_item(reload)
   );
 
   let edit_sub_menu = Submenu::new(

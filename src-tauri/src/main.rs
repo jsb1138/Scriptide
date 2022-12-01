@@ -13,8 +13,13 @@
 
 // use tauri::api::version;
 
+// window event attempts for page refresh on keybind
+// use ::tao::event::WindowEvent;
+use tauri::{Manager, /*WebviewAttributes, window::PlatformWebview, WindowEvent */};
+
 mod tao;
 mod menu;
+mod commands;
 // use window_vibrancy::{apply_blur, apply_vibrancy, NSVisualEffectMaterial};
 
 // API call function to be invoked from app.tsx
@@ -52,6 +57,24 @@ fn main() {
   let builder = builder.menu(menu::menu());
 
   builder
+    .on_menu_event(|event| {
+      match event.menu_item_id() {
+        "quit" => {
+          let app = event.window().app_handle();
+          app.exit(0);
+        }
+        "close" => {
+          let window = event.window();
+          window.close().unwrap();
+        }
+        // can't find reload functionality from tauri window events
+        // "reload" => {
+        //   event.window().reload();
+        // }
+        _ => {}
+      }
+    })
+    .invoke_handler(tauri::generate_handler![commands::close_splash])
     .run(tauri::generate_context!())
     .expect("Error while running application");
 
