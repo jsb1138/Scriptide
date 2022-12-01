@@ -187,80 +187,6 @@ const Meeting: FC = () => {
     REMOVE_ALL,
   }
 
-  // const AddNot = () => {
-  //   const dispatch = useNotificationDispatch();
-
-  //   // const payload: any = {
-  //   //   severity: Severity.INFO,
-  //   //   message: "It worked!",
-  //   // };
-
-  //   const addNotification = (e: any) => {
-  //     // console.log("notifications addnot", notifications);
-  //     // console.log("dispatch", dispatch);
-  //     console.log("pressed");
-  //     dispatch({
-  //       type: ActionType.ADD,
-  //       payload: "Payload",
-  //     });
-  //   };
-
-  //   return (
-  //     // <h1>WORKED</h1>
-  //     <div id="hand-raise-btn" onClick={addNotification}>
-  //       PRESS IT
-  //     </div>
-  //   );
-  // };
-
-  // const MyChild = () => {
-  //   // const { notifications } = useNotificationState();
-  //   const dispatch = useNotificationDispatch();
-
-  //   let notifications = [{ test: "One entry" }];
-
-  //   // const notificationItems = {notifications.map(({ id, ...rest }): any => (
-  //   //   <Notification
-  //   //     key={id}
-  //   //     {...rest}
-  //   //     onClose={() => dispatch({ type: ActionType.REMOVE, payload: id })}
-  //   //   />
-  //   // ))};
-
-  //   return <NotificationGroup>{notificationItems}</NotificationGroup>;
-  // };
-
-  // const NotificationGroup = () => {
-  //   // const { notifications } = useNotificationState();
-  //   const dispatch = useNotificationDispatch();
-  //   let notifications = [{ test: "One entry" }, { test: "Another entry" }];
-  //   console.log("notifications XXX", notifications);
-
-  //   // const notificationItems = {notifications.map(({ id, ...rest }): any => (
-  //   //   // @ts-ignore
-  //   //   <Notification
-  //   //     key={id}
-  //   //     {...rest}
-  //   //     onClose={() => dispatch({ type: ActionType.REMOVE, payload: id })}
-  //   //   />
-  //   // ))};
-
-  //   return (
-  //     <>
-  //       {/* <h1>note group</h1> */}
-  //       {notifications}
-  //     </>
-  //   );
-  // };
-
-  // const { notifications } = useNotificationState();
-  // console.log("notifications", notifications);
-
-  interface Action {
-    type: ActionType;
-    payload?: any;
-  }
-
   const AddNotificationButton = () => {
     const dispatch = useNotificationDispatch();
 
@@ -322,7 +248,7 @@ const Meeting: FC = () => {
                       ? "red"
                       : "pink"
                   }`,
-                  height: "4rem",
+                  height: "2rem",
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "center",
@@ -333,9 +259,9 @@ const Meeting: FC = () => {
                 }}
               >
                 {currentUserId.length > 0 ? (
-                  <h1>
+                  <h6>
                     {currentUserId === initiator ? "Instructor" : "Student"}
-                  </h1>
+                  </h6>
                 ) : (
                   <></>
                 )}
@@ -412,14 +338,14 @@ const Meeting: FC = () => {
                   onClick={handleGridClick}
                   id={gridActive ? "grid-view-open" : "grid-view-closed"}
                 >
-                  <VideoTileGrid />
+                  <RemoteVideos />
                 </div>
               </>
             ) : (
               <>
                 <div onClick={handleGridClick} id="grid-view-closed"></div>
                 <div id={gridActive ? "grid-view-open" : "grid-view-closed"}>
-                  {/* <VideoTileGrid /> */}
+                  <RemoteVideos />
                 </div>
               </>
             )}
@@ -444,27 +370,13 @@ const Meeting: FC = () => {
                   onClick={console.log("raised hands", raisedHands)}
                 >
                   <h1>TEST</h1>
-                  {/* <NotificationGroupX /> */}
-                  {/* {raisedHands.map((student) => (
-                    <h4>{student.name}</h4>
-                  ))} */}
                 </div>
               </>
             )}
 
             {currentUserId.length > 0 && currentUserId === initiator ? (
               <>
-                {/* <div
-                id="hands"
-                onClick={console.log("raised hands", raisedHands)}
-              > */}
                 <h1>TEST</h1>
-                {/* <MyChild /> */}
-                {/* <NotificationGroup /> */}
-                {/* {raisedHands.map((student) => (
-                  <h4>{student.name}</h4>
-                ))} */}
-                {/* </div> */}
               </>
             ) : (
               <></>
