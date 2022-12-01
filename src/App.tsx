@@ -63,6 +63,7 @@ export default function App() {
 
   const enterPress = useKeyPress("Enter");
   const ctrlPress = useKeyPress("Control");
+  
 
   const noDragSelector = "input, a, button";
   document.addEventListener("mousedown", async (mouseDown: any) => {
