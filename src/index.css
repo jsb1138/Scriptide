@@ -15,8 +15,22 @@
   -webkit-text-size-adjust: 100%;
 }
 
+.noSelect {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.noSelect:focus {
+  outline: none !important;
+}
+
 html {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 *, *:before, *:after {
   box-sizing: inherit;
@@ -39,9 +53,17 @@ body {
   min-height: 100vh;
 }
 
+code {
+  font-family: 'Courier New', Courier, monospace;
+}
+
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+h3 {
+  color: #213547;
 }
 
 button {

@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import "./SliderItem.css";
+import { useNavigate } from 'react-router-dom';
+import './SliderItem.css';
 
 interface IProps {
   item: string;
@@ -15,9 +15,8 @@ export default function SliderItem({ item, isOpen }: IProps) {
   }
   return (
     <div
-      // className={`item ${isOpen ? 'shown' : 'hidden'}`}
-      onClick={handleClick}
-    >
+      className={`item ${isOpen ? 'shown' : 'hidden'}`}
+      onClick={handleClick}>
       <h3>{item}</h3>
     </div>
   );
