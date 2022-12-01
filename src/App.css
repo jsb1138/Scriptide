@@ -219,6 +219,14 @@ code {
   cursor: pointer;
 }
 
+.theme-bar {
+  height: 200px;
+  width: 400px;
+  /* background-color: red; */
+  position:absolute;
+  top: 200px;
+}
+
 #menu-btn {
   z-index: 10;
   background-color: transparent;

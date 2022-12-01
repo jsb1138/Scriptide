@@ -1,16 +1,17 @@
-
 import React, { useState, useRef, useEffect, SetStateAction } from "react";
 import { invoke } from "@tauri-apps/api";
 import Editor from "@monaco-editor/react";
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
+import monacoThemes from 'monaco-themes/themes'
 
 import "../App.css";
 import { OutputWindow } from "./OutputWindow";
 import useKeyPress from "../hooks/useKeyPress";
 import { defineTheme } from "../lib/defineTheme.js";
 import { showSuccessToast, showErrorToast } from "../utils/apiServices.js";
+import { ThemeDropdown } from "./ThemeDropdown";
 
 export function IDE() {
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
@@ -36,10 +37,10 @@ export function IDE() {
   const enterPress = useKeyPress("Enter");
   const ctrlPress = useKeyPress("Control");
 
-  function handleChange(value: any) {
-    setValue(value);
-    onChange("code", value);
-  }
+  // function handleChange(value: any) {
+  //   setValue(value);
+  //   onChange("code", value);
+  // }
 
   function handleEditorDidMount(editor: any, monaco: any) {
     editorRef.current = monaco;
@@ -62,12 +63,16 @@ export function IDE() {
     }
   }
 
+  // const themelist = Object.entries(monacoThemes)
+  
+
   function handleThemeChange(th: any) {
     const theme = th;
     console.log("theme: ", theme);
 
-    if (["light", "vs-dark"].includes(theme.value)) {
+    if (monacoThemes.includes(theme.value)) {
       setTheme(theme);
+      console.log("chosen theme", theme.value);
     } else {
       defineTheme(theme.value).then((_: any) => setTheme(theme.value));
     }
@@ -149,16 +154,17 @@ export function IDE() {
     }
   }
 
-  function handleChange (value: any) {
-  const newState = value
-  setValue(newState)
+  // function handleChange(value: any) {
+  //   const newState = value;
+  //   setValue(newState);
+  // }
+
+  function handleCodeChange(value: any) {
+    setValue(value);
+    onChange("code", value);
   }
 
-
-
-
   // invoke('greet', { name: 'World'}).then((response) => {console.log(response)})
-
 
   useEffect(() => {
     if (enterPress && ctrlPress) {
@@ -168,24 +174,27 @@ export function IDE() {
     }
   }, [ctrlPress, enterPress]);
 
-
   return (
     <>
       <Editor
         height="65vh"
         width="74vw"
         onMount={handleEditorDidMount}
-        onChange={handleChange}
+        onChange={handleCodeChange}
         language={language?.value}
         value={value}
         theme="vs-dark"
         defaultValue="// happy coding"
       />
-      <button className="ide-run-btn" onClick={handleCompile}>
-        Run
-      </button>
+
       <div className="ide-output">
+        <button className="ide-run-btn" onClick={handleCompile}>
+          Run
+        </button>
         <OutputWindow outputDetails={outputDetails} />
+      </div>
+      <div className="theme-bar">
+        <ThemeDropdown onChange={handleThemeChange} theme={theme}/>
       </div>
     </>
   );
