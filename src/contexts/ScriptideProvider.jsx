@@ -28,10 +28,6 @@ export default function ScriptideProvider({ children }) {
 
   const javascriptDefault = "//happy coding";
 
-  //socket
-
-  const socket = io('http://127.0.0.1:3000')
-
   const [camActive, setCamActive] = useState(false);
   const [ideActive, setIdeActive] = useState(false);
   const [gridActive, setGridActive] = useState(false);
@@ -44,11 +40,6 @@ export default function ScriptideProvider({ children }) {
   const [meetingActive, setMeetingActive] = useState(false);
   const [thisUser, setThisUser] = useState("");
 
-  async function getAndSet() {}
-
-  useEffect(() => {
-    getAndSet();
-  }, []);
 
   return (
     <ScriptideContext.Provider
@@ -75,7 +66,7 @@ export default function ScriptideProvider({ children }) {
         setMeetingActive,
         thisUser,
         setThisUser,
-        socket
+
       }}
     >
       {children}
