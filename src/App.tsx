@@ -31,6 +31,7 @@ import {
   Severity,
   // useLocalVideo
 } from "amazon-chime-sdk-component-library-react";
+import MeetingContainer from "./components/MeetingContainer";
 import Meeting from "./components/Meeting";
 import MeetingForm from "./components/MeetingForm";
 
@@ -38,6 +39,9 @@ import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
 // @ts-ignore
 Amplify.configure(awsconfig);
+
+//////////////////////////////////////////////////////////////////////liveblocks
+import { useUpdateMyPresence } from "./liveblocks.config.js";
 
 //css
 import "./App.css";
@@ -68,6 +72,8 @@ export default function App() {
     menuState,
     setMenuState,
   } = useScriptideContext();
+
+  const updateMyPresence = useUpdateMyPresence();
 
   // const { tileId, isVideoEnabled, hasReachedVideoLimit, toggleVideo } = useLocalVideo();
 
@@ -239,7 +245,13 @@ export default function App() {
 
   return (
     // <div data-tauri-drag-region>
-    <div className="App">
+    <div
+      className="App"
+      onPointerMove={(e) =>
+        updateMyPresence({ cursor: { x: e.clientX, y: e.clientY } })
+      }
+      onPointerLeave={() => updateMyPresence({ cursor: null })}
+    >
       <ThemeProvider theme={lightTheme}>
         {/* @ts-ignore */}
         <MeetingProvider>
