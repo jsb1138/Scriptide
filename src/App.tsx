@@ -41,7 +41,7 @@ import awsconfig from "./aws-exports";
 Amplify.configure(awsconfig);
 
 //////////////////////////////////////////////////////////////////////liveblocks
-import { useUpdateMyPresence } from "./liveblocks.config.js";
+import { useOthers, useUpdateMyPresence } from "./liveblocks.config.js";
 
 //css
 import "./App.css";
@@ -243,6 +243,21 @@ export default function App() {
   //   }
   // }, [ctrlPress, enterPress]);
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////liveblocks
+  function Cursor({ x, y }) {
+    return (
+      <img
+        style={{
+          position: "absolute",
+          transform: `translate(${x}px, ${y}px)`,
+        }}
+        src="cursor-image.svg"
+      />
+    );
+  }
+
+  const others = useOthers();
+
   return (
     // <div data-tauri-drag-region>
     <div
@@ -252,6 +267,15 @@ export default function App() {
       }
       onPointerLeave={() => updateMyPresence({ cursor: null })}
     >
+      {others.map(({ connectionId, presence }) =>
+        presence.cursor ? (
+          <Cursor
+            key={connectionId}
+            x={presence.cursor.x}
+            y={presence.cursor.y}
+          />
+        ) : null
+      )}
       <ThemeProvider theme={lightTheme}>
         {/* @ts-ignore */}
         <MeetingProvider>
