@@ -154,7 +154,7 @@ const Meeting: FC = () => {
   //   }, 5000);
   // },[])
 
-  // DON'T DELETE
+  // DON'T DELETE --> ATTEMPTING TO GET VIDEO TO ENABLE AUTOMATICALLY
   meetingStatus === MeetingStatus.Succeeded
     ? () => {
         useEffect(() => {
@@ -167,21 +167,72 @@ const Meeting: FC = () => {
       }
     : console.log("TOO SOON");
 
+  const triggerNotification = (payload) => {
+    const dispatch = useNotificationDispatch();
+
+    // const payload: any = {
+    //   severity: Severity.INFO,
+    //   message: 'Information'
+    // };
+    console.log("innnnn", payload);
+    // const addNotification = (e: any) => {
+    dispatch({
+      type: ActionType.ADD,
+      payload: payload,
+    });
+    // };
+    console.log("after");
+
+    // return <button onClick={addNotification}>{label}</button>;
+  };
+
+  interface Action {
+    type: ActionType;
+    payload?: any;
+  }
+
+  enum ActionType {
+    ADD,
+    REMOVE,
+    REMOVE_ALL,
+  }
+
   const toggleMenu = () => {
     setMenuState(!menuState);
   };
 
   //////////////////////////////////////////////////////////////////////////////////////////liveblocks
+  const removeRaisedHand = (index) => {
+    deleteHand(index);
+    console.log("hands--->", hands);
+  };
+
+  const raiseHand = (student) => {
+    updateHands(student);
+    // triggerNotification({
+    //   severity: Severity.INFO,
+    //   message: `Your hand is raised and the instructor has been notified.`,
+    // });
+  };
+
   const others = useOthers();
-  // const ide = useStorage((root) => root.ide);
 
-  // // Define mutation
-  // const updateIDE = useMutation(({ storage }, property, newData) => {
-  //   const mutableIDE = storage.get("ide");
-  //   mutableIDE.set(property, newData);
-  // }, []);
+  const hands = useStorage((root) => root.raisedHands);
 
-  console.log("meeting id", meetingIdentifier);
+  // Define mutation
+  const updateHands = useMutation(({ storage }, student) => {
+    const mutableHandsList = storage.get("raisedHands");
+    mutableHandsList.push(student);
+  }, []);
+
+  const deleteHand = useMutation(({ storage }, hand) => {
+    const mutableHandsList = storage.get("raisedHands");
+    mutableHandsList.delete(hand);
+  }, []);
+
+  // console.log("raised hands", ide);
+
+  // console.log("meeting id", meetingIdentifier);
 
   // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
   // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER
@@ -330,7 +381,13 @@ const Meeting: FC = () => {
             {currentUserId.length > 0 && currentUserId !== initiator ? (
               <>
                 <div
-                  onClick={() => handleHandRaise(currentUserId, "Joel")}
+                  onClick={() => {
+                    raiseHand({ name: currentUserName });
+                    triggerNotification({
+                      severity: Severity.INFO,
+                      message: `Your hand is raised and the instructor has been notified.`,
+                    });
+                  }}
                   id="hand-raise-btn"
                   className="cf"
                 >
@@ -343,9 +400,21 @@ const Meeting: FC = () => {
               <>
                 <div
                   id="hands"
-                  onClick={console.log("raised hands", raisedHands)}
+                  onClick={console.log("these are the hands", hands)}
                 >
-                  <h1>TEST</h1>
+                  <ul>
+                    {hands.map((student, i) => (
+                      <li>
+                        {student.name}
+                        <button
+                          onClick={() => removeRaisedHand(i)}
+                          className="cf"
+                        >
+                          X
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </>
             )}

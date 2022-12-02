@@ -18,7 +18,7 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         ide: new LiveObject({
           content: "// happy coding",
         }),
-        raisedHands: new LiveList([]),
+        raisedHandsX: new LiveList([]),
       }}
     >
       <ClientSideSuspense

@@ -489,7 +489,7 @@ h3 {
 
 #hands {
   position: absolute;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   margin-top: 0px;
   right: 15px;
   top: 500px;
@@ -502,6 +502,34 @@ h3 {
   /* background-color: rgb(255, 119, 189); */
   z-index: 10000;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+#hands ul {
+  padding: 0;
+  margin: 0 0 0 10px;
+}
+
+#hands li {
+  margin: 15px auto;
+  padding: 0 10px;
+  width: 220px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* background-color: #61dafb; */
+}
+
+#hands button {
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 25px;
+  color: rgb(255, 92, 92);
+}
+
+#hands button:hover {
+  color: rgb(255, 64, 64);
 }
 
 #tester {
@@ -560,3 +588,4 @@ h3 {
     text-shadow:
       .25em 0 0 #213547,
       .5em 0 0 #213547;}}
+
