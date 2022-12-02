@@ -3,7 +3,7 @@ import { invoke } from '@tauri-apps/api'
 import Editor from '@monaco-editor/react'
 import { useScriptideContext }  from '../contexts/ScriptideProvider';
 import * as Y from 'yjs'
-import { WebsocketProvider } from 'y-websocket';
+import { WebrtcProvider } from 'y-webrtc'
 import { MonacoBinding } from 'y-monaco';
 
 
@@ -19,7 +19,7 @@ export function IDE({ onChange, language, code, theme }:any ) {
 
 
   const ydoc = new Y.Doc();
-  const provider = new WebsocketProvider('ws://localhost:1234','scriptide', ydoc)
+  const provider = new WebrtcProvider('scriptide', ydoc);
   const type = ydoc.getText('monaco')
 
   provider.on('status', (event: { status: any; }) => {
