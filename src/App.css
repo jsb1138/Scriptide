@@ -546,7 +546,6 @@ h3 {
 .ellipsis:after {
   content: '  .  ';
   animation: dots 1s steps(5, end) infinite;
-  animation
 }
 
 @keyframes dots {
