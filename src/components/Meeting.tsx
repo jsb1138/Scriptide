@@ -52,6 +52,8 @@ const Meeting: FC = () => {
     setRaisedHand,
     excalActive,
     setExcalActive,
+    setTransitionState,
+    transitionState
   } = useScriptideContext();
 
   const { isVideoEnabled, toggleVideo } = useLocalVideo();

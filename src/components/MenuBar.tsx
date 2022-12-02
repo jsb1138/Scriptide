@@ -2,16 +2,39 @@ import { useScriptideContext } from "../contexts/ScriptideProvider";
 import React, { FC, useState, useEffect } from "react";
 
 const MenuBar: FC = () => {
-  const { setExcalActive, excalActive, menuState, setMenuState } = useScriptideContext();
+  const {
+    setExcalActive,
+    excalActive,
+    menuState,
+    setMenuState,
+    transitionState,
+    setTransitionState,
+    opacity,
+    setOpacity
+  } = useScriptideContext();
 
   const toggleMenu = () => {
     setMenuState(!menuState);
   };
 
+  const handleExcali = () =>{
+    setTransitionState(!transitionState);
+    if(excalActive){
+      setExcalActive(false);
+      setOpacity(true);
+    } else {
+      setTimeout(()=>setExcalActive(!excalActive), 220);
+      setTimeout(() => setOpacity(false), 250)
+    }
+  }
+
   return (
     <div id={!menuState ? "menu-container-open" : "menu-container-closed"}>
       <div id="menu">
-        <div className="menu-item" onClick={()=>setExcalActive(!excalActive)} >
+        <div
+          className="menu-item"
+          onClick={handleExcali}
+        >
           <p>E</p>
         </div>
       </div>

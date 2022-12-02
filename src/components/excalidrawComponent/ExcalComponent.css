@@ -1,14 +1,104 @@
-.excalidraw .ToolIcon {
-  align-items: center;
-  position: relative;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-  user-select: none;
+.excalibox .excalidraw .Island {
+background-color: rgba(255, 255, 255, 0.4);
 }
 
 .excalidraw__canvas {
-  z-index: -3;
-  position: relative;
+border-radius: 10px;
+opacity: .5;
+} 
+
+.excalibox {
+  height: 75vh;
+  width: 80vw;
+  border-radius: 8px;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.excal-open {
+  position: absolute;
+  left: 0px;
+  margin-left: 0px;
+  margin-top: 0px;
+  top: 0px;
+  padding: 0 0 0 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+}
+
+.excal-closed {
+  position: absolute;
+  left: -350px;
+  margin-left: 200px;
+  margin-top: 0px;
+  top: 190px;
+  width: 0px;
+  height: 140px;
+  padding: 0 0 0 0;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 10000;
+} 
+
+.hider-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hider {
+  position: absolute;
+  left: 0px;
+  margin-left: 0px;
+  margin-top: 0px;
+  top: 0px;
+  padding: 0 0 0 0;
+  width: 75vw;
+  height: 80vh;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+  background-color: rgba(255, 255, 255, 0.4);
+  transition: cubic-bezier(0.87, 0, 0.13, 1);
+  transition-property: width, height, top, margin-left, left, ;
+  transition-duration: .3s;
+}
+
+.open {
+  left: 13.7vh;
+  margin-left: 2vw;
+  top: 12.5vh;
+  height: 75vh;
+  width: 80vw;
+}
+
+.closed {
+  left: -350px;
+  margin-left: 200px;
+  top: 190px;
+  width: 0px;
+  height: 140px;
+}
+
+.opaque {
   opacity: 1;
-  height: 0;
+}
+
+.transparent {
+  opacity: 0;
 }
