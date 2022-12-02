@@ -2,6 +2,7 @@ import { loader } from '@monaco-editor/react'
 
 
 
+
 export const monacoThemes = {
   active4d: "Active4D",
   "all-hallows-eve": "All Hallows Eve",
@@ -54,14 +55,24 @@ export const monacoThemes = {
 }
 
 export async function defineTheme (theme) {
-  let themeImport = await import(`./themes/${monacoThemes[theme]}.json`)
-  return new Promise((res) => {
-    Promise.all([
-      loader.init(),
-      themeImport
-    ]).then(([monaco, themeData]) => {
-      monaco.editor.defineTheme(theme, themeData);
-      res();
-    });
-  });
+  // let themeImport = await import(`./themes/${monacoThemes[theme]}.json`).then(module => module.default)
+  // return new Promise((res) => {
+  //   Promise.all([
+  //     loader.init(),
+  //     themeImport
+  //   ]).then(([monaco, themeData]) => {
+  //     monaco.editor.defineTheme(theme, themeData);
+  //     res();
+  //   });
+  // });
+
+  let themeImport = await fetch(`/themes/${theme}.json`)
+    .then(data => data.json())
+    .then(data => {
+      monaco.editor.defineTheme(theme, data)
+      monaco.editor.setTheme(theme)
+    }) 
+
+  return themeImport
 };
+

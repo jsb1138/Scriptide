@@ -4,7 +4,7 @@ import Editor from "@monaco-editor/react";
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
-import monacoThemes from 'monaco-themes/themes'
+import monacoThemes from 'monaco-themes'
 
 import "../App.css";
 import { OutputWindow } from "./OutputWindow";
@@ -70,10 +70,11 @@ export function IDE() {
     const theme = th;
     console.log("theme: ", theme);
 
-    if (monacoThemes.includes(theme.value)) {
+    if (["light", "vs-dark"].includes(theme.value)) {
       setTheme(theme);
       console.log("chosen theme", theme.value);
     } else {
+      console.log('theme else: ', theme)
       defineTheme(theme.value).then((_: any) => setTheme(theme.value));
     }
   }
@@ -173,6 +174,12 @@ export function IDE() {
       handleCompile();
     }
   }, [ctrlPress, enterPress]);
+
+  useEffect(() => {
+    defineTheme("Oceanic Next").then((_: any) =>
+      setTheme({ value: "Oceanic Next", label: "Oceanic Next" })
+    );
+  }, []);
 
   return (
     <>
