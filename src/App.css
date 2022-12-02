@@ -42,9 +42,11 @@ code {
   padding: 1.5em;
   will-change: filter;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -53,6 +55,7 @@ code {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -62,6 +65,7 @@ code {
   a:nth-of-type(2) .logo {
     animation: logo-spin infinite 20s linear;
   }
+
   a:nth-of-type(3) .logo {
     animation: logo-spin infinite 20s linear;
   }
@@ -109,7 +113,7 @@ code {
   /* overflow-y: hidden; */
   /* opacity: 1;
   transition: 0.3s;  */
-} 
+}
 
 .App-logo {
   height: 40vmin;
@@ -157,6 +161,9 @@ code {
 }
 
 #menu {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   z-index: 10;
   background: rgba(255, 255, 255, 0.4);
   width: 90px;
@@ -166,6 +173,7 @@ code {
   left: 25px;
   opacity: 0.7;
 }
+
 #menu-open {
   z-index: 10;
   background: rgba(255, 255, 255, 0.4);
@@ -219,11 +227,26 @@ code {
   cursor: pointer;
 }
 
+.menu-item {
+  margin: 33px 0 0 0px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+}
+
 .theme-bar {
   height: 200px;
   width: 400px;
   /* background-color: red; */
-  position:absolute;
+  position: absolute;
   top: 200px;
 }
 
@@ -304,7 +327,7 @@ button {
   width: 100%;
   height: 100%;
   z-index: 9999;
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
   overflow: hidden;
 }
 
@@ -321,7 +344,7 @@ button {
   z-index: 10000;
   overflow: hidden;
   backdrop-filter: blur(10px);
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 #ide-view-open {
@@ -340,7 +363,7 @@ button {
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
   overflow: hidden;
 }
 
@@ -361,8 +384,8 @@ button {
   align-items: center;
   overflow: hidden;
   z-index: 10000;
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
-  
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+
 }
 
 #empty-porthole {
@@ -381,7 +404,7 @@ button {
   align-items: center;
   overflow: hidden;
   z-index: 100000;
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 #empty-porthole-invis {
@@ -400,19 +423,19 @@ button {
   align-items: center;
   overflow: hidden;
   z-index: 100000;
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 .ide-pos-closed {
   padding-top: 450px;
   padding-left: 720px;
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 .ide-pos-open {
   padding-top: 00px;
   padding-left: 00px;
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 .ide-output {
@@ -439,7 +462,7 @@ button {
   margin-top: 0px;
   /* background-color: rgb(255, 119, 189); */
   z-index: 9999;
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
   /* overflow: hidden; */
 }
 
@@ -456,7 +479,7 @@ button {
   background-color: rgba(255, 255, 255, 0.2);
   /* background-color: rgb(255, 119, 189); */
   z-index: 10000;
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 #hand-raise-btn {
@@ -472,7 +495,7 @@ button {
   background-color: rgba(77, 199, 55, 0.2);
   /* background-color: rgb(255, 119, 189); */
   z-index: 10000;
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 .top {
@@ -509,7 +532,7 @@ h3 {
   backdrop-filter: blur(10px);
   /* background-color: rgb(255, 119, 189); */
   z-index: 10000;
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 #tester {
@@ -526,11 +549,13 @@ h3 {
   border-radius: 5rem;
   padding: 0 20px;
 }
+
 .sc-kDvujY.ibMrYq {
   opacity: 1;
   /* background-color: rgb(255, 103, 103); */
   /* border-radius: 6rem; */
 }
+
 .caIMRX {
   opacity: 1;
 }
@@ -550,20 +575,64 @@ h3 {
 
 @keyframes dots {
   0%, 20% {
-    color: rgba(0,0,0,0);
+    color: rgba(0, 0, 0, 0);
     text-shadow:
-      .25em 0 0 rgba(0,0,0,0),
-      .5em 0 0 rgba(0,0,0,0);}
+      .25em 0 0 rgba(0, 0, 0, 0),
+      .5em 0 0 rgba(0, 0, 0, 0);
+  }
+
   40% {
     color: #213547;
     text-shadow:
-      .25em 0 0 rgba(0,0,0,0),
-      .5em 0 0 rgba(0,0,0,0);}
+      .25em 0 0 rgba(0, 0, 0, 0),
+      .5em 0 0 rgba(0, 0, 0, 0);
+  }
+
   60% {
     text-shadow:
       .25em 0 0 #213547,
-      .5em 0 0 rgba(0,0,0,0);}
+      .5em 0 0 rgba(0, 0, 0, 0);
+  }
+
   80%, 100% {
     text-shadow:
       .25em 0 0 #213547,
-      .5em 0 0 #213547;}}
+      .5em 0 0 #213547;
+  }
+}
+
+.excal-open {
+  position: absolute;
+  left: 0px;
+  margin-left: 0px;
+  margin-top: 0px;
+  top: 0px;
+  padding: 0 0 0 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.excal-closed {
+  position: absolute;
+  left: -350px;
+  margin-left: 200px;
+  margin-top: 0px;
+  top: 190px;
+  width: 0px;
+  height: 140px;
+  padding: 0 0 0 0;
+  border-radius: 0%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 10000;
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+
+} 

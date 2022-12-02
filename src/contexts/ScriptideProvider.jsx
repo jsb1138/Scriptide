@@ -46,6 +46,7 @@ export default function ScriptideProvider({ children }) {
   const [menuState, setMenuState] = useState(false);
   const [meetingIdentifier, setMeetingIdentifier] = useState("");
   const [raisedHands, setRaisedHand] = useState([]);
+  const [excalActive, setExcalActive] = useState(false);
 
   async function getAndSet() {}
 
@@ -84,6 +85,8 @@ export default function ScriptideProvider({ children }) {
         setMeetingIdentifier,
         raisedHands,
         setRaisedHand,
+        excalActive,
+        setExcalActive
       }}
     >
       {children}

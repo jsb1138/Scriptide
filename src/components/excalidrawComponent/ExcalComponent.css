@@ -1,0 +1,14 @@
+.excalidraw .ToolIcon {
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+.excalidraw__canvas {
+  z-index: -3;
+  position: relative;
+  opacity: 1;
+  height: 0;
+}

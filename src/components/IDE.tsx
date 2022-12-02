@@ -4,7 +4,7 @@ import Editor from "@monaco-editor/react";
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
-import monacoThemes from 'monaco-themes/themes'
+// import monacoThemes from 'monaco-themes/themes'
 
 import "../App.css";
 import { OutputWindow } from "./OutputWindow";
@@ -66,17 +66,17 @@ export function IDE() {
   // const themelist = Object.entries(monacoThemes)
   
 
-  function handleThemeChange(th: any) {
-    const theme = th;
-    console.log("theme: ", theme);
+  // function handleThemeChange(th: any) {
+  //   const theme = th;
+  //   console.log("theme: ", theme);
 
-    if (monacoThemes.includes(theme.value)) {
-      setTheme(theme);
-      console.log("chosen theme", theme.value);
-    } else {
-      defineTheme(theme.value).then((_: any) => setTheme(theme.value));
-    }
-  }
+  //   if (monacoThemes.includes(theme.value)) {
+  //     setTheme(theme);
+  //     console.log("chosen theme", theme.value);
+  //   } else {
+  //     defineTheme(theme.value).then((_: any) => setTheme(theme.value));
+  //   }
+  // }
 
   function handleCompile() {
     //@ts-ignore
@@ -194,7 +194,7 @@ export function IDE() {
         <OutputWindow outputDetails={outputDetails} />
       </div>
       <div className="theme-bar">
-        <ThemeDropdown onChange={handleThemeChange} theme={theme}/>
+        {/* <ThemeDropdown onChange={handleThemeChange} theme={theme}/> */}
       </div>
     </>
   );
