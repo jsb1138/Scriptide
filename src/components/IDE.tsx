@@ -66,18 +66,18 @@ export function IDE() {
   // const themelist = Object.entries(monacoThemes)
   
 
-  function handleThemeChange(th: any) {
-    const theme = th;
-    console.log("theme: ", theme);
+  // function handleThemeChange(th: any) {
+  //   const theme = th;
+  //   console.log("theme: ", theme);
 
-    if (["light", "vs-dark"].includes(theme.value)) {
-      setTheme(theme);
-      console.log("chosen theme", theme.value);
-    } else {
-      console.log('theme else: ', theme)
-      defineTheme(theme.value).then((_: any) => setTheme(theme.value));
-    }
-  }
+  //   if (["light", "vs-dark"].includes(theme)) {
+  //     setTheme(theme);
+  //     console.log("chosen theme", theme);
+  //   } else {
+  //     console.log('theme else: ', theme)
+  //     defineTheme(theme).then((_: any) => setTheme(theme));
+  //   }
+  // }
 
   function handleCompile() {
     //@ts-ignore
@@ -175,12 +175,6 @@ export function IDE() {
     }
   }, [ctrlPress, enterPress]);
 
-  useEffect(() => {
-    defineTheme("Oceanic Next").then((_: any) =>
-      setTheme({ value: "Oceanic Next", label: "Oceanic Next" })
-    );
-  }, []);
-
   return (
     <>
       <Editor
@@ -190,7 +184,7 @@ export function IDE() {
         onChange={handleCodeChange}
         language={language?.value}
         value={value}
-        theme="vs-dark"
+        theme={theme.value}
         defaultValue="// happy coding"
       />
 
@@ -201,7 +195,7 @@ export function IDE() {
         <OutputWindow outputDetails={outputDetails} />
       </div>
       <div className="theme-bar">
-        <ThemeDropdown onChange={handleThemeChange} theme={theme}/>
+        <ThemeDropdown />
       </div>
     </>
   );

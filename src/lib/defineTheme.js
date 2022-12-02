@@ -1,5 +1,5 @@
 import { loader } from '@monaco-editor/react'
-
+import themeList from 'monaco-themes/themes/themelist.json'
 
 
 
@@ -55,24 +55,36 @@ export const monacoThemes = {
 }
 
 export async function defineTheme (theme) {
-  // let themeImport = await import(`./themes/${monacoThemes[theme]}.json`).then(module => module.default)
-  // return new Promise((res) => {
-  //   Promise.all([
-  //     loader.init(),
-  //     themeImport
-  //   ]).then(([monaco, themeData]) => {
-  //     monaco.editor.defineTheme(theme, themeData);
-  //     res();
-  //   });
-  // });
+  let themeImport = await import(`./themes/${monacoThemes[theme]}.json`).then(module => module.default)
+  return new Promise((res) => {
+    Promise.all([
+      loader.init(),
+      themeImport
+    ]).then(([monaco, themeData]) => {
+      monaco.editor.defineTheme(theme, themeData);
+      res();
+    });
+  });
 
-  let themeImport = await fetch(`/themes/${theme}.json`)
-    .then(data => data.json())
-    .then(data => {
-      monaco.editor.defineTheme(theme, data)
-      monaco.editor.setTheme(theme)
-    }) 
+  // let themeImport = await fetch(`monaco-themes/themes/${theme}.json`)
+  //   .then(data => data.json())
+  //   .then(data => {
+  //     monaco.editor.defineTheme(theme, data)
+  //     monaco.editor.setTheme(theme)
+  //   }) 
 
-  return themeImport
+  // return themeImport
+
+
+  
+  // const themePath = themeList[theme];
+  // /* @vite-ignore */
+  // return import(/* @vite-ignore */`monaco-themes/themes/${themePath}.json`)
+  // /* @vite-ignore */
+  //   .then(theme => {
+  //     console.log(theme, themePath)
+  //     monaco.editor.defineTheme(theme, themePath);
+  //     monaco.editor.setTheme(theme)
+  //   })
 };
 
