@@ -16,6 +16,7 @@
 // window event attempts for page refresh on keybind
 // use ::tao::event::WindowEvent;
 use tauri::{Manager, /*WebviewAttributes, window::PlatformWebview, WindowEvent */};
+use env_logger::builder;
 
 mod tao;
 mod menu;
@@ -54,8 +55,9 @@ fn main() {
   //   .expect("error while running tauri application");
 
   let builder = tauri::Builder::default().setup(tao::init);
+  #[cfg(target_os = "macos")]
   let builder = builder.menu(menu::menu());
-
+  #[cfg(target_os = "macos")]
   builder
     .on_menu_event(|event| {
       match event.menu_item_id() {
@@ -78,4 +80,10 @@ fn main() {
     .run(tauri::generate_context!())
     .expect("Error while running application");
 
+  #[cfg(target_os = "linux")]
+  let builder = tauri::Builder::default();
+
+  builder.invoke_handler(tauri::generate_handler![commands::close_splash])
+  .run(tauri::generate_context!())
+  .expect("Error while running application")
 }
