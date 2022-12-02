@@ -10,6 +10,8 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@liveblocks/client": "^0.19.2",
+    "@liveblocks/react": "^0.19.2",
     "@monaco-editor/react": "^4.4.6",
     "@tauri-apps/api": "^1.2.0",
     "amazon-chime-sdk-component-library-react": "^3.4.0",

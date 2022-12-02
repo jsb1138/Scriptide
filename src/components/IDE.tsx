@@ -170,10 +170,10 @@ export function IDE() {
         theme="vs-dark"
         defaultValue="// happy coding"
       />
-      <button className="ide-run-btn" onClick={handleCompile}>
-        Run
-      </button>
       <div className="ide-output">
+        <button className="ide-run-btn" onClick={handleCompile}>
+          Run
+        </button>
         <OutputWindow outputDetails={outputDetails} />
       </div>
     </>

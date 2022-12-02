@@ -31,6 +31,10 @@ import {
 import { endMeeting } from "../utils/api";
 import Notifications from "../containers/Notifications";
 
+///////////////////////////////////////////////////////////////////////////////////////////////////liveblocks
+import { ClientSideSuspense } from "@liveblocks/react";
+import { RoomProvider, useOthers } from "../liveblocks.config.js";
+
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
   const meetingStatus = useMeetingStatus();
@@ -137,13 +141,6 @@ const Meeting: FC = () => {
     }
   };
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     toggleVideo()
-  //     console.log("123Time");
-  //   }, 5000);
-  // },[])
-
   // DON'T DELETE
   meetingStatus === MeetingStatus.Succeeded
     ? () => {
@@ -161,241 +158,230 @@ const Meeting: FC = () => {
     setMenuState(!menuState);
   };
 
-  // const handleHandRaise = (uid: any, name: string) => {
-  //   const user = { id: uid, name };
-  //   console.log("user", user);
-  //   console.log("name", name);
-  //   console.log("raised hands", raisedHands);
-  //   console.log("attendees", attendees);
-  //   const handRaiser = attendees.find((user) => user.name == name);
-  //   if (handRaiser) {
-  //     roster.hand = handRaiser as RosterAttendeeType;
-  //   }
-  //   console.log("hand raiser", handRaiser);
-  //   console.log("roster", roster);
-  //   setRaisedHand((raisedHands) => [...raisedHands, user]);
-  // };
-
-  interface Action {
-    type: ActionType;
-    payload?: any;
-  }
-
-  enum ActionType {
-    ADD,
-    REMOVE,
-    REMOVE_ALL,
-  }
-
-  const AddNotificationButton = () => {
-    const dispatch = useNotificationDispatch();
-
-    const payload: any = {
-      severity: Severity.INFO,
-      message: "Information",
-    };
-
-    const addNotification = (e: any) => {
-      dispatch({
-        type: ActionType.ADD,
-        payload: payload,
-      });
-    };
-
-    return (
-      <button onClick={addNotification}>
-        <h1>TEST</h1>
-      </button>
-    );
-  };
+  //////////////////////////////////////////////////////////////////////////////////////////liveblocks
+  const others = useOthers();
 
   // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
   // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER
   return (
-    <>
-      <NotificationProvider>
-        {/* // @ts-ignore */}
-        <Notifications />
-        <AddNotificationButton />
-        {meetingStatus === MeetingStatus.Succeeded ? (
-          <>
-            {/** @todo: THIS RUDIMENTARY MENU CAN BE MADE INTO A COMPONENT --> *INCLUDE* "toggleMenu function" **/}
-            <div
-              id={!menuState ? "menu-container-open" : "menu-container-closed"}
-            >
-              <div id="menu"></div>
-              <div id="menu-btn-container" onClick={toggleMenu}>
-                <div className={menuState ? "menu-btn" : "menu-btn-mod"}>
-                  {menuState ? "►" : "◄"}
-                </div>
-              </div>
-            </div>
-            <div
-              style={{
-                // backgroundColor: "white",
-                height: "100vh",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <div
-                style={{
-                  margin: "0",
-                  backgroundColor: `${
-                    currentUserId.length > 0 && currentUserId === initiator
-                      ? "red"
-                      : "pink"
-                  }`,
-                  height: "2rem",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  position: "absolute",
-                  top: "33px",
-                  zIndex: "10000000000",
-                }}
-              >
-                {currentUserId.length > 0 ? (
-                  <h6>
-                    {currentUserId === initiator ? "Instructor" : "Student"}
-                  </h6>
-                ) : (
-                  <></>
-                )}
-              </div>
-            </div>
-
-            <div id="meeting-ctrls">
-              {meetingStatus === MeetingStatus.Succeeded ? (
-                <>
-                  <ControlBar layout="undocked-horizontal" showLabels>
-                    <AudioInputControl />
-                    <VideoInputControl />
-                    <AudioOutputControl />
-                    <ControlBarButton
-                      icon={<Phone />}
-                      onClick={clickedEndMeeting}
-                      label="End"
-                    />
-                  </ControlBar>
-                  <div />
-                </>
-              ) : (
-                <div />
-              )}
-            </div>
-
-            {!camActive ? (
-              <>
-                <div onClick={handleCamClick} id="cam-view-closed"></div>
-                <div
-                  onClick={handleCamClick}
-                  id={camActive ? "cam-view-open" : "cam-view-closed"}
-                >
-                  <LocalVideo />
-                </div>
-              </>
-            ) : (
-              <>
-                <div onClick={handleCamClick} id="cam-view-closed"></div>
-                <div id={camActive ? "cam-view-open" : "cam-view-closed"}>
-                  <LocalVideo />
-                </div>
-              </>
-            )}
-
-            {!ideActive ? (
-              <>
-                <div onClick={handleIdeClick} id="empty-porthole-invis"></div>
-                <div
-                  onClick={handleIdeClick}
-                  id={ideActive ? "ide-view-open" : "ide-view-closed"}
-                >
-                  <div className="ide-pos-closed">
-                    <IDE />
-                  </div>
-                </div>
-              </>
-            ) : (
-              <>
-                <div onClick={handleIdeClick} id="empty-porthole"></div>
-                <div id={ideActive ? "ide-view-open" : "ide-view-closed"}>
-                  <div className="ide-pos-open">
-                    <IDE />
-                  </div>
-                </div>
-              </>
-            )}
-
-            {/* {currentUserId.length > 0 && currentUserId === initiator ? <> */}
-            {!gridActive ? (
-              <>
-                <div onClick={handleGridClick} id="grid-view-closed"></div>
-                <div
-                  onClick={handleGridClick}
-                  id={gridActive ? "grid-view-open" : "grid-view-closed"}
-                >
-                  <RemoteVideos />
-                </div>
-              </>
-            ) : (
-              <>
-                <div onClick={handleGridClick} id="grid-view-closed"></div>
-                <div id={gridActive ? "grid-view-open" : "grid-view-closed"}>
-                  <RemoteVideos />
-                </div>
-              </>
-            )}
-
-            {currentUserId.length > 0 && currentUserId !== initiator ? (
-              <>
-                {/* <AddNot /> */}
-                <div
-                  onClick={() => handleHandRaise(currentUserId, "Joel")}
-                  id="hand-raise-btn"
-                  className="cf"
-                >
-                  <h2>
-                    <HandRaise width="5rem" height="5rem" color="green" />
-                  </h2>
-                </div>
-              </>
-            ) : (
-              <>
-                <div
-                  id="hands"
-                  onClick={console.log("raised hands", raisedHands)}
-                >
-                  <h1>TEST</h1>
-                </div>
-              </>
-            )}
-
-            {currentUserId.length > 0 && currentUserId === initiator ? (
-              <>
-                <h1>TEST</h1>
-              </>
-            ) : (
-              <></>
-            )}
-
-            {/* </>  */}
-            {/* // :  */}
-            {/* // <></>} */}
-          </>
-        ) : (
+    <RoomProvider id={meetingManager.meetingId} initialPresence={{}}>
+      <ClientSideSuspense
+        fallback={
           <div id="center-flex">
             <h3>
               Joining<code> {meetingIdentifier} </code>meeting
             </h3>
             <h3 className="ellipsis"></h3>
           </div>
+        }
+      >
+        {() => (
+          <>
+            {/* @ts-ignore */}
+            <NotificationProvider>
+              {/* @ts-ignore */}
+              <Notifications />
+              {/* <AddNotificationButton /> */}
+              {meetingStatus === MeetingStatus.Succeeded ? (
+                <>
+                  {/** @todo: THIS RUDIMENTARY MENU CAN BE MADE INTO A COMPONENT --> *INCLUDE* "toggleMenu function" **/}
+                  <div
+                    id={
+                      !menuState
+                        ? "menu-container-open"
+                        : "menu-container-closed"
+                    }
+                  >
+                    <div id="menu"></div>
+                    <div id="menu-btn-container" onClick={toggleMenu}>
+                      <div className={menuState ? "menu-btn" : "menu-btn-mod"}>
+                        {menuState ? "►" : "◄"}
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    style={{
+                      // backgroundColor: "white",
+                      height: "100vh",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div
+                      style={{
+                        margin: "0",
+                        backgroundColor: `${
+                          currentUserId.length > 0 &&
+                          currentUserId === initiator
+                            ? "red"
+                            : "pink"
+                        }`,
+                        height: "2rem",
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        position: "absolute",
+                        top: "33px",
+                        zIndex: "10000000000",
+                      }}
+                    >
+                      {currentUserId.length > 0 ? (
+                        <h6>
+                          {currentUserId === initiator
+                            ? `Instructor -> with ${others.count} others`
+                            : "Student"}
+                        </h6>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  </div>
+
+                  <div id="meeting-ctrls">
+                    {meetingStatus === MeetingStatus.Succeeded ? (
+                      <>
+                        <ControlBar layout="undocked-horizontal" showLabels>
+                          <AudioInputControl />
+                          <VideoInputControl />
+                          <AudioOutputControl />
+                          <ControlBarButton
+                            icon={<Phone />}
+                            onClick={clickedEndMeeting}
+                            label="End"
+                          />
+                        </ControlBar>
+                        <div />
+                      </>
+                    ) : (
+                      <div />
+                    )}
+                  </div>
+
+                  {!camActive ? (
+                    <>
+                      <div onClick={handleCamClick} id="cam-view-closed"></div>
+                      <div
+                        onClick={handleCamClick}
+                        id={camActive ? "cam-view-open" : "cam-view-closed"}
+                      >
+                        <LocalVideo />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div onClick={handleCamClick} id="cam-view-closed"></div>
+                      <div id={camActive ? "cam-view-open" : "cam-view-closed"}>
+                        <LocalVideo />
+                      </div>
+                    </>
+                  )}
+
+                  {!ideActive ? (
+                    <>
+                      <div
+                        onClick={handleIdeClick}
+                        id="empty-porthole-invis"
+                      ></div>
+                      <div
+                        onClick={handleIdeClick}
+                        id={ideActive ? "ide-view-open" : "ide-view-closed"}
+                      >
+                        <div className="ide-pos-closed">
+                          <IDE />
+                        </div>
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div onClick={handleIdeClick} id="empty-porthole"></div>
+                      <div id={ideActive ? "ide-view-open" : "ide-view-closed"}>
+                        <div className="ide-pos-open">
+                          <IDE />
+                        </div>
+                      </div>
+                    </>
+                  )}
+
+                  {/* {currentUserId.length > 0 && currentUserId === initiator ? <> */}
+                  {!gridActive ? (
+                    <>
+                      <div
+                        onClick={handleGridClick}
+                        id="grid-view-closed"
+                      ></div>
+                      <div
+                        onClick={handleGridClick}
+                        id={gridActive ? "grid-view-open" : "grid-view-closed"}
+                      >
+                        <RemoteVideos />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div
+                        onClick={handleGridClick}
+                        id="grid-view-closed"
+                      ></div>
+                      <div
+                        id={gridActive ? "grid-view-open" : "grid-view-closed"}
+                      >
+                        <RemoteVideos />
+                      </div>
+                    </>
+                  )}
+
+                  {/* {currentUserId.length > 0 && currentUserId !== initiator ? (
+      <>
+        <AddNot />
+        <div
+          onClick={() => handleHandRaise(currentUserId, "Joel")}
+          id="hand-raise-btn"
+          className="cf"
+        >
+          <h2>
+            <HandRaise width="5rem" height="5rem" color="green" />
+          </h2>
+        </div>
+      </>
+    ) : (
+      <>
+        <div
+          id="hands"
+          onClick={console.log("raised hands", raisedHands)}
+        >
+          <h1>TEST</h1>
+        </div>
+      </>
+    )} */}
+
+                  {/* {currentUserId.length > 0 && currentUserId === initiator ? (
+      <>
+        <h1>TEST</h1>
+      </>
+    ) : (
+      <></>
+    )} */}
+
+                  {/* </>  */}
+                  {/* // :  */}
+                  {/* // <></>} */}
+                </>
+              ) : (
+                <div id="center-flex">
+                  <h3>
+                    Joining<code> {meetingIdentifier} </code>meeting
+                  </h3>
+                  <h3 className="ellipsis"></h3>
+                </div>
+              )}
+            </NotificationProvider>
+          </>
         )}
-      </NotificationProvider>
-    </>
+      </ClientSideSuspense>
+    </RoomProvider>
   );
 };
 
