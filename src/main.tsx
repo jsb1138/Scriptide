@@ -12,7 +12,7 @@ import { RoomProvider } from "./liveblocks.config.js";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <>
     <RoomProvider
-      id="123456789"
+      id="12345678900"
       initialPresence={{ cursor: null }}
       initialStorage={{
         ide: new LiveObject({

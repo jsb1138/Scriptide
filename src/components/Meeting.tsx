@@ -175,13 +175,14 @@ const Meeting: FC = () => {
     //   message: 'Information'
     // };
     console.log("innnnn", payload);
-    // const addNotification = (e: any) => {
-    dispatch({
-      type: ActionType.ADD,
-      payload: payload,
-    });
-    // };
-    console.log("after");
+    const addNotification = () => {
+      dispatch({
+        type: ActionType.ADD,
+        payload: payload,
+      });
+    };
+
+    addNotification();
 
     // return <button onClick={addNotification}>{label}</button>;
   };
@@ -217,22 +218,67 @@ const Meeting: FC = () => {
 
   const others = useOthers();
 
-  const hands = useStorage((root) => root.raisedHands);
+  const hands = useStorage((root) => root.raisedHandsX);
 
   // Define mutation
   const updateHands = useMutation(({ storage }, student) => {
-    const mutableHandsList = storage.get("raisedHands");
+    const mutableHandsList = storage.get("raisedHandsX");
     mutableHandsList.push(student);
   }, []);
 
   const deleteHand = useMutation(({ storage }, hand) => {
-    const mutableHandsList = storage.get("raisedHands");
+    const mutableHandsList = storage.get("raisedHandsX");
     mutableHandsList.delete(hand);
   }, []);
 
-  // console.log("raised hands", ide);
+  const RaiseYourHand = () => {
+    const dispatch = useNotificationDispatch();
 
-  // console.log("meeting id", meetingIdentifier);
+    const payload: any = {
+      severity: Severity.INFO,
+      message: "Your hand is raised and the instructor has been notified.",
+    };
+
+    const addNotification = (e: any) => {
+      updateHands({ name: currentUserName });
+      dispatch({
+        type: ActionType.ADD,
+        payload: payload,
+      });
+    };
+
+    return (
+      <button id="hand-raise-btn" className="cf" onClick={addNotification}>
+        <div>
+          <h2>
+            <HandRaise width="5rem" height="5rem" color="green" />
+          </h2>
+        </div>
+      </button>
+    );
+  };
+
+  // const AddNotificationButton = () => {
+  //   const dispatch = useNotificationDispatch();
+
+  //   const payload: any = {
+  //     severity: Severity.INFO,
+  //     message: "Information",
+  //   };
+
+  //   const addNotification = (e: any) => {
+  //     dispatch({
+  //       type: ActionType.ADD,
+  //       payload: payload,
+  //     });
+  //   };
+
+  //   return (
+  //     <button onClick={addNotification}>
+  //       <h1>TEST</h1>
+  //     </button>
+  //   );
+  // };
 
   // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
   // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER
@@ -380,21 +426,7 @@ const Meeting: FC = () => {
 
             {currentUserId.length > 0 && currentUserId !== initiator ? (
               <>
-                <div
-                  onClick={() => {
-                    raiseHand({ name: currentUserName });
-                    triggerNotification({
-                      severity: Severity.INFO,
-                      message: `Your hand is raised and the instructor has been notified.`,
-                    });
-                  }}
-                  id="hand-raise-btn"
-                  className="cf"
-                >
-                  <h2>
-                    <HandRaise width="5rem" height="5rem" color="green" />
-                  </h2>
-                </div>
+                <RaiseYourHand />
               </>
             ) : (
               <>
