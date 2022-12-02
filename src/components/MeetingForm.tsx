@@ -7,7 +7,6 @@ import {
   Input,
   PrimaryButton,
   useMeetingManager,
-  setMeetingIdentifier,
 } from "amazon-chime-sdk-component-library-react";
 import { MeetingSessionConfiguration } from "amazon-chime-sdk-js";
 import {

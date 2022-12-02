@@ -244,6 +244,7 @@ export default function App() {
   // }, [ctrlPress, enterPress]);
 
   /////////////////////////////////////////////////////////////////////////////////////////////////liveblocks
+  // @ts-ignore
   function Cursor({ x, y }) {
     return (
       <img
@@ -269,6 +270,7 @@ export default function App() {
       }
       onPointerLeave={() => updateMyPresence({ cursor: null })}
     >
+      {/* @ts-ignore */}
       {others.map(({ connectionId, presence }) =>
         presence.cursor ? (
           <Cursor

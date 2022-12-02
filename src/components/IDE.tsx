@@ -163,13 +163,16 @@ export function IDE() {
   }
 
   ////////////////////////////////////////////////////////////////////////////////////////liveblocks
-  const ide = useStorage((root) => root.ide);
+  const ide = useStorage((root: any) => root.ide);
 
   // Define mutation
-  const updateIDE = useMutation(({ storage }, property, newData) => {
-    const mutableIDE = storage.get("ide");
-    mutableIDE.set(property, newData);
-  }, []);
+  const updateIDE = useMutation(
+    ({ storage }: any, property: string, newData: string) => {
+      const mutableIDE = storage.get("ide");
+      mutableIDE.set(property, newData);
+    },
+    []
+  );
 
   console.log("ide storage", ide);
   // const handleIdeInput = () => {}

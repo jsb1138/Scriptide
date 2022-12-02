@@ -82,8 +82,8 @@ const Meeting: FC = () => {
   const attendeeItems = attendees.splice(0, 1).map((attendee) => {
     const { chimeAttendeeId, name } = attendee;
     currentUserId = chimeAttendeeId;
+    // @ts-ignore
     currentUserName = name;
-    // setThisUser(currentUserId);
   });
 
   ///////// COULD IMPORT THESE FUNCTIONS FROM ELSEWHERE... AS HELPERS??
@@ -167,26 +167,6 @@ const Meeting: FC = () => {
       }
     : console.log("TOO SOON");
 
-  const triggerNotification = (payload) => {
-    const dispatch = useNotificationDispatch();
-
-    // const payload: any = {
-    //   severity: Severity.INFO,
-    //   message: 'Information'
-    // };
-    console.log("innnnn", payload);
-    const addNotification = () => {
-      dispatch({
-        type: ActionType.ADD,
-        payload: payload,
-      });
-    };
-
-    addNotification();
-
-    // return <button onClick={addNotification}>{label}</button>;
-  };
-
   interface Action {
     type: ActionType;
     payload?: any;
@@ -203,12 +183,12 @@ const Meeting: FC = () => {
   };
 
   //////////////////////////////////////////////////////////////////////////////////////////liveblocks
-  const removeRaisedHand = (index) => {
+  const removeRaisedHand = (index: number) => {
     deleteHand(index);
     console.log("hands--->", hands);
   };
 
-  const raiseHand = (student) => {
+  const raiseHand = (student: {}) => {
     updateHands(student);
     // triggerNotification({
     //   severity: Severity.INFO,
@@ -218,15 +198,16 @@ const Meeting: FC = () => {
 
   const others = useOthers();
 
-  const hands = useStorage((root) => root.raisedHandsX);
+  const hands = useStorage((root: any) => root.raisedHandsX);
 
   // Define mutation
-  const updateHands = useMutation(({ storage }, student) => {
+  const updateHands = useMutation(({ storage }: any, student: any) => {
+    // @ts-ignore
     const mutableHandsList = storage.get("raisedHandsX");
     mutableHandsList.push(student);
   }, []);
 
-  const deleteHand = useMutation(({ storage }, hand) => {
+  const deleteHand = useMutation(({ storage }: any, hand: any) => {
     const mutableHandsList = storage.get("raisedHandsX");
     mutableHandsList.delete(hand);
   }, []);
@@ -430,12 +411,9 @@ const Meeting: FC = () => {
               </>
             ) : (
               <>
-                <div
-                  id="hands"
-                  onClick={console.log("these are the hands", hands)}
-                >
+                <div id="hands">
                   <ul>
-                    {hands.map((student, i) => (
+                    {hands.map((student: any, i: number) => (
                       <li>
                         {student.name}
                         <button
