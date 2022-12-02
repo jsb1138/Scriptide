@@ -11,6 +11,9 @@ import useKeyPress from "../hooks/useKeyPress";
 import { defineTheme } from "../lib/defineTheme.js";
 import { showSuccessToast, showErrorToast } from "../utils/apiServices.js";
 
+///////////////////////////////////////////////////////////liveblocks
+import { useStorage, useMutation } from "../liveblocks.config.js";
+
 export function IDE() {
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
   const host = import.meta.env.VITE_RAPIDAPI_HOST;
@@ -34,11 +37,6 @@ export function IDE() {
 
   const enterPress = useKeyPress("Enter");
   const ctrlPress = useKeyPress("Control");
-
-  function handleChange(value: any) {
-    setValue(value);
-    onChange("code", value);
-  }
 
   function handleEditorDidMount(editor: any, monaco: any) {
     editorRef.current = monaco;
@@ -158,6 +156,24 @@ export function IDE() {
     }
   }, [ctrlPress, enterPress]);
 
+  function handleChange(value: any) {
+    updateIDE("content", value);
+    setValue(value);
+    // onChange("code", value);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////liveblocks
+  const ide = useStorage((root) => root.ide);
+
+  // Define mutation
+  const updateIDE = useMutation(({ storage }, property, newData) => {
+    const mutableIDE = storage.get("ide");
+    mutableIDE.set(property, newData);
+  }, []);
+
+  console.log("ide storage", ide);
+  // const handleIdeInput = () => {}
+
   return (
     <>
       <Editor
@@ -166,7 +182,7 @@ export function IDE() {
         onMount={handleEditorDidMount}
         onChange={handleChange}
         language={language?.value}
-        value={value}
+        value={ide.content}
         theme="vs-dark"
         defaultValue="// happy coding"
       />

@@ -6,17 +6,24 @@ import "./index.css";
 
 ///////////////////////////////////////////////////////////liveblocks
 import { ClientSideSuspense } from "@liveblocks/react";
+import { LiveObject } from "@liveblocks/client";
 import { RoomProvider } from "./liveblocks.config.js";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <>
-    <RoomProvider id="meetingName!" initialPresence={{ cursor: null }}>
+    <RoomProvider
+      id="1"
+      initialPresence={{ cursor: null }}
+      initialStorage={{
+        ide: new LiveObject({
+          content: "// happy coding",
+        }),
+      }}
+    >
       <ClientSideSuspense
         fallback={
           <div id="center-flex">
-            <h3>
-              Joining<code> SOME-MEETING </code>meeting
-            </h3>
+            <h3>Loading Scriptide</h3>
             <h3 className="ellipsis"></h3>
           </div>
         }

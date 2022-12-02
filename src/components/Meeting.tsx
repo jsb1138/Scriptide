@@ -37,6 +37,8 @@ import {
   RoomProvider,
   useOthers,
   useUpdateMyPresence,
+  useStorage,
+  useMutation,
 } from "../liveblocks.config.js";
 
 const Meeting: FC = () => {
@@ -171,8 +173,15 @@ const Meeting: FC = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////liveblocks
   const others = useOthers();
+  const ide = useStorage((root) => root.ide);
 
-  console.log("others", others);
+  // Define mutation
+  const updateIDE = useMutation(({ storage }, property, newData) => {
+    const mutableIDE = storage.get("ide");
+    mutableIDE.set(property, newData);
+  }, []);
+
+  console.log("ide storage", ide);
 
   // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
   // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER

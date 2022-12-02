@@ -250,8 +250,10 @@ export default function App() {
         style={{
           position: "absolute",
           transform: `translate(${x}px, ${y}px)`,
+          height: "15px",
+          width: "15px",
         }}
-        src="cursor-image.svg"
+        src="src/assets/cursor.png"
       />
     );
   }
