@@ -184,7 +184,6 @@ export function IDE() {
         language={language?.value}
         value={ide.content}
         theme="vs-dark"
-        defaultValue="// happy coding"
       />
       <div className="ide-output">
         <button className="ide-run-btn" onClick={handleCompile}>

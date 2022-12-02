@@ -173,15 +173,15 @@ const Meeting: FC = () => {
 
   //////////////////////////////////////////////////////////////////////////////////////////liveblocks
   const others = useOthers();
-  const ide = useStorage((root) => root.ide);
+  // const ide = useStorage((root) => root.ide);
 
-  // Define mutation
-  const updateIDE = useMutation(({ storage }, property, newData) => {
-    const mutableIDE = storage.get("ide");
-    mutableIDE.set(property, newData);
-  }, []);
+  // // Define mutation
+  // const updateIDE = useMutation(({ storage }, property, newData) => {
+  //   const mutableIDE = storage.get("ide");
+  //   mutableIDE.set(property, newData);
+  // }, []);
 
-  console.log("ide storage", ide);
+  console.log("meeting id", meetingIdentifier);
 
   // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
   // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER
@@ -236,8 +236,8 @@ const Meeting: FC = () => {
                 {currentUserId.length > 0 ? (
                   <h6>
                     {currentUserId === initiator
-                      ? `Instructor + ${others.count} others`
-                      : `Student + ${others.count} others`}
+                      ? `Instructor + ${others.count} others in meeting: ${meetingIdentifier}`
+                      : `Student + ${others.count} others in meeting: ${meetingIdentifier}`}
                   </h6>
                 ) : (
                   <></>
@@ -327,9 +327,8 @@ const Meeting: FC = () => {
               </>
             )}
 
-            {/* {currentUserId.length > 0 && currentUserId !== initiator ? (
+            {currentUserId.length > 0 && currentUserId !== initiator ? (
               <>
-                <AddNot />
                 <div
                   onClick={() => handleHandRaise(currentUserId, "Joel")}
                   id="hand-raise-btn"
@@ -349,7 +348,7 @@ const Meeting: FC = () => {
                   <h1>TEST</h1>
                 </div>
               </>
-            )} */}
+            )}
 
             {/* {currentUserId.length > 0 && currentUserId === initiator ? (
               <>

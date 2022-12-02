@@ -41,6 +41,7 @@ export default function ScriptideProvider({ children }) {
   const [menuState, setMenuState] = useState(false);
   const [meetingIdentifier, setMeetingIdentifier] = useState("");
   const [raisedHands, setRaisedHand] = useState([]);
+  const [localMeetingId, setlocalMeetingId] = useState("");
 
   async function getAndSet() {}
 
