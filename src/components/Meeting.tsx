@@ -272,17 +272,6 @@ const Meeting: FC = () => {
         {/* <AddNotificationButton /> */}
         {meetingStatus === MeetingStatus.Succeeded ? (
           <>
-            {/** @todo: THIS RUDIMENTARY MENU CAN BE MADE INTO A COMPONENT --> *INCLUDE* "toggleMenu function" **/}
-            <div
-              id={!menuState ? "menu-container-open" : "menu-container-closed"}
-            >
-              <div id="menu"></div>
-              <div id="menu-btn-container" onClick={toggleMenu}>
-                <div className={menuState ? "menu-btn" : "menu-btn-mod"}>
-                  {menuState ? "►" : "◄"}
-                </div>
-              </div>
-            </div>
             <div
               style={{
                 // backgroundColor: "white",
@@ -312,11 +301,13 @@ const Meeting: FC = () => {
                 }}
               >
                 {currentUserId.length > 0 ? (
-                  <h6>
-                    {currentUserId === initiator
-                      ? `Instructor + ${others.count} others in meeting: ${meetingIdentifier}`
-                      : `Student + ${others.count} others in meeting: ${meetingIdentifier}`}
-                  </h6>
+                  <>
+                    <h6>
+                      {currentUserId === initiator
+                        ? `Instructor + ${others.count} others in meeting: ${meetingIdentifier}`
+                        : `Student + ${others.count} others in meeting: ${meetingIdentifier}`}
+                    </h6>
+                  </>
                 ) : (
                   <></>
                 )}
@@ -343,6 +334,16 @@ const Meeting: FC = () => {
               )}
             </div>
 
+            <div
+              id="menu"
+              className={menuState ? "menu-open" : "menu-closed"}
+            ></div>
+            <div
+              className={menuState ? "menu-btn-mod" : "menu-btn"}
+              onClick={toggleMenu}
+            >
+              {menuState ? "◄" : "►"}
+            </div>
             {!camActive ? (
               <>
                 <div onClick={handleCamClick} id="cam-view-closed"></div>

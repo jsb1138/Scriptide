@@ -168,6 +168,7 @@ export function IDE() {
   // Define mutation
   const updateIDE = useMutation(
     ({ storage }: any, property: string, newData: string) => {
+      setValue(newData);
       const mutableIDE = storage.get("ide");
       mutableIDE.set(property, newData);
     },
@@ -185,7 +186,7 @@ export function IDE() {
         onMount={handleEditorDidMount}
         onChange={handleChange}
         language={language?.value}
-        value={ide.content}
+        value={value}
         theme="vs-dark"
       />
       <div className="ide-output">
