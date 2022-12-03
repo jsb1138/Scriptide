@@ -1,26 +1,18 @@
-import React, { useState, useRef, useEffect, SetStateAction } from "react";
-import { invoke } from "@tauri-apps/api";
 import Editor from "@monaco-editor/react";
-import { useScriptideContext } from "../contexts/ScriptideProvider";
-import { toast } from "react-toastify";
 import axios from "axios";
-
-// import monacoThemes from 'monaco-themes/themes'
-
-import monacoThemes from 'monaco-themes'
-
+import { useEffect, useRef } from "react";
+import { useScriptideContext } from "../contexts/ScriptideProvider";
 
 import "../App.css";
-import { OutputWindow } from "./OutputWindow";
 import useKeyPress from "../hooks/useKeyPress";
-import { defineTheme } from "../lib/defineTheme.js";
-import { showSuccessToast, showErrorToast } from "../utils/apiServices.js";
-import { ThemeDropdown } from "./ThemeDropdown";
+import { showErrorToast, showSuccessToast } from "../utils/apiServices.js";
 import { LanguageDropdown } from "./LanguageDropdown";
+import { OutputWindow } from "./OutputWindow";
+import { ThemeDropdown } from "./ThemeDropdown";
 
-///////////////////////////////////////////////////////////liveblocks
-import { useStorage, useMutation } from "../liveblocks.config.js";
+//liveblocks
 
+import { useMutation, useStorage } from "../liveblocks.config.js";
 
 export function IDE() {
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
@@ -28,19 +20,15 @@ export function IDE() {
   const key = import.meta.env.VITE_RAPIDAPI_KEY;
 
   const {
-    processing,
     setProcessing,
     language,
-    setLanguage,
     code,
     setCode,
     theme,
-    setTheme,
     outputDetails,
     setOutputDetails,
   } = useScriptideContext();
 
-  const [value, setValue] = useState(code || "");
   const editorRef = useRef<typeof Editor | null>(null);
 
   const enterPress = useKeyPress("Enter");
@@ -49,11 +37,6 @@ export function IDE() {
   function handleEditorDidMount(editor: any, monaco: any) {
     editorRef.current = monaco;
   }
-
-  // function onSelectChange(select: SetStateAction<any>) {
-  //   console.log("selected: ", select);
-  //   setLanguage(select);
-  // }
 
   function onChange(action: any, data: any) {
     switch (action) {
@@ -66,8 +49,6 @@ export function IDE() {
       }
     }
   }
-
-
 
   function handleCompile() {
     //@ts-ignore
@@ -145,17 +126,8 @@ export function IDE() {
     }
   }
 
-  // function handleChange(value: any) {
-  //   const newState = value;
-  //   setValue(newState);
-  // }
 
-  function handleCodeChange(value: any) {
-    setValue(value);
-    onChange("code", value);
-  }
 
-  // invoke('greet', { name: 'World'}).then((response) => {console.log(response)})
 
   useEffect(() => {
     if (enterPress && ctrlPress) {
@@ -167,25 +139,22 @@ export function IDE() {
 
   function handleChange(value: any) {
     updateIDE("content", value);
-    setValue(value);
-    // onChange("code", value);
+
   }
 
-  ////////////////////////////////////////////////////////////////////////////////////////liveblocks
+ //liveblocks
+
   const ide = useStorage((root: any) => root.ide);
 
   // Define mutation
+
   const updateIDE = useMutation(
     ({ storage }: any, property: string, newData: string) => {
-      setValue(newData);
       const mutableIDE = storage.get("ide");
       mutableIDE.set(property, newData);
     },
     []
   );
-
-  console.log("ide storage", ide);
-  // const handleIdeInput = () => {}
 
   return (
     <>
@@ -197,7 +166,7 @@ export function IDE() {
         language={language?.value}
         value={ide.content}
         theme={theme.value}
-        
+
       />
 
       <div className="ide-output">

@@ -11,10 +11,8 @@ function ExcalComponent() {
     <>
       <div className="hider-container">
         <div className={`hider ${transitionState ? "open" : "closed"} ${opacity ? "opaque" : "transparent"}`}>
-         
         </div>
       </div>
-
       <div className={excalActive ? "excal-open" : "excal-closed"}>
         <div className="excalibox">
           <Excalidraw />

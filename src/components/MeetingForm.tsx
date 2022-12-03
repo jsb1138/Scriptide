@@ -1,12 +1,11 @@
-import React, { ChangeEvent, FC, FormEvent, useState } from "react";
+import { ChangeEvent, FC, FormEvent } from "react";
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 
 import {
-  Flex,
   FormField,
   Input,
   PrimaryButton,
-  useMeetingManager,
+  useMeetingManager
 } from "amazon-chime-sdk-component-library-react";
 import { MeetingSessionConfiguration } from "amazon-chime-sdk-js";
 import {
@@ -15,15 +14,14 @@ import {
   createMeeting,
   getAttendeeFromDB,
   getMeetingFromDB,
-  joinMeeting,
+  joinMeeting
 } from "../utils/api";
 
 const MeetingForm: FC = () => {
   const meetingManager = useMeetingManager();
-  const [meetingTitle, setMeetingTitle] = useState("");
-  const [attendeeName, setName] = useState("");
 
-  const { initiator, setInitiator, setMeetingActive, setMeetingIdentifier } =
+
+  const { setInitiator, setMeetingActive, setMeetingIdentifier, attendeeName, setName, meetingTitle, setMeetingTitle } =
     useScriptideContext();
 
   function getAttendeeCallback() {
@@ -54,7 +52,6 @@ const MeetingForm: FC = () => {
         const meetingData = JSON.parse(meetingJson.data);
         const joinInfo = await joinMeeting(meetingData.MeetingId, name);
         console.log("meeting Data", meetingData);
-        // console.log("is initiator NOT FIRST> --> ", isInitiator);
         await addAttendeeToDB(joinInfo.Attendee.AttendeeId, name);
         const meetingSessionConfiguration = new MeetingSessionConfiguration(
           meetingData,
@@ -113,9 +110,7 @@ const MeetingForm: FC = () => {
             setName(e.target.value);
           }}
         />
-        {/* <Flex> */}
         <PrimaryButton label="Join Meeting" onClick={clickedJoinMeeting} />
-        {/* </Flex> */}
       </form>
     </div>
   );

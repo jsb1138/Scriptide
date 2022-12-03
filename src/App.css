@@ -1,6 +1,5 @@
 ul {
   list-style-type: none;
-  /* background-color: grey; */
   width: 7vw;
   height: 50vh;
   padding-top: 1px;
@@ -33,7 +32,6 @@ code {
 .editor {
   display: flex;
   justify-content: center;
-  /* background-color: blue; */
   border-radius: 10px;
 }
 
@@ -107,12 +105,7 @@ code {
 .App {
   width: 100vw;
   height: 100vh;
-  /* background-color: rgb(185, 134, 134); */
-  /* background-color: white; */
   text-align: center;
-  /* overflow-y: hidden; */
-  /* opacity: 1;
-  transition: 0.3s;  */
 }
 
 .App-logo {
@@ -136,29 +129,6 @@ code {
   padding: 0 20px 0 20px;
 }
 
-/* #menu-container-closed {
-  z-index: 100000;
-  width: 200px;
-  height: 100%;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  top: 0;
-  left: -115px;
-  transition: 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-}
-
-#menu-container-open {
-  z-index: 100000;
-  width: 200px;
-  height: 100%;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  left: 0px;
-  transition: 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
-} */
-
 #menu {
   width: 90px;
   height: 75%;
@@ -180,28 +150,6 @@ code {
   top: 100px;
   left: -100px;
 }
-
-/* #menu-open {
-  z-index: 10;
-  background: rgba(255, 255, 255, 0.4);
-  width: 90px;
-  height: 75%;
-  border-radius: 4px;
-  position: relative;
-  left: 45px;
-  opacity: 0.7;
-} */
-
-/* #menu-btn-container {
-  z-index: 10;
-  width: 90px;
-  height: 75%;
-  border-radius: 4px;
-  position: relative;
-  left: 30px;
-  display: flex;
-  align-items: flex-start;
-} */
 
 .menu-btn {
   position: absolute;
@@ -264,7 +212,6 @@ code {
 .theme-bar {
   height: 200px;
   width: 400px;
-  /* background-color: red; */
   position: absolute;
   top: 200px;
 }
@@ -286,7 +233,6 @@ code {
 }
 
 .open {
-  /* background-color: aliceblue; */
   width: 200px;
   height: 80%;
   border-radius: 4px;
@@ -318,8 +264,6 @@ button {
 }
 
 .form-container {
-  /* height: 50vh; */
-  /* top:50%; */
   width: 20vw;
   margin: auto;
   background-color: white;
@@ -327,7 +271,6 @@ button {
   height: 260px;
   width: 300px;
   padding: 20px 20px;
-  /* opacity: 0.6; */
 }
 
 #meeting-ctrls {
@@ -479,10 +422,8 @@ button {
   height: 100%;
   margin-left: 0px;
   margin-top: 0px;
-  /* background-color: rgb(255, 119, 189); */
   z-index: 9999;
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-  /* overflow: hidden; */
 }
 
 #grid-view-closed {
@@ -494,9 +435,7 @@ button {
   width: 140px;
   height: 140px;
   border-radius: 50%;
-  /* overflow: hidden; */
   background-color: rgba(255, 255, 255, 0.2);
-  /* background-color: rgb(255, 119, 189); */
   backdrop-filter: blur(10px);
   z-index: 10000;
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
@@ -513,13 +452,11 @@ button {
   border-radius: 50%;
   overflow: hidden;
   background-color: rgba(77, 199, 55, 0.2);
-  /* background-color: rgb(255, 119, 189); */
   z-index: 10000;
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 .top {
-  /* background-color: #61dafb; */
   z-index: 100000000000000000000;
 }
 
@@ -547,7 +484,7 @@ h3 {
   width: 240px;
   height: 300px;
   border-radius: 2rem;
-  overflowX: hidden;
+  overflow-X: hidden;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   /* background-color: rgb(255, 119, 189); */
@@ -618,8 +555,6 @@ h3 {
 }
 
 .sc-jrcTuL.iLFcWf {
-  /* opacity: 0; */
-  /* background-color: blanchedalmond; */
   background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(10px);
   border-radius: 5rem;
@@ -628,8 +563,6 @@ h3 {
 
 .sc-kDvujY.ibMrYq {
   opacity: 1;
-  /* background-color: rgb(255, 103, 103); */
-  /* border-radius: 6rem; */
 }
 
 .caIMRX {
@@ -641,7 +574,6 @@ h3 {
   justify-content: flex-start;
   padding: 0;
   width: 30px;
-  /* background-color: red; */
 }
 
 .ellipsis:after {

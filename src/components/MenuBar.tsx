@@ -1,5 +1,5 @@
 import { useScriptideContext } from "../contexts/ScriptideProvider";
-import React, { FC, useState, useEffect } from "react";
+import { FC } from "react";
 
 const MenuBar: FC = () => {
   const {
@@ -9,7 +9,6 @@ const MenuBar: FC = () => {
     setMenuState,
     transitionState,
     setTransitionState,
-    opacity,
     setOpacity
   } = useScriptideContext();
 
@@ -29,21 +28,20 @@ const MenuBar: FC = () => {
   }
 
   return (
-    <div id={!menuState ? "menu-container-open" : "menu-container-closed"}>
-      <div id="menu">
-        <div
-          className="menu-item"
-          onClick={handleExcali}
-        >
-          <p>E</p>
-        </div>
-      </div>
-      <div id="menu-btn-container" onClick={toggleMenu}>
-        <div className={menuState ? "menu-btn" : "menu-btn-mod"}>
-          {menuState ? "►" : "◄"}
-        </div>
-      </div>
-    </div>
+    <>
+    <div
+    id="menu"
+    className={menuState ? "menu-open" : "menu-closed"}
+  ><div className="menu-item" onClick={handleExcali}>
+  <p>E</p>
+</div></div>
+  <div
+    className={menuState ? "menu-btn-mod" : "menu-btn"}
+    onClick={toggleMenu}
+  >
+    {menuState ? "◄" : "►"}
+  </div>
+  </>
   );
 };
 

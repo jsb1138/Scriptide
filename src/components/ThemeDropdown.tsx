@@ -1,7 +1,5 @@
-import React from "react";
 import Select from "react-select";
 import monacoThemes from "../lib/themes/themelist.json";
-import { customStyles } from "../constants/customStyles";
 import { useEffect } from "react";
 import { defineTheme } from "../lib/defineTheme.js";
 import { useScriptideContext } from "../contexts/ScriptideProvider";

@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { IDE } from "./IDE";
 
@@ -12,19 +12,14 @@ import {
   MeetingStatus,
   useMeetingStatus,
   VideoInputControl,
-  VideoTileGrid,
   RemoteVideos,
   LocalVideo,
   useRosterState,
   useLocalVideo,
   useVideoInputs,
-  CameraSelection,
   HandRaise,
-  RosterAttendeeType,
   NotificationProvider,
   useNotificationDispatch,
-  useNotificationState,
-  NotificationGroup,
   ActionType,
   Severity,
 } from "amazon-chime-sdk-component-library-react";
@@ -32,15 +27,12 @@ import { endMeeting } from "../utils/api";
 import Notifications from "../containers/Notifications";
 import ExcalComponent from "./excalidrawComponent/ExcalComponent";
 
-///////////////////////////////////////////////////////////liveblocks
-import { ClientSideSuspense } from "@liveblocks/react";
 import {
-  RoomProvider,
   useOthers,
-  useUpdateMyPresence,
   useStorage,
   useMutation,
 } from "../liveblocks.config.js";
+import MenuBar from "./MenuBar";
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
@@ -57,16 +49,9 @@ const Meeting: FC = () => {
     menuState,
     setMenuState,
     meetingIdentifier,
-    raisedHands,
-    setRaisedHand,
-    excalActive,
-    setExcalActive,
-    setTransitionState,
-    transitionState,
-    setOpacity
   } = useScriptideContext();
 
-  const { isVideoEnabled, toggleVideo } = useLocalVideo();
+  const { toggleVideo } = useLocalVideo();
 
   const clickedEndMeeting = async () => {
     const meetingId = meetingManager.meetingId;
@@ -245,27 +230,7 @@ const Meeting: FC = () => {
     );
   };
 
-  // const AddNotificationButton = () => {
-  //   const dispatch = useNotificationDispatch();
 
-  //   const payload: any = {
-  //     severity: Severity.INFO,
-  //     message: "Information",
-  //   };
-
-  //   const addNotification = (e: any) => {
-  //     dispatch({
-  //       type: ActionType.ADD,
-  //       payload: payload,
-  //     });
-  //   };
-
-  //   return (
-  //     <button onClick={addNotification}>
-  //       <h1>TEST</h1>
-  //     </button>
-  //   );
-  // };
 
   // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
   // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER
@@ -290,7 +255,6 @@ const Meeting: FC = () => {
           <>
             <div
               style={{
-                // backgroundColor: "white",
                 height: "100vh",
                 display: "flex",
                 flexDirection: "column",
@@ -349,18 +313,8 @@ const Meeting: FC = () => {
                 <div />
               )}
             </div>
+            <MenuBar />
 
-            <div id="menu" className={menuState ? "menu-open" : "menu-closed"}>
-              <div className="menu-item" onClick={handleExcali}>
-                <p>E</p>
-              </div>
-            </div>
-            <div
-              className={menuState ? "menu-btn-mod" : "menu-btn"}
-              onClick={toggleMenu}
-            >
-              {menuState ? "◄" : "►"}
-            </div>
             {!camActive ? (
               <>
                 <div onClick={handleCamClick} id="cam-view-closed"></div>
@@ -403,7 +357,6 @@ const Meeting: FC = () => {
               </>
             )}
 
-            {/* {currentUserId.length > 0 && currentUserId === initiator ? <> */}
             {!gridActive ? (
               <>
                 <div onClick={handleGridClick} id="grid-view-closed"></div>
@@ -447,17 +400,6 @@ const Meeting: FC = () => {
               </>
             )}
 
-            {/* {currentUserId.length > 0 && currentUserId === initiator ? (
-              <>
-                <h1>TEST</h1>
-              </>
-            ) : (
-              <></>
-            )} */}
-
-            {/* </>  */}
-            {/* // :  */}
-            {/* // <></>} */}
           </>
         ) : (
           <div id="center-flex">
@@ -467,7 +409,7 @@ const Meeting: FC = () => {
             <h3 className="ellipsis"></h3>
           </div>
         )}
-        <ExcalComponent />
+          <ExcalComponent />
       </NotificationProvider>
     </>
   );
