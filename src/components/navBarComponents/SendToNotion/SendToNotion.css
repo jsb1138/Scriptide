@@ -2,6 +2,32 @@
   border: 2px solid white;
 }
 
+#notion-connect {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+#notion-connect:hover {
+  opacity: 1;
+}
+
+#notion-connect p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+}
+
+#notion-logo {
+  width: 40px;
+  margin-left: 10px;
+}
+
 #notion-form {
   display: flex;
   flex-direction: column;

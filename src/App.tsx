@@ -12,6 +12,7 @@ import Porthole from './components/Porthole';
 import { ThemeDropdown } from './components/ThemeDropdown';
 import { LanguageDropdown } from './components/LanguageDropdown';
 import { SideBar } from './components/SideBar';
+import NotionModal from "./components/NotionModal/NotionModal"
 
 //dependencies
 import React, { useEffect, SetStateAction } from 'react';
@@ -208,6 +209,7 @@ export default function App() {
       </header>
       <div id='App-main'>
         <NavBar />
+        <NotionModal/>
         {/* <div id="menu-container">
           <div id="menu">
           </div>
@@ -215,7 +217,7 @@ export default function App() {
         </div> */}
         {holes.map((hole, i) => (
           <Porthole key={`${hole}+${i}`} hole={hole} />
-        ))}
+          ))}
       </div>
     </div>
     // </div>
