@@ -230,20 +230,6 @@ const Meeting: FC = () => {
     );
   };
 
-
-
-  // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
-  // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER
-  const handleExcali = () => {
-    setTransitionState(!transitionState);
-    if (excalActive) {
-      setExcalActive(false);
-      setOpacity(true);
-    } else {
-      setTimeout(() => setExcalActive(!excalActive), 180);
-      setTimeout(() => setOpacity(false), 180);
-    }
-  };
   return (
     <>
       {/* @ts-ignore */}
