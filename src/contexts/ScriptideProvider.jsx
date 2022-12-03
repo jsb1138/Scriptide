@@ -1,36 +1,36 @@
 import { createContext, useContext, useState, useEffect, useRef } from "react";
 // import  languageOptions  from '../constants/languageOptions'
-import { io } from 'socket.io-client'
+// import { io } from 'socket.io-client'
 
 const ScriptideContext = createContext(null);
 
 export default function ScriptideProvider({ children }) {
-  const languageOptions = [
-    {
-      id: 63,
-      name: "JavaScript (Node.js 12.14.0)",
-      label: "JavaScript (Node.js 12.14.0)",
-      value: "javascript",
-    },
-    {
-      id: 45,
-      name: "Assembly (NASM 2.14.02)",
-      label: "Assembly (NASM 2.14.02)",
-      value: "assembly",
-    },
-    {
-      id: 84,
-      name: "Visual Basic.Net (vbnc 0.0.0.5943)",
-      label: "Visual Basic.Net (vbnc 0.0.0.5943)",
-      value: "vbnet",
-    },
-  ];
+  // const languageOptions = [
+  //   {
+  //     id: 63,
+  //     name: "JavaScript (Node.js 12.14.0)",
+  //     label: "JavaScript (Node.js 12.14.0)",
+  //     value: "javascript",
+  //   },
+  //   {
+  //     id: 45,
+  //     name: "Assembly (NASM 2.14.02)",
+  //     label: "Assembly (NASM 2.14.02)",
+  //     value: "assembly",
+  //   },
+  //   {
+  //     id: 84,
+  //     name: "Visual Basic.Net (vbnc 0.0.0.5943)",
+  //     label: "Visual Basic.Net (vbnc 0.0.0.5943)",
+  //     value: "vbnet",
+  //   },
+  // ];
 
   const javascriptDefault = "//happy coding";
 
   //socket
 
-  const socket = io('http://127.0.0.1:3000')
+  // const socket = io('http://127.0.0.1:3000')
 
   const [camActive, setCamActive] = useState(false);
   const [ideActive, setIdeActive] = useState(false);
@@ -39,7 +39,7 @@ export default function ScriptideProvider({ children }) {
   const [outputDetails, setOutputDetails] = useState(null);
   const [processing, setProcessing] = useState(null);
   const [theme, setTheme] = useState("vs-dark");
-  const [language, setLanguage] = useState(languageOptions[0]);
+  // const [language, setLanguage] = useState(languageOptions[0]);
   const [initiator, setInitiator] = useState("");
   const [meetingActive, setMeetingActive] = useState(false);
   const [thisUser, setThisUser] = useState("");
@@ -48,13 +48,13 @@ export default function ScriptideProvider({ children }) {
   const [raisedHands, setRaisedHand] = useState([]);
   const [excalActive, setExcalActive] = useState(false);
   const [transitionState, setTransitionState] = useState(false)  
-  const [opacity, setOpacity] = useState(false);
+  const [opacity, setOpacity] = useState(true);
 
-  async function getAndSet() {}
+  // async function getAndSet() {}
 
-  useEffect(() => {
-    getAndSet();
-  }, []);
+  // useEffect(() => {
+  //   getAndSet();
+  // }, []);
 
   return (
     <ScriptideContext.Provider
@@ -67,8 +67,8 @@ export default function ScriptideProvider({ children }) {
         setGridActive,
         processing,
         setProcessing,
-        language,
-        setLanguage,
+        // language,
+        // setLanguage,
         code,
         setCode,
         theme,

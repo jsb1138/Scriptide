@@ -195,7 +195,7 @@ export function IDE() {
         onMount={handleEditorDidMount}
         onChange={handleChange}
         language={language?.value}
-        value={value}
+        value={ide.content}
         theme={theme.value}
         
       />

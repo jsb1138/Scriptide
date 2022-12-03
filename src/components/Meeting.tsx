@@ -32,7 +32,6 @@ import { endMeeting } from "../utils/api";
 import Notifications from "../containers/Notifications";
 import ExcalComponent from "./excalidrawComponent/ExcalComponent";
 
-
 ///////////////////////////////////////////////////////////liveblocks
 import { ClientSideSuspense } from "@liveblocks/react";
 import {
@@ -42,8 +41,6 @@ import {
   useStorage,
   useMutation,
 } from "../liveblocks.config.js";
-
-
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
@@ -65,7 +62,8 @@ const Meeting: FC = () => {
     excalActive,
     setExcalActive,
     setTransitionState,
-    transitionState
+    transitionState,
+    setOpacity
   } = useScriptideContext();
 
   const { isVideoEnabled, toggleVideo } = useLocalVideo();
@@ -271,6 +269,16 @@ const Meeting: FC = () => {
 
   // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
   // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER
+  const handleExcali = () => {
+    setTransitionState(!transitionState);
+    if (excalActive) {
+      setExcalActive(false);
+      setOpacity(true);
+    } else {
+      setTimeout(() => setExcalActive(!excalActive), 180);
+      setTimeout(() => setOpacity(false), 180);
+    }
+  };
   return (
     <>
       {/* @ts-ignore */}
@@ -342,10 +350,11 @@ const Meeting: FC = () => {
               )}
             </div>
 
-            <div
-              id="menu"
-              className={menuState ? "menu-open" : "menu-closed"}
-            ></div>
+            <div id="menu" className={menuState ? "menu-open" : "menu-closed"}>
+              <div className="menu-item" onClick={handleExcali}>
+                <p>E</p>
+              </div>
+            </div>
             <div
               className={menuState ? "menu-btn-mod" : "menu-btn"}
               onClick={toggleMenu}
@@ -457,8 +466,8 @@ const Meeting: FC = () => {
             </h3>
             <h3 className="ellipsis"></h3>
           </div>
-        )}       
-          <ExcalComponent />
+        )}
+        <ExcalComponent />
       </NotificationProvider>
     </>
   );
