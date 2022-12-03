@@ -16,7 +16,7 @@
 // window event attempts for page refresh on keybind
 // use ::tao::event::WindowEvent;
 use tauri::{Manager, /*WebviewAttributes, window::PlatformWebview, WindowEvent */};
-use env_logger::builder;
+// use env_logger::builder;
 
 mod tao;
 mod menu;

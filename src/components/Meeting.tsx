@@ -27,15 +27,12 @@ import { endMeeting } from "../utils/api";
 import Notifications from "../containers/Notifications";
 import ExcalComponent from "./excalidrawComponent/ExcalComponent";
 
-
 import {
   useOthers,
   useStorage,
   useMutation,
 } from "../liveblocks.config.js";
 import MenuBar from "./MenuBar";
-
-
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
@@ -237,6 +234,16 @@ const Meeting: FC = () => {
 
   // ALL THAT CHAOTIC INLINE STYLING IS TEMPORARY
   // MUCH OF THE RENDER BLOCK WILL BE TIGHTENED UP LATER
+  const handleExcali = () => {
+    setTransitionState(!transitionState);
+    if (excalActive) {
+      setExcalActive(false);
+      setOpacity(true);
+    } else {
+      setTimeout(() => setExcalActive(!excalActive), 180);
+      setTimeout(() => setOpacity(false), 180);
+    }
+  };
   return (
     <>
       {/* @ts-ignore */}
@@ -307,6 +314,7 @@ const Meeting: FC = () => {
               )}
             </div>
             <MenuBar />
+
             {!camActive ? (
               <>
                 <div onClick={handleCamClick} id="cam-view-closed"></div>

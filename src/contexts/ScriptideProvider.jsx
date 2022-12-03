@@ -1,3 +1,4 @@
+
 import { createContext, useContext, useState } from "react";
 
 const ScriptideContext = createContext(null);
@@ -22,7 +23,6 @@ export default function ScriptideProvider({ children }) {
   const [meetingTitle, setMeetingTitle] = useState("");
   const [attendeeName, setName] = useState("");
   const [keyPressed, setKeyPressed] = useState(false);
-
 
   return (
     <ScriptideContext.Provider
