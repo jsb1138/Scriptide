@@ -423,7 +423,7 @@ const Meeting: FC = () => {
               </>
             )}
 
-            {/* {currentUserId.length > 0 && currentUserId !== initiator ? (
+            {currentUserId.length > 0 && currentUserId !== initiator ? (
               <>
                 <RaiseYourHand />
               </>
@@ -445,7 +445,7 @@ const Meeting: FC = () => {
                   </ul>
                 </div>
               </>
-            )} */}
+            )}
 
             {/* {currentUserId.length > 0 && currentUserId === initiator ? (
               <>
