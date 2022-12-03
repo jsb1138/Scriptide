@@ -4,7 +4,7 @@ import Editor from "@monaco-editor/react";
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
-import monacoThemes from 'monaco-themes/themes'
+import monacoThemes from 'monaco-themes'
 
 import "../App.css";
 import { OutputWindow } from "./OutputWindow";
@@ -12,6 +12,7 @@ import useKeyPress from "../hooks/useKeyPress";
 import { defineTheme } from "../lib/defineTheme.js";
 import { showSuccessToast, showErrorToast } from "../utils/apiServices.js";
 import { ThemeDropdown } from "./ThemeDropdown";
+import { LanguageDropdown } from "./LanguageDropdown";
 
 export function IDE() {
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
@@ -46,10 +47,10 @@ export function IDE() {
     editorRef.current = monaco;
   }
 
-  function onSelectChange(select: SetStateAction<any>) {
-    console.log("selected: ", select);
-    setLanguage(select);
-  }
+  // function onSelectChange(select: SetStateAction<any>) {
+  //   console.log("selected: ", select);
+  //   setLanguage(select);
+  // }
 
   function onChange(action: any, data: any) {
     switch (action) {
@@ -66,17 +67,18 @@ export function IDE() {
   // const themelist = Object.entries(monacoThemes)
   
 
-  function handleThemeChange(th: any) {
-    const theme = th;
-    console.log("theme: ", theme);
+  // function handleThemeChange(th: any) {
+  //   const theme = th;
+  //   console.log("theme: ", theme);
 
-    if (monacoThemes.includes(theme.value)) {
-      setTheme(theme);
-      console.log("chosen theme", theme.value);
-    } else {
-      defineTheme(theme.value).then((_: any) => setTheme(theme.value));
-    }
-  }
+  //   if (["light", "vs-dark"].includes(theme)) {
+  //     setTheme(theme);
+  //     console.log("chosen theme", theme);
+  //   } else {
+  //     console.log('theme else: ', theme)
+  //     defineTheme(theme).then((_: any) => setTheme(theme));
+  //   }
+  // }
 
   function handleCompile() {
     //@ts-ignore
@@ -181,9 +183,9 @@ export function IDE() {
         width="74vw"
         onMount={handleEditorDidMount}
         onChange={handleCodeChange}
-        language={language?.value}
+        language={"javascript" || language?.value}
         value={value}
-        theme="vs-dark"
+        theme={theme.value}
         defaultValue="// happy coding"
       />
 
@@ -194,7 +196,8 @@ export function IDE() {
         <OutputWindow outputDetails={outputDetails} />
       </div>
       <div className="theme-bar">
-        <ThemeDropdown onChange={handleThemeChange} theme={theme}/>
+        <ThemeDropdown />
+        <LanguageDropdown />
       </div>
     </>
   );
