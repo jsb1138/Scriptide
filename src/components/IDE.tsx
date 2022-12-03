@@ -173,7 +173,7 @@ export function IDE() {
         width="74vw"
         onMount={handleEditorDidMount}
         onChange={handleCodeChange}
-        language={"javascript" || language?.value}
+        language={language?.value}
         value={value}
         theme={theme.value}
         defaultValue="// happy coding"
