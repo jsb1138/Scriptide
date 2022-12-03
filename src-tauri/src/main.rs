@@ -80,9 +80,11 @@ fn main() {
     .run(tauri::generate_context!())
     .expect("Error while running application");
 
+
   #[cfg(target_os = "linux")]
   let builder = tauri::Builder::default();
   #[cfg(target_os = "linux")]
+
   builder.invoke_handler(tauri::generate_handler![commands::close_splash])
   .run(tauri::generate_context!())
   .expect("Error while running application")

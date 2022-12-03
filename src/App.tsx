@@ -56,7 +56,7 @@ const key = import.meta.env.VITE_RAPIDAPI_KEY;
 
 export default function App() {
   const {
-    processing,
+    // processing,
     setProcessing,
     language,
     setLanguage,

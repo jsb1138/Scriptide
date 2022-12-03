@@ -46,6 +46,9 @@ export default function ScriptideProvider({ children }) {
   const [menuState, setMenuState] = useState(false);
   const [meetingIdentifier, setMeetingIdentifier] = useState("");
   const [raisedHands, setRaisedHand] = useState([]);
+  const [excalActive, setExcalActive] = useState(false);
+  const [transitionState, setTransitionState] = useState(false)  
+  const [opacity, setOpacity] = useState(false);
 
   async function getAndSet() {}
 
@@ -84,6 +87,12 @@ export default function ScriptideProvider({ children }) {
         setMeetingIdentifier,
         raisedHands,
         setRaisedHand,
+        excalActive,
+        setExcalActive,
+        transitionState,
+        setTransitionState,
+        opacity,
+        setOpacity
       }}
     >
       {children}

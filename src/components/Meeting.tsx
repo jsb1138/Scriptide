@@ -30,6 +30,8 @@ import {
 } from "amazon-chime-sdk-component-library-react";
 import { endMeeting } from "../utils/api";
 import Notifications from "../containers/Notifications";
+import ExcalComponent from "./excalidrawComponent/ExcalComponent";
+import MenuBar from "./MenuBar";
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
@@ -48,6 +50,10 @@ const Meeting: FC = () => {
     meetingIdentifier,
     raisedHands,
     setRaisedHand,
+    excalActive,
+    setExcalActive,
+    setTransitionState,
+    transitionState
   } = useScriptideContext();
 
   const { isVideoEnabled, toggleVideo } = useLocalVideo();
@@ -157,10 +163,6 @@ const Meeting: FC = () => {
       }
     : console.log("TOO SOON");
 
-  const toggleMenu = () => {
-    setMenuState(!menuState);
-  };
-
   // const handleHandRaise = (uid: any, name: string) => {
   //   const user = { id: uid, name };
   //   console.log("user", user);
@@ -220,17 +222,7 @@ const Meeting: FC = () => {
         {/* <AddNotificationButton /> */}
         {meetingStatus === MeetingStatus.Succeeded ? (
           <>
-            {/** @todo: THIS RUDIMENTARY MENU CAN BE MADE INTO A COMPONENT --> *INCLUDE* "toggleMenu function" **/}
-            <div
-              id={!menuState ? "menu-container-open" : "menu-container-closed"}
-            >
-              <div id="menu"></div>
-              <div id="menu-btn-container" onClick={toggleMenu}>
-                <div className={menuState ? "menu-btn" : "menu-btn-mod"}>
-                  {menuState ? "►" : "◄"}
-                </div>
-              </div>
-            </div>
+            <MenuBar />
             <div
               style={{
                 // backgroundColor: "white",
@@ -354,7 +346,7 @@ const Meeting: FC = () => {
             {/* {currentUserId.length > 0 && currentUserId !== initiator ? (
               <>
                 {/* <AddNot /> */}
-                {/* <div
+            {/* <div
                   onClick={() => handleHandRaise(currentUserId, "Joel")}
                   id="hand-raise-btn"
                   className="cf"
@@ -373,7 +365,7 @@ const Meeting: FC = () => {
                   <h1>TEST</h1>
                 </div>
               </>
-            )} */ }
+            )} */}
 
             {/* {currentUserId.length > 0 && currentUserId === initiator ? (
               <>
@@ -394,7 +386,8 @@ const Meeting: FC = () => {
             </h3>
             <h3 className="ellipsis"></h3>
           </div>
-        )}
+        )}       
+          <ExcalComponent />
       </NotificationProvider>
     </>
   );

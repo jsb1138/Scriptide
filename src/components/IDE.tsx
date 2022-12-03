@@ -4,7 +4,11 @@ import Editor from "@monaco-editor/react";
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
+
+// import monacoThemes from 'monaco-themes/themes'
+
 import monacoThemes from 'monaco-themes'
+
 
 import "../App.css";
 import { OutputWindow } from "./OutputWindow";
@@ -64,21 +68,7 @@ export function IDE() {
     }
   }
 
-  // const themelist = Object.entries(monacoThemes)
-  
 
-  // function handleThemeChange(th: any) {
-  //   const theme = th;
-  //   console.log("theme: ", theme);
-
-  //   if (["light", "vs-dark"].includes(theme)) {
-  //     setTheme(theme);
-  //     console.log("chosen theme", theme);
-  //   } else {
-  //     console.log('theme else: ', theme)
-  //     defineTheme(theme).then((_: any) => setTheme(theme));
-  //   }
-  // }
 
   function handleCompile() {
     //@ts-ignore
