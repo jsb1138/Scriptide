@@ -30,6 +30,8 @@ import {
 } from "amazon-chime-sdk-component-library-react";
 import { endMeeting } from "../utils/api";
 import Notifications from "../containers/Notifications";
+import ExcalComponent from "./excalidrawComponent/ExcalComponent";
+
 
 ///////////////////////////////////////////////////////////liveblocks
 import { ClientSideSuspense } from "@liveblocks/react";
@@ -40,6 +42,8 @@ import {
   useStorage,
   useMutation,
 } from "../liveblocks.config.js";
+
+
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
@@ -58,6 +62,10 @@ const Meeting: FC = () => {
     meetingIdentifier,
     raisedHands,
     setRaisedHand,
+    excalActive,
+    setExcalActive,
+    setTransitionState,
+    transitionState
   } = useScriptideContext();
 
   const { isVideoEnabled, toggleVideo } = useLocalVideo();
@@ -76,7 +84,7 @@ const Meeting: FC = () => {
   const attendees = Object.values(roster);
   console.log("attendees", attendees);
   let currentUserId: string = "";
-  let currentUserName: string = "";
+  let currentUserName: string | undefined = "";
 
   //redundant variable
   const attendeeItems = attendees.splice(0, 1).map((attendee) => {
@@ -172,11 +180,11 @@ const Meeting: FC = () => {
     payload?: any;
   }
 
-  enum ActionType {
-    ADD,
-    REMOVE,
-    REMOVE_ALL,
-  }
+  // enum ActionType {
+  //   ADD,
+  //   REMOVE,
+  //   REMOVE_ALL,
+  // }
 
   const toggleMenu = () => {
     setMenuState(!menuState);
@@ -267,7 +275,7 @@ const Meeting: FC = () => {
     <>
       {/* @ts-ignore */}
       <NotificationProvider>
-        {/* // @ts-ignore */}
+        {/* @ts-ignore */}
         <Notifications />
         {/* <AddNotificationButton /> */}
         {meetingStatus === MeetingStatus.Succeeded ? (
@@ -406,7 +414,7 @@ const Meeting: FC = () => {
               </>
             )}
 
-            {currentUserId.length > 0 && currentUserId !== initiator ? (
+            {/* {currentUserId.length > 0 && currentUserId !== initiator ? (
               <>
                 <RaiseYourHand />
               </>
@@ -428,7 +436,7 @@ const Meeting: FC = () => {
                   </ul>
                 </div>
               </>
-            )}
+            )} */}
 
             {/* {currentUserId.length > 0 && currentUserId === initiator ? (
               <>
@@ -449,7 +457,8 @@ const Meeting: FC = () => {
             </h3>
             <h3 className="ellipsis"></h3>
           </div>
-        )}
+        )}       
+          <ExcalComponent />
       </NotificationProvider>
     </>
   );

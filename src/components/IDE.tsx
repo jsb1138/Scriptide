@@ -5,14 +5,22 @@ import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { toast } from "react-toastify";
 import axios from "axios";
 
+// import monacoThemes from 'monaco-themes/themes'
+
+import monacoThemes from 'monaco-themes'
+
+
 import "../App.css";
 import { OutputWindow } from "./OutputWindow";
 import useKeyPress from "../hooks/useKeyPress";
 import { defineTheme } from "../lib/defineTheme.js";
 import { showSuccessToast, showErrorToast } from "../utils/apiServices.js";
+import { ThemeDropdown } from "./ThemeDropdown";
+import { LanguageDropdown } from "./LanguageDropdown";
 
 ///////////////////////////////////////////////////////////liveblocks
 import { useStorage, useMutation } from "../liveblocks.config.js";
+
 
 export function IDE() {
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
@@ -42,10 +50,10 @@ export function IDE() {
     editorRef.current = monaco;
   }
 
-  function onSelectChange(select: SetStateAction<any>) {
-    console.log("selected: ", select);
-    setLanguage(select);
-  }
+  // function onSelectChange(select: SetStateAction<any>) {
+  //   console.log("selected: ", select);
+  //   setLanguage(select);
+  // }
 
   function onChange(action: any, data: any) {
     switch (action) {
@@ -59,16 +67,7 @@ export function IDE() {
     }
   }
 
-  function handleThemeChange(th: any) {
-    const theme = th;
-    console.log("theme: ", theme);
 
-    if (["light", "vs-dark"].includes(theme.value)) {
-      setTheme(theme);
-    } else {
-      defineTheme(theme.value).then((_: any) => setTheme(theme.value));
-    }
-  }
 
   function handleCompile() {
     //@ts-ignore
@@ -146,6 +145,16 @@ export function IDE() {
     }
   }
 
+  // function handleChange(value: any) {
+  //   const newState = value;
+  //   setValue(newState);
+  // }
+
+  function handleCodeChange(value: any) {
+    setValue(value);
+    onChange("code", value);
+  }
+
   // invoke('greet', { name: 'World'}).then((response) => {console.log(response)})
 
   useEffect(() => {
@@ -187,13 +196,19 @@ export function IDE() {
         onChange={handleChange}
         language={language?.value}
         value={value}
-        theme="vs-dark"
+        theme={theme.value}
+        
       />
+
       <div className="ide-output">
         <button className="ide-run-btn" onClick={handleCompile}>
           Run
         </button>
         <OutputWindow outputDetails={outputDetails} />
+      </div>
+      <div className="theme-bar">
+        <ThemeDropdown />
+        <LanguageDropdown />
       </div>
     </>
   );
