@@ -12,6 +12,8 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@liveblocks/client": "^0.19.2",
+    "@liveblocks/react": "^0.19.2",
     "@excalidraw/excalidraw": "^0.13.0",
     "@monaco-editor/react": "^4.4.6",
     "@tauri-apps/api": "^1.2.0",

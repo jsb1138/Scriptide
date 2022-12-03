@@ -45,3 +45,6 @@ amplifytools.xcconfig
 .secret-*
 **.sample
 #amplify-do-not-edit-end
+
+#liveblocks
+liveblocks.config.js

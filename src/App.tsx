@@ -20,7 +20,7 @@ import { invoke } from "@tauri-apps/api";
 import { ToastContainer, toast } from "react-toastify";
 import { window as tauriWindow } from "@tauri-apps/api";
 
-//chimeintegration -> TODO
+////////////////////////////////////////////////////////chimeintegration -> TODO
 import { ThemeProvider } from "styled-components";
 import {
   MeetingProvider,
@@ -31,6 +31,7 @@ import {
   Severity,
   // useLocalVideo
 } from "amazon-chime-sdk-component-library-react";
+import MeetingContainer from "./components/MeetingContainer";
 import Meeting from "./components/Meeting";
 import MeetingForm from "./components/MeetingForm";
 
@@ -38,6 +39,9 @@ import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
 // @ts-ignore
 Amplify.configure(awsconfig);
+
+//////////////////////////////////////////////////////////////////////liveblocks
+import { useOthers, useUpdateMyPresence } from "./liveblocks.config.js";
 
 //css
 import "./App.css";
@@ -68,6 +72,8 @@ export default function App() {
     menuState,
     setMenuState,
   } = useScriptideContext();
+
+  const updateMyPresence = useUpdateMyPresence();
 
   // const { tileId, isVideoEnabled, hasReachedVideoLimit, toggleVideo } = useLocalVideo();
 
@@ -118,9 +124,43 @@ export default function App() {
   //   }
   // }, [ctrlPress, enterPress]);
 
+  /////////////////////////////////////////////////////////////////////////////////////////////////liveblocks
+  // @ts-ignore
+  function Cursor({ x, y }) {
+    return (
+      <img
+        style={{
+          position: "absolute",
+          transform: `translate(${x}px, ${y}px)`,
+          height: "15px",
+          width: "15px",
+        }}
+        src="src/assets/cursor.png"
+      />
+    );
+  }
+
+  const others = useOthers();
+
   return (
     // <div data-tauri-drag-region>
-    <div className="App">
+    <div
+      className="App"
+      onPointerMove={(e) =>
+        updateMyPresence({ cursor: { x: e.clientX, y: e.clientY } })
+      }
+      onPointerLeave={() => updateMyPresence({ cursor: null })}
+    >
+      {/* @ts-ignore */}
+      {others.map(({ connectionId, presence }) =>
+        presence.cursor ? (
+          <Cursor
+            key={connectionId}
+            x={presence.cursor.x}
+            y={presence.cursor.y}
+          />
+        ) : null
+      )}
       <ThemeProvider theme={lightTheme}>
         {/* @ts-ignore */}
         <MeetingProvider>

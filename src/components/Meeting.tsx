@@ -31,7 +31,19 @@ import {
 import { endMeeting } from "../utils/api";
 import Notifications from "../containers/Notifications";
 import ExcalComponent from "./excalidrawComponent/ExcalComponent";
-import MenuBar from "./MenuBar";
+
+
+///////////////////////////////////////////////////////////liveblocks
+import { ClientSideSuspense } from "@liveblocks/react";
+import {
+  RoomProvider,
+  useOthers,
+  useUpdateMyPresence,
+  useStorage,
+  useMutation,
+} from "../liveblocks.config.js";
+
+
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
@@ -78,8 +90,8 @@ const Meeting: FC = () => {
   const attendeeItems = attendees.splice(0, 1).map((attendee) => {
     const { chimeAttendeeId, name } = attendee;
     currentUserId = chimeAttendeeId;
+    // @ts-ignore
     currentUserName = name;
-    // setThisUser(currentUserId);
   });
 
   ///////// COULD IMPORT THESE FUNCTIONS FROM ELSEWHERE... AS HELPERS??
@@ -150,7 +162,7 @@ const Meeting: FC = () => {
   //   }, 5000);
   // },[])
 
-  // DON'T DELETE
+  // DON'T DELETE --> ATTEMPTING TO GET VIDEO TO ENABLE AUTOMATICALLY
   meetingStatus === MeetingStatus.Succeeded
     ? () => {
         useEffect(() => {
@@ -163,31 +175,77 @@ const Meeting: FC = () => {
       }
     : console.log("TOO SOON");
 
-  // const handleHandRaise = (uid: any, name: string) => {
-  //   const user = { id: uid, name };
-  //   console.log("user", user);
-  //   console.log("name", name);
-  //   console.log("raised hands", raisedHands);
-  //   console.log("attendees", attendees);
-  //   const handRaiser = attendees.find((user) => user.name == name);
-  //   if (handRaiser) {
-  //     roster.hand = handRaiser as RosterAttendeeType;
-  //   }
-  //   console.log("hand raiser", handRaiser);
-  //   console.log("roster", roster);
-  //   setRaisedHand((raisedHands) => [...raisedHands, user]);
-  // };
-
-  // interface Action {
-  //   type: ActionType;
-  //   payload?: any;
-  // }
+  interface Action {
+    type: ActionType;
+    payload?: any;
+  }
 
   // enum ActionType {
   //   ADD,
   //   REMOVE,
   //   REMOVE_ALL,
   // }
+
+  const toggleMenu = () => {
+    setMenuState(!menuState);
+  };
+
+  //////////////////////////////////////////////////////////////////////////////////////////liveblocks
+  const removeRaisedHand = (index: number) => {
+    deleteHand(index);
+    console.log("hands--->", hands);
+  };
+
+  const raiseHand = (student: {}) => {
+    updateHands(student);
+    // triggerNotification({
+    //   severity: Severity.INFO,
+    //   message: `Your hand is raised and the instructor has been notified.`,
+    // });
+  };
+
+  const others = useOthers();
+
+  const hands = useStorage((root: any) => root.raisedHandsX);
+
+  // Define mutation
+  const updateHands = useMutation(({ storage }: any, student: any) => {
+    // @ts-ignore
+    const mutableHandsList = storage.get("raisedHandsX");
+    mutableHandsList.push(student);
+  }, []);
+
+  const deleteHand = useMutation(({ storage }: any, hand: any) => {
+    const mutableHandsList = storage.get("raisedHandsX");
+    mutableHandsList.delete(hand);
+  }, []);
+
+  const RaiseYourHand = () => {
+    const dispatch = useNotificationDispatch();
+
+    const payload: any = {
+      severity: Severity.INFO,
+      message: "Your hand is raised and the instructor has been notified.",
+    };
+
+    const addNotification = (e: any) => {
+      updateHands({ name: currentUserName });
+      dispatch({
+        type: ActionType.ADD,
+        payload: payload,
+      });
+    };
+
+    return (
+      <button id="hand-raise-btn" className="cf" onClick={addNotification}>
+        <div>
+          <h2>
+            <HandRaise width="5rem" height="5rem" color="green" />
+          </h2>
+        </div>
+      </button>
+    );
+  };
 
   // const AddNotificationButton = () => {
   //   const dispatch = useNotificationDispatch();
@@ -222,7 +280,6 @@ const Meeting: FC = () => {
         {/* <AddNotificationButton /> */}
         {meetingStatus === MeetingStatus.Succeeded ? (
           <>
-            <MenuBar />
             <div
               style={{
                 // backgroundColor: "white",
@@ -252,9 +309,13 @@ const Meeting: FC = () => {
                 }}
               >
                 {currentUserId.length > 0 ? (
-                  <h6>
-                    {currentUserId === initiator ? "Instructor" : "Student"}
-                  </h6>
+                  <>
+                    <h6>
+                      {currentUserId === initiator
+                        ? `Instructor + ${others.count} others in meeting: ${meetingIdentifier}`
+                        : `Student + ${others.count} others in meeting: ${meetingIdentifier}`}
+                    </h6>
+                  </>
                 ) : (
                   <></>
                 )}
@@ -281,6 +342,16 @@ const Meeting: FC = () => {
               )}
             </div>
 
+            <div
+              id="menu"
+              className={menuState ? "menu-open" : "menu-closed"}
+            ></div>
+            <div
+              className={menuState ? "menu-btn-mod" : "menu-btn"}
+              onClick={toggleMenu}
+            >
+              {menuState ? "◄" : "►"}
+            </div>
             {!camActive ? (
               <>
                 <div onClick={handleCamClick} id="cam-view-closed"></div>
@@ -345,24 +416,24 @@ const Meeting: FC = () => {
 
             {/* {currentUserId.length > 0 && currentUserId !== initiator ? (
               <>
-                {/* <AddNot /> */}
-            {/* <div
-                  onClick={() => handleHandRaise(currentUserId, "Joel")}
-                  id="hand-raise-btn"
-                  className="cf"
-                >
-                  <h2>
-                    <HandRaise width="5rem" height="5rem" color="green" />
-                  </h2>
-                </div>
+                <RaiseYourHand />
               </>
             ) : (
               <>
-                <div
-                  id="hands"
-                  onClick={console.log("raised hands", raisedHands)}
-                >
-                  <h1>TEST</h1>
+                <div id="hands">
+                  <ul>
+                    {hands.map((student: any, i: number) => (
+                      <li>
+                        {student.name}
+                        <button
+                          onClick={() => removeRaisedHand(i)}
+                          className="cf"
+                        >
+                          X
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </>
             )} */}

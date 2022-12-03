@@ -18,6 +18,10 @@ import { showSuccessToast, showErrorToast } from "../utils/apiServices.js";
 import { ThemeDropdown } from "./ThemeDropdown";
 import { LanguageDropdown } from "./LanguageDropdown";
 
+///////////////////////////////////////////////////////////liveblocks
+import { useStorage, useMutation } from "../liveblocks.config.js";
+
+
 export function IDE() {
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
   const host = import.meta.env.VITE_RAPIDAPI_HOST;
@@ -41,11 +45,6 @@ export function IDE() {
 
   const enterPress = useKeyPress("Enter");
   const ctrlPress = useKeyPress("Control");
-
-  // function handleChange(value: any) {
-  //   setValue(value);
-  //   onChange("code", value);
-  // }
 
   function handleEditorDidMount(editor: any, monaco: any) {
     editorRef.current = monaco;
@@ -166,17 +165,39 @@ export function IDE() {
     }
   }, [ctrlPress, enterPress]);
 
+  function handleChange(value: any) {
+    updateIDE("content", value);
+    setValue(value);
+    // onChange("code", value);
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////liveblocks
+  const ide = useStorage((root: any) => root.ide);
+
+  // Define mutation
+  const updateIDE = useMutation(
+    ({ storage }: any, property: string, newData: string) => {
+      setValue(newData);
+      const mutableIDE = storage.get("ide");
+      mutableIDE.set(property, newData);
+    },
+    []
+  );
+
+  console.log("ide storage", ide);
+  // const handleIdeInput = () => {}
+
   return (
     <>
       <Editor
         height="65vh"
         width="74vw"
         onMount={handleEditorDidMount}
-        onChange={handleCodeChange}
+        onChange={handleChange}
         language={language?.value}
         value={value}
         theme={theme.value}
-        defaultValue="// happy coding"
+        
       />
 
       <div className="ide-output">
