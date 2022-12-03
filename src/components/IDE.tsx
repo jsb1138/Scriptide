@@ -12,6 +12,7 @@ import useKeyPress from "../hooks/useKeyPress";
 import { defineTheme } from "../lib/defineTheme.js";
 import { showSuccessToast, showErrorToast } from "../utils/apiServices.js";
 import { ThemeDropdown } from "./ThemeDropdown";
+import { LanguageDropdown } from "./LanguageDropdown";
 
 export function IDE() {
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
@@ -46,10 +47,10 @@ export function IDE() {
     editorRef.current = monaco;
   }
 
-  function onSelectChange(select: SetStateAction<any>) {
-    console.log("selected: ", select);
-    setLanguage(select);
-  }
+  // function onSelectChange(select: SetStateAction<any>) {
+  //   console.log("selected: ", select);
+  //   setLanguage(select);
+  // }
 
   function onChange(action: any, data: any) {
     switch (action) {
@@ -182,7 +183,7 @@ export function IDE() {
         width="74vw"
         onMount={handleEditorDidMount}
         onChange={handleCodeChange}
-        language={language?.value}
+        language={"javascript" || language?.value}
         value={value}
         theme={theme.value}
         defaultValue="// happy coding"
@@ -196,6 +197,7 @@ export function IDE() {
       </div>
       <div className="theme-bar">
         <ThemeDropdown />
+        <LanguageDropdown />
       </div>
     </>
   );

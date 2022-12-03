@@ -55,7 +55,7 @@ export const monacoThemes = {
 }
 
 export async function defineTheme (theme) {
-  let themeImport = await import(`./themes/${monacoThemes[theme]}.json`).then(module => module.default)
+  let themeImport = await import(`./themes/${monacoThemes[theme]}.json`)//.then(module => module.default)
   return new Promise((res) => {
     Promise.all([
       loader.init(),
