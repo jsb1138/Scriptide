@@ -23,8 +23,8 @@ const MenuBar: FC = () => {
       setExcalActive(false);
       setOpacity(true);
     } else {
-      setTimeout(()=>setExcalActive(!excalActive), 220);
-      setTimeout(() => setOpacity(false), 250)
+      setTimeout(()=>setExcalActive(!excalActive), 180);
+      setTimeout(() => setOpacity(false), 180)
     }
   }
 
