@@ -1,5 +1,29 @@
 .notion-modal {
+  min-width: 500px;
+  width: 30vw;
+  height: 150px;
+  position: absolute;
+  top: 800px;
+  left: 400;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: white;
+  z-index: 9999999;
+}
+
+.cross {
+  background-color: red;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  /* margin: 5px; */
+  border-top-right-radius: 5px;
   position: absolute;
   top: 0;
-  left: 0;
+  right:0;
+  cursor: pointer;
 }

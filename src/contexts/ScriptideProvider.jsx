@@ -36,6 +36,7 @@ export default function ScriptideProvider({children}){
   const [processing, setProcessing] = useState(null);
   const [theme, setTheme] = useState("vs-dark");
   const [language, setLanguage] = useState(languageOptions[0]);
+  const [notionModalIsOpen, setNotionModalIsOpen] = useState(true)
 
   async function getAndSet (){
   }
@@ -47,7 +48,7 @@ export default function ScriptideProvider({children}){
   }, [] )
 
   return (
-    <ScriptideContext.Provider value={{ camActive, setCamActive, ideActive, setIdeActive, gridActive, setGridActive, processing, setProcessing, language, setLanguage, code, setCode, theme, setTheme, outputDetails, setOutputDetails }}>
+    <ScriptideContext.Provider value={{ camActive, setCamActive, ideActive, setIdeActive, gridActive, setGridActive, processing, setProcessing, language, setLanguage, code, setCode, theme, setTheme, outputDetails, setOutputDetails, notionModalIsOpen, setNotionModalIsOpen }}>
       {children}
     </ScriptideContext.Provider>
 

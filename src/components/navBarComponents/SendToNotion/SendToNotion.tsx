@@ -1,13 +1,20 @@
 import './SendToNotion.css';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import NotionLogo from "../../../assets/Notion_app_logo.png"
+import { useScriptideContext } from '../../../contexts/ScriptideProvider';
+import NotionLogo from '../../../assets/Notion_app_logo.png';
 
 interface Props {
   isOpen: boolean;
 }
 
 function SendToNotion({ isOpen }: Props) {
+  const { notionModalIsOpen, setNotionModalIsOpen } = useScriptideContext();
+
+  function handleClick () {
+    setNotionModalIsOpen(!notionModalIsOpen)
+  }
+
   const [userNotionId, setUserNotionId] = useState(null);
 
   const exchangeCodeForAccessToken = async () => {
@@ -57,11 +64,11 @@ function SendToNotion({ isOpen }: Props) {
 
   return (
     <div id='send-to-notion' className={isOpen ? 'shown' : 'hidden'}>
-      <div id="notion-connect">
-      <p>Connect</p>
-      <img id="notion-logo" src={NotionLogo} alt="Notion Logo" />
+      <div onClick={handleClick} id='notion-connect'>
+        <p>Make a note</p>
+        <img id='notion-logo' src={NotionLogo} alt='Notion Logo' />
       </div>
-      <br/>
+      <br />
       {/* Fallback is still Localhost!! */}
       <a href='https://api.notion.com/v1/oauth/authorize?client_id=08b1c623-a965-4750-9a1e-11042ef8700f&response_type=code&owner=user&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fauth%2Fnotion%2Fcallback'>
         First connect to your Notion.
