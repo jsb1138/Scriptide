@@ -36,7 +36,7 @@ export default function ScriptideProvider({children}){
   const [processing, setProcessing] = useState(null);
   const [theme, setTheme] = useState("vs-dark");
   const [language, setLanguage] = useState(languageOptions[0]);
-  const [notionModalIsOpen, setNotionModalIsOpen] = useState(true)
+  const [notionModalIsOpen, setNotionModalIsOpen] = useState(false)
 
   async function getAndSet (){
   }

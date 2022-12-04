@@ -1,18 +1,20 @@
 .notion-modal {
   min-width: 500px;
   width: 30vw;
-  height: 150px;
+  height: 300px;
   position: absolute;
-  top: 800px;
+  top: 600px;
   left: 400;
-  border: 2px solid black;
   border-radius: 10px;
   background-color: white;
   z-index: 9999999;
 }
 
+h3 {
+  margin-bottom: 0px;
+}
+
 .cross {
-  background-color: red;
   width: 20px;
   height: 20px;
   display: flex;
@@ -20,10 +22,44 @@
   justify-content: center;
   align-items: center;
   padding: 10px 20px;
-  /* margin: 5px; */
   border-top-right-radius: 5px;
   position: absolute;
   top: 0;
-  right:0;
+  right: 0;
   cursor: pointer;
+}
+
+#close-cross {
+  width: 20px;
+}
+
+#notion-connect-button {
+  margin-top: 100px;
+}
+
+#notion-form {
+  /* background-color: red; */
+}
+
+#notionPageTitle {
+  width: 200px;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 10px;
+  border: none;
+  background-color: lightblue;
+}
+
+#notionBulletPoint {
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  background-color: lightblue;
+}
+
+#notion-submit-button {
+  width: 150px;
+  height: 45px;
+  background-color: lightblue;
 }
