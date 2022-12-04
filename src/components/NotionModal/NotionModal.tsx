@@ -2,7 +2,7 @@ import './NotionModal.css';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useScriptideContext } from '../../contexts/ScriptideProvider';
-import CloseCross from "../../assets/close.png"
+import CloseCross from '../../assets/close.png';
 
 function NotionModal() {
   const { notionModalIsOpen, setNotionModalIsOpen } = useScriptideContext();
@@ -64,7 +64,7 @@ function NotionModal() {
     return (
       <div className='notion-modal'>
         <div onClick={handleClick} className='cross'>
-          <img id="close-cross" src={CloseCross} alt="" />
+          <img id='close-cross' src={CloseCross} alt='' />
         </div>
         {!userNotionId ? (
           <h3>Grant Access to Notion ⬇</h3>
@@ -73,13 +73,16 @@ function NotionModal() {
         )}
         {!userNotionId ? (
           <a href='https://api.notion.com/v1/oauth/authorize?client_id=08b1c623-a965-4750-9a1e-11042ef8700f&response_type=code&owner=user&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fauth%2Fnotion%2Fcallback'>
-            <button id="notion-connect-button">Connect to Notion</button>
+            <button id='notion-connect-button'>Connect to Notion</button>
           </a>
         ) : (
           <form onSubmit={handleSubmit} id='notion-form'>
-            <p>{userNotionId === null ? "isNull" : "isString"}</p>
-            <p>{userNotionId}</p>
-            <input type='text' id='notionPageTitle' name='notionPageTitle' placeholder="Enter Page Title"/>
+            <input
+              type='text'
+              id='notionPageTitle'
+              name='notionPageTitle'
+              placeholder='Enter Page Title'
+            />
             <textarea
               name='notionBulletPoint'
               id='notionBulletPoint'
@@ -87,7 +90,9 @@ function NotionModal() {
               rows={5}
               placeholder='This text will be added as a bulletpoint'
             ></textarea>
-            <button id="notion-submit-button" type='submit'>Send</button>
+            <button id='notion-submit-button' type='submit'>
+              Send
+            </button>
           </form>
         )}
       </div>

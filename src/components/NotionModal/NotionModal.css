@@ -3,7 +3,7 @@
   width: 30vw;
   height: 300px;
   position: absolute;
-  top: 600px;
+  top: 400px;
   left: 400;
   border-radius: 10px;
   background-color: white;
@@ -35,10 +35,6 @@ h3 {
 
 #notion-connect-button {
   margin-top: 100px;
-}
-
-#notion-form {
-  /* background-color: red; */
 }
 
 #notionPageTitle {
