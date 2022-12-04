@@ -35,8 +35,6 @@ const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
   const meetingStatus = useMeetingStatus();
   const { toggleVideo } = useLocalVideo();
-  const [userIsMuted, setUserIsMuted] = useState(true);
-  const [userIsLocked, setUserIsLocked] = useState(true);
   const { muted, toggleMute } = useToggleLocalMute();
 
   const {
@@ -50,6 +48,10 @@ const Meeting: FC = () => {
     menuState,
     setMenuState,
     meetingIdentifier,
+    userIsMuted,
+    setUserIsMuted,
+    userIsLocked,
+    setUserIsLocked,
   } = useScriptideContext();
 
   const clickedEndMeeting = async () => {
@@ -307,13 +309,13 @@ const Meeting: FC = () => {
         // toggleMute();
         console.log("1 this should be false ->", userIsLocked);
       } else if (!unlockedUsers.includes(currentUserId) && !userIsLocked) {
-        toggleMute();
+        // toggleMute();
         setUserIsLocked(true);
-        console.log("2 You have been MUTED!");
+        console.log("2 You have been LOCKED!");
       } else if (unlockedUsers.includes(currentUserId) && userIsLocked) {
-        toggleMute();
+        // toggleMute();
         setUserIsLocked(false);
-        console.log("3 You have been UN-MUTED!");
+        console.log("3 You have been UN-LOCKED!");
       } else if (!unlockedUsers.includes(currentUserId) && userIsLocked) {
         // toggleMute();
         // setUserIsMuted(false);
@@ -486,7 +488,7 @@ const Meeting: FC = () => {
                           onClick={() => updateUnlockedList(student.id)}
                           className="cf"
                         >
-                          {unmutedUsers.includes(student.id) ? "L" : "unL"}
+                          {unlockedUsers.includes(student.id) ? "L" : "unL"}
                         </button>
                         <button
                           onClick={() => removeRaisedHand(i)}

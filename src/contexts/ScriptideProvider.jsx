@@ -1,10 +1,8 @@
-
 import { createContext, useContext, useState } from "react";
 
 const ScriptideContext = createContext(null);
 
 export default function ScriptideProvider({ children }) {
-
   const [camActive, setCamActive] = useState(false);
   const [ideActive, setIdeActive] = useState(false);
   const [gridActive, setGridActive] = useState(false);
@@ -18,11 +16,13 @@ export default function ScriptideProvider({ children }) {
   const [meetingIdentifier, setMeetingIdentifier] = useState("");
   const [raisedHands, setRaisedHand] = useState([]);
   const [excalActive, setExcalActive] = useState(false);
-  const [transitionState, setTransitionState] = useState(false)
+  const [transitionState, setTransitionState] = useState(false);
   const [opacity, setOpacity] = useState(true);
   const [meetingTitle, setMeetingTitle] = useState("");
   const [attendeeName, setName] = useState("");
   const [keyPressed, setKeyPressed] = useState(false);
+  const [userIsMuted, setUserIsMuted] = useState(true);
+  const [userIsLocked, setUserIsLocked] = useState(true);
 
   return (
     <ScriptideContext.Provider
@@ -62,7 +62,11 @@ export default function ScriptideProvider({ children }) {
         attendeeName,
         setName,
         keyPressed,
-        setKeyPressed
+        setKeyPressed,
+        userIsMuted,
+        setUserIsMuted,
+        userIsLocked,
+        setUserIsLocked,
       }}
     >
       {children}

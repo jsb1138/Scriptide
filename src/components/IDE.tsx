@@ -27,6 +27,7 @@ export function IDE() {
     theme,
     outputDetails,
     setOutputDetails,
+    userIsLocked,
   } = useScriptideContext();
 
   const editorRef = useRef<typeof Editor | null>(null);
@@ -126,9 +127,6 @@ export function IDE() {
     }
   }
 
-
-
-
   useEffect(() => {
     if (enterPress && ctrlPress) {
       console.log("enter: ", enterPress);
@@ -139,10 +137,9 @@ export function IDE() {
 
   function handleChange(value: any) {
     updateIDE("content", value);
-
   }
 
- //liveblocks
+  //liveblocks
 
   const ide = useStorage((root: any) => root.ide);
 
@@ -166,7 +163,6 @@ export function IDE() {
         language={language?.value}
         value={ide.content}
         theme={theme.value}
-
       />
 
       <div className="ide-output">
@@ -179,6 +175,32 @@ export function IDE() {
         <ThemeDropdown />
         <LanguageDropdown />
       </div>
+      {userIsLocked ? (
+        <div id="lock" className="shield-up">
+          {/* <div className="unlocked"></div> */}
+          <img
+            style={{ height: "80px", width: "80px", position: "relative" }}
+            src="src/assets/lock.png"
+          />
+        </div>
+      ) : (
+        <>
+          <div id="no-lock" className="shield-up">
+            {/* <div className="unlocked"></div> */}
+            <img
+              style={{ height: "80px", width: "80px", position: "relative" }}
+              src="src/assets/lock.png"
+            />
+          </div>
+        </>
+        // <div id="unlock" className="shield-down">
+        //   <div className="unlocked"></div>
+        //   {/* <img
+        //   style={{ height: "150px", width: "150px" }}
+        //   src="src/assets/lock.png"
+        // /> */}
+        // </div>
+      )}
     </>
   );
 }
