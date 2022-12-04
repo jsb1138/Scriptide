@@ -1,6 +1,5 @@
 import { useScriptideContext } from "./contexts/ScriptideProvider";
 
-
 import { window as tauriWindow } from "@tauri-apps/api";
 
 ////////////////////////////////////////////////////////chimeintegration -> TODO
@@ -27,11 +26,7 @@ import "./App.css";
 import { defineTheme } from "./lib/defineTheme.js";
 
 export default function App() {
-  const {
-
-    meetingActive,
-
-  } = useScriptideContext();
+  const { meetingActive } = useScriptideContext();
 
   const updateMyPresence = useUpdateMyPresence();
 
@@ -44,7 +39,6 @@ export default function App() {
     await tauriWindow.appWindow.startDragging();
   });
 
-
   /////////////////////////////////////////////////////////////////////////////////////////////////liveblocks
   // @ts-ignore
   function Cursor({ x, y }) {
@@ -55,7 +49,6 @@ export default function App() {
           transform: `translate(${x}px, ${y}px)`,
           height: "15px",
           width: "15px",
-
         }}
         src="src/assets/cursor.png"
       />

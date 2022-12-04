@@ -11,13 +11,15 @@ import { RoomProvider } from "./liveblocks.config.js";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <>
     <RoomProvider
-      id="12345678900"
+      id="new1"
       initialPresence={{ cursor: null }}
       initialStorage={{
         ide: new LiveObject({
           content: "// happy coding",
         }),
         raisedHandsX: new LiveList([]),
+        unmutedAttendees: new LiveList([]),
+        unlockedAttendees: new LiveList([]),
       }}
     >
       <ClientSideSuspense

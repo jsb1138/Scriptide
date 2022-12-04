@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { IDE } from "./IDE";
 
@@ -22,21 +22,21 @@ import {
   useNotificationDispatch,
   ActionType,
   Severity,
+  useToggleLocalMute,
 } from "amazon-chime-sdk-component-library-react";
 import { endMeeting } from "../utils/api";
 import Notifications from "../containers/Notifications";
 import ExcalComponent from "./excalidrawComponent/ExcalComponent";
 
-import {
-  useOthers,
-  useStorage,
-  useMutation,
-} from "../liveblocks.config.js";
+import { useOthers, useStorage, useMutation } from "../liveblocks.config.js";
 import MenuBar from "./MenuBar";
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
   const meetingStatus = useMeetingStatus();
+  const { toggleVideo } = useLocalVideo();
+  const [userIsMuted, setUserIsMuted] = useState(false);
+  const { muted, toggleMute } = useToggleLocalMute();
 
   const {
     initiator,
@@ -50,8 +50,6 @@ const Meeting: FC = () => {
     setMenuState,
     meetingIdentifier,
   } = useScriptideContext();
-
-  const { toggleVideo } = useLocalVideo();
 
   const clickedEndMeeting = async () => {
     const meetingId = meetingManager.meetingId;
@@ -163,12 +161,6 @@ const Meeting: FC = () => {
     payload?: any;
   }
 
-  // enum ActionType {
-  //   ADD,
-  //   REMOVE,
-  //   REMOVE_ALL,
-  // }
-
   const toggleMenu = () => {
     setMenuState(!menuState);
   };
@@ -176,15 +168,10 @@ const Meeting: FC = () => {
   //////////////////////////////////////////////////////////////////////////////////////////liveblocks
   const removeRaisedHand = (index: number) => {
     deleteHand(index);
-    console.log("hands--->", hands);
   };
 
   const raiseHand = (student: {}) => {
     updateHands(student);
-    // triggerNotification({
-    //   severity: Severity.INFO,
-    //   message: `Your hand is raised and the instructor has been notified.`,
-    // });
   };
 
   const others = useOthers();
@@ -198,9 +185,9 @@ const Meeting: FC = () => {
     mutableHandsList.push(student);
   }, []);
 
-  const deleteHand = useMutation(({ storage }: any, hand: any) => {
+  const deleteHand = useMutation(({ storage }: any, handIndex: any) => {
     const mutableHandsList = storage.get("raisedHandsX");
-    mutableHandsList.delete(hand);
+    mutableHandsList.delete(handIndex);
   }, []);
 
   const RaiseYourHand = () => {
@@ -212,7 +199,7 @@ const Meeting: FC = () => {
     };
 
     const addNotification = (e: any) => {
-      updateHands({ name: currentUserName });
+      updateHands({ name: currentUserName, id: currentUserId });
       dispatch({
         type: ActionType.ADD,
         payload: payload,
@@ -229,6 +216,66 @@ const Meeting: FC = () => {
       </button>
     );
   };
+
+  const unmutedUsers = useStorage((root: any) => root.unmutedAttendees);
+  console.log("unmuted users --->", unmutedUsers);
+
+  // Define mutation
+
+  /////HANDLING USER MUTING --> CONTROLS
+  const updateUnmutedList = useMutation(
+    ({ storage }: any, userToUnmuteOrUnmute: string) => {
+      const mutableUnmutedList = storage.get("unmutedAttendees");
+      const arrayCopy = [...mutableUnmutedList];
+      if (arrayCopy.includes(userToUnmuteOrUnmute)) {
+        ///// if they ARE in the unmuted array
+        mutableUnmutedList.delete(
+          ////// delete them from UNMUTED
+          mutableUnmutedList.findIndex((user) => user == userToUnmuteOrUnmute)
+        );
+        if (userToUnmuteOrUnmute == currentUserName) setUserIsMuted(true); /////// and set them as MUTED
+      } else if (!arrayCopy.includes(userToUnmuteOrUnmute)) {
+        ///// if they ARE NOT in the unmuted array
+        mutableUnmutedList.push(userToUnmuteOrUnmute);
+        ////// push them into UNMUTED
+        if (userToUnmuteOrUnmute == currentUserName) setUserIsMuted(false); /////// and set them as UNmuted
+      }
+    },
+    []
+  );
+
+  //////HANDLING USER MUTING --> FUNCTIONALITY
+  useEffect(() => {
+    if (currentUserId !== initiator) {
+      //////
+      //////
+      //////
+      //////
+      //////
+      if (unmutedUsers.includes(currentUserName) && !userIsMuted) {
+        // toggleMute();
+        console.log("1 this should be false ->", userIsMuted);
+      } else if (!unmutedUsers.includes(currentUserName) && !userIsMuted) {
+        toggleMute();
+        setUserIsMuted(true);
+        console.log("2 You have been MUTED!");
+      } else if (unmutedUsers.includes(currentUserName) && userIsMuted) {
+        toggleMute();
+        setUserIsMuted(false);
+        console.log("3 You have been UN-MUTED!");
+      } else if (!unmutedUsers.includes(currentUserName) && userIsMuted) {
+        // toggleMute();
+        // setUserIsMuted(false);
+        console.log("4 this should be false ->", userIsMuted);
+      }
+      //////
+      //////
+      //////
+      //////
+      //////
+      //////
+    }
+  }, [unmutedUsers]);
 
   return (
     <>
@@ -374,6 +421,12 @@ const Meeting: FC = () => {
                       <li>
                         {student.name}
                         <button
+                          onClick={() => updateUnmutedList(student.name)}
+                          className="cf"
+                        >
+                          {unmutedUsers.includes(student.name) ? "M" : "UNm"}
+                        </button>
+                        <button
                           onClick={() => removeRaisedHand(i)}
                           className="cf"
                         >
@@ -385,7 +438,6 @@ const Meeting: FC = () => {
                 </div>
               </>
             )}
-
           </>
         ) : (
           <div id="center-flex">
@@ -395,7 +447,7 @@ const Meeting: FC = () => {
             <h3 className="ellipsis"></h3>
           </div>
         )}
-          <ExcalComponent />
+        <ExcalComponent />
       </NotificationProvider>
     </>
   );
