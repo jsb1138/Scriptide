@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useRef } from "react";
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { IDE } from "./IDE";
 
@@ -35,7 +35,8 @@ const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
   const meetingStatus = useMeetingStatus();
   const { toggleVideo } = useLocalVideo();
-  const [userIsMuted, setUserIsMuted] = useState(false);
+  const [userIsMuted, setUserIsMuted] = useState(true);
+  const [userIsLocked, setUserIsLocked] = useState(true);
   const { muted, toggleMute } = useToggleLocalMute();
 
   const {
@@ -61,9 +62,9 @@ const Meeting: FC = () => {
   };
 
   const { roster } = useRosterState();
-  console.log("roster", roster);
+  // console.log("roster", roster);
   const attendees = Object.values(roster);
-  console.log("attendees", attendees);
+  // console.log("attendees", attendees);
   let currentUserId: string = "";
   let currentUserName: string | undefined = "";
 
@@ -135,13 +136,6 @@ const Meeting: FC = () => {
       console.log(error);
     }
   };
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     toggleVideo()
-  //     console.log("123Time");
-  //   }, 5000);
-  // },[])
 
   // DON'T DELETE --> ATTEMPTING TO GET VIDEO TO ENABLE AUTOMATICALLY
   meetingStatus === MeetingStatus.Succeeded
@@ -218,27 +212,29 @@ const Meeting: FC = () => {
   };
 
   const unmutedUsers = useStorage((root: any) => root.unmutedAttendees);
+  const unlockedUsers = useStorage((root: any) => root.unlockedAttendees);
   console.log("unmuted users --->", unmutedUsers);
+  console.log("unlocked users --->", unlockedUsers);
 
   // Define mutation
 
   /////HANDLING USER MUTING --> CONTROLS
   const updateUnmutedList = useMutation(
-    ({ storage }: any, userToUnmuteOrUnmute: string) => {
+    ({ storage }: any, userToUnmuteOrMute: string) => {
       const mutableUnmutedList = storage.get("unmutedAttendees");
       const arrayCopy = [...mutableUnmutedList];
-      if (arrayCopy.includes(userToUnmuteOrUnmute)) {
+      if (arrayCopy.includes(userToUnmuteOrMute)) {
         ///// if they ARE in the unmuted array
         mutableUnmutedList.delete(
           ////// delete them from UNMUTED
-          mutableUnmutedList.findIndex((user) => user == userToUnmuteOrUnmute)
+          mutableUnmutedList.findIndex((user) => user == userToUnmuteOrMute)
         );
-        if (userToUnmuteOrUnmute == currentUserName) setUserIsMuted(true); /////// and set them as MUTED
-      } else if (!arrayCopy.includes(userToUnmuteOrUnmute)) {
+        if (userToUnmuteOrMute == currentUserId) setUserIsMuted(true); /////// and set them as MUTED
+      } else if (!arrayCopy.includes(userToUnmuteOrMute)) {
         ///// if they ARE NOT in the unmuted array
-        mutableUnmutedList.push(userToUnmuteOrUnmute);
+        mutableUnmutedList.push(userToUnmuteOrMute);
         ////// push them into UNMUTED
-        if (userToUnmuteOrUnmute == currentUserName) setUserIsMuted(false); /////// and set them as UNmuted
+        if (userToUnmuteOrMute == currentUserId) setUserIsMuted(false); /////// and set them as UNmuted
       }
     },
     []
@@ -252,18 +248,18 @@ const Meeting: FC = () => {
       //////
       //////
       //////
-      if (unmutedUsers.includes(currentUserName) && !userIsMuted) {
+      if (unmutedUsers.includes(currentUserId) && !userIsMuted) {
         // toggleMute();
         console.log("1 this should be false ->", userIsMuted);
-      } else if (!unmutedUsers.includes(currentUserName) && !userIsMuted) {
+      } else if (!unmutedUsers.includes(currentUserId) && !userIsMuted) {
         toggleMute();
         setUserIsMuted(true);
         console.log("2 You have been MUTED!");
-      } else if (unmutedUsers.includes(currentUserName) && userIsMuted) {
+      } else if (unmutedUsers.includes(currentUserId) && userIsMuted) {
         toggleMute();
         setUserIsMuted(false);
         console.log("3 You have been UN-MUTED!");
-      } else if (!unmutedUsers.includes(currentUserName) && userIsMuted) {
+      } else if (!unmutedUsers.includes(currentUserId) && userIsMuted) {
         // toggleMute();
         // setUserIsMuted(false);
         console.log("4 this should be false ->", userIsMuted);
@@ -276,6 +272,66 @@ const Meeting: FC = () => {
       //////
     }
   }, [unmutedUsers]);
+
+  /////HANDLING USER UNLOCKING --> CONTROLS
+  const updateUnlockedList = useMutation(
+    ({ storage }: any, userToLockOrUnlock: string) => {
+      const mutableUnlockedList = storage.get("unlockedAttendees");
+      const arrayCopy = [...mutableUnlockedList];
+      if (arrayCopy.includes(userToLockOrUnlock)) {
+        ///// if they ARE in the unmuted array
+        mutableUnlockedList.delete(
+          ////// delete them from UNMUTED
+          mutableUnlockedList.findIndex((user) => user == userToLockOrUnlock)
+        );
+        if (userToLockOrUnlock == currentUserId) setUserIsLocked(true); /////// and set them as MUTED
+      } else if (!arrayCopy.includes(userToLockOrUnlock)) {
+        ///// if they ARE NOT in the unmuted array
+        mutableUnlockedList.push(userToLockOrUnlock);
+        ////// push them into UNMUTED
+        if (userToLockOrUnlock == currentUserId) setUserIsLocked(false); /////// and set them as UNmuted
+      }
+    },
+    []
+  );
+
+  //////HANDLING USER UNLOCKING --> FUNCTIONALITY
+  useEffect(() => {
+    if (currentUserId !== initiator) {
+      //////
+      //////
+      //////
+      //////
+      //////
+      if (unlockedUsers.includes(currentUserId) && !userIsLocked) {
+        // toggleMute();
+        console.log("1 this should be false ->", userIsLocked);
+      } else if (!unlockedUsers.includes(currentUserId) && !userIsLocked) {
+        toggleMute();
+        setUserIsLocked(true);
+        console.log("2 You have been MUTED!");
+      } else if (unlockedUsers.includes(currentUserId) && userIsLocked) {
+        toggleMute();
+        setUserIsLocked(false);
+        console.log("3 You have been UN-MUTED!");
+      } else if (!unlockedUsers.includes(currentUserId) && userIsLocked) {
+        // toggleMute();
+        // setUserIsMuted(false);
+        console.log("4 this should be false ->", userIsLocked);
+      }
+      //////
+      //////
+      //////
+      //////
+      //////
+      //////
+    }
+  }, [unlockedUsers]);
+
+  const startVid = () => {
+    console.log("START!");
+    toggleVideo();
+  };
 
   return (
     <>
@@ -315,7 +371,7 @@ const Meeting: FC = () => {
               >
                 {currentUserId.length > 0 ? (
                   <>
-                    <h6>
+                    <h6 onClick={startVid}>
                       {currentUserId === initiator
                         ? `Instructor + ${others.count} others in meeting: ${meetingIdentifier}`
                         : `Student + ${others.count} others in meeting: ${meetingIdentifier}`}
@@ -421,10 +477,16 @@ const Meeting: FC = () => {
                       <li>
                         {student.name}
                         <button
-                          onClick={() => updateUnmutedList(student.name)}
+                          onClick={() => updateUnmutedList(student.id)}
                           className="cf"
                         >
-                          {unmutedUsers.includes(student.name) ? "M" : "UNm"}
+                          {unmutedUsers.includes(student.id) ? "M" : "unM"}
+                        </button>
+                        <button
+                          onClick={() => updateUnlockedList(student.id)}
+                          className="cf"
+                        >
+                          {unmutedUsers.includes(student.id) ? "L" : "unL"}
                         </button>
                         <button
                           onClick={() => removeRaisedHand(i)}
