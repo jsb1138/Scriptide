@@ -184,22 +184,7 @@ export function IDE() {
           />
         </div>
       ) : (
-        <>
-          <div id="no-lock" className="shield-up">
-            {/* <div className="unlocked"></div> */}
-            <img
-              style={{ height: "80px", width: "80px", position: "relative" }}
-              src="src/assets/lock.png"
-            />
-          </div>
-        </>
-        // <div id="unlock" className="shield-down">
-        //   <div className="unlocked"></div>
-        //   {/* <img
-        //   style={{ height: "150px", width: "150px" }}
-        //   src="src/assets/lock.png"
-        // /> */}
-        // </div>
+        <></>
       )}
     </>
   );
