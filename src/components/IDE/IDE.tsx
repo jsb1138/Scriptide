@@ -1,18 +1,18 @@
 import Editor from "@monaco-editor/react";
 import axios from "axios";
 import { useEffect, useRef } from "react";
-import { useScriptideContext } from "../contexts/ScriptideProvider";
+import { useScriptideContext } from "../../contexts/ScriptideProvider";
 
-import "../App.css";
-import useKeyPress from "../hooks/useKeyPress";
-import { showErrorToast, showSuccessToast } from "../utils/apiServices.js";
-import { LanguageDropdown } from "./LanguageDropdown";
-import { OutputWindow } from "./OutputWindow";
-import { ThemeDropdown } from "./ThemeDropdown";
+import "./IDE.css";
+import useKeyPress from "../../hooks/useKeyPress";
+import { showErrorToast, showSuccessToast } from "../../utils/apiServices.js";
+import { LanguageDropdown } from "../LanguageDropdown/LanguageDropdown";
+import { OutputWindow } from "../OutputWindow/OutputWindow";
+import { ThemeDropdown } from "../ThemeDropdown/ThemeDropdown";
 
 //liveblocks
 
-import { useMutation, useStorage } from "../liveblocks.config.js";
+import { useMutation, useStorage } from "../../liveblocks.config.js";
 
 export function IDE() {
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;

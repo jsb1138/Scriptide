@@ -1,7 +1,8 @@
 import { FC, useEffect } from "react";
-import { useScriptideContext } from "../contexts/ScriptideProvider";
-import { IDE } from "./IDE";
-import NotionModal from "../components/NotionModal/NotionModal"
+import { useScriptideContext } from "../../contexts/ScriptideProvider";
+import { IDE } from "../../components/IDE/IDE.tsx";
+import NotionModal from "../../components/NotionModal/NotionModal"
+import "./Meeting.css"
 
 import {
   AudioInputControl,
@@ -24,16 +25,16 @@ import {
   ActionType,
   Severity,
 } from "amazon-chime-sdk-component-library-react";
-import { endMeeting } from "../utils/api";
-import Notifications from "../containers/Notifications";
-import ExcalComponent from "./excalidrawComponent/ExcalComponent";
+import { endMeeting } from "../../utils/api";
+import Notifications from "../../containers/Notifications";
+import ExcalComponent from "../excalidrawComponent/ExcalComponent";
 
 import {
   useOthers,
   useStorage,
   useMutation,
-} from "../liveblocks.config.js";
-import MenuBar from "./MenuBar";
+} from "../../liveblocks.config.js";
+import MenuBar from "../MenuBar/MenuBar";
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();

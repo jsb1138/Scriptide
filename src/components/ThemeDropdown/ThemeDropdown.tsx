@@ -1,8 +1,8 @@
 import Select from "react-select";
-import monacoThemes from "../lib/themes/themelist.json";
+import monacoThemes from "../../lib/themes/themelist.json";
 import { useEffect } from "react";
-import { defineTheme } from "../lib/defineTheme.js";
-import { useScriptideContext } from "../contexts/ScriptideProvider";
+import { defineTheme } from "../../lib/defineTheme.js";
+import { useScriptideContext } from "../../contexts/ScriptideProvider";
 
 export function ThemeDropdown() {
   const { theme, setTheme } = useScriptideContext();
