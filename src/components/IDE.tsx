@@ -165,7 +165,7 @@ export function IDE() {
         width="74vw"
         onMount={handleEditorDidMount}
         onChange={handleChange}
-        language={language?.value || 'javascript'}
+        language={language?.value}
         value={ide.content}
         theme={theme.value}
 
