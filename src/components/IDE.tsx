@@ -14,7 +14,7 @@ import { ThemeDropdown } from "./ThemeDropdown";
 
 import { useMutation, useStorage } from "../liveblocks.config.js";
 
-export function IDE() {
+export function IDE({ currentUserId }) {
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
   const host = import.meta.env.VITE_RAPIDAPI_HOST;
   const key = import.meta.env.VITE_RAPIDAPI_KEY;
@@ -28,6 +28,8 @@ export function IDE() {
     outputDetails,
     setOutputDetails,
     userIsLocked,
+    thisUser,
+    initiator,
   } = useScriptideContext();
 
   const editorRef = useRef<typeof Editor | null>(null);
@@ -153,6 +155,9 @@ export function IDE() {
     []
   );
 
+  console.log("thisUser", thisUser);
+  console.log("initiator", initiator);
+
   return (
     <>
       <Editor
@@ -175,16 +180,22 @@ export function IDE() {
         <ThemeDropdown />
         <LanguageDropdown />
       </div>
-      {userIsLocked ? (
-        <div id="lock" className="shield-up">
-          {/* <div className="unlocked"></div> */}
-          <img
-            style={{ height: "80px", width: "80px", position: "relative" }}
-            src="src/assets/lock.png"
-          />
-        </div>
-      ) : (
+      {thisUser === initiator ? (
         <></>
+      ) : (
+        <>
+          {userIsLocked ? (
+            <div id="lock" className="shield-up">
+              {/* <div className="unlocked"></div> */}
+              <img
+                style={{ height: "80px", width: "80px", position: "relative" }}
+                src="src/assets/lock.png"
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+        </>
       )}
     </>
   );

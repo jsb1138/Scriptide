@@ -52,6 +52,7 @@ const Meeting: FC = () => {
     setUserIsMuted,
     userIsLocked,
     setUserIsLocked,
+    setThisUser,
   } = useScriptideContext();
 
   const clickedEndMeeting = async () => {
@@ -76,8 +77,11 @@ const Meeting: FC = () => {
     currentUserId = chimeAttendeeId;
     // @ts-ignore
     currentUserName = name;
+    setThisUser(currentUserId);
   });
 
+  console.log("Current USER ID meeting", currentUserId);
+  console.log("initiator meeting", initiator);
   ///////// COULD IMPORT THESE FUNCTIONS FROM ELSEWHERE... AS HELPERS??
 
   const handleCamClick = () => {
@@ -229,7 +233,9 @@ const Meeting: FC = () => {
         ///// if they ARE in the unmuted array
         mutableUnmutedList.delete(
           ////// delete them from UNMUTED
-          mutableUnmutedList.findIndex((user) => user == userToUnmuteOrMute)
+          mutableUnmutedList.findIndex(
+            (user: string) => user == userToUnmuteOrMute
+          )
         );
         if (userToUnmuteOrMute == currentUserId) setUserIsMuted(true); /////// and set them as MUTED
       } else if (!arrayCopy.includes(userToUnmuteOrMute)) {
@@ -283,15 +289,17 @@ const Meeting: FC = () => {
       if (arrayCopy.includes(userToLockOrUnlock)) {
         ///// if they ARE in the unmuted array
         mutableUnlockedList.delete(
-          ////// delete them from UNMUTED
-          mutableUnlockedList.findIndex((user) => user == userToLockOrUnlock)
+          ////// delete them from UNLOCKED
+          mutableUnlockedList.findIndex(
+            (user: string) => user == userToLockOrUnlock
+          )
         );
-        if (userToLockOrUnlock == currentUserId) setUserIsLocked(true); /////// and set them as MUTED
+        if (userToLockOrUnlock == currentUserId) setUserIsLocked(true); /////// and set them as LOCKED
       } else if (!arrayCopy.includes(userToLockOrUnlock)) {
         ///// if they ARE NOT in the unmuted array
         mutableUnlockedList.push(userToLockOrUnlock);
-        ////// push them into UNMUTED
-        if (userToLockOrUnlock == currentUserId) setUserIsLocked(false); /////// and set them as UNmuted
+        ////// push them into UNLOCKED
+        if (userToLockOrUnlock == currentUserId) setUserIsLocked(false); /////// and set them as UNlocked
       }
     },
     []
@@ -319,7 +327,7 @@ const Meeting: FC = () => {
       } else if (!unlockedUsers.includes(currentUserId) && userIsLocked) {
         // toggleMute();
         // setUserIsMuted(false);
-        console.log("4 this should be false ->", userIsLocked);
+        console.log("4 this should be true ->", userIsLocked);
       }
       //////
       //////
@@ -433,7 +441,7 @@ const Meeting: FC = () => {
                   id={ideActive ? "ide-view-open" : "ide-view-closed"}
                 >
                   <div className="ide-pos-closed">
-                    <IDE />
+                    <IDE currentUserId={currentUserId} />
                   </div>
                 </div>
               </>
