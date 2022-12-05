@@ -11,7 +11,9 @@ import { RoomProvider } from "./liveblocks.config.js";
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <>
     <RoomProvider
-      id="12345678900"
+    //Meeting ID will get clogged after a while
+    //If this goes live this will have to be changed to play nice
+      id="12678900345"
       initialPresence={{ cursor: null }}
       initialStorage={{
         ide: new LiveObject({
