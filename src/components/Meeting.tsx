@@ -27,12 +27,10 @@ import { endMeeting } from "../utils/api";
 import Notifications from "../containers/Notifications";
 import ExcalComponent from "./excalidrawComponent/ExcalComponent";
 
-import {
-  useOthers,
-  useStorage,
-  useMutation,
-} from "../liveblocks.config.js";
+import { useOthers, useStorage, useMutation } from "../liveblocks.config.js";
 import MenuBar from "./MenuBar";
+import { LanguageDropdown } from "./LanguageDropdown";
+import { ThemeDropdown } from "./ThemeDropdown";
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
@@ -49,6 +47,8 @@ const Meeting: FC = () => {
     menuState,
     setMenuState,
     meetingIdentifier,
+    showLanguage,
+    showTheme,
   } = useScriptideContext();
 
   const { toggleVideo } = useLocalVideo();
@@ -239,6 +239,12 @@ const Meeting: FC = () => {
         {/* <AddNotificationButton /> */}
         {meetingStatus === MeetingStatus.Succeeded ? (
           <>
+            <div className="dropdown theme-dropdown">
+              {showTheme ? <ThemeDropdown /> : ""}
+            </div>
+            <div className="dropdown lang-dropdown">
+              {showLanguage ? <LanguageDropdown /> : ""}
+            </div>
             <div
               style={{
                 height: "100vh",
@@ -279,7 +285,6 @@ const Meeting: FC = () => {
                 )}
               </div>
             </div>
-
             <div id="meeting-ctrls">
               {meetingStatus === MeetingStatus.Succeeded ? (
                 <>
@@ -385,7 +390,6 @@ const Meeting: FC = () => {
                 </div>
               </>
             )}
-
           </>
         ) : (
           <div id="center-flex">
@@ -395,7 +399,8 @@ const Meeting: FC = () => {
             <h3 className="ellipsis"></h3>
           </div>
         )}
-          <ExcalComponent />
+
+        <ExcalComponent />
       </NotificationProvider>
     </>
   );

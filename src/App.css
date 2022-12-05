@@ -307,7 +307,7 @@ button {
   overflow: hidden;
   backdrop-filter: blur(10px);
   /* -webkit-filter: blur(20px) */
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 #ide-view-open {
@@ -489,7 +489,7 @@ h3 {
   backdrop-filter: blur(10px);
   /* background-color: rgb(255, 119, 189); */
   z-index: 10000;
-  transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 #hands ul {
@@ -605,5 +605,23 @@ h3 {
   80%, 100% {
     text-shadow:
       .25em 0 0 #213547,
-      .5em 0 0 #213547;}}
+      .5em 0 0 #213547;
+  }
+}
 
+.dropdown {
+  position: absolute;
+  left: 50%;
+  z-index: 918327436452525;
+}
+
+/* Dropdown CSS */
+.dropdown {
+  height: 3rem;
+  width: 12rem;
+  margin: 2rem;
+}
+
+/* .lang-dropdown {}
+
+.theme-dropdown {} */

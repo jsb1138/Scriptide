@@ -25,6 +25,8 @@ export default function ScriptideProvider({ children }) {
   const [keyPressed, setKeyPressed] = useState(false);
   const [language, setLanguage] = useState('javascript');
   const [code, setCode] = useState("");
+  const [showLanguage, setShowLanguage] = useState(false)
+  const [showTheme, setShowTheme] = useState(false)
 
   return (
     <ScriptideContext.Provider
@@ -68,7 +70,11 @@ export default function ScriptideProvider({ children }) {
         keyPressed,
         setKeyPressed,
         code,
-        setCode
+        setCode,
+        showLanguage,
+        setShowLanguage,
+        showTheme,
+        setShowTheme
       }}
     >
       {children}

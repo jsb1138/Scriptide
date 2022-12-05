@@ -1,5 +1,7 @@
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { FC } from "react";
+import { ThemeDropdown } from "./ThemeDropdown";
+import { LanguageDropdown } from "./LanguageDropdown";
 
 const MenuBar: FC = () => {
   const {
@@ -9,39 +11,55 @@ const MenuBar: FC = () => {
     setMenuState,
     transitionState,
     setTransitionState,
-    setOpacity
+    setOpacity,
+    setShowTheme,
+    showTheme,
+    setShowLanguage,
+    showLanguage,
   } = useScriptideContext();
 
   const toggleMenu = () => {
     setMenuState(!menuState);
   };
 
-  const handleExcali = () =>{
+  const handleExcali = () => {
     setTransitionState(!transitionState);
-    if(excalActive){
+    if (excalActive) {
       setExcalActive(false);
       setOpacity(true);
     } else {
-      setTimeout(()=>setExcalActive(!excalActive), 180);
-      setTimeout(() => setOpacity(false), 180)
+      setTimeout(() => setExcalActive(!excalActive), 180);
+      setTimeout(() => setOpacity(false), 180);
     }
-  }
+  };
+
+  const handleTheme = () => {
+    setShowTheme(!showTheme);
+  };
+  const handleLanguage = () => {
+    setShowLanguage(!showLanguage);
+  };
 
   return (
     <>
-    <div
-    id="menu"
-    className={menuState ? "menu-open" : "menu-closed"}
-  ><div className="menu-item" onClick={handleExcali}>
-  <p>E</p>
-</div></div>
-  <div
-    className={menuState ? "menu-btn-mod" : "menu-btn"}
-    onClick={toggleMenu}
-  >
-    {menuState ? "◄" : "►"}
-  </div>
-  </>
+      <div id="menu" className={menuState ? "menu-open" : "menu-closed"}>
+        <div className="menu-item" onClick={handleExcali}>
+          <p>E</p>
+        </div>
+        <div className="menu-item" onClick={handleTheme}>
+          <p>T</p>
+        </div>
+        <div className="menu-item" onClick={handleLanguage}>
+          <p>L</p>
+        </div>
+      </div>
+      <div
+        className={menuState ? "menu-btn-mod" : "menu-btn"}
+        onClick={toggleMenu}
+      >
+        {menuState ? "◄" : "►"}
+      </div>
+    </>
   );
 };
 

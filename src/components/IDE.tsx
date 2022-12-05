@@ -177,10 +177,10 @@ export function IDE() {
         </button>
         <OutputWindow outputDetails={outputDetails} />
       </div>
-      <div className="theme-bar">
+      {/* <div className="theme-bar">
         <ThemeDropdown />
         <LanguageDropdown />
-      </div>
+      </div> */}
     </>
   );
 }
