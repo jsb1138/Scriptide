@@ -61,16 +61,12 @@ const MenuBar: FC = () => {
           </div>
         </Tooltip>
         <div className="dont-show">
-        <Tooltip content='Choose an IDE theme'>
-          <div className='menu-item-without-cursor' onClick={handleTheme}>
+          <div className='menu-item-without-cursor'>
             <p>T</p>
           </div>
-        </Tooltip>
-        <Tooltip content='Choose a programming language'>
-          <div className='menu-item-without-cursor' onClick={handleLanguage}>
+          <div className='menu-item-without-cursor'>
             <p>L</p>
           </div>
-        </Tooltip>
         </div>
       </div>
       <div
