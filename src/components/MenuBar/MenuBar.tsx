@@ -49,7 +49,7 @@ const MenuBar: FC = () => {
         <Tooltip content='Sketch diagrams with Excalidraw'>
           <div className='menu-item' onClick={handleExcali}>
             <img
-              src='src/assets/excalidraw.png'
+              src='src/assets/excalidraw4.png'
               className='excali-logo'
               title='open excalidraw'
             />
