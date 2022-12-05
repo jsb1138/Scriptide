@@ -1,3 +1,6 @@
+#send-to-notion {
+  margin-top: 30px;
+}
 
 #notion-logo {
   width: 40px;
@@ -7,19 +10,4 @@
 
 #notion-logo:hover {
   opacity: 0.8;
-}
-
-#notion-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px 20px;
-  margin: 5px;
-}
-
-#notion-form label {
-  color: white;
-  padding: 10px 20px;
-  margin: 5px;
 }

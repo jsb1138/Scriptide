@@ -1,17 +1,20 @@
 .notion-modal {
-  min-width: 500px;
-  width: 30vw;
-  height: 300px;
   position: absolute;
-  top: 400px;
-  left: 400;
-  border-radius: 10px;
-  background-color: white;
-  z-index: 9999999;
+  width: 300px;
+  height: 300px;
+  top: 500px;
+  left: 15px;
+  border-radius: 2rem;
+  z-index: 10000;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
 }
 
-h3 {
-  margin-bottom: 0px;
+.notion-modal h3 {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-right: 7px;
+  color: black;
 }
 
 .cross {
@@ -24,8 +27,8 @@ h3 {
   padding: 10px 20px;
   border-top-right-radius: 5px;
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 10px;
+  right: 7px;
   cursor: pointer;
 }
 
@@ -35,27 +38,36 @@ h3 {
 
 #notion-connect-button {
   margin-top: 100px;
+  
 }
 
 #notionPageTitle {
-  width: 200px;
-  padding: 10px;
+  width: 262px;
+  padding: 10px 15px;
   margin: 5px;
-  border-radius: 10px;
+  border-radius: 2rem;
   border: none;
-  background-color: lightblue;
-}
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  font-size: 0.9rem;
+} 
 
 #notionBulletPoint {
+  width: 270px;
   margin: 5px;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 15px;
+  border-radius: 2rem;
   border: none;
-  background-color: lightblue;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  font-size: 0.9rem;
+  font-family: "Helvetica"
 }
 
 #notion-submit-button {
   width: 150px;
   height: 45px;
-  background-color: lightblue;
+  background-color: white;
+  border-radius: 2rem;
+  font-weight: bold;
 }

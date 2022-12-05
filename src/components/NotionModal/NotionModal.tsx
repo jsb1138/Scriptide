@@ -3,6 +3,8 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useScriptideContext } from '../../contexts/ScriptideProvider';
 import CloseCross from '../../assets/close.png';
+import NotionLogo from '../../assets/Notion_app_logo.png';
+
 
 function NotionModal() {
   const { notionModalIsOpen, setNotionModalIsOpen } = useScriptideContext();
@@ -64,12 +66,13 @@ function NotionModal() {
     return (
       <div className='notion-modal'>
         <div onClick={handleClick} className='cross'>
-          <img id='close-cross' src={CloseCross} alt='' />
+          <img id='close-cross' src={CloseCross} alt=' closing cross' />
         </div>
         {!userNotionId ? (
-          <h3>Grant Access to Notion ⬇</h3>
+          <h3>Grant Access to Notion</h3>
         ) : (
-          <h3>Post a note</h3>
+          <h3>Post to Notion
+            </h3>
         )}
         {!userNotionId ? (
           <a href='https://api.notion.com/v1/oauth/authorize?client_id=08b1c623-a965-4750-9a1e-11042ef8700f&response_type=code&owner=user&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fauth%2Fnotion%2Fcallback'>
@@ -86,7 +89,7 @@ function NotionModal() {
             <textarea
               name='notionBulletPoint'
               id='notionBulletPoint'
-              cols={30}
+              cols={28}
               rows={5}
               placeholder='This text will be added as a bulletpoint'
             ></textarea>
