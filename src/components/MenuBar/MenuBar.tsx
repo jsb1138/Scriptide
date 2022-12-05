@@ -45,7 +45,8 @@ const MenuBar: FC = () => {
 
   return !ideActive ? (
     <>
-      <div id='menu' className={menuState ? 'menu-open' : 'menu-closed'}>
+
+      <div id='menu-without-ide-options' className={menuState ? 'menu-open' : 'menu-closed'}>
         <Tooltip content='Sketch diagrams with Excalidraw'>
           <div className='menu-item' onClick={handleExcali}>
             <img
@@ -68,6 +69,7 @@ const MenuBar: FC = () => {
         {menuState ? '◄' : '►'}
       </div>
     </>
+
   ) : (
     <>
       <div id='menu' className={menuState ? 'menu-open' : 'menu-closed'}>
@@ -91,6 +93,7 @@ const MenuBar: FC = () => {
             <p>L</p>
           </div>
         </Tooltip>
+
       </div>
       <div
         className={menuState ? 'menu-btn-mod' : 'menu-btn'}
