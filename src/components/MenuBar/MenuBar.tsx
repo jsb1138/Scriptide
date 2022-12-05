@@ -20,6 +20,7 @@ const MenuBar: FC = () => {
     showTheme,
     setShowLanguage,
     showLanguage,
+    ideActive,
   } = useScriptideContext();
 
   const toggleMenu = () => {
@@ -43,8 +44,26 @@ const MenuBar: FC = () => {
     setShowLanguage(!showLanguage);
   };
 
-  return (
+
+  return !ideActive ? (
     <>
+      <div id="menu" className={menuState ? "menu-open" : "menu-closed"}>
+        <div className="menu-item" onClick={handleExcali}>
+          <img src="src/assets/excalidraw.png" className="excali-logo" title="open excalidraw" />
+        </div>
+        <div className='menu-item'>
+          <SendToNotion/>
+        </div>
+        </div>
+      <div
+        className={menuState ? "menu-btn-mod" : "menu-btn"}
+        onClick={toggleMenu}
+      >
+        {menuState ? "◄" : "►"}
+      </div>
+    </>
+    ) : (
+      <>
       <div id="menu" className={menuState ? "menu-open" : "menu-closed"}>
         <div className="menu-item" onClick={handleExcali}>
           <img src="src/assets/excalidraw.png" className="excali-logo" title="open excalidraw" />
@@ -66,7 +85,7 @@ const MenuBar: FC = () => {
         {menuState ? "◄" : "►"}
       </div>
     </>
-  );
+    )
 };
 
 export default MenuBar;
