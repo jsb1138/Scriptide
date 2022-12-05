@@ -1,6 +1,7 @@
 import { FC, useEffect } from "react";
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { IDE } from "./IDE";
+import NotionModal from "../components/NotionModal/NotionModal"
 
 import {
   AudioInputControl,
@@ -410,8 +411,8 @@ const Meeting: FC = () => {
             <h3 className="ellipsis"></h3>
           </div>
         )}
-
-        <ExcalComponent />
+          <ExcalComponent />
+          <NotionModal/>
       </NotificationProvider>
     </>
   );

@@ -1,7 +1,10 @@
+
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 import { FC } from "react";
 import { ThemeDropdown } from "./ThemeDropdown";
 import { LanguageDropdown } from "./LanguageDropdown";
+import SendToNotion from "../components/SendToNotion/SendToNotion"
+
 
 const MenuBar: FC = () => {
   const {
@@ -32,7 +35,6 @@ const MenuBar: FC = () => {
       setTimeout(() => setOpacity(false), 180);
     }
   };
-
   const handleTheme = () => {
     setShowTheme(!showTheme);
   };
@@ -45,6 +47,9 @@ const MenuBar: FC = () => {
       <div id="menu" className={menuState ? "menu-open" : "menu-closed"}>
         <div className="menu-item" onClick={handleExcali}>
           <p>E</p>
+        </div>
+        <div className='menu-item'>
+          <SendToNotion/>
         </div>
         <div className="menu-item" onClick={handleTheme}>
           <p>T</p>
