@@ -3,7 +3,8 @@ import { useScriptideContext } from "../../contexts/ScriptideProvider";
 import { FC } from "react";
 import { ThemeDropdown } from "./ThemeDropdown";
 import { LanguageDropdown } from "./LanguageDropdown";
-import SendToNotion from "../../components/SendToNotion/SendToNotion"
+import SendToNotion from "../SendToNotion/SendToNotion"
+import Tooltip from "../Tooltip/Tooltip"
 import "./MenuBar.css"
 
 
@@ -52,7 +53,9 @@ const MenuBar: FC = () => {
           <img src="src/assets/excalidraw.png" className="excali-logo" title="open excalidraw" />
         </div>
         <div className='menu-item'>
+          <Tooltip content="Post to Notion">
           <SendToNotion/>
+          </Tooltip>
         </div>
         </div>
       <div
@@ -65,18 +68,26 @@ const MenuBar: FC = () => {
     ) : (
       <>
       <div id="menu" className={menuState ? "menu-open" : "menu-closed"}>
+        <Tooltip content="Sketch diagrams with Excalidraw">
         <div className="menu-item" onClick={handleExcali}>
-          <img src="src/assets/excalidraw.png" className="excali-logo" title="open excalidraw" />
+          <img src="src/assets/excalidraw.png" className="excali-logo" />
         </div>
+        </Tooltip>
+        <Tooltip content="Post notes with Notion">
         <div className='menu-item'>
           <SendToNotion/>
         </div>
+          </Tooltip>
+          <Tooltip content="Choose an IDE theme">
         <div className="menu-item" onClick={handleTheme}>
           <p>T</p>
         </div>
+          </Tooltip>
+          <Tooltip content="Choose a programming language">
         <div className="menu-item" onClick={handleLanguage}>
           <p>L</p>
         </div>
+          </Tooltip>
       </div>
       <div
         className={menuState ? "menu-btn-mod" : "menu-btn"}
