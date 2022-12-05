@@ -24,6 +24,8 @@ export default function ScriptideProvider({ children }) {
   const [notionModalIsOpen, setNotionModalIsOpen] = useState(false);
   const [language, setLanguage] = useState('javascript');
   const [code, setCode] = useState("");
+  const [showLanguage, setShowLanguage] = useState(false)
+  const [showTheme, setShowTheme] = useState(false)
 
   return (
     <ScriptideContext.Provider
@@ -69,7 +71,11 @@ export default function ScriptideProvider({ children }) {
         notionModalIsOpen,
         setNotionModalIsOpen,
         code,
-        setCode
+        setCode,
+        showLanguage,
+        setShowLanguage,
+        showTheme,
+        setShowTheme
       }}
     >
       {children}

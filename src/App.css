@@ -621,4 +621,23 @@ h3 {
       .25em 0 0 #213547,
       .5em 0 0 #213547;
   }
+
 }
+
+.dropdown {
+  position: absolute;
+  left: 50%;
+  z-index: 918327436452525;
+}
+
+/* Dropdown CSS */
+.dropdown {
+  height: 3rem;
+  width: 12rem;
+  margin: 2rem;
+}
+
+/* .lang-dropdown {}
+
+.theme-dropdown {} */
+
