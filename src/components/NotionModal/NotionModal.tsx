@@ -59,7 +59,7 @@ function NotionModal() {
     const valuePageTitle = event.currentTarget.notionPageTitle.value;
     const valueBulletPoint = event.currentTarget.notionBulletPoint.value;
     postToServer(valuePageTitle, valueBulletPoint);
-    event.currentTarget.reset()
+    event.currentTarget.notionBulletPoint.value = "";
   }
 
   if (notionModalIsOpen) {
