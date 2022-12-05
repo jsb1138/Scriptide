@@ -1,7 +1,7 @@
 import { useScriptideContext } from '../contexts/ScriptideProvider';
 import { FC } from 'react';
 import SendToNotion from "../components/SendToNotion/SendToNotion"
-import MenuBarTooltip from './MenuBarTooltip/MenuBarTooltip';
+import Tooltip from './Tooltip/Tooltip';
 
 const MenuBar: FC = () => {
   const {
@@ -35,9 +35,9 @@ const MenuBar: FC = () => {
         <div className='menu-item' onClick={handleExcali}>
           <p>E</p>
         </div>
-        <MenuBarTooltip content="Post Notes to Notion">
+        <Tooltip content="Post Notes to Notion">
         <SendToNotion/>
-        </MenuBarTooltip>
+        </Tooltip>
       </div>
       <div
         className={menuState ? 'menu-btn-mod' : 'menu-btn'}
