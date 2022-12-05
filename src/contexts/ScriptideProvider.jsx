@@ -23,10 +23,14 @@ export default function ScriptideProvider({ children }) {
   const [meetingTitle, setMeetingTitle] = useState("");
   const [attendeeName, setName] = useState("");
   const [keyPressed, setKeyPressed] = useState(false);
+  const [language, setLanguage] = useState('javascript');
+  const [code, setCode] = useState("");
 
   return (
     <ScriptideContext.Provider
       value={{
+        language,
+        setLanguage,
         camActive,
         setCamActive,
         ideActive,
@@ -62,7 +66,9 @@ export default function ScriptideProvider({ children }) {
         attendeeName,
         setName,
         keyPressed,
-        setKeyPressed
+        setKeyPressed,
+        code,
+        setCode
       }}
     >
       {children}

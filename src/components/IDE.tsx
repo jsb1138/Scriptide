@@ -139,7 +139,9 @@ export function IDE() {
 
   function handleChange(value: any) {
     updateIDE("content", value);
-
+    onChange("code", value);
+    console.log('code set: ', code)
+    console.log(language)
   }
 
  //liveblocks
@@ -163,7 +165,7 @@ export function IDE() {
         width="74vw"
         onMount={handleEditorDidMount}
         onChange={handleChange}
-        language={language?.value}
+        language={language?.value || 'javascript'}
         value={ide.content}
         theme={theme.value}
 
