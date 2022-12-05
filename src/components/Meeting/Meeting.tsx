@@ -31,8 +31,8 @@ import ExcalComponent from "../excalidrawComponent/ExcalComponent";
 
 import { useOthers, useStorage, useMutation } from "../../liveblocks.config.js";
 import MenuBar from "../MenuBar/MenuBar";
-import { LanguageDropdown } from "./LanguageDropdown";
-import { ThemeDropdown } from "./ThemeDropdown";
+import { LanguageDropdown } from "../LanguageDropdown/LanguageDropdown";
+import { ThemeDropdown } from "../ThemeDropdown/ThemeDropdown";
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
