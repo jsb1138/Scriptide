@@ -32,9 +32,11 @@ const MenuBar: FC = () => {
     <>
       <div id='menu' className={menuState ? 'menu-open' : 'menu-closed'}>
         <div className='menu-item' onClick={handleExcali}>
-          <p>E</p>
+        <img src="src/assets/excalidraw.png" className="excali-logo" title="open excalidraw" />
         </div>
-        <SendToNotion/>
+        <div className='menu-item'>
+          <SendToNotion/>
+        </div>
       </div>
       <div
         className={menuState ? 'menu-btn-mod' : 'menu-btn'}

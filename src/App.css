@@ -213,6 +213,11 @@ code {
   overflow: hidden;
 }
 
+.menu-item:hover {
+  cursor: pointer;
+  opacity: .5;
+}
+
 .theme-bar {
   height: 200px;
   width: 400px;
