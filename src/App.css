@@ -423,8 +423,24 @@ button {
   height: 100%;
   margin-left: 0px;
   margin-top: 0px;
+  padding: 240px 200px 300px 200px;
   z-index: 9999;
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  
+  
+  
+  /* overflow: scroll; */
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  flex: 1;
+  background: rgba(0, 0, 0, 0.85);
+  /* aspect-ratio: 1 / 1; */
+
+
 }
 
 #grid-view-closed {
@@ -440,6 +456,53 @@ button {
   backdrop-filter: blur(10px);
   z-index: 10000;
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+#grid-view-open .djKFHp {
+  position: relative;
+  vertical-align: middle;
+  align-self: center;
+  border-radius: 1000px;
+  overflow: hidden;
+  display: inline-block;
+  box-shadow: var(--shadow-dark);
+  background: #fff;
+  margin: 10px;
+  max-width: 25%;
+  max-height: 50%;
+  min-height: 5%;
+  min-width: 10%;
+  aspect-ratio: 1 / 1;
+  animation: show 0.4s ease;
+}
+
+#grid-view-open .sc-eeMvmM {
+  position: relative;
+  vertical-align: middle;
+  align-self: center;
+  border-radius: 1000px;
+  overflow: hidden;
+  display: inline-block;
+  box-shadow: var(--shadow-dark);
+  background: #fff;
+  margin: 10px;
+  max-width: 25%;
+  max-height: 50%;
+  min-height: 5%;
+  min-width: 10%;
+  aspect-ratio: 1 / 1;
+  animation: show 0.4s ease;
+}
+
+#grid-view-closed .djKFHp {
+  object-fit: cover;
+  max-width: 40%;
+  max-height: 40%;
+  min-height: 10%;
+  min-width: 10%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  background: #1b1c20;
 }
 
 #hand-raise-btn {

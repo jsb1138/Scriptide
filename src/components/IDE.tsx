@@ -155,9 +155,6 @@ export function IDE({ currentUserId }) {
     []
   );
 
-  console.log("thisUser", thisUser);
-  console.log("initiator", initiator);
-
   return (
     <>
       <Editor

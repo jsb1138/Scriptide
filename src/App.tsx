@@ -50,7 +50,7 @@ export default function App() {
           height: "15px",
           width: "15px",
         }}
-        src="src/assets/cursor.png"
+        src="src/assets/fly.png"
       />
     );
   }
