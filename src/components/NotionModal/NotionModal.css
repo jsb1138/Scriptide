@@ -38,7 +38,6 @@
 
 #notion-connect-button {
   margin-top: 100px;
-  
 }
 
 #notionPageTitle {
@@ -50,7 +49,7 @@
   background-color: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
   font-size: 0.9rem;
-} 
+}
 
 #notionBulletPoint {
   width: 270px;
@@ -61,7 +60,7 @@
   background: rgba(255, 255, 255, 0.4);
   backdrop-filter: blur(10px);
   font-size: 0.9rem;
-  font-family: "Helvetica"
+  font-family: 'Helvetica';
 }
 
 #notion-submit-button {

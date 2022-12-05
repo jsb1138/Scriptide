@@ -3,7 +3,6 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useScriptideContext } from '../../contexts/ScriptideProvider';
 import CloseCross from '../../assets/close.png';
-import NotionLogo from '../../assets/Notion_app_logo.png';
 
 
 function NotionModal() {
