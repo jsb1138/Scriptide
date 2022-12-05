@@ -24,8 +24,7 @@
   position: absolute;
   backdrop-filter: blur(10px);
   background: rgba(255, 255, 255, 0.2);
-  z-index: 10000;
-  overflow: hidden;
+  z-index: 100001;
   transition: 0.3s cubic-bezier(0.68, -0.6, 0.32, 1.6);
 }
 
