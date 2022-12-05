@@ -139,7 +139,9 @@ export function IDE() {
 
   function handleChange(value: any) {
     updateIDE("content", value);
-
+    onChange("code", value);
+    console.log('code set: ', code)
+    console.log(language)
   }
 
  //liveblocks
@@ -155,7 +157,7 @@ export function IDE() {
     },
     []
   );
-
+    //useEffect to re-render Editor on language change (?)
   return (
     <>
       <Editor
