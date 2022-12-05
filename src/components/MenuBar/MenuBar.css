@@ -1,6 +1,6 @@
 #menu-without-ide-options {
   width: 90px;
-  height: 24%;
+  height: 34%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,7 +16,7 @@
 
 #menu-with-ide-options {
   width: 90px;
-  height: 45%;
+  height: 65%;
   display: flex;
   flex-direction: column;
   align-items: center;
