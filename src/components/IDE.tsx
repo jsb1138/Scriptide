@@ -157,7 +157,7 @@ export function IDE() {
     },
     []
   );
-
+    //useEffect to re-render Editor on language change (?)
   return (
     <>
       <Editor
