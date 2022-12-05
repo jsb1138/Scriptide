@@ -1,5 +1,6 @@
-import { useScriptideContext } from "../contexts/ScriptideProvider";
-import { FC } from "react";
+import { useScriptideContext } from '../contexts/ScriptideProvider';
+import { FC } from 'react';
+import SendToNotion from "../components/SendToNotion/SendToNotion"
 
 const MenuBar: FC = () => {
   const {
@@ -29,16 +30,17 @@ const MenuBar: FC = () => {
 
   return (
     <>
-      <div id="menu" className={menuState ? "menu-open" : "menu-closed"}>
-        <div className="menu-item" onClick={handleExcali}>
-          <img src="src/assets/excalidraw.png" className="excali-logo" title="open excalidraw" />
+      <div id='menu' className={menuState ? 'menu-open' : 'menu-closed'}>
+        <div className='menu-item' onClick={handleExcali}>
+          <p>E</p>
         </div>
+        <SendToNotion/>
       </div>
       <div
-        className={menuState ? "menu-btn-mod" : "menu-btn"}
+        className={menuState ? 'menu-btn-mod' : 'menu-btn'}
         onClick={toggleMenu}
       >
-        {menuState ? "◄" : "►"}
+        {menuState ? '◄' : '►'}
       </div>
     </>
   );

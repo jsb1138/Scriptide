@@ -1,28 +1,27 @@
-
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
 const ScriptideContext = createContext(null);
 
 export default function ScriptideProvider({ children }) {
-
   const [camActive, setCamActive] = useState(false);
   const [ideActive, setIdeActive] = useState(false);
   const [gridActive, setGridActive] = useState(false);
   const [outputDetails, setOutputDetails] = useState(null);
   const [processing, setProcessing] = useState(null);
-  const [theme, setTheme] = useState("vs-dark");
-  const [initiator, setInitiator] = useState("");
+  const [theme, setTheme] = useState('vs-dark');
+  const [initiator, setInitiator] = useState('');
   const [meetingActive, setMeetingActive] = useState(false);
-  const [thisUser, setThisUser] = useState("");
+  const [thisUser, setThisUser] = useState('');
   const [menuState, setMenuState] = useState(false);
-  const [meetingIdentifier, setMeetingIdentifier] = useState("");
+  const [meetingIdentifier, setMeetingIdentifier] = useState('');
   const [raisedHands, setRaisedHand] = useState([]);
   const [excalActive, setExcalActive] = useState(false);
-  const [transitionState, setTransitionState] = useState(false)
+  const [transitionState, setTransitionState] = useState(false);
   const [opacity, setOpacity] = useState(true);
-  const [meetingTitle, setMeetingTitle] = useState("");
-  const [attendeeName, setName] = useState("");
+  const [meetingTitle, setMeetingTitle] = useState('');
+  const [attendeeName, setName] = useState('');
   const [keyPressed, setKeyPressed] = useState(false);
+  const [notionModalIsOpen, setNotionModalIsOpen] = useState(false);
   const [language, setLanguage] = useState('javascript');
   const [code, setCode] = useState("");
 
@@ -67,6 +66,8 @@ export default function ScriptideProvider({ children }) {
         setName,
         keyPressed,
         setKeyPressed,
+        notionModalIsOpen,
+        setNotionModalIsOpen,
         code,
         setCode
       }}
