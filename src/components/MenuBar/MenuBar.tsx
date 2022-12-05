@@ -47,12 +47,18 @@ const MenuBar: FC = () => {
 
   return !ideActive ? (
     <>
-      <div id="menu" className={menuState ? "menu-open" : "menu-closed"}>
+      <div id="menu-without-ide-options" className={menuState ? "menu-open" : "menu-closed"}>
         <div className="menu-item" onClick={handleExcali}>
           <img src="src/assets/excalidraw.png" className="excali-logo" title="open excalidraw" />
         </div>
         <div className='menu-item'>
           <SendToNotion/>
+        </div>
+        <div className="menu-item ide-options-notshowing" onClick={handleTheme}>
+          <p>T</p>
+        </div>
+        <div className="menu-item ide-options-notshowing" onClick={handleLanguage}>
+          <p>L</p>
         </div>
         </div>
       <div
@@ -64,7 +70,7 @@ const MenuBar: FC = () => {
     </>
     ) : (
       <>
-      <div id="menu" className={menuState ? "menu-open" : "menu-closed"}>
+      <div id="menu-with-ide-options" className={menuState ? "menu-open" : "menu-closed"}>
         <div className="menu-item" onClick={handleExcali}>
           <img src="src/assets/excalidraw.png" className="excali-logo" title="open excalidraw" />
         </div>
