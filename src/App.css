@@ -131,7 +131,7 @@ code {
 
 #menu {
   width: 90px;
-  height: 35%;
+  height: 75%;
   display: flex;
   flex-direction: column;
   align-items: center;

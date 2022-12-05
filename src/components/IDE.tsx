@@ -54,7 +54,7 @@ export function IDE() {
     //@ts-ignore
     setProcessing(true);
     const formData = {
-      language_id: language.id,
+      language_id: language.id || 63,
       source_code: btoa(code),
       stdin: btoa(""),
     };
@@ -165,10 +165,9 @@ export function IDE() {
         width="74vw"
         onMount={handleEditorDidMount}
         onChange={handleChange}
-        language={language?.value}
+        language={language?.value || 'javascript'}
         value={ide.content}
-        theme={theme.value}
-
+        theme={theme.value || 'vs-dark'}
       />
 
       <div className="ide-output">

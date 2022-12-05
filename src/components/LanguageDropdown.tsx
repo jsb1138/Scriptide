@@ -16,15 +16,15 @@ export function LanguageDropdown() {
     <Select
       placeholder={"Filter By Category"}
       options={languageOptions}
-      // theme={(theme) => ({
-      //   ...theme,
-      //   borderRadius: 10,
-      //   colors: {
-      //     ...theme.colors,
-      //     primary25: "green",
-      //     neutral0: "black",
-      //   },
-      // })}
+      theme={(theme) => ({
+        ...theme,
+        borderRadius: 10,
+        colors: {
+          ...theme.colors,
+          primary25: "green",
+          neutral0: "black",
+        },
+      })}
       defaultValue={languageOptions[0]}
       onChange={(selectedOption) => onSelectChange(selectedOption)}
     />

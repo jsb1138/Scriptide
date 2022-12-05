@@ -22,12 +22,12 @@ export function ThemeDropdown() {
       }));
     }
   }
-  useEffect(() => {
-    console.log(theme);
-    defineTheme("oceanic-next").then((_: any) =>
-      setTheme({ value: "oceanic-next", label: "oceanic-next" })
-    );
-  }, []);
+  // useEffect(() => {
+  //   console.log(theme);
+  //   defineTheme("oceanic-next").then((_: any) =>
+  //     setTheme({ value: "oceanic-next", label: "oceanic-next" })
+  //   );
+  // }, []);
   return (
     <Select
       placeholder={`Select Theme`}
