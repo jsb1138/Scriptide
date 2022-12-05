@@ -45,7 +45,6 @@ const MenuBar: FC = () => {
 
   return !ideActive ? (
     <>
-
       <div id='menu-without-ide-options' className={menuState ? 'menu-open' : 'menu-closed'}>
         <Tooltip content='Sketch diagrams with Excalidraw'>
           <div className='menu-item' onClick={handleExcali}>
@@ -61,6 +60,18 @@ const MenuBar: FC = () => {
             <SendToNotion />
           </div>
         </Tooltip>
+        <div className="dont-show">
+        <Tooltip content='Choose an IDE theme'>
+          <div className='menu-item-without-cursor' onClick={handleTheme}>
+            <p>T</p>
+          </div>
+        </Tooltip>
+        <Tooltip content='Choose a programming language'>
+          <div className='menu-item-without-cursor' onClick={handleLanguage}>
+            <p>L</p>
+          </div>
+        </Tooltip>
+        </div>
       </div>
       <div
         className={menuState ? 'menu-btn-mod' : 'menu-btn'}
@@ -69,10 +80,9 @@ const MenuBar: FC = () => {
         {menuState ? '◄' : '►'}
       </div>
     </>
-
   ) : (
     <>
-      <div id='menu' className={menuState ? 'menu-open' : 'menu-closed'}>
+      <div id='menu-with-ide-options' className={menuState ? 'menu-open' : 'menu-closed'}>
         <Tooltip content='Sketch diagrams with Excalidraw'>
           <div className='menu-item' onClick={handleExcali}>
             <img src='src/assets/excalidraw.png' className='excali-logo' />
@@ -83,6 +93,7 @@ const MenuBar: FC = () => {
             <SendToNotion />
           </div>
         </Tooltip>
+        <div className='show-me'>
         <Tooltip content='Choose an IDE theme'>
           <div className='menu-item' onClick={handleTheme}>
             <p>T</p>
@@ -93,7 +104,7 @@ const MenuBar: FC = () => {
             <p>L</p>
           </div>
         </Tooltip>
-
+        </div>
       </div>
       <div
         className={menuState ? 'menu-btn-mod' : 'menu-btn'}

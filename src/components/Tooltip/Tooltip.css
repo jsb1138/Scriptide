@@ -8,7 +8,10 @@
 .tooltip-wrapper {
   display: inline-block;
   position: relative;
+
 }
+
+
 
 .tooltip-tip {
   position: absolute;
