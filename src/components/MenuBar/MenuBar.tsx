@@ -1,9 +1,10 @@
 
-import { useScriptideContext } from "../contexts/ScriptideProvider";
+import { useScriptideContext } from "../../contexts/ScriptideProvider";
 import { FC } from "react";
 import { ThemeDropdown } from "./ThemeDropdown";
 import { LanguageDropdown } from "./LanguageDropdown";
-import SendToNotion from "../components/SendToNotion/SendToNotion"
+import SendToNotion from "../../components/SendToNotion/SendToNotion"
+import "./MenuBar.css"
 
 
 const MenuBar: FC = () => {

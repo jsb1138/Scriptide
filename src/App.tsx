@@ -9,8 +9,8 @@ import {
   MeetingProvider,
   lightTheme,
 } from "amazon-chime-sdk-component-library-react";
-import Meeting from "./components/Meeting";
-import MeetingForm from "./components/MeetingForm";
+import Meeting from "./components/Meeting/Meeting";
+import MeetingForm from "./components/MeetingForm/MeetingForm";
 
 import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";

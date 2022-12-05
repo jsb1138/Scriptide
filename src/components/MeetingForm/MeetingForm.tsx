@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, FormEvent } from "react";
-import { useScriptideContext } from "../contexts/ScriptideProvider";
+import { useScriptideContext } from "../../contexts/ScriptideProvider";
+import "./MeetingForm.css"
 
 import {
   FormField,
@@ -15,7 +16,7 @@ import {
   getAttendeeFromDB,
   getMeetingFromDB,
   joinMeeting
-} from "../utils/api";
+} from "../../utils/api";
 
 const MeetingForm: FC = () => {
   const meetingManager = useMeetingManager();
