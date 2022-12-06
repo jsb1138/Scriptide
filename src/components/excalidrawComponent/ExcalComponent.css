@@ -32,6 +32,7 @@ opacity: .5;
   justify-content: center;
   align-items: center;
   z-index: 1;
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 .excal-closed {
@@ -49,6 +50,7 @@ opacity: .5;
   align-items: center;
   overflow: hidden;
   z-index: 10000;
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
 .hider-container {

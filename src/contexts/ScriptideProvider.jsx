@@ -26,6 +26,7 @@ export default function ScriptideProvider({ children }) {
   const [code, setCode] = useState("");
   const [showLanguage, setShowLanguage] = useState(false)
   const [showTheme, setShowTheme] = useState(false)
+  const [excalState, setExcalState] = useState([])
 
   return (
     <ScriptideContext.Provider
@@ -75,7 +76,9 @@ export default function ScriptideProvider({ children }) {
         showLanguage,
         setShowLanguage,
         showTheme,
-        setShowTheme
+        setShowTheme,
+        excalState,
+        setExcalState
       }}
     >
       {children}
