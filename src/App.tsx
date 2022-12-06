@@ -35,7 +35,7 @@ export default function App() {
 
   const updateMyPresence = useUpdateMyPresence();
 
-  const noDragSelector = "input, a, button, #ide-view-open, .excalibox";
+  const noDragSelector = "input, a, button, #ide-view-open, .excalibox, .menu-item, #cam-view-close, #ide-view-closed, #grid-view-closed, #cam-view-open, #grid-view-open";
 
   document.addEventListener("mousedown", async (mouseDown: any) => {
     if (mouseDown.target.closest(noDragSelector)) {

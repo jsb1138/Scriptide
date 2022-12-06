@@ -99,12 +99,12 @@ const MenuBar: FC = () => {
         <div className='show-me'>
         <Tooltip content='Choose an IDE theme'>
           <div className='menu-item' onClick={handleTheme}>
-            <img src='src/assets/theme.svg' className='theme-logo' />
+            <img src='src/assets/theme.svg' className='theme-logo'/>
           </div>
         </Tooltip>
         <Tooltip content='Choose a programming language'>
           <div className='menu-item' onClick={handleLanguage}>
-          <img src='src/assets/lang-select.svg' className='lang-logo' />
+          <img src='src/assets/lang-select.svg' className='lang-logo'/>
           </div>
         </Tooltip>
         </div>
