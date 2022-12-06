@@ -5,9 +5,11 @@ import ScriptideProvider from '../../src/contexts/ScriptideProvider';
 import { RoomProvider } from '../../src/liveblocks.config';
 
 
+
 describe("Landing screen", () => {
 
   beforeEach(() => {
+    cy.viewport(1200,800)
     mount(
       <RoomProvider
       id="12678900345">
