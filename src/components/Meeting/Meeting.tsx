@@ -209,26 +209,24 @@ const Meeting: FC = () => {
         {/* <AddNotificationButton /> */}
         {meetingStatus === MeetingStatus.Succeeded ? (
           <>
-            {showTheme ? (
+           {showTheme && ideActive ? (
               <div className="dropdown theme-dropdown">
                 <ThemeDropdown />
               </div>
             ) : (
               <div className="dropdown theme-dropdown-hidden">
-                {/* <ThemeDropdown /> */}
+                <ThemeDropdown />
               </div>
             )}
-
-            {showLanguage ? (
+            {showLanguage && ideActive ? (
               <div className="dropdown lang-dropdown">
                 <LanguageDropdown />
               </div>
             ) : (
               <div className="dropdown lang-dropdown-hidden">
-                {/* <LanguageDropdown /> */}
+                <LanguageDropdown />
               </div>
             )}
-
             <div
               style={{
                 height: "100vh",
