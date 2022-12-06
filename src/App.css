@@ -42,47 +42,6 @@ code {
   border-radius: 10px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-
-  a:nth-of-type(3) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
 
 .sideBar {
   position: relative;
@@ -115,30 +74,11 @@ code {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-link {
-  color: #61dafb;
-}
-
 #App-main {
   height: 100%;
   width: 100%;
   padding: 0 20px 0 20px;
 }
-
-
-
-
 
 .open {
   width: 200px;
@@ -165,11 +105,25 @@ button {
 
 
 
+#hand-raise-btn {
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 0px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: rgba(77, 199, 55, 0.2);
+  /* background:radial-gradient(circle at 50% 50%, rgba(77, 199, 55, 1) 0%, rgba(255, 255, 255, 0) 60%); */
+  z-index: 10000000000;
+  border: none;
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+
 h3 {
   margin: 0;
   padding: 0;
 }
-
+/* 
 .appear {
   opacity: 0.2;
   transition: 0.3s;
@@ -178,7 +132,6 @@ h3 {
 .disappear {
   opacity: 0;
   transition: 0.3s;
-}
 
 .sc-jrcTuL.iLFcWf {
   background: rgba(255, 255, 255, 0.3);
