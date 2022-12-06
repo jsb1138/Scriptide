@@ -212,19 +212,22 @@ const Meeting: FC = () => {
           <>
             {showTheme ? (
               <div className="dropdown theme-dropdown">
-                <ThemeDropdown />{" "}
+                <ThemeDropdown />
               </div>
             ) : (
-              ""
+              <div className="dropdown theme-dropdown-hidden">
+                {/* <ThemeDropdown /> */}
+              </div>
             )}
 
             {showLanguage ? (
               <div className="dropdown lang-dropdown">
-                {" "}
-                <LanguageDropdown />{" "}
+                <LanguageDropdown />
               </div>
             ) : (
-              ""
+              <div className="dropdown lang-dropdown-hidden">
+                {/* <LanguageDropdown /> */}
+              </div>
             )}
 
             <div
