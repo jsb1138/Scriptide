@@ -154,7 +154,6 @@ const Meeting: FC = () => {
   };
   const { devices, selectedDevice } = useVideoInputs();
   function activateVid() {
-
     toggleVideo();
   }
 
@@ -436,7 +435,7 @@ const Meeting: FC = () => {
         {/* <AddNotificationButton /> */}
         {meetingStatus === MeetingStatus.Succeeded ? (
           <>
-           {showTheme && ideActive ? (
+            {showTheme && ideActive ? (
               <div className="dropdown theme-dropdown">
                 <ThemeDropdown />
               </div>
@@ -494,24 +493,26 @@ const Meeting: FC = () => {
                 )}
               </div>
             </div>
-            <div id="meeting-ctrls">
-              {meetingStatus === MeetingStatus.Succeeded ? (
-                <>
-                  <ControlBar layout="undocked-horizontal" showLabels>
-                    <AudioInputControl />
-                    <VideoInputControl />
-                    <AudioOutputControl />
-                    <ControlBarButton
-                      icon={<Phone />}
-                      onClick={clickedEndMeeting}
-                      label="End"
-                    />
-                  </ControlBar>
+            <div className="getitcentered">
+              <div id="meeting-ctrls">
+                {meetingStatus === MeetingStatus.Succeeded ? (
+                  <>
+                    <ControlBar layout="undocked-horizontal" showLabels>
+                      <AudioInputControl />
+                      <VideoInputControl />
+                      <AudioOutputControl />
+                      <ControlBarButton
+                        icon={<Phone />}
+                        onClick={clickedEndMeeting}
+                        label="End"
+                      />
+                    </ControlBar>
+                    <div />
+                  </>
+                ) : (
                   <div />
-                </>
-              ) : (
-                <div />
-              )}
+                )}
+              </div>
             </div>
             <MenuBar />
 
