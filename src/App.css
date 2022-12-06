@@ -9,6 +9,13 @@ ul {
 
 }
 
+#center-flex > div > form > div:nth-child(1) > span > button {
+  display: none;
+}
+#center-flex > div > form > div:nth-child(2) > span > button {
+  display: none;
+}
+
 code {
   font-family: 'Courier New', Courier, monospace;
 }
@@ -229,20 +236,54 @@ h3 {
 
 }
 
-.dropdown {
-  position: absolute;
-  left: 50%;
-  z-index: 918327436452525;
-}
-
 /* Dropdown CSS */
 .dropdown {
   height: 3rem;
-  width: 12rem;
-  margin: 2rem;
+  position: absolute;
+  left: 7%;
 }
 
-/* .lang-dropdown {}
+.lang-dropdown-hidden {
+  height: 0rem;
+  width: 0rem;
+  margin: 0rem;
+  top: 47%;
+  /* z-index: -918327436452525; */
+  transition: all .3s ease-out;
+  -webkit-transition: all .3s ease-out;
+}
 
-.theme-dropdown {} */
+.theme-dropdown-hidden {
+  height: 0rem;
+  width: 0rem;
+  margin: 0rem;
+  top: 36%;
+  /* z-index: -999999999999999999999; */
+  transition: all .3s ease-out;
+  -webkit-transition: all .3s ease-out;
+}
 
+.lang-dropdown {
+  top: 47%;
+  height: 3rem;
+  width: 12rem;
+  margin: 2rem;
+  z-index: 918327436452525;
+  transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+
+.theme-dropdown {
+  top: 36%;
+  height: 3rem;
+  width: 12rem;
+  margin: 2rem;
+  z-index: 999999999999999999999;
+  transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+}
+
+/* #root > div > div.dropdown.theme-dropdown > div {
+
+}
+ */
