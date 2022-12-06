@@ -14,7 +14,7 @@ export default function ScriptideProvider({ children }) {
   const [thisUser, setThisUser] = useState("");
   const [menuState, setMenuState] = useState(false);
   const [meetingIdentifier, setMeetingIdentifier] = useState("");
-  const [raisedHands, setRaisedHand] = useState([]);
+  const [localRaisedHand, setLocalRaisedHand] = useState(false);
   const [excalActive, setExcalActive] = useState(false);
   const [transitionState, setTransitionState] = useState(false);
   const [opacity, setOpacity] = useState(true);
@@ -49,8 +49,8 @@ export default function ScriptideProvider({ children }) {
         setMenuState,
         meetingIdentifier,
         setMeetingIdentifier,
-        raisedHands,
-        setRaisedHand,
+        localRaisedHand,
+        setLocalRaisedHand,
         excalActive,
         setExcalActive,
         transitionState,

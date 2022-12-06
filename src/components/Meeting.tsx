@@ -53,6 +53,8 @@ const Meeting: FC = () => {
     userIsLocked,
     setUserIsLocked,
     setThisUser,
+    localRaisedHand,
+    setLocalRaisedHand,
   } = useScriptideContext();
 
   const clickedEndMeeting = async () => {
@@ -63,6 +65,8 @@ const Meeting: FC = () => {
       location.reload();
     }
   };
+
+  console.log("this is it------->>", meetingManager);
 
   const { roster } = useRosterState();
   // console.log("roster", roster);
@@ -80,8 +84,6 @@ const Meeting: FC = () => {
     setThisUser(currentUserId);
   });
 
-  console.log("Current USER ID meeting", currentUserId);
-  console.log("initiator meeting", initiator);
   ///////// COULD IMPORT THESE FUNCTIONS FROM ELSEWHERE... AS HELPERS??
 
   const handleCamClick = () => {
@@ -200,6 +202,7 @@ const Meeting: FC = () => {
 
     const addNotification = (e: any) => {
       updateHands({ name: currentUserName, id: currentUserId });
+      setLocalRaisedHand(!localRaisedHand);
       dispatch({
         type: ActionType.ADD,
         payload: payload,
@@ -207,10 +210,20 @@ const Meeting: FC = () => {
     };
 
     return (
-      <button id="hand-raise-btn" className="cf" onClick={addNotification}>
+      <button
+        id="hand-raise-btn"
+        className={
+          localRaisedHand ? "hr-btn-raised cf" : "hr-btn-not-raised cf"
+        }
+        onClick={addNotification}
+      >
         <div>
           <h2>
-            <HandRaise width="5rem" height="5rem" color="green" />
+            {localRaisedHand ? (
+              <HandRaise width="6rem" height="6rem" color="green" />
+            ) : (
+              <HandRaise width="3rem" height="3rem" color="white" />
+            )}
           </h2>
         </div>
       </button>

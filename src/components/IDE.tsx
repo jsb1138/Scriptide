@@ -151,6 +151,7 @@ export function IDE({ currentUserId }) {
     ({ storage }: any, property: string, newData: string) => {
       const mutableIDE = storage.get("ide");
       mutableIDE.set(property, newData);
+      console.log("newdataaaaa", newData);
     },
     []
   );

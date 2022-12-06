@@ -61,6 +61,7 @@ export default function App() {
     // <div data-tauri-drag-region>
     <div
       className="App"
+      style={{ width: "100vw", height: "100vh" }}
       onPointerMove={(e) =>
         updateMyPresence({ cursor: { x: e.clientX, y: e.clientY } })
       }
