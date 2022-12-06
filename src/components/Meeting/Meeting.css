@@ -177,7 +177,7 @@
   /* margin-left: 20px; */
   margin-top: 0px;
   right: 15px;
-  top: 500px;
+  bottom: 40px;
   width: 240px;
   height: 300px;
   border-radius: 2rem;
@@ -252,3 +252,38 @@
   justify-content: center;
   align-items: center;
 }
+
+/* Dropdown CSS */
+.dropdown {
+  height: 3rem;
+  position: absolute;
+  left: 7%;
+}
+
+.lang-dropdown-hidden {
+  bottom: 57%;
+  opacity: 0;
+  transition: .2s;
+
+}
+
+.theme-dropdown-hidden {
+  bottom: 67%;
+  opacity: 0;
+  transition: .2s;
+}
+
+.lang-dropdown {
+  bottom: 57%;
+  opacity: 1;
+  z-index: 100000;
+  transition: .2s;
+}
+
+.theme-dropdown {
+  bottom: 67%;
+  opacity: 1;
+  z-index: 100000;
+  transition: .2s;
+}
+
