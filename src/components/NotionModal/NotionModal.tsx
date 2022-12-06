@@ -4,8 +4,11 @@ import { useState, useEffect } from 'react';
 import { useScriptideContext } from '../../contexts/ScriptideProvider';
 import CloseCross from '../../assets/close.png';
 
+interface Props {
+  meetingLoaded: boolean;
+}
 
-function NotionModal() {
+function NotionModal({meetingLoaded}: Props) {
   const { notionModalIsOpen, setNotionModalIsOpen, userNotionId, setUserNotionId } = useScriptideContext();
 
   function handleClick() {
@@ -16,13 +19,13 @@ function NotionModal() {
     const params = new URL(location.href).searchParams;
     const code = params.get('code');
     if (!code) return;
-    setNotionModalIsOpen(true);
     const res = await fetch(
       `https://zi0hht29th.execute-api.eu-central-1.amazonaws.com/default/ScriptideNotionLogin?code=${code}`
-    );
-    const data = await res.json();
-    if (data) {
-      setUserNotionId(data);
+      );
+      const data = await res.json();
+      if (data) {
+        setUserNotionId(data);
+        setNotionModalIsOpen(true);
     }
   };
 
@@ -61,7 +64,7 @@ function NotionModal() {
 
   if (notionModalIsOpen) {
     return (
-      <div className='notion-modal'>
+      <div className='notion-modal' style={{visibility: `${meetingLoaded ? "visible" : "hidden"}`}}>
         <div onClick={handleClick} className='cross'>
           <img id='close-cross-show' src={CloseCross} alt=' closing cross' />
         </div>
@@ -99,7 +102,7 @@ function NotionModal() {
     );
   } else {
     return (
-       <div className='notion-modal-closed'>
+       <div className='notion-modal-closed' style={{visibility: `${meetingLoaded ? "visible" : "hidden"}`}}>
         <div onClick={handleClick} className='cross'>
           <img id='close-cross-dont-show' src={CloseCross} alt=' closing cross' />
         </div>
