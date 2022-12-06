@@ -65,8 +65,6 @@ export default function ScriptideProvider({ children }) {
         setExcalActive,
         transitionState,
         setTransitionState,
-        opacity,
-        setOpacity,
         meetingTitle,
         setMeetingTitle,
         attendeeName,
@@ -85,6 +83,7 @@ export default function ScriptideProvider({ children }) {
         setUserNotionId,
         excalState,
         setExcalState
+
 
       }}
     >
