@@ -49,10 +49,8 @@ const MeetingForm: FC = () => {
     try {
       if (meetingJson) {
         setMeetingActive(true);
-        console.log("--------NOOOOOOOOOOOOOOOOOOOOO------");
         const meetingData = JSON.parse(meetingJson.data);
         const joinInfo = await joinMeeting(meetingData.MeetingId, name);
-        console.log("meeting Data", meetingData);
         await addAttendeeToDB(joinInfo.Attendee.AttendeeId, name);
         const meetingSessionConfiguration = new MeetingSessionConfiguration(
           meetingData,
@@ -61,7 +59,6 @@ const MeetingForm: FC = () => {
         await meetingManager.join(meetingSessionConfiguration);
       } else {
         setMeetingActive(true);
-        console.log("----------------FIRST----------------");
         const joinInfo = await createMeeting(title, name, "us-east-1");
         await addMeetingToDB(
           title,
@@ -89,10 +86,10 @@ const MeetingForm: FC = () => {
       <form>
         <FormField
           field={Input}
-          label="Meeting Id"
+          label="Meeting ID"
           value={meetingTitle}
           fieldProps={{
-            name: "Meeting Id",
+            name: "Meeting ID",
             placeholder: "Enter a Meeting ID",
           }}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {

@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from 'react';
 const ScriptideContext = createContext(null);
 
 export default function ScriptideProvider({ children }) {
+
   const [camActive, setCamActive] = useState(false);
   const [ideActive, setIdeActive] = useState(false);
   const [gridActive, setGridActive] = useState(false);
@@ -26,6 +27,9 @@ export default function ScriptideProvider({ children }) {
   const [code, setCode] = useState("");
   const [showLanguage, setShowLanguage] = useState(false)
   const [showTheme, setShowTheme] = useState(false)
+  const [userNotionId, setUserNotionId] = useState(null);
+
+
 
   return (
     <ScriptideContext.Provider
@@ -75,7 +79,10 @@ export default function ScriptideProvider({ children }) {
         showLanguage,
         setShowLanguage,
         showTheme,
-        setShowTheme
+        setShowTheme,
+        userNotionId,
+        setUserNotionId,
+
       }}
     >
       {children}

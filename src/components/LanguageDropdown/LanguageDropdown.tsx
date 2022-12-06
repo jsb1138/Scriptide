@@ -7,8 +7,6 @@ export function LanguageDropdown() {
   const { setLanguage } = useScriptideContext();
 
   function onSelectChange(select: SetStateAction<any>) {
-    console.log("selected: ", select);
-    console.log('language selected', select.value);
     setLanguage(select);
   }
 

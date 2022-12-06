@@ -65,9 +65,7 @@ const Meeting: FC = () => {
   };
 
   const { roster } = useRosterState();
-  console.log("roster", roster);
   const attendees = Object.values(roster);
-  console.log("attendees", attendees);
   let currentUserId: string = "";
   let currentUserName: string | undefined = "";
 
@@ -108,7 +106,6 @@ const Meeting: FC = () => {
   };
 
   const handleGridClick = () => {
-    console.log("clicked");
     if (camActive) {
       setGridActive(!gridActive);
       setCamActive(!camActive);
@@ -122,59 +119,11 @@ const Meeting: FC = () => {
   };
   const { devices, selectedDevice } = useVideoInputs();
   function activateVid() {
-    console.log("devices", devices);
-    console.log("selected device", selectedDevice);
+
     toggleVideo();
   }
 
-  const getLocalPreview = async () => {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        audio: true,
-        video: true,
-      });
-      return stream;
-    } catch (error) {
-      //this is when user don't allow media devices
-      console.log(error);
-    }
-  };
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     toggleVideo()
-  //     console.log("123Time");
-  //   }, 5000);
-  // },[])
-
-  // DON'T DELETE --> ATTEMPTING TO GET VIDEO TO ENABLE AUTOMATICALLY
-  meetingStatus === MeetingStatus.Succeeded
-    ? () => {
-        useEffect(() => {
-          toggleVideo();
-        }, []);
-        // setTimeout(() => {
-        //   toggleVideo();
-        //   console.log("TOGGLER");
-        // }, 5000);
-      }
-    : console.log("TOO SOON");
-
-  interface Action {
-    type: ActionType;
-    payload?: any;
-  }
-
-  // enum ActionType {
-  //   ADD,
-  //   REMOVE,
-  //   REMOVE_ALL,
-  // }
-
-  const toggleMenu = () => {
-    setMenuState(!menuState);
-  };
-
+ 
   //////////////////////////////////////////////////////////////////////////////////////////liveblocks
   const removeRaisedHand = (index: number) => {
     deleteHand(index);
