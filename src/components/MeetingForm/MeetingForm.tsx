@@ -32,17 +32,6 @@ const MeetingForm: FC = () => {
   } = useScriptideContext();
 
   // START: Code for Notion automatic re-login after granting access
-  // let trigger: HTMLButtonElement | null;
-  // useEffect(() => {
-  //   window.localStorage.setItem('meetingTitle', JSON.stringify(meetingTitle));
-  // }, [meetingTitle]);
-  // useEffect(() => {
-  //   window.localStorage.setItem('attendeeName', JSON.stringify(attendeeName));
-  // }, [attendeeName]);
-
-  //
-  const buttonRef = useRef<HTMLButtonElement>(null);
-
   useEffect(() => {
     const params = new URL(location.href).searchParams;
     const code = params.get('code');
@@ -56,24 +45,15 @@ const MeetingForm: FC = () => {
         typeof localAttendeeName === 'string'
       ) {
         const processedLocalStorageMeetingTitle = JSON.parse(localMeetingTitle);
-        // .trim()
-        // .toLocaleLowerCase();
         const processedLocalStorageAttendeeName =
-          JSON.parse(localAttendeeName); /* .trim() */
+          JSON.parse(localAttendeeName);
         console.log(processedLocalStorageMeetingTitle);
         console.log(processedLocalStorageAttendeeName);
         setName(processedLocalStorageAttendeeName);
         setMeetingTitle(processedLocalStorageMeetingTitle);
-        // clickedJoinMeeting({ preventDefault: () => {} });
-        // buttonRef.
-        //@ts-ignore
-        // trigger.click();
-        if (buttonRef.current) {
-          buttonRef.current.click();
-        }
         setTimeout(() => {
           // @ts-ignore
-          document.getElementById('primay-button').click();
+          document.getElementById('primary-button').click();
         }, 200);
       }
     }
@@ -172,9 +152,8 @@ const MeetingForm: FC = () => {
           }}
         />
         <PrimaryButton
-          ref={buttonRef}
           label='Join Meeting'
-          id='primay-button'
+          id='primary-button'
           onClick={clickedJoinMeeting}
         />
       </form>

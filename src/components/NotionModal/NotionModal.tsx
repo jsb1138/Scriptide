@@ -69,9 +69,9 @@ function NotionModal({meetingLoaded}: Props) {
           <img id='close-cross-show' src={CloseCross} alt=' closing cross' />
         </div>
         {!userNotionId ? (
-          <h3 className="nodal-show">Grant Access to Notion</h3>
+          <h3 className="modal-show">Grant Access to Notion</h3>
         ) : (
-          <h3 className="nodal-show">Post to Notion
+          <h3 className="modal-show">Post to Notion
             </h3>
         )}
         {!userNotionId ? (
@@ -103,26 +103,27 @@ function NotionModal({meetingLoaded}: Props) {
   } else {
     return (
        <div className='notion-modal-closed' style={{visibility: `${meetingLoaded ? "visible" : "hidden"}`}}>
-        <div onClick={handleClick} className='cross'>
+        <div className='cross'>
           <img id='close-cross-dont-show' src={CloseCross} alt=' closing cross' />
         </div>
         {!userNotionId ? (
-          <h3 className='nodal-dont-show'>Grant Access to Notion</h3>
+          <h3 className='modal-dont-show'>Grant Access to Notion</h3>
         ) : (
-          <h3 className='nodal-dont-show'>Post to Notion
+          <h3 className='modal-dont-show'>Post to Notion
             </h3>
         )}
         {!userNotionId ? (
           <a href='https://api.notion.com/v1/oauth/authorize?client_id=08b1c623-a965-4750-9a1e-11042ef8700f&response_type=code&owner=user&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fauth%2Fnotion%2Fcallback'>
-            <button className='nodal-dont-show'>Connect to Notion</button>
+            <button className='modal-dont-show'>Connect to Notion</button>
           </a>
         ) : (
-          <form onSubmit={handleSubmit} id='notion-form'>
+          <form id='notion-form' className="item-dont-show">
             <input
               type='text'
               id='notionPageTitle'
               name='notionPageTitle'
               placeholder='Enter Page Title'
+              className="item-dont-show"
             />
             <textarea
               name='notionBulletPoint'
@@ -130,8 +131,9 @@ function NotionModal({meetingLoaded}: Props) {
               cols={28}
               rows={5}
               placeholder='This text will be added as a bulletpoint'
+              className="item-dont-show"
             ></textarea>
-            <button id='notion-submit-button' type='submit'>
+            <button id='notion-submit-button' type='submit' className="item-dont-show">
               Send
             </button>
           </form>

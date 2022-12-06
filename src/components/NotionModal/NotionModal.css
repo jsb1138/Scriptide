@@ -22,7 +22,7 @@
   z-index: 100000000000000000;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  transition: 0.15s linear;
+  transition: 0.01s linear;
   opacity: 1;
 }
 
@@ -90,18 +90,23 @@
   font-weight: bold;
 }
 
-.nodal-dont-show {
+.modal-dont-show {
   opacity: 0;
-  transition: 0.3s;
+  transition: 0.05s;
 }
 
-.nodal-show {
+.item-dont-show {
+  visibility: hidden;
+  transition: 0.05s linear;
+}
+
+.modal-show {
   opacity: 1;
-  transition: 0.3s;
+  transition: 0.0s;
 }
 
 #close-cross-dont-show {
   width: 10px;
   opacity: 0;
-  transition: 0.3s;
+  transition: 0.05s;
 }
