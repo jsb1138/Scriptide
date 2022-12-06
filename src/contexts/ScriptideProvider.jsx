@@ -29,6 +29,9 @@ export default function ScriptideProvider({ children }) {
   const [showLanguage, setShowLanguage] = useState(false);
   const [showTheme, setShowTheme] = useState(false);
   const [userNotionId, setUserNotionId] = useState(null);
+  const [userIsMuted, setUserIsMuted] = useState(true);
+  const [userIsLocked, setUserIsLocked] = useState(true);
+  const [isClicked, setIsClicked] = useState(false);
 
   return (
     <ScriptideContext.Provider

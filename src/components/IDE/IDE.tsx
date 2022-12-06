@@ -27,6 +27,9 @@ export function IDE() {
     theme,
     outputDetails,
     setOutputDetails,
+    userIsLocked,
+    thisUser,
+    initiator
   } = useScriptideContext();
 
   const editorRef = useRef<typeof Editor | null>(null);
