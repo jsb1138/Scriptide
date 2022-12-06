@@ -27,9 +27,6 @@ export function IDE() {
     theme,
     outputDetails,
     setOutputDetails,
-    userIsLocked,
-    thisUser,
-    initiator,
   } = useScriptideContext();
 
   const editorRef = useRef<typeof Editor | null>(null);
@@ -129,6 +126,9 @@ export function IDE() {
     }
   }
 
+
+
+
   useEffect(() => {
     if (enterPress && ctrlPress) {
       console.log("enter: ", enterPress);
@@ -141,7 +141,7 @@ export function IDE() {
     updateIDE("content", value);
   }
 
-  //liveblocks
+ //liveblocks
 
   const ide = useStorage((root: any) => root.ide);
 

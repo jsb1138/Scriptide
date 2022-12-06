@@ -9,6 +9,7 @@ import {
 const Notifications = () => {
   const { notifications } = useNotificationState();
   return notifications.length ? <NotificationGroup /> : null;
+  // return notifications;
 };
 
 export default Notifications;

@@ -1,5 +1,6 @@
 import { useScriptideContext } from "./contexts/ScriptideProvider";
 
+
 import { window as tauriWindow } from "@tauri-apps/api";
 
 ////////////////////////////////////////////////////////chimeintegration -> TODO
@@ -26,7 +27,11 @@ import "./App.css";
 import { defineTheme } from "./lib/defineTheme.js";
 
 export default function App() {
-  const { meetingActive } = useScriptideContext();
+  const {
+
+    meetingActive,
+
+  } = useScriptideContext();
 
   const updateMyPresence = useUpdateMyPresence();
 
@@ -39,12 +44,46 @@ export default function App() {
     await tauriWindow.appWindow.startDragging();
   });
 
+
   /////////////////////////////////////////////////////////////////////////////////////////////////liveblocks
+  // @ts-ignore
+  function Cursor({ x, y }) {
+    return (
+      <img
+        style={{
+          position: "absolute",
+          transform: `translate(${x}px, ${y}px)`,
+          height: "15px",
+          width: "15px",
+
+        }}
+        src="src/assets/cursor.png"
+        alt="cursor"
+      />
+    );
+  }
 
   const others = useOthers();
 
   return (
-    <div data-tauri-drag-region>
+    // <div data-tauri-drag-region>
+    <div
+      className="App"
+      onPointerMove={(e) =>
+        updateMyPresence({ cursor: { x: e.clientX, y: e.clientY } })
+      }
+      onPointerLeave={() => updateMyPresence({ cursor: null })}
+    >
+      {/* @ts-ignore */}
+      {others.map(({ connectionId, presence }) =>
+        presence.cursor ? (
+          <Cursor
+            key={connectionId}
+            x={presence.cursor.x}
+            y={presence.cursor.y}
+          />
+        ) : null
+      )}
       <ThemeProvider theme={lightTheme}>
         {/* @ts-ignore */}
         <MeetingProvider>
