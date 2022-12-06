@@ -20,6 +20,9 @@ const MenuBar: FC = () => {
     setShowLanguage,
     showLanguage,
     ideActive,
+    setCamActive,
+    setIdeActive,
+    setGridActive
   } = useScriptideContext();
 
   const toggleMenu = () => {
@@ -34,6 +37,10 @@ const MenuBar: FC = () => {
     } else {
       setTimeout(() => setExcalActive(!excalActive), 180);
       setTimeout(() => setOpacity(false), 180);
+      setCamActive(false);
+      setIdeActive(false);
+      setGridActive(false);
+
     }
   };
   const handleTheme = () => {
@@ -81,7 +88,7 @@ const MenuBar: FC = () => {
       <div id='menu-with-ide-options' className={menuState ? 'menu-open' : 'menu-closed'}>
         <Tooltip content='Sketch diagrams with Excalidraw'>
           <div className='menu-item' onClick={handleExcali}>
-            <img src='src/assets/excalidraw.png' className='excali-logo' />
+            <img src='src/assets/excalidraw4.png' className='excali-logo' />
           </div>
         </Tooltip>
         <Tooltip content='Post notes with Notion'>
