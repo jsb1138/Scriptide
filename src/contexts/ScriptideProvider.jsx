@@ -23,6 +23,7 @@ export default function ScriptideProvider({ children }) {
   const [keyPressed, setKeyPressed] = useState(false);
   const [userIsMuted, setUserIsMuted] = useState(true);
   const [userIsLocked, setUserIsLocked] = useState(true);
+  const [isClicked, setIsClicked] = useState(false);
 
   return (
     <ScriptideContext.Provider
@@ -67,6 +68,8 @@ export default function ScriptideProvider({ children }) {
         setUserIsMuted,
         userIsLocked,
         setUserIsLocked,
+        isClicked,
+        setIsClicked,
       }}
     >
       {children}

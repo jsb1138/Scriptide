@@ -30,6 +30,7 @@ import {
 import { endMeeting } from "../utils/api";
 import Notifications from "../containers/Notifications";
 import ExcalComponent from "./excalidrawComponent/ExcalComponent";
+import HandRaiseManager from "./HandRaiseManager";
 
 import { useOthers, useStorage, useMutation } from "../liveblocks.config.js";
 import MenuBar from "./MenuBar";
@@ -215,7 +216,11 @@ const Meeting: FC = () => {
     return (
       <>
         {localRaisedHand ? (
-          <button id="hand-raise-btn" className="hr-btn-raised cf">
+          <button
+            id="hand-raise-btn"
+            className="hr-btn-raised cf"
+            onClick={addNotification}
+          >
             <div>
               <h2>
                 <HandRaise width="6rem" height="6rem" color="green" />
@@ -252,7 +257,7 @@ const Meeting: FC = () => {
                   className="cf"
                 >
                   {unmutedUsers.includes(student.id) ? (
-                    <Microphone />
+                    <Microphone muted />
                   ) : (
                     <Microphone />
                   )}
