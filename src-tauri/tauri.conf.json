@@ -82,10 +82,10 @@
         "transparent": true,
         "focus": true,
         "height": 800,
+        "width": 1300,
         "resizable": true,
         "title": "Scriptide",
         "label": "main",
-        "width": 1300,
         "tabbingIdentifier": "Scriptide",
         "decorations": true,
         "titleBarStyle": "Overlay"
