@@ -3,6 +3,7 @@ import { createContext, useContext, useState } from 'react';
 const ScriptideContext = createContext(null);
 
 export default function ScriptideProvider({ children }) {
+
   const [camActive, setCamActive] = useState(false);
   const [ideActive, setIdeActive] = useState(false);
   const [gridActive, setGridActive] = useState(false);
@@ -14,16 +15,13 @@ export default function ScriptideProvider({ children }) {
   const [thisUser, setThisUser] = useState('');
   const [menuState, setMenuState] = useState(false);
   const [meetingIdentifier, setMeetingIdentifier] = useState('');
-  const [localRaisedHand, setLocalRaisedHand] = useState(false);
+  const [raisedHands, setRaisedHand] = useState([]);
   const [excalActive, setExcalActive] = useState(false);
-  const [transitionState, setTransitionState] = useState(false);;
+  const [transitionState, setTransitionState] = useState(false);
   const [opacity, setOpacity] = useState(true);
   const [meetingTitle, setMeetingTitle] = useState('');
   const [attendeeName, setName] = useState('');
   const [keyPressed, setKeyPressed] = useState(false);
-  const [userIsMuted, setUserIsMuted] = useState(true);
-  const [userIsLocked, setUserIsLocked] = useState(true);
-  const [isClicked, setIsClicked] = useState(false);
   const [notionModalIsOpen, setNotionModalIsOpen] = useState(false);
   const [language, setLanguage] = useState('javascript');
   const [code, setCode] = useState("");
@@ -60,8 +58,8 @@ export default function ScriptideProvider({ children }) {
         setMenuState,
         meetingIdentifier,
         setMeetingIdentifier,
-        localRaisedHand,
-        setLocalRaisedHand,
+        raisedHands,
+        setRaisedHand,
         excalActive,
         setExcalActive,
         transitionState,
@@ -74,12 +72,6 @@ export default function ScriptideProvider({ children }) {
         setName,
         keyPressed,
         setKeyPressed,
-        userIsMuted,
-        setUserIsMuted,
-        userIsLocked,
-        setUserIsLocked,
-        isClicked,
-        setIsClicked,,
         notionModalIsOpen,
         setNotionModalIsOpen,
         code,
