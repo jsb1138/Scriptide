@@ -6,8 +6,7 @@ import CloseCross from '../../assets/close.png';
 
 
 function NotionModal() {
-  const { notionModalIsOpen, setNotionModalIsOpen } = useScriptideContext();
-  const [userNotionId, setUserNotionId] = useState(null);
+  const { notionModalIsOpen, setNotionModalIsOpen, userNotionId, setUserNotionId } = useScriptideContext();
 
   function handleClick() {
     setNotionModalIsOpen(false);
@@ -24,9 +23,7 @@ function NotionModal() {
     const data = await res.json();
     if (data) {
       setUserNotionId(data);
-      console.log('UserNotionId is: ' + userNotionId);
     }
-    console.log('Second: UserNotionId is: ' + userNotionId);
   };
 
   useEffect(() => {
@@ -66,12 +63,12 @@ function NotionModal() {
     return (
       <div className='notion-modal'>
         <div onClick={handleClick} className='cross'>
-          <img id='close-cross' src={CloseCross} alt=' closing cross' />
+          <img id='close-cross-show' src={CloseCross} alt=' closing cross' />
         </div>
         {!userNotionId ? (
-          <h3>Grant Access to Notion</h3>
+          <h3 className="nodal-show">Grant Access to Notion</h3>
         ) : (
-          <h3>Post to Notion
+          <h3 className="nodal-show">Post to Notion
             </h3>
         )}
         {!userNotionId ? (
@@ -101,7 +98,42 @@ function NotionModal() {
       </div>
     );
   } else {
-    return null;
+    return (
+       <div className='notion-modal-closed'>
+        <div onClick={handleClick} className='cross'>
+          <img id='close-cross-dont-show' src={CloseCross} alt=' closing cross' />
+        </div>
+        {!userNotionId ? (
+          <h3 className='nodal-dont-show'>Grant Access to Notion</h3>
+        ) : (
+          <h3 className='nodal-dont-show'>Post to Notion
+            </h3>
+        )}
+        {!userNotionId ? (
+          <a href='https://api.notion.com/v1/oauth/authorize?client_id=08b1c623-a965-4750-9a1e-11042ef8700f&response_type=code&owner=user&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fauth%2Fnotion%2Fcallback'>
+            <button className='nodal-dont-show'>Connect to Notion</button>
+          </a>
+        ) : (
+          <form onSubmit={handleSubmit} id='notion-form'>
+            <input
+              type='text'
+              id='notionPageTitle'
+              name='notionPageTitle'
+              placeholder='Enter Page Title'
+            />
+            <textarea
+              name='notionBulletPoint'
+              id='notionBulletPoint'
+              cols={28}
+              rows={5}
+              placeholder='This text will be added as a bulletpoint'
+            ></textarea>
+            <button id='notion-submit-button' type='submit'>
+              Send
+            </button>
+          </form>
+        )}
+      </div>  );
   }
 }
 

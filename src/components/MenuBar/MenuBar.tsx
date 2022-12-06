@@ -20,6 +20,9 @@ const MenuBar: FC = () => {
     setShowLanguage,
     showLanguage,
     ideActive,
+    setCamActive,
+    setIdeActive,
+    setGridActive
   } = useScriptideContext();
 
   const toggleMenu = () => {
@@ -34,6 +37,10 @@ const MenuBar: FC = () => {
     } else {
       setTimeout(() => setExcalActive(!excalActive), 180);
       setTimeout(() => setOpacity(false), 180);
+      setCamActive(false);
+      setIdeActive(false);
+      setGridActive(false);
+
     }
   };
   const handleTheme = () => {
