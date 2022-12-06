@@ -58,6 +58,7 @@ export default function App() {
 
         }}
         src="src/assets/cursor.png"
+        alt="cursor"
       />
     );
   }
