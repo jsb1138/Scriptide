@@ -6,17 +6,8 @@ function ExcalComponent() {
   const { excalActive, transitionState, opacity, excalState, setExcalState } =
     useScriptideContext();
 
-  return (
-    <>
-      <div className="hider-container">
-        <div
-          className={`hider ${transitionState ? "open" : "closed"} 
-          ${
-            opacity ? "opaque" : "transparent"
-          }`}
-        ></div>
-      </div>
-      {excalActive && (
+  return excalActive ? (
+        <>
         <div className="excal-open">
           <div className="excalibox ">
             <Excalidraw
@@ -25,16 +16,28 @@ function ExcalComponent() {
               }}
               onChange={(elements, appState, files) => {
                 setExcalState(elements);
-                console.log(excalState);
-                // console.log('elements', JSON.stringify(elements));
-                // console.log('appState', JSON.stringify(appState));
+
               }}
             />
           </div>
         </div>
-      )}
     </>
-  );
+  ) : (
+    <>
+    <div className="excal-closed">
+      <div className="excalibox ">
+        <Excalidraw
+          initialData={{
+            elements: excalState,
+          }}
+          onChange={(elements, appState, files) => {
+            setExcalState(elements);
+          }}
+        />
+      </div>
+    </div>
+  </>
+)
 }
 
 export default ExcalComponent;
