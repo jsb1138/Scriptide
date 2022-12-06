@@ -58,7 +58,6 @@ export function IDE() {
       source_code: btoa(code),
       stdin: btoa(""),
     };
-    console.log(formData);
     const options = {
       method: "POST",
       url: submissions,
@@ -75,13 +74,10 @@ export function IDE() {
     axios
       .request(options)
       .then(function (response: { data: { token: any } }) {
-        console.log("res.data: ", response.data);
         const token = response.data.token;
-        console.log("token: ", token);
         checkStatus(token);
       })
       .catch((err: { response: { data: any } }) => {
-        console.log(options);
         let error = err.response ? err.response.data : err;
         //@ts-ignore
         setProcessing(false);
@@ -115,7 +111,6 @@ export function IDE() {
         setProcessing(false);
         setOutputDetails(response.data);
         showSuccessToast(`Compiled Successfully!`);
-        console.log("response.data", response.data);
         return;
       }
     } catch (err) {
@@ -131,8 +126,6 @@ export function IDE() {
 
   useEffect(() => {
     if (enterPress && ctrlPress) {
-      console.log("enter: ", enterPress);
-      console.log("control: ", ctrlPress);
       handleCompile();
     }
   }, [ctrlPress, enterPress]);
@@ -140,8 +133,6 @@ export function IDE() {
   function handleChange(value: any) {
     updateIDE("content", value);
     onChange("code", value);
-    console.log('code set: ', code)
-    console.log(language)
   }
 
  //liveblocks

@@ -8,7 +8,6 @@ import {
 
 const Notifications = () => {
   const { notifications } = useNotificationState();
-  console.log("notifications", notifications);
   return notifications.length ? <NotificationGroup /> : null;
   // return notifications;
 };

@@ -34,7 +34,6 @@ function response(statusCode, contentType, body) {
 }
 
 const createChimeMeeting = async (context) => {
-  console.log("create chime meeting executed");
   const title = context.arguments.title;
   const region = context.arguments.region || "us-east-1";
   const name = context.arguments.name;
@@ -132,7 +131,6 @@ const joinChimeMeeting = async (context) => {
 const endChimeMeeting = async (context) => {
   const meetingId = context.arguments.meetingId;
   await chime.deleteMeeting({ MeetingId: meetingId });
-  console.log("Deleted Meeting: " + meetingId);
   return response(200, "application/json", JSON.stringify({}));
 };
 
@@ -151,7 +149,6 @@ const resolvers = {
 };
 
 exports.handler = async (event) => {
-  console.log(JSON.stringify(event));
   const typeHandler = resolvers[event.typeName];
   if (typeHandler) {
     const resolver = typeHandler[event.fieldName];

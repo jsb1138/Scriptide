@@ -1,5 +1,7 @@
 import "./Tooltip.css"
-import React, { useState } from "react";
+import { useScriptideContext } from '../../contexts/ScriptideProvider';
+import { useState } from 'react';
+
 
 interface Props {
   content: string;
@@ -8,7 +10,7 @@ interface Props {
 
 function Tooltip({content, children}: Props) {
   let timeout: NodeJS.Timeout;
-  const [active, setActive] = useState(false);
+  const [ active, setActive]  = useState(false);
 
   const showTip = () => {
     timeout = setTimeout(() => {
