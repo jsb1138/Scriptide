@@ -6,7 +6,9 @@ import {
   FormField,
   Input,
   PrimaryButton,
-  useMeetingManager
+  useMeetingManager,
+  useLocalVideo,
+  getDeviceId,
 } from "amazon-chime-sdk-component-library-react";
 import { MeetingSessionConfiguration } from "amazon-chime-sdk-js";
 import {
@@ -20,10 +22,17 @@ import {
 
 const MeetingForm: FC = () => {
   const meetingManager = useMeetingManager();
+  const { isVideoEnabled, toggleVideo } = useLocalVideo();
 
-
-  const { setInitiator, setMeetingActive, setMeetingIdentifier, attendeeName, setName, meetingTitle, setMeetingTitle } =
-    useScriptideContext();
+  const {
+    setInitiator,
+    setMeetingActive,
+    setMeetingIdentifier,
+    attendeeName,
+    setName,
+    meetingTitle,
+    setMeetingTitle,
+  } = useScriptideContext();
 
   function getAttendeeCallback() {
     return async (chimeAttendeeId: string, externalUserId?: string) => {
@@ -43,6 +52,7 @@ const MeetingForm: FC = () => {
     const title = meetingTitle.trim().toLocaleLowerCase();
     const name = attendeeName.trim();
     setMeetingIdentifier(title);
+    console.log("meeting manager", meetingManager);
 
     const meetingResponse: any = await getMeetingFromDB(title);
     const meetingJson = meetingResponse.data.getMeeting;
@@ -51,12 +61,16 @@ const MeetingForm: FC = () => {
         setMeetingActive(true);
         const meetingData = JSON.parse(meetingJson.data);
         const joinInfo = await joinMeeting(meetingData.MeetingId, name);
+        
         await addAttendeeToDB(joinInfo.Attendee.AttendeeId, name);
         const meetingSessionConfiguration = new MeetingSessionConfiguration(
           meetingData,
           joinInfo.Attendee
         );
         await meetingManager.join(meetingSessionConfiguration);
+        await meetingManager.audioVideo?.realtimeMuteLocalAudio();
+        // await meetingManager.audioVideo?.realtimeSetCanUnmuteLocalAudio(false);
+        // await meetingManager.audioVideo?.startVideoInput();
       } else {
         setMeetingActive(true);
         const joinInfo = await createMeeting(title, name, "us-east-1");
@@ -79,7 +93,35 @@ const MeetingForm: FC = () => {
 
     // At this point you can let users setup their devices, or start the session immediately
     await meetingManager.start();
+
+    const videoDevice =
+      await meetingManager.audioVideo?.listVideoInputDevices();
+    console.log("9900", videoDevice);
+
+    let localVideoDevice;
+    const videoStuff = videoDevice.map((info) => {
+      const { deviceId } = info;
+      localVideoDevice = deviceId;
+    });
+
+    await meetingManager.audioVideo?.startVideoInput(localVideoDevice);
+    console.log("888", localVideoDevice);
+
+    // await meetingManager.audioVideo?.realtimeMuteLocalAudio();
+    // await meetingManager.audioVideo?.realtimeSetCanUnmuteLocalAudio(false);
+    // await meetingManager.audioVideo?.startVideoInput(audioInputDeviceInfo.deviceId);
+    // await meetingManager.audioVideo?.start();
+    console.log("???", isVideoEnabled);
+    if (localVideoDevice && !isVideoEnabled) {
+      console.log("TURN ON VIDEO!!!!");
+      setTimeout(() => {
+        toggleVideo();
+      }, 3000);
+      toggleVideo();
+    }
+    console.log("AUDIO VIDEO STUFF --> ", meetingManager.audioVideo);
   };
+  toggleVideo();
 
   return (
     <div className="form-container">

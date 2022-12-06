@@ -14,7 +14,7 @@ import { ThemeDropdown } from "../ThemeDropdown/ThemeDropdown";
 
 import { useMutation, useStorage } from "../../liveblocks.config.js";
 
-export function IDE() {
+export function IDE({ currentUserId }) {
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
   const host = import.meta.env.VITE_RAPIDAPI_HOST;
   const key = import.meta.env.VITE_RAPIDAPI_KEY;
@@ -27,6 +27,9 @@ export function IDE() {
     theme,
     outputDetails,
     setOutputDetails,
+    userIsLocked,
+    thisUser,
+    initiator,
   } = useScriptideContext();
 
   const editorRef = useRef<typeof Editor | null>(null);
@@ -121,9 +124,6 @@ export function IDE() {
     }
   }
 
-
-
-
   useEffect(() => {
     if (enterPress && ctrlPress) {
       handleCompile();
@@ -135,7 +135,7 @@ export function IDE() {
     onChange("code", value);
   }
 
- //liveblocks
+  //liveblocks
 
   const ide = useStorage((root: any) => root.ide);
 
@@ -145,6 +145,7 @@ export function IDE() {
     ({ storage }: any, property: string, newData: string) => {
       const mutableIDE = storage.get("ide");
       mutableIDE.set(property, newData);
+      console.log("newdataaaaa", newData);
     },
     []
   );
@@ -170,7 +171,24 @@ export function IDE() {
       {/* <div className="theme-bar">
         <ThemeDropdown />
         <LanguageDropdown />
-      </div> */}
+      </div>
+      {thisUser === initiator ? (
+        <></>
+      ) : (
+        <>
+          {userIsLocked ? (
+            <div id="lock" className="shield-up">
+              {/* <div className="unlocked"></div> */}
+              <img
+                style={{ height: "80px", width: "80px", position: "relative" }}
+                src="src/assets/lock.png"
+              />
+            </div>
+          ) : (
+            <></>
+          )}
+        </>
+      )}
     </>
   );
 }
