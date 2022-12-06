@@ -1,10 +1,10 @@
 .excalibox .excalidraw .Island {
-background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
 .excalidraw__canvas {
-border-radius: 10px;
-opacity: .5;
+  border-radius: 10px;
+  opacity: .5;
 }
 
 .excalibox {
@@ -74,7 +74,7 @@ opacity: .5;
   align-items: center;
   z-index: 1;
   background-color: rgba(255, 255, 255, 0.4);
-  transition: cubic-bezier(0.87, 0, 0.13, 1);
+  transition: linear;
   transition-property: width, height, top, margin-left, left, border-radius;
   transition-duration: .3s;
 }
@@ -83,8 +83,8 @@ opacity: .5;
   left: 13.7vh;
   margin-left: 2vw;
   top: 12.5vh;
-  height: 75vh;
   width: 80vw;
+  height: 75vh;
   border-radius: 10px;
 }
 

@@ -28,6 +28,7 @@ export default function ScriptideProvider({ children }) {
   const [showLanguage, setShowLanguage] = useState(false)
   const [showTheme, setShowTheme] = useState(false)
   const [userNotionId, setUserNotionId] = useState(null);
+  const [excalState, setExcalState] = useState([])
 
 
 
@@ -82,6 +83,8 @@ export default function ScriptideProvider({ children }) {
         setShowTheme,
         userNotionId,
         setUserNotionId,
+        excalState,
+        setExcalState
 
       }}
     >
