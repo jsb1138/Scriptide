@@ -1,5 +1,6 @@
 import { ChangeEvent, FC, FormEvent } from "react";
-import { useScriptideContext } from "../contexts/ScriptideProvider";
+import { useScriptideContext } from "../../contexts/ScriptideProvider";
+import "./MeetingForm.css"
 
 import {
   FormField,
@@ -16,8 +17,8 @@ import {
   createMeeting,
   getAttendeeFromDB,
   getMeetingFromDB,
-  joinMeeting,
-} from "../utils/api";
+  joinMeeting
+} from "../../utils/api";
 
 const MeetingForm: FC = () => {
   const meetingManager = useMeetingManager();
@@ -58,11 +59,9 @@ const MeetingForm: FC = () => {
     try {
       if (meetingJson) {
         setMeetingActive(true);
-        console.log("--------NOOOOOOOOOOOOOOOOOOOOO------");
         const meetingData = JSON.parse(meetingJson.data);
         const joinInfo = await joinMeeting(meetingData.MeetingId, name);
-        console.log("meeting Data", meetingData);
-        console.log("join info", joinInfo);
+        
         await addAttendeeToDB(joinInfo.Attendee.AttendeeId, name);
         const meetingSessionConfiguration = new MeetingSessionConfiguration(
           meetingData,
@@ -74,7 +73,6 @@ const MeetingForm: FC = () => {
         // await meetingManager.audioVideo?.startVideoInput();
       } else {
         setMeetingActive(true);
-        console.log("----------------FIRST----------------");
         const joinInfo = await createMeeting(title, name, "us-east-1");
         await addMeetingToDB(
           title,
@@ -130,10 +128,10 @@ const MeetingForm: FC = () => {
       <form>
         <FormField
           field={Input}
-          label="Meeting Id"
+          label="Meeting ID"
           value={meetingTitle}
           fieldProps={{
-            name: "Meeting Id",
+            name: "Meeting ID",
             placeholder: "Enter a Meeting ID",
           }}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {

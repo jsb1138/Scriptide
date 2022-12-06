@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
 const ScriptideContext = createContext(null);
 
@@ -8,26 +8,36 @@ export default function ScriptideProvider({ children }) {
   const [gridActive, setGridActive] = useState(false);
   const [outputDetails, setOutputDetails] = useState(null);
   const [processing, setProcessing] = useState(null);
-  const [theme, setTheme] = useState("vs-dark");
-  const [initiator, setInitiator] = useState("");
+  const [theme, setTheme] = useState('vs-dark');
+  const [initiator, setInitiator] = useState('');
   const [meetingActive, setMeetingActive] = useState(false);
-  const [thisUser, setThisUser] = useState("");
+  const [thisUser, setThisUser] = useState('');
   const [menuState, setMenuState] = useState(false);
-  const [meetingIdentifier, setMeetingIdentifier] = useState("");
+  const [meetingIdentifier, setMeetingIdentifier] = useState('');
   const [localRaisedHand, setLocalRaisedHand] = useState(false);
   const [excalActive, setExcalActive] = useState(false);
-  const [transitionState, setTransitionState] = useState(false);
+  const [transitionState, setTransitionState] = useState(false);;
   const [opacity, setOpacity] = useState(true);
-  const [meetingTitle, setMeetingTitle] = useState("");
-  const [attendeeName, setName] = useState("");
+  const [meetingTitle, setMeetingTitle] = useState('');
+  const [attendeeName, setName] = useState('');
   const [keyPressed, setKeyPressed] = useState(false);
   const [userIsMuted, setUserIsMuted] = useState(true);
   const [userIsLocked, setUserIsLocked] = useState(true);
   const [isClicked, setIsClicked] = useState(false);
+  const [notionModalIsOpen, setNotionModalIsOpen] = useState(false);
+  const [language, setLanguage] = useState('javascript');
+  const [code, setCode] = useState("");
+  const [showLanguage, setShowLanguage] = useState(false)
+  const [showTheme, setShowTheme] = useState(false)
+  const [userNotionId, setUserNotionId] = useState(null);
+
+
 
   return (
     <ScriptideContext.Provider
       value={{
+        language,
+        setLanguage,
         camActive,
         setCamActive,
         ideActive,
@@ -69,7 +79,18 @@ export default function ScriptideProvider({ children }) {
         userIsLocked,
         setUserIsLocked,
         isClicked,
-        setIsClicked,
+        setIsClicked,,
+        notionModalIsOpen,
+        setNotionModalIsOpen,
+        code,
+        setCode,
+        showLanguage,
+        setShowLanguage,
+        showTheme,
+        setShowTheme,
+        userNotionId,
+        setUserNotionId,
+
       }}
     >
       {children}

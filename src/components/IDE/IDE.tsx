@@ -1,18 +1,18 @@
 import Editor from "@monaco-editor/react";
 import axios from "axios";
 import { useEffect, useRef } from "react";
-import { useScriptideContext } from "../contexts/ScriptideProvider";
+import { useScriptideContext } from "../../contexts/ScriptideProvider";
 
-import "../App.css";
-import useKeyPress from "../hooks/useKeyPress";
-import { showErrorToast, showSuccessToast } from "../utils/apiServices.js";
-import { LanguageDropdown } from "./LanguageDropdown";
-import { OutputWindow } from "./OutputWindow";
-import { ThemeDropdown } from "./ThemeDropdown";
+import "./IDE.css";
+import useKeyPress from "../../hooks/useKeyPress";
+import { showErrorToast, showSuccessToast } from "../../utils/apiServices.js";
+import { LanguageDropdown } from "../LanguageDropdown/LanguageDropdown";
+import { OutputWindow } from "../OutputWindow/OutputWindow";
+import { ThemeDropdown } from "../ThemeDropdown/ThemeDropdown";
 
 //liveblocks
 
-import { useMutation, useStorage } from "../liveblocks.config.js";
+import { useMutation, useStorage } from "../../liveblocks.config.js";
 
 export function IDE({ currentUserId }) {
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
@@ -57,11 +57,10 @@ export function IDE({ currentUserId }) {
     //@ts-ignore
     setProcessing(true);
     const formData = {
-      language_id: language.id,
+      language_id: language.id || 63,
       source_code: btoa(code),
       stdin: btoa(""),
     };
-    console.log(formData);
     const options = {
       method: "POST",
       url: submissions,
@@ -78,13 +77,10 @@ export function IDE({ currentUserId }) {
     axios
       .request(options)
       .then(function (response: { data: { token: any } }) {
-        console.log("res.data: ", response.data);
         const token = response.data.token;
-        console.log("token: ", token);
         checkStatus(token);
       })
       .catch((err: { response: { data: any } }) => {
-        console.log(options);
         let error = err.response ? err.response.data : err;
         //@ts-ignore
         setProcessing(false);
@@ -118,7 +114,6 @@ export function IDE({ currentUserId }) {
         setProcessing(false);
         setOutputDetails(response.data);
         showSuccessToast(`Compiled Successfully!`);
-        console.log("response.data", response.data);
         return;
       }
     } catch (err) {
@@ -131,14 +126,13 @@ export function IDE({ currentUserId }) {
 
   useEffect(() => {
     if (enterPress && ctrlPress) {
-      console.log("enter: ", enterPress);
-      console.log("control: ", ctrlPress);
       handleCompile();
     }
   }, [ctrlPress, enterPress]);
 
   function handleChange(value: any) {
     updateIDE("content", value);
+    onChange("code", value);
   }
 
   //liveblocks
@@ -155,7 +149,7 @@ export function IDE({ currentUserId }) {
     },
     []
   );
-
+    //useEffect to re-render Editor on language change (?)
   return (
     <>
       <Editor
@@ -163,9 +157,9 @@ export function IDE({ currentUserId }) {
         width="74vw"
         onMount={handleEditorDidMount}
         onChange={handleChange}
-        language={language?.value}
+        language={language?.value || 'javascript'}
         value={ide.content}
-        theme={theme.value}
+        theme={theme.value || 'vs-dark'}
       />
 
       <div className="ide-output">
@@ -174,7 +168,7 @@ export function IDE({ currentUserId }) {
         </button>
         <OutputWindow outputDetails={outputDetails} />
       </div>
-      <div className="theme-bar">
+      {/* <div className="theme-bar">
         <ThemeDropdown />
         <LanguageDropdown />
       </div>

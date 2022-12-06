@@ -8,8 +8,8 @@ import {
   MeetingProvider,
   lightTheme,
 } from "amazon-chime-sdk-component-library-react";
-import Meeting from "./components/Meeting";
-import MeetingForm from "./components/MeetingForm";
+import Meeting from "./components/Meeting/Meeting";
+import MeetingForm from "./components/MeetingForm/MeetingForm";
 
 import { Amplify } from "aws-amplify";
 import awsconfig from "./aws-exports";
@@ -30,7 +30,7 @@ export default function App() {
 
   const updateMyPresence = useUpdateMyPresence();
 
-  const noDragSelector = "input, a, button, #ide-view-open, .excalibox";
+  const noDragSelector = "input, a, button, #ide-view-open, .excalibox, .menu-item, #cam-view-close, #ide-view-closed, #grid-view-closed, #cam-view-open, #grid-view-open";
 
   document.addEventListener("mousedown", async (mouseDown: any) => {
     if (mouseDown.target.closest(noDragSelector)) {

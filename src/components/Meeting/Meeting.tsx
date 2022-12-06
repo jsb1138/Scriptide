@@ -1,6 +1,8 @@
 import { FC, useEffect, useState, useRef } from "react";
-import { useScriptideContext } from "../contexts/ScriptideProvider";
-import { IDE } from "./IDE";
+import { useScriptideContext } from "../../contexts/ScriptideProvider";
+import { IDE } from "../../components/IDE/IDE.tsx";
+import NotionModal from "../../components/NotionModal/NotionModal";
+import "./Meeting.css";
 
 import {
   AudioInputControl,
@@ -27,13 +29,15 @@ import {
   Lock,
   Microphone,
 } from "amazon-chime-sdk-component-library-react";
-import { endMeeting } from "../utils/api";
-import Notifications from "../containers/Notifications";
-import ExcalComponent from "./excalidrawComponent/ExcalComponent";
-import HandRaiseManager from "./HandRaiseManager";
+import { endMeeting } from "../../utils/api";
+import Notifications from "../../containers/Notifications";
+import ExcalComponent from "../excalidrawComponent/ExcalComponent";
+import HandRaiseManager from "../HandRaiseManager";
 
-import { useOthers, useStorage, useMutation } from "../liveblocks.config.js";
-import MenuBar from "./MenuBar";
+import { useOthers, useStorage, useMutation } from "../../liveblocks.config.js";
+import MenuBar from "../MenuBar/MenuBar";
+import { LanguageDropdown } from "../LanguageDropdown/LanguageDropdown";
+import { ThemeDropdown } from "../ThemeDropdown/ThemeDropdown";
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
@@ -59,6 +63,13 @@ const Meeting: FC = () => {
     setThisUser,
     localRaisedHand,
     setLocalRaisedHand,
+    showLanguage,
+    showTheme,
+    setExcalActive,
+    setOpacity,
+    excalActive,
+    setTransitionState,
+    transitionState,
   } = useScriptideContext();
 
   const clickedEndMeeting = async () => {
@@ -73,9 +84,7 @@ const Meeting: FC = () => {
   console.log("this is it------->>", meetingManager);
 
   const { roster } = useRosterState();
-  // console.log("roster", roster);
   const attendees = Object.values(roster);
-  // console.log("attendees", attendees);
   let currentUserId: string = "";
   let currentUserName: string | undefined = "";
 
@@ -100,6 +109,11 @@ const Meeting: FC = () => {
       setCamActive(!camActive);
     } else {
       setCamActive(!camActive);
+      if (excalActive) {
+        setTransitionState(!transitionState);
+        setExcalActive(false);
+        setOpacity(true);
+      }
     }
   };
 
@@ -113,11 +127,15 @@ const Meeting: FC = () => {
       setIdeActive(!ideActive);
     } else {
       setIdeActive(!ideActive);
+      if (excalActive) {
+        setTransitionState(!transitionState);
+        setExcalActive(false);
+        setOpacity(true);
+      }
     }
   };
 
   const handleGridClick = () => {
-    console.log("clicked");
     if (camActive) {
       setGridActive(!gridActive);
       setCamActive(!camActive);
@@ -127,12 +145,16 @@ const Meeting: FC = () => {
       setIdeActive(!ideActive);
     } else {
       setGridActive(!gridActive);
+      if (excalActive) {
+        setTransitionState(!transitionState);
+        setExcalActive(false);
+        setOpacity(true);
+      }
     }
   };
   const { devices, selectedDevice } = useVideoInputs();
   function activateVid() {
-    console.log("devices", devices);
-    console.log("selected device", selectedDevice);
+
     toggleVideo();
   }
 
@@ -414,6 +436,24 @@ const Meeting: FC = () => {
         {/* <AddNotificationButton /> */}
         {meetingStatus === MeetingStatus.Succeeded ? (
           <>
+           {showTheme && ideActive ? (
+              <div className="dropdown theme-dropdown">
+                <ThemeDropdown />
+              </div>
+            ) : (
+              <div className="dropdown theme-dropdown-hidden">
+                <ThemeDropdown />
+              </div>
+            )}
+            {showLanguage && ideActive ? (
+              <div className="dropdown lang-dropdown">
+                <LanguageDropdown />
+              </div>
+            ) : (
+              <div className="dropdown lang-dropdown-hidden">
+                <LanguageDropdown />
+              </div>
+            )}
             <div
               style={{
                 height: "100vh",
@@ -454,7 +494,6 @@ const Meeting: FC = () => {
                 )}
               </div>
             </div>
-
             <div id="meeting-ctrls">
               {meetingStatus === MeetingStatus.Succeeded ? (
                 <>
@@ -552,6 +591,7 @@ const Meeting: FC = () => {
           </div>
         )}
         <ExcalComponent />
+        <NotionModal />
       </NotificationProvider>
     </>
   );

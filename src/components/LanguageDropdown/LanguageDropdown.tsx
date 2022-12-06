@@ -1,13 +1,12 @@
 import { SetStateAction } from "react";
 import Select from "react-select";
-import { languageOptions } from "../constants/languageOptions";
-import { useScriptideContext } from "../contexts/ScriptideProvider";
+import { languageOptions } from "../../constants/languageOptions";
+import { useScriptideContext } from "../../contexts/ScriptideProvider";
 
 export function LanguageDropdown() {
   const { setLanguage } = useScriptideContext();
 
   function onSelectChange(select: SetStateAction<any>) {
-    console.log("selected: ", select);
     setLanguage(select);
   }
 
