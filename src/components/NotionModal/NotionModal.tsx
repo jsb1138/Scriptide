@@ -62,16 +62,15 @@ function NotionModal({meetingLoaded}: Props) {
     event.currentTarget.notionBulletPoint.value = "";
   }
 
-  if (notionModalIsOpen) {
     return (
-      <div className='notion-modal' style={{visibility: `${meetingLoaded ? "visible" : "hidden"}`}}>
+      <div className={`${notionModalIsOpen ? "notion-modal" : "notion-modal-closed"}`} style={{visibility: `${meetingLoaded ? "visible" : "hidden"}`}} >
         <div onClick={handleClick} className='cross'>
           <img id='close-cross-show' src={CloseCross} alt=' closing cross' />
         </div>
         {!userNotionId ? (
-          <h3 className="modal-show">Grant Access to Notion</h3>
+          <h3 className={`${!notionModalIsOpen && "header-dont-show" }`}>Grant Access to Notion</h3>
         ) : (
-          <h3 className="modal-show">Post to Notion
+          <h3 className={`${!notionModalIsOpen && "header-dont-show" }`}>Post to Notion
             </h3>
         )}
         {!userNotionId ? (
@@ -100,46 +99,5 @@ function NotionModal({meetingLoaded}: Props) {
         )}
       </div>
     );
-  } else {
-    return (
-       <div className='notion-modal-closed' style={{visibility: `${meetingLoaded ? "visible" : "hidden"}`}}>
-        <div className='cross'>
-          <img id='close-cross-dont-show' src={CloseCross} alt=' closing cross' />
-        </div>
-        {!userNotionId ? (
-          <h3 className='modal-dont-show'>Grant Access to Notion</h3>
-        ) : (
-          <h3 className='modal-dont-show'>Post to Notion
-            </h3>
-        )}
-        {!userNotionId ? (
-          <a href='https://api.notion.com/v1/oauth/authorize?client_id=08b1c623-a965-4750-9a1e-11042ef8700f&response_type=code&owner=user&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fauth%2Fnotion%2Fcallback'>
-            <button className='modal-dont-show'>Connect to Notion</button>
-          </a>
-        ) : (
-          <form id='notion-form' className="item-dont-show">
-            <input
-              type='text'
-              id='notionPageTitle'
-              name='notionPageTitle'
-              placeholder='Enter Page Title'
-              className="item-dont-show"
-            />
-            <textarea
-              name='notionBulletPoint'
-              id='notionBulletPoint'
-              cols={28}
-              rows={5}
-              placeholder='This text will be added as a bulletpoint'
-              className="item-dont-show"
-            ></textarea>
-            <button id='notion-submit-button' type='submit' className="item-dont-show">
-              Send
-            </button>
-          </form>
-        )}
-      </div>  );
-  }
-}
-
+        }
 export default NotionModal;
