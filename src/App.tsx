@@ -59,36 +59,35 @@ export default function App() {
 
   return (
     // <div data-tauri-drag-region>
-    <div
-      className="App"
-      style={{ width: "100vw", height: "100vh" }}
-      onPointerMove={(e) =>
-        updateMyPresence({ cursor: { x: e.clientX, y: e.clientY } })
-      }
-      onPointerLeave={() => updateMyPresence({ cursor: null })}
-    >
+    // <div
+    //   className="App"
+    //   style={{ width: "100vw", height: "100vh" }}
+    //   onPointerMove={(e) =>
+    //     updateMyPresence({ cursor: { x: e.clientX, y: e.clientY } })
+    //   }
+    //   onPointerLeave={() => updateMyPresence({ cursor: null })}
+    // >
+    // {others.map(({ connectionId, presence }) =>
+    //   presence.cursor ? (
+    //     <Cursor
+    //       key={connectionId}
+    //       x={presence.cursor.x}
+    //       y={presence.cursor.y}
+    //     />
+    //   ) : null
+    // )}
+    <ThemeProvider theme={lightTheme}>
       {/* @ts-ignore */}
-      {others.map(({ connectionId, presence }) =>
-        presence.cursor ? (
-          <Cursor
-            key={connectionId}
-            x={presence.cursor.x}
-            y={presence.cursor.y}
-          />
-        ) : null
-      )}
-      <ThemeProvider theme={lightTheme}>
-        {/* @ts-ignore */}
-        <MeetingProvider>
-          {!meetingActive ? (
-            <div id="center-flex">
-              <MeetingForm />
-            </div>
-          ) : (
-            <Meeting />
-          )}
-        </MeetingProvider>
-      </ThemeProvider>
-    </div>
+      <MeetingProvider>
+        {!meetingActive ? (
+          <div id="center-flex">
+            <MeetingForm />
+          </div>
+        ) : (
+          <Meeting />
+        )}
+      </MeetingProvider>
+    </ThemeProvider>
+    // </div>
   );
 }
