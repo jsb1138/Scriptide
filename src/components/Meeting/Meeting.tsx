@@ -143,11 +143,10 @@ const Meeting: FC = () => {
     toggleVideo();
   }
 
- 
+
   //////////////////////////////////////////////////////////////////////////////////////////liveblocks
   const removeRaisedHand = (index: number) => {
     deleteHand(index);
-    console.log("hands--->", hands);
   };
 
   const raiseHand = (student: {}) => {
