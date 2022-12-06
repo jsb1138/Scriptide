@@ -1,0 +1,72 @@
+.notion-modal {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 500px;
+  left: 15px;
+  border-radius: 2rem;
+  z-index: 100002;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.notion-modal h3 {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  margin-right: 7px;
+  color: black;
+}
+
+.cross {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 20px;
+  border-top-right-radius: 5px;
+  position: absolute;
+  top: 10px;
+  right: 7px;
+  cursor: pointer;
+}
+
+#close-cross {
+  width: 20px;
+}
+
+#notion-connect-button {
+  margin-top: 100px;
+}
+
+#notionPageTitle {
+  width: 262px;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 2rem;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  font-size: 0.9rem;
+}
+
+#notionBulletPoint {
+  width: 270px;
+  margin: 5px;
+  padding: 15px;
+  border-radius: 2rem;
+  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(10px);
+  font-size: 0.9rem;
+  font-family: 'Helvetica';
+}
+
+#notion-submit-button {
+  width: 150px;
+  height: 45px;
+  background-color: white;
+  border-radius: 2rem;
+  font-weight: bold;
+}

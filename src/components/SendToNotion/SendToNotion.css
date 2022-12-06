@@ -1,0 +1,13 @@
+#send-to-notion {
+  margin-top: 30px;
+}
+
+#notion-logo {
+  width: 40px;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+
+#notion-logo:hover {
+  opacity: 0.8;
+}

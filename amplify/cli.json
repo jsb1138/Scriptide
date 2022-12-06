@@ -4,20 +4,20 @@
       "addmissingownerfields": true,
       "improvepluralization": false,
       "validatetypenamereservedwords": true,
-      "useexperimentalpipelinedtransformer": true,
+      "useexperimentalpipelinedtransformer": false,
       "enableiterativegsiupdates": true,
       "secondarykeyasgsi": true,
       "skipoverridemutationinputtypes": true,
-      "transformerversion": 2,
+      "transformerversion": 1,
       "suppressschemamigrationprompt": true,
       "securityenhancementnotification": false,
       "showfieldauthnotification": false,
       "usesubusernamefordefaultidentityclaim": true,
       "usefieldnameforprimarykeyconnectionfield": false,
-      "enableautoindexquerynames": false,
-      "respectprimarykeyattributesonconnectionfield": false,
+      "enableautoindexquerynames": true,
+      "respectprimarykeyattributesonconnectionfield": true,
       "shoulddeepmergedirectiveconfigdefaults": false,
-      "populateownerfieldforstaticgroupauth": false
+      "populateownerfieldforstaticgroupauth": true
     },
     "frontend-ios": {
       "enablexcodeintegration": true
