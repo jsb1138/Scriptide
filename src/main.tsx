@@ -12,7 +12,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <>
     <RoomProvider
       id="new3"
-      initialPresence={{ cursor: null }}
       initialStorage={{
         ide: new LiveObject({
           content: "// happy coding",
@@ -20,7 +19,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
         raisedHandsX: new LiveList([]),
         unmutedAttendees: new LiveList([]),
         unlockedAttendees: new LiveList([]),
-        excalidrawCanvas: new LiveObject({ state: [] }),
       }}
     >
       <ClientSideSuspense

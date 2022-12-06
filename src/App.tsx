@@ -40,54 +40,23 @@ export default function App() {
   });
 
   /////////////////////////////////////////////////////////////////////////////////////////////////liveblocks
-  // @ts-ignore
-  function Cursor({ x, y }) {
-    return (
-      <img
-        style={{
-          position: "absolute",
-          transform: `translate(${x}px, ${y}px)`,
-          height: "15px",
-          width: "15px",
-        }}
-        src="src/assets/fly.png"
-      />
-    );
-  }
 
   const others = useOthers();
 
   return (
-    // <div data-tauri-drag-region>
-    // <div
-    //   className="App"
-    //   style={{ width: "100vw", height: "100vh" }}
-    //   onPointerMove={(e) =>
-    //     updateMyPresence({ cursor: { x: e.clientX, y: e.clientY } })
-    //   }
-    //   onPointerLeave={() => updateMyPresence({ cursor: null })}
-    // >
-    // {others.map(({ connectionId, presence }) =>
-    //   presence.cursor ? (
-    //     <Cursor
-    //       key={connectionId}
-    //       x={presence.cursor.x}
-    //       y={presence.cursor.y}
-    //     />
-    //   ) : null
-    // )}
-    <ThemeProvider theme={lightTheme}>
-      {/* @ts-ignore */}
-      <MeetingProvider>
-        {!meetingActive ? (
-          <div id="center-flex">
-            <MeetingForm />
-          </div>
-        ) : (
-          <Meeting />
-        )}
-      </MeetingProvider>
-    </ThemeProvider>
-    // </div>
+    <div data-tauri-drag-region>
+      <ThemeProvider theme={lightTheme}>
+        {/* @ts-ignore */}
+        <MeetingProvider>
+          {!meetingActive ? (
+            <div id="center-flex">
+              <MeetingForm />
+            </div>
+          ) : (
+            <Meeting />
+          )}
+        </MeetingProvider>
+      </ThemeProvider>
+    </div>
   );
 }
