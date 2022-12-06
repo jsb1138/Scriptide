@@ -1,8 +1,8 @@
 import { FC, useEffect } from "react";
 import { useScriptideContext } from "../../contexts/ScriptideProvider";
 import { IDE } from "../../components/IDE/IDE.tsx";
-import NotionModal from "../../components/NotionModal/NotionModal"
-import "./Meeting.css"
+import NotionModal from "../../components/NotionModal/NotionModal";
+import "./Meeting.css";
 
 import {
   AudioInputControl,
@@ -51,6 +51,11 @@ const Meeting: FC = () => {
     meetingIdentifier,
     showLanguage,
     showTheme,
+    setExcalActive,
+    setOpacity,
+    excalActive,
+    setTransitionState,
+    transitionState,
   } = useScriptideContext();
 
   const { toggleVideo } = useLocalVideo();
@@ -91,6 +96,11 @@ const Meeting: FC = () => {
       setCamActive(!camActive);
     } else {
       setCamActive(!camActive);
+      if (excalActive) {
+        setTransitionState(!transitionState);
+        setExcalActive(false);
+        setOpacity(true);
+      }
     }
   };
 
@@ -104,6 +114,11 @@ const Meeting: FC = () => {
       setIdeActive(!ideActive);
     } else {
       setIdeActive(!ideActive);
+      if (excalActive) {
+        setTransitionState(!transitionState);
+        setExcalActive(false);
+        setOpacity(true);
+      }
     }
   };
 
@@ -118,6 +133,11 @@ const Meeting: FC = () => {
       setIdeActive(!ideActive);
     } else {
       setGridActive(!gridActive);
+      if (excalActive) {
+        setTransitionState(!transitionState);
+        setExcalActive(false);
+        setOpacity(true);
+      }
     }
   };
   const { devices, selectedDevice } = useVideoInputs();
@@ -412,8 +432,8 @@ const Meeting: FC = () => {
             <h3 className="ellipsis"></h3>
           </div>
         )}
-          <ExcalComponent />
-          <NotionModal/>
+        <ExcalComponent />
+        <NotionModal />
       </NotificationProvider>
     </>
   );
