@@ -14,7 +14,7 @@ import { ThemeDropdown } from "../ThemeDropdown/ThemeDropdown";
 
 import { useMutation, useStorage } from "../../liveblocks.config.js";
 
-export function IDE({ currentUserId }) {
+export function IDE() {
   const submissions = import.meta.env.VITE_RAPIDAPI_SUBMISSIONS;
   const host = import.meta.env.VITE_RAPIDAPI_HOST;
   const key = import.meta.env.VITE_RAPIDAPI_KEY;
@@ -57,10 +57,11 @@ export function IDE({ currentUserId }) {
     //@ts-ignore
     setProcessing(true);
     const formData = {
-      language_id: language.id || 63,
+      language_id: language.id,
       source_code: btoa(code),
       stdin: btoa(""),
     };
+    console.log(formData);
     const options = {
       method: "POST",
       url: submissions,
@@ -77,10 +78,13 @@ export function IDE({ currentUserId }) {
     axios
       .request(options)
       .then(function (response: { data: { token: any } }) {
+        console.log("res.data: ", response.data);
         const token = response.data.token;
+        console.log("token: ", token);
         checkStatus(token);
       })
       .catch((err: { response: { data: any } }) => {
+        console.log(options);
         let error = err.response ? err.response.data : err;
         //@ts-ignore
         setProcessing(false);
@@ -114,6 +118,7 @@ export function IDE({ currentUserId }) {
         setProcessing(false);
         setOutputDetails(response.data);
         showSuccessToast(`Compiled Successfully!`);
+        console.log("response.data", response.data);
         return;
       }
     } catch (err) {
@@ -126,13 +131,14 @@ export function IDE({ currentUserId }) {
 
   useEffect(() => {
     if (enterPress && ctrlPress) {
+      console.log("enter: ", enterPress);
+      console.log("control: ", ctrlPress);
       handleCompile();
     }
   }, [ctrlPress, enterPress]);
 
   function handleChange(value: any) {
     updateIDE("content", value);
-    onChange("code", value);
   }
 
   //liveblocks
@@ -145,11 +151,10 @@ export function IDE({ currentUserId }) {
     ({ storage }: any, property: string, newData: string) => {
       const mutableIDE = storage.get("ide");
       mutableIDE.set(property, newData);
-      console.log("newdataaaaa", newData);
     },
     []
   );
-    //useEffect to re-render Editor on language change (?)
+
   return (
     <>
       <Editor
@@ -157,9 +162,9 @@ export function IDE({ currentUserId }) {
         width="74vw"
         onMount={handleEditorDidMount}
         onChange={handleChange}
-        language={language?.value || 'javascript'}
+        language={language?.value}
         value={ide.content}
-        theme={theme.value || 'vs-dark'}
+        theme={theme.value}
       />
 
       <div className="ide-output">
@@ -168,20 +173,16 @@ export function IDE({ currentUserId }) {
         </button>
         <OutputWindow outputDetails={outputDetails} />
       </div>
-      {/* <div className="theme-bar">
-        <ThemeDropdown />
-        <LanguageDropdown />
-      </div>
       {thisUser === initiator ? (
         <></>
       ) : (
         <>
           {userIsLocked ? (
             <div id="lock" className="shield-up">
-              {/* <div className="unlocked"></div> */}
               <img
                 style={{ height: "80px", width: "80px", position: "relative" }}
                 src="src/assets/lock.png"
+                alt="lock"
               />
             </div>
           ) : (
