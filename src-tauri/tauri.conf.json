@@ -83,6 +83,8 @@
         "focus": true,
         "height": 800,
         "width": 1300,
+        "minHeight": 800,
+        "minWidth": 1300,
         "resizable": true,
         "title": "Scriptide",
         "label": "main",

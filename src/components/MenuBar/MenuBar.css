@@ -157,3 +157,17 @@
   overflow: hidden;
 
 }
+
+.theme-logo {
+  height: 55%;
+  width: 55%;
+  margin-bottom: 5px;
+  margin-left: 3px;
+}
+
+.lang-logo {
+  height: 55%;
+  width: 55%;
+  margin-bottom: 3px;
+  margin-left: 1px;
+}
