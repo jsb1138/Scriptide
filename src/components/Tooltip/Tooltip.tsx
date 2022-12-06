@@ -1,5 +1,4 @@
 import "./Tooltip.css"
-import { useScriptideContext } from '../../contexts/ScriptideProvider';
 import { useState } from 'react';
 
 

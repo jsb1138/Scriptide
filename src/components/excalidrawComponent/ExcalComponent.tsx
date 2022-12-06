@@ -3,7 +3,7 @@ import { Excalidraw } from "@excalidraw/excalidraw";
 import { useScriptideContext } from "../../contexts/ScriptideProvider";
 
 function ExcalComponent() {
-  const { excalActive, transitionState, setExcalState, excalState } =
+  const { excalActive, setExcalState, excalState } =
     useScriptideContext();
   return (
     <>
@@ -19,6 +19,7 @@ function ExcalComponent() {
               }}
             />
           </div>
+
         </div>
       )}
     </>

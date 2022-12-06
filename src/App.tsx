@@ -1,6 +1,5 @@
 import { useScriptideContext } from "./contexts/ScriptideProvider";
 
-
 import { window as tauriWindow } from "@tauri-apps/api";
 
 ////////////////////////////////////////////////////////chimeintegration -> TODO
@@ -27,15 +26,11 @@ import "./App.css";
 import { defineTheme } from "./lib/defineTheme.js";
 
 export default function App() {
-  const {
-
-    meetingActive,
-
-  } = useScriptideContext();
+  const { meetingActive } = useScriptideContext();
 
   const updateMyPresence = useUpdateMyPresence();
 
-  const noDragSelector = "input, a, button, #ide-view-open, .excalibox";
+  const noDragSelector = "input, a, button, #ide-view-open, .excalibox, .menu-item, #cam-view-close, #ide-view-closed, #grid-view-closed, #cam-view-open, #grid-view-open";
 
   document.addEventListener("mousedown", async (mouseDown: any) => {
     if (mouseDown.target.closest(noDragSelector)) {
@@ -44,45 +39,12 @@ export default function App() {
     await tauriWindow.appWindow.startDragging();
   });
 
-
   /////////////////////////////////////////////////////////////////////////////////////////////////liveblocks
-  // @ts-ignore
-  function Cursor({ x, y }) {
-    return (
-      <img
-        style={{
-          position: "absolute",
-          transform: `translate(${x}px, ${y}px)`,
-          height: "15px",
-          width: "15px",
-
-        }}
-        src="src/assets/cursor.png"
-      />
-    );
-  }
 
   const others = useOthers();
 
   return (
-    // <div data-tauri-drag-region>
-    <div
-      className="App"
-      onPointerMove={(e) =>
-        updateMyPresence({ cursor: { x: e.clientX, y: e.clientY } })
-      }
-      onPointerLeave={() => updateMyPresence({ cursor: null })}
-    >
-      {/* @ts-ignore */}
-      {others.map(({ connectionId, presence }) =>
-        presence.cursor ? (
-          <Cursor
-            key={connectionId}
-            x={presence.cursor.x}
-            y={presence.cursor.y}
-          />
-        ) : null
-      )}
+    <div data-tauri-drag-region>
       <ThemeProvider theme={lightTheme}>
         {/* @ts-ignore */}
         <MeetingProvider>

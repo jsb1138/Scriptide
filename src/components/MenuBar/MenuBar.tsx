@@ -40,9 +40,12 @@ const MenuBar: FC = () => {
     }
   };
   const handleTheme = () => {
+    if (showLanguage) setShowLanguage(!showLanguage);
+
     setShowTheme(!showTheme);
   };
   const handleLanguage = () => {
+    if (showTheme) setShowTheme(!showTheme);
     setShowLanguage(!showLanguage);
   };
 
@@ -84,13 +87,15 @@ const MenuBar: FC = () => {
     </>
   ) : (
     <>
+
       <div
         id="menu-with-ide-options"
         className={menuState ? "menu-open" : "menu-closed"}
       >
         <Tooltip content="Sketch diagrams with Excalidraw">
           <div className="menu-item" onClick={handleExcali}>
-            <img src="src/assets/excalidraw4.png" className="excali-logo" />
+            <img src="src/assets/excalidraw4.png" className="excali-logo" alt='excalilogo'/>
+
           </div>
         </Tooltip>
         <Tooltip content="Post notes with Notion">
@@ -101,12 +106,12 @@ const MenuBar: FC = () => {
         <div className='show-me'>
         <Tooltip content='Choose an IDE theme'>
           <div className='menu-item' onClick={handleTheme}>
-            <img src='src/assets/theme.svg' className='theme-logo' />
+            <img src='src/assets/theme.svg' className='theme-logo'alt='theme icon'/>
           </div>
         </Tooltip>
         <Tooltip content='Choose a programming language'>
           <div className='menu-item' onClick={handleLanguage}>
-          <img src='src/assets/lang-select.svg' className='lang-logo' />
+          <img src='src/assets/lang-select.svg' className='lang-logo' alt='language logo'/>
           </div>
         </Tooltip>
         </div>
