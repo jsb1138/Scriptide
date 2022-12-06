@@ -31,7 +31,9 @@
 }
 
 .overflow-guard {
-  border: 10px solid rgb(28 28 28);
+  border-top:18px solid rgb(28 28 28);
+  border-right:18px solid rgb(28 28 28);
+  border-bottom:18px solid rgb(28 28 28);
   /* padding: 2rem; */
   border-radius: 10px;
 }
