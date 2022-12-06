@@ -23,6 +23,9 @@ import {
   ActionType,
   Severity,
   useToggleLocalMute,
+  Clear,
+  Lock,
+  Microphone,
 } from "amazon-chime-sdk-component-library-react";
 import { endMeeting } from "../utils/api";
 import Notifications from "../containers/Notifications";
@@ -192,7 +195,7 @@ const Meeting: FC = () => {
     mutableHandsList.delete(handIndex);
   }, []);
 
-  const RaiseYourHand = () => {
+  const HandRaiser = () => {
     const dispatch = useNotificationDispatch();
 
     const payload: any = {
@@ -210,23 +213,64 @@ const Meeting: FC = () => {
     };
 
     return (
-      <button
-        id="hand-raise-btn"
-        className={
-          localRaisedHand ? "hr-btn-raised cf" : "hr-btn-not-raised cf"
-        }
-        onClick={addNotification}
-      >
-        <div>
-          <h2>
-            {localRaisedHand ? (
-              <HandRaise width="6rem" height="6rem" color="green" />
-            ) : (
-              <HandRaise width="3rem" height="3rem" color="white" />
-            )}
-          </h2>
-        </div>
-      </button>
+      <>
+        {localRaisedHand ? (
+          <button id="hand-raise-btn" className="hr-btn-raised cf">
+            <div>
+              <h2>
+                <HandRaise width="6rem" height="6rem" color="green" />
+              </h2>
+            </div>
+          </button>
+        ) : (
+          <button
+            id="hand-raise-btn"
+            className="hr-btn-not-raised cf"
+            onClick={addNotification}
+          >
+            <div>
+              <h2>
+                <HandRaise width="3rem" height="3rem" color="white" />
+              </h2>
+            </div>
+          </button>
+        )}
+      </>
+    );
+  };
+
+  const HandRaiseManager = () => {
+    return (
+      <div id="hands">
+        <ul>
+          {hands.map((student: any, i: number) => (
+            <li>
+              {student.name}
+              <div id="hand-ctrls">
+                <button
+                  onClick={() => updateUnmutedList(student.id)}
+                  className="cf"
+                >
+                  {unmutedUsers.includes(student.id) ? (
+                    <Microphone />
+                  ) : (
+                    <Microphone />
+                  )}
+                </button>
+                <button
+                  onClick={() => updateUnlockedList(student.id)}
+                  className="cf"
+                >
+                  {unlockedUsers.includes(student.id) ? <Lock /> : <Lock />}
+                </button>
+                <button onClick={() => removeRaisedHand(i)} className="cf">
+                  <Clear />
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     );
   };
 
@@ -489,39 +533,9 @@ const Meeting: FC = () => {
             )}
 
             {currentUserId.length > 0 && currentUserId !== initiator ? (
-              <>
-                <RaiseYourHand />
-              </>
+              <HandRaiser />
             ) : (
-              <>
-                <div id="hands">
-                  <ul>
-                    {hands.map((student: any, i: number) => (
-                      <li>
-                        {student.name}
-                        <button
-                          onClick={() => updateUnmutedList(student.id)}
-                          className="cf"
-                        >
-                          {unmutedUsers.includes(student.id) ? "M" : "unM"}
-                        </button>
-                        <button
-                          onClick={() => updateUnlockedList(student.id)}
-                          className="cf"
-                        >
-                          {unlockedUsers.includes(student.id) ? "L" : "unL"}
-                        </button>
-                        <button
-                          onClick={() => removeRaisedHand(i)}
-                          className="cf"
-                        >
-                          X
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </>
+              <HandRaiseManager />
             )}
           </>
         ) : (

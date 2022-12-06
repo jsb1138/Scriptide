@@ -559,9 +559,14 @@ button {
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
-#hand-raise-btn:hover {
+.hr-btn-not-raised:hover {
   background-color: rgba(77, 199, 55, 0.4);
-  z-index: 10000000000;
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  border: none;
+}
+
+.hr-btn-raised:hover {
+  background-color: rgba(77, 199, 55, 0.2);
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
   border: none;
 }
@@ -584,6 +589,7 @@ button {
   height: 130px;
   background-color: rgba(77, 199, 55, 0.2);
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  pointer-events: none;
 }
 
 .top {
@@ -609,73 +615,112 @@ h3 {
   position: absolute;
   /* margin-left: 20px; */
   margin-top: 0px;
-  right: 15px;
-  top: 500px;
+  right: 20px;
+  bottom: 40px;
   width: 240px;
-  height: 300px;
-  border-radius: 2rem;
+  height: 240px;
+  border-radius: 1rem;
   overflow-X: hidden;
   background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  /* background-color: rgb(255, 119, 189); */
   z-index: 10000000000000000;
   transition:  0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
+#hand-ctrls {
+  width: 100px;
+  display: flex;
+  justify-content: flex-end;
+}
+/* 
+#hands button {
+  padding: 0;
+  margin: 0 0 0 5px;
+  border-radius: 25px;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 95, 95, 0.8);
+  /* color: rgb(255, 92, 92); */
+} */
+
+#hands button:hover {
+  background-image: linear-gradient(
+  145deg,
+  hsl(200deg 57% 84% / 40%) 0%,
+  hsl(200deg 57% 81% / 40%) 2%,
+  hsl(200deg 57% 79% / 40%) 7%,
+  hsl(200deg 57% 77% / 40%) 13%,
+  hsl(200deg 56% 75% / 40%) 22%,
+  hsl(200deg 56% 72% / 40%) 34%,
+  hsl(200deg 56% 70% / 40%) 46%,
+  hsl(200deg 56% 68% / 40%) 60%,
+  hsl(200deg 56% 65% / 40%) 73%,
+  hsl(200deg 56% 63% / 40%) 85%,
+  hsl(200deg 56% 60% / 40%) 94%,
+  hsl(200deg 56% 58% / 40%) 100%
+);
+}
+
 #hands ul {
   padding: 0;
-  margin: 0 0 0 10px;
+  margin: 0 0 0 5px;
 }
 
 #hands li {
-  margin: 15px auto;
-  padding: 0 10px;
-  width: 220px;
+  margin: 5px auto;
+  padding: 0 8px;
+  width: 230px;
   height: 40px;
+  border-radius: 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* background-color: #61dafb; */
-}
+  color: white;
+  font-weight: 700;
+  background-image: linear-gradient(
+  145deg,
+  hsl(200deg 57% 84% / 40%) 0%,
+  hsl(200deg 57% 81% / 40%) 2%,
+  hsl(200deg 57% 79% / 40%) 7%,
+  hsl(200deg 57% 77% / 40%) 13%,
+  hsl(200deg 56% 75% / 40%) 22%,
+  hsl(200deg 56% 72% / 40%) 34%,
+  hsl(200deg 56% 70% / 40%) 46%,
+  hsl(200deg 56% 68% / 40%) 60%,
+  hsl(200deg 56% 65% / 40%) 73%,
+  hsl(200deg 56% 63% / 40%) 85%,
+  hsl(200deg 56% 60% / 40%) 94%,
+  hsl(200deg 56% 58% / 40%) 100%
+);
+} 
 
 #hands button {
   padding: 0;
+  margin: 0 0 0 5px;
+  border-radius: 25px;
   width: 30px;
   height: 30px;
-  border-radius: 25px;
-  color: rgb(255, 92, 92);
+  background: rgba(255, 156, 156, 0.8);
+  color: white;
+  transition: 0.2s;
 }
 
 #hands button:hover {
-  color: rgb(255, 64, 64);
+  background: rgba(95, 180, 255, 0.8);
+  /* color: rgb(255, 64, 64); */
+  transition: 0.2s;
 }
 
-#hands ul {
-  padding: 0;
-  margin: 0 0 0 10px;
+#hands button:active {
+  background: rgba(122, 255, 95, 0.8);
+  /* color: rgb(255, 64, 64); */
+  transition: 0.2s;
 }
 
-#hands li {
-  margin: 15px auto;
-  padding: 0 10px;
-  width: 220px;
-  height: 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* background-color: #61dafb; */
-}
-
-#hands button {
-  padding: 0;
-  width: 30px;
-  height: 30px;
-  border-radius: 25px;
-  color: rgb(255, 92, 92);
-}
-
-#hands button:hover {
-  color: rgb(255, 64, 64);
+#hands button:focus {
+  background: rgba(122, 255, 95, 0.8);
+  /* color: rgb(255, 64, 64); */
+  transition: 0.2s;
 }
 
 #tester {
@@ -698,7 +743,6 @@ h3 {
   justify-content: center;
   align-items: center;
   opacity: 1;
-  transition: 2s;
 }
 
 
