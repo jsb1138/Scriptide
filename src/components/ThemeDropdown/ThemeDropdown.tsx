@@ -27,14 +27,14 @@ export function ThemeDropdown() {
   // }, []);
   return (
     <Select
-      placeholder={`Select Theme`}
+      placeholder={theme?.value || `Select Theme`}
       // options={languageOptions}
       options={Object.entries(monacoThemes).map(([themeId, themeName]) => ({
         label: themeName,
         value: themeId,
         key: themeId,
       }))}
-      value={theme.value}
+      value={theme?.value}
       theme={(theme) => ({
         ...theme,
         borderRadius: 10,

@@ -1,23 +1,27 @@
 import "./ExcalComponent.css";
 import { Excalidraw } from "@excalidraw/excalidraw";
 import { useScriptideContext } from "../../contexts/ScriptideProvider";
-import { Flex } from "amazon-chime-sdk-component-library-react";
-import { centerScrollOn } from "@excalidraw/excalidraw/types/scene/scroll";
 
 function ExcalComponent() {
-  const { excalActive, transitionState, opacity, setOpacity } = useScriptideContext();
-
+  const { excalActive, setExcalState, excalState } =
+    useScriptideContext();
   return (
     <>
-      <div className="hider-container">
-        <div className={`hider ${transitionState ? "open" : "closed"} ${opacity ? "opaque" : "transparent"}`}>
+      {excalActive && (
+        <div className="excal-open">
+          <div className="excalibox ">
+            <Excalidraw
+              initialData={{
+                elements: excalState,
+              }}
+              onChange={(elements, appState, files) => {
+                setExcalState(elements);
+              }}
+            />
+          </div>
+
         </div>
-      </div>
-      <div className={excalActive ? "excal-open" : "excal-closed"}>
-        <div className="excalibox">
-          <Excalidraw />
-        </div>
-      </div>
+      )}
     </>
   );
 }

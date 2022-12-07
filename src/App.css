@@ -42,47 +42,6 @@ code {
   border-radius: 10px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-}
-
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-
-  a:nth-of-type(3) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
 
 .sideBar {
   position: relative;
@@ -113,21 +72,7 @@ code {
   width: 100vw;
   height: 100vh;
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-link {
-  color: #61dafb;
+  overflow: hidden;
 }
 
 #App-main {
@@ -135,10 +80,6 @@ code {
   width: 100%;
   padding: 0 20px 0 20px;
 }
-
-
-
-
 
 .open {
   width: 200px;
@@ -161,15 +102,74 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+
+}
+/* 
+.cf {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
+
+/* 
+
+.ide-pos-closed {
+  padding-top: 450px;
+  padding-left: 720px;
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 }
 
+.ide-pos-open {
+  padding-top: 00px;
+  padding-left: 00px;
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+} */
 
+
+.hr-btn-not-raised:hover {
+  background-color: rgba(77, 199, 55, 0.4);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  border: none;
+}
+
+.hr-btn-raised:hover {
+  background-color: rgba(77, 199, 55, 0.2);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  border: none;
+}
+
+.hr-btn-not-raised {
+  padding-top: 20px;
+  right: 45px;
+  bottom: 48px;
+  width: 70px;
+  height: 70px;
+  background-color: rgba(77, 199, 55, 0.2);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.hr-btn-raised {
+  padding-top: 20px;
+  right: 15px;
+  bottom: 20px;
+  width: 130px;
+  height: 130px;
+  background-color: rgba(77, 199, 55, 0.2);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  /* pointer-events: none; */
+}
+
+.top {
+  z-index: 100000000000000000000;
+}
 
 h3 {
   margin: 0;
   padding: 0;
 }
-
+/* 
 .appear {
   opacity: 0.2;
   transition: 0.3s;
@@ -178,7 +178,16 @@ h3 {
 .disappear {
   opacity: 0;
   transition: 0.3s;
-}
+} */
+/* 
+#tester {
+  height: 40px;
+  width: 60px;
+  background-color: blueviolet;
+} */
+
+
+
 
 .sc-jrcTuL.iLFcWf {
   background: rgba(255, 255, 255, 0.3);
@@ -233,6 +242,148 @@ h3 {
       .25em 0 0 #213547,
       .5em 0 0 #213547;
   }
-
 }
 
+
+
+.shield-up {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #666;
+}
+
+.shield-up::after {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 100%;
+  position: absolute;
+  bottom: -180px;
+  right: 0;
+  background-color: #FFF;
+  opacity: 0;
+  transform: rotate(280deg);
+  animation: reflect 0.76s ease-in-out ;
+  -webkit-transform: rotate(280deg);
+  -webkit-animation: reflect 0.76s ease-out ;
+}
+@keyframes reflect {
+  0% { transform: scale(0) rotate(280deg); opacity: 0; }
+  10% { transform: scale(0) rotate(280deg); opacity: 0.2; }
+  11% { transform: scale(4) rotate(280deg); opacity: 0.5; }
+  30% { transform: scale(100) rotate(280deg); opacity: 0; }
+}
+@-webkit-keyframes reflect {
+  0% { transform: scale(0) rotate(280deg); opacity: 0; }
+  10% { transform: scale(0) rotate(280deg); opacity: 0.2; }
+  11% { transform: scale(4) rotate(280deg); opacity: 0.5; }
+  30% { transform: scale(50) rotate(280deg); opacity: 0; }
+}
+
+.shield-down {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #666;
+}
+.shield-down::after {
+  content: "";
+  display: block;
+  width: 30px;
+  height: 100%;
+  position: absolute;
+  top: -180px;
+  left: 0;
+  background-color: #FFF;
+  opacity: 0;
+  /* transform: rotate(45deg); */
+  /* animation: reflect 1s ease-in-out ; */
+  -webkit-transform: rotate(45deg);
+  -webkit-animation: reflect 0.3s ease-out ;
+}
+@keyframes reflect {
+  0% { transform: scale(0) rotate(45deg); opacity: 0; }
+  80% { transform: scale(0) rotate(45deg); opacity: 0.2; }
+  81% { transform: scale(4) rotate(45deg); opacity: 0.5; }
+  100% { transform: scale(100) rotate(45deg); opacity: 0; }
+}
+@-webkit-keyframes reflect {
+  0% { transform: scale(0) rotate(45deg); opacity: 0; }
+  10% { transform: scale(0) rotate(45deg); opacity: 0.2; }
+  11% { transform: scale(4) rotate(45deg); opacity: 0.5; }
+  20% { transform: scale(50) rotate(45deg); opacity: 0; }
+}
+
+.lock {
+  width: 24px;
+  height: 21px;
+  border: 3px solid var(--locked-color);
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+.lock:after {
+  content: "";
+  display: block;
+  background: var(--locked-color);
+  width: 3px;
+  height: 7px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -3.5px 0 0 -2px;
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+.lock:before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  bottom: 100%;
+  position: absolute;
+  left: 50%;
+  margin-left: -8px;
+  border: 3px solid var(--locked-color);
+  border-top-right-radius: 50%;
+  border-top-left-radius: 50%;
+  border-bottom: 0;
+  -webkit-transition: all 0.1s ease-in-out;
+  transition: all 0.1s ease-in-out;
+}
+/* Locked Hover */
+.lock:hover:before {
+  height: 12px;
+}
+/* Unlocked */
+.unlocked {
+  transform: rotate(10deg);
+}
+.unlocked:before {
+  bottom: 130%;
+  left: 31%;
+  margin-left: -11.5px;
+  transform: rotate(-45deg);
+}
+.unlocked,
+.unlocked:before {
+  border-color: var(--unlocked-color);
+}
+.unlocked:after {
+  background: var(--unlocked-color);
+}
+/* Unlocked Hover */
+.unlocked:hover {
+  transform: rotate(3deg);
+}
+.unlocked:hover:before {
+  height: 10px;
+  left: 40%;
+  bottom: 124%;
+  transform: rotate(-30deg);
+}
