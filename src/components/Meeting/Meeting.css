@@ -1,24 +1,42 @@
-#hand-raise-btn {
-  position: absolute;
-  margin-left: 20px;
-  margin-top: 0px;
-  right: 15px;
-  top: 550px;
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: rgba(77, 199, 55, 0.2);
-  z-index: 10000;
-  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-}
-
 #meeting-ctrls {
   position: absolute;
   bottom: 40px;
   width: 100vw;
   z-index: 10000000000000000;
 }
+
+
+#meeting-ctrls .sc-gswNZR {
+  border: none;
+  transition: 0.4s;
+}
+
+#meeting-ctrls .sc-gswNZR:hover {
+background-image: linear-gradient(
+  150deg,
+  hsl(250deg 100% 60%) 0%,
+  hsl(217deg 100% 50%) 5%,
+  hsl(210deg 100% 50%) 17%,
+  hsl(205deg 100% 50%) 32%,
+  hsl(200deg 100% 50%) 47%,
+  hsl(198deg 100% 56%) 62%,
+  hsl(196deg 96% 63%) 75%,
+  hsl(193deg 91% 70%) 86%,
+  hsl(189deg 84% 76%) 94%,
+  hsl(184deg 77% 82%) 99%,
+  hsl(176deg 85% 90%) 100%
+  );
+  border: none;
+  transition: 0.4s;
+}
+
+#meeting-ctrls {
+position: absolute;
+bottom: 40px;
+width: 100vw;
+z-index: 10000000000;
+}
+
 
 #cam-view-open {
   position: absolute;
@@ -320,8 +338,8 @@
   border-radius: 25px;
   width: 30px;
   height: 30px;
-  background: rgba(255, 156, 156, 0.8);
-  color: white;
+  /* background: rgba(255, 156, 156, 0.8); */
+  color: black;
   transition: 0.2s;
 }
 
@@ -332,62 +350,17 @@
 }
 
 #hands button:active {
-  background: rgba(122, 255, 95, 0.8);
+  background: rgba(0, 136, 255, 0.8);
   /* color: rgb(255, 64, 64); */
   transition: 0.2s;
 }
 
 #hands button:focus {
-  background: rgba(122, 255, 95, 0.8);
+  background: rgba(50, 158, 252, 0.8);
   /* color: rgb(255, 64, 64); */
   transition: 0.2s;
 }
 
-#hand-raise-btn {
-  position: absolute;
-  margin-left: 20px;
-  margin-top: 0px;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: rgba(77, 199, 55, 0.2);
-  /* background:radial-gradient(circle at 50% 50%, rgba(77, 199, 55, 1) 0%, rgba(255, 255, 255, 0) 60%); */
-  z-index: 10000000000;
-  border: none;
-  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-}
-
-.hr-btn-not-raised:hover {
-  background-color: rgba(77, 199, 55, 0.4);
-  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-  border: none;
-}
-
-.hr-btn-raised:hover {
-  background-color: rgba(77, 199, 55, 0.2);
-  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-  border: none;
-}
-
-.hr-btn-not-raised {
-  padding-top: 20px;
-  right: 45px;
-  bottom: 48px;
-  width: 70px;
-  height: 70px;
-  background-color: rgba(77, 199, 55, 0.2);
-  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-}
-
-.hr-btn-raised {
-  padding-top: 20px;
-  right: 15px;
-  bottom: 20px;
-  width: 130px;
-  height: 130px;
-  background-color: rgba(77, 199, 55, 0.2);
-  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-  /* pointer-events: none; */
-}
 
 .cf {
   /* height: 100vh;
@@ -427,6 +400,11 @@ bottom: 40px;
 width: 100vw;
 z-index: 10000000000;
 }
+
+.ch-popover-menu {
+  height: 110px;
+}
+
 .getitcentered {
   display: flex;
   justify-content: center;

@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 
 import { useScriptideContext } from "../contexts/ScriptideProvider";
 
+import "./HandRaiser.css";
+
 import {
   HandRaise,
   useNotificationDispatch,
@@ -59,49 +61,57 @@ export default function HandRaiser() {
     mutableHandsList.delete(handIndex);
   }, []);
 
-  const dispatch = useNotificationDispatch();
+  const HandRaiseButton = () => {
+    const dispatch = useNotificationDispatch();
 
-  const payload: any = {
-    severity: Severity.INFO,
-    message: "Your hand is raised and the instructor has been notified.",
+    const payload: any = {
+      severity: Severity.INFO,
+      message: "Your hand is raised and the instructor has been notified.",
+      autoClose: true,
+      autoCloseDelay: 3000,
+    };
+
+    const addNotification = (e: any) => {
+      updateHands({ name: "ff", id: thisUser });
+      setLocalRaisedHand(!localRaisedHand);
+      dispatch({
+        type: ActionType.ADD,
+        payload: payload,
+      });
+    };
+
+    console.log("LOCAL HAND", localRaisedHand);
+
+    return (
+      <>
+        {localRaisedHand ? (
+          <button
+            id="hand-raise-btn"
+            className="hr-btn-raised cf"
+            onClick={addNotification}
+          >
+            <div>
+              <h2>
+                <HandRaise width="6rem" height="6rem" color="green" />
+              </h2>
+            </div>
+          </button>
+        ) : (
+          <button
+            id="hand-raise-btn"
+            className="hr-btn-not-raised cf"
+            onClick={addNotification}
+          >
+            <div>
+              <h2>
+                <HandRaise width="3rem" height="3rem" color="white" />
+              </h2>
+            </div>
+          </button>
+        )}
+      </>
+    );
   };
 
-  const addNotification = (e: any) => {
-    updateHands({ name: "ff", id: thisUser });
-    setLocalRaisedHand(!localRaisedHand);
-    dispatch({
-      type: ActionType.ADD,
-      payload: payload,
-    });
-  };
-
-  return (
-    <>
-      {localRaisedHand ? (
-        <button
-          id="hand-raise-btn"
-          className="hr-btn-raised cf"
-          onClick={addNotification}
-        >
-          <div>
-            <h2>
-              <HandRaise width="6rem" height="6rem" color="green" />
-            </h2>
-          </div>
-        </button>
-      ) : (
-        <button
-          id="hand-raise-btn"
-          className="hr-btn-not-raised cf"
-          onClick={addNotification}
-        >
-          <div>
-            <h2>
-              <HandRaise width="3rem" height="3rem" color="white" />
-            </h2>
-          </div>
-        </button>
-      )}
-    </>
-  );
+  return <HandRaiseButton />;
 }

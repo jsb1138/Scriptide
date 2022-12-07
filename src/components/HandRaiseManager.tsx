@@ -13,6 +13,12 @@ import {
   Microphone,
 } from "amazon-chime-sdk-component-library-react";
 
+import LockClosedIcon from "../assets/lock-closed-icn.png";
+import LockOpenIcon from "../assets/lock-open-icn.png";
+import MicOpenIcon from "../assets/mic-open-icn.png";
+import MicClosedIcon from "../assets/mic-closed-icn.png";
+import DismissIcon from "../assets/dismiss-icn.png";
+
 import { useOthers, useStorage, useMutation } from "../liveblocks.config.js";
 
 export default function HandRaiseManager() {
@@ -164,31 +170,51 @@ export default function HandRaiseManager() {
     }
   }, [unlockedUsers]);
 
+  console.log("unlockedUsers --->>>", unlockedUsers);
+
   return (
     <div id="hands">
       <ul>
         {hands.map((student: any, i: number) => (
           <li>
-            {student.name}
+            {student.name.length > 12
+              ? student.name.slice(0, 12) + "..."
+              : student.name}
             <div id="hand-ctrls">
               <button
                 onClick={() => updateUnmutedList(student.id)}
                 className="cf"
               >
                 {unmutedUsers.includes(student.id) ? (
-                  <Microphone />
+                  <img
+                    src={MicOpenIcon}
+                    alt="open microphone icon"
+                    height="28px"
+                  />
                 ) : (
-                  <Microphone muted />
+                  <img
+                    src={MicClosedIcon}
+                    alt="muted microphone icon"
+                    height="28px"
+                  />
                 )}
               </button>
               <button
                 onClick={() => updateUnlockedList(student.id)}
                 className="cf"
               >
-                {unlockedUsers.includes(student.id) ? <Lock /> : <Lock />}
+                {unlockedUsers.includes(student.id) ? (
+                  <img src={LockOpenIcon} alt="open lock icon" height="28px" />
+                ) : (
+                  <img
+                    src={LockClosedIcon}
+                    alt="closed lock icon"
+                    height="28px"
+                  />
+                )}
               </button>
               <button onClick={() => removeRaisedHand(i)} className="cf">
-                <Clear />
+                <img src={DismissIcon} alt="dismiss icon" height="24px" />
               </button>
             </div>
           </li>

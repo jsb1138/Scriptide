@@ -73,12 +73,14 @@ code {
   height: 100vh;
   text-align: center;
   overflow: hidden;
+  background-color: pink;
 }
 
 #App-main {
   height: 100%;
   width: 100%;
   padding: 0 20px 0 20px;
+  background-color: pink;
 }
 
 .open {
@@ -104,6 +106,7 @@ button {
   align-items: center;
 
 }
+
 /*
 .cf {
   height: 100vh;
@@ -127,7 +130,7 @@ button {
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 } */
 
-
+/* 
 .hr-btn-not-raised:hover {
   background-color: rgba(77, 199, 55, 0.4);
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
@@ -158,8 +161,8 @@ button {
   height: 130px;
   background-color: rgba(77, 199, 55, 0.2);
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-  /* pointer-events: none; */
-}
+  pointer-events: none;
+} */
 
 .top {
   z-index: 100000000000000000000;
@@ -386,5 +389,40 @@ h3 {
   left: 40%;
   bottom: 124%;
   transform: rotate(-30deg);
+}
+
+.monaco-scrollable-element {
+  border-radius: 1rem;
+  /* border: 5px solid red; */
+}
+
+.monaco-editor-background {
+  border-radius: 1rem;
+  /* border: 5px solid blue; */
+}
+
+.margin {
+  border-radius: 1rem;
+  /* border: 5px solid green; */
+}
+
+.ide-output {
+  border-radius: 1rem;
+  /* border: 5px solid purple; */
+}
+
+.overflow-guard {
+  border-radius: 1rem;
+  /* border: 5px solid yellow; */
+
+}
+
+.monaco-editor {
+  border-radius: 1rem;
+  /* border: 5px solid darksalmon; */
+}
+
+.sc-kMjNwy .lcJRGE .sc-ilhmMj .eOSYqn {
+  z-index: 1000000000000000000;
 }
 
