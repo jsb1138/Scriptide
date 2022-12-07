@@ -51,6 +51,9 @@ z-index: 10000000000;
   overflow: hidden;
   border-radius: 8px;
 
+  /* border: 6px solid rgba(255, 255, 255, 0.2); */
+  box-shadow: 10px 10px 20px grey
+
 }
 
 #cam-view-closed {
@@ -175,9 +178,9 @@ z-index: 10000000000;
   padding: 240px 200px 300px 200px;
   z-index: 9999;
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-  
-  
-  
+
+
+
   /* overflow: scroll; */
   display: flex;
   align-content: center;
@@ -327,7 +330,7 @@ z-index: 10000000000;
   hsl(200deg 56% 60% / 40%) 94%,
   hsl(200deg 56% 58% / 40%) 100%
 );
-} 
+}
 
 #hands button {
   padding: 0;
@@ -367,43 +370,42 @@ z-index: 10000000000;
   align-items: center;
 }
 
-/* Dropdown CSS */
-.dropdown {
-  height: 3rem;
-  position: absolute;
-  left: 7%;
+#meeting-ctrls .sc-gswNZR {
+  border: none;
+  transition: 0.4s;
 }
 
-.lang-dropdown-hidden {
-  bottom: 57%;
-  opacity: 0;
-  transition: .2s;
-
+#meeting-ctrls .sc-gswNZR:hover {
+background-image: linear-gradient(
+  150deg,
+  hsl(250deg 100% 60%) 0%,
+  hsl(217deg 100% 50%) 5%,
+  hsl(210deg 100% 50%) 17%,
+  hsl(205deg 100% 50%) 32%,
+  hsl(200deg 100% 50%) 47%,
+  hsl(198deg 100% 56%) 62%,
+  hsl(196deg 96% 63%) 75%,
+  hsl(193deg 91% 70%) 86%,
+  hsl(189deg 84% 76%) 94%,
+  hsl(184deg 77% 82%) 99%,
+  hsl(176deg 85% 90%) 100%
+  );
+  border: none;
+  transition: 0.4s;
 }
 
-.lang-dropdown {
-  bottom: 57%;
-  opacity: 1;
-  z-index: 100000;
-  transition: .2s;
+#meeting-ctrls {
+position: absolute;
+bottom: 40px;
+width: 100vw;
+z-index: 10000000000;
 }
-
-.theme-dropdown {
-  bottom: 50%;
-  left: 140px;
-  opacity: 1;
-  z-index: 100000;
-  transition: .2s;
-}
-
-.theme-dropdown-hidden {
-  bottom: 67%;
-  left: -200px;
-  opacity: 0;
-  transition: .2s;
-}
-
 
 .ch-popover-menu {
   height: 110px;
+}
+
+.getitcentered {
+  display: flex;
+  justify-content: center;
 }

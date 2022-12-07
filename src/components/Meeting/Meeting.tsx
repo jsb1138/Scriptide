@@ -83,7 +83,6 @@ const Meeting: FC = () => {
     }
   };
 
-  console.log("this is it------->>", meetingManager);
 
   const { roster } = useRosterState();
   const attendees = Object.values(roster);
@@ -179,10 +178,7 @@ const Meeting: FC = () => {
         useEffect(() => {
           toggleVideo();
         }, []);
-        // setTimeout(() => {
-        //   toggleVideo();
-        //   console.log("TOGGLER");
-        // }, 5000);
+
       }
     : console.log("TOO SOON");
 
@@ -305,8 +301,6 @@ const Meeting: FC = () => {
 
   const unmutedUsers = useStorage((root: any) => root.unmutedAttendees);
   const unlockedUsers = useStorage((root: any) => root.unlockedAttendees);
-  console.log("unmuted users --->", unmutedUsers);
-  console.log("unlocked users --->", unlockedUsers);
 
   // Define mutation
 
@@ -344,19 +338,15 @@ const Meeting: FC = () => {
       //////
       if (unmutedUsers.includes(currentUserId) && !userIsMuted) {
         // toggleMute();
-        console.log("1 this should be false ->", userIsMuted);
       } else if (!unmutedUsers.includes(currentUserId) && !userIsMuted) {
         toggleMute();
         setUserIsMuted(true);
-        console.log("2 You have been MUTED!");
       } else if (unmutedUsers.includes(currentUserId) && userIsMuted) {
         toggleMute();
         setUserIsMuted(false);
-        console.log("3 You have been UN-MUTED!");
       } else if (!unmutedUsers.includes(currentUserId) && userIsMuted) {
         // toggleMute();
         // setUserIsMuted(false);
-        console.log("4 this should be false ->", userIsMuted);
       }
       //////
       //////
@@ -401,19 +391,15 @@ const Meeting: FC = () => {
       //////
       if (unlockedUsers.includes(currentUserId) && !userIsLocked) {
         // toggleMute();
-        console.log("1 this should be false ->", userIsLocked);
       } else if (!unlockedUsers.includes(currentUserId) && !userIsLocked) {
         // toggleMute();
         setUserIsLocked(true);
-        console.log("2 You have been LOCKED!");
       } else if (unlockedUsers.includes(currentUserId) && userIsLocked) {
         // toggleMute();
         setUserIsLocked(false);
-        console.log("3 You have been UN-LOCKED!");
       } else if (!unlockedUsers.includes(currentUserId) && userIsLocked) {
         // toggleMute();
         // setUserIsMuted(false);
-        console.log("4 this should be true ->", userIsLocked);
       }
       //////
       //////
@@ -425,7 +411,6 @@ const Meeting: FC = () => {
   }, [unlockedUsers]);
 
   const startVid = () => {
-    console.log("START!");
     toggleVideo();
   };
 
@@ -496,6 +481,8 @@ const Meeting: FC = () => {
                 )}
               </div>
             </div>
+            <div className="getitcentered">
+
             <div id="meeting-ctrls">
               {meetingStatus === MeetingStatus.Succeeded ? (
                 <>
@@ -513,8 +500,9 @@ const Meeting: FC = () => {
                 </>
               ) : (
                 <div />
-              )}
+                )}
             </div>
+                </div>
             <MenuBar />
 
             {!camActive ? (
@@ -593,7 +581,9 @@ const Meeting: FC = () => {
           </div>
         )}
         <ExcalComponent />
-        <NotionModal />
+        <NotionModal meetingLoaded={
+            meetingStatus === MeetingStatus.Succeeded ? true : false
+          }/>
       </NotificationProvider>
     </>
   );

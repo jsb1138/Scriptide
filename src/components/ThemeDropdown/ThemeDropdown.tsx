@@ -7,7 +7,7 @@ import { useScriptideContext } from "../../contexts/ScriptideProvider";
 export function ThemeDropdown() {
   const { theme, setTheme } = useScriptideContext();
 
-  function handleThemeChange(th: any) {
+  function handleThemeChange(th: typeof theme) {
     const theme = th;
 
     if (["light", "vs-dark"].includes(theme)) {
@@ -19,48 +19,44 @@ export function ThemeDropdown() {
       }));
     }
   }
-  // useEffect(() => {
-  //   console.log(theme);
-  //   defineTheme("oceanic-next").then((_: any) =>
-  //     setTheme({ value: "oceanic-next", label: "oceanic-next" })
-  //   );
-  // }, []);
+
   return (
     <Select
-      placeholder={`Select Theme`}
+      placeholder={theme?.value || `Select Theme`}
       // options={languageOptions}
       options={Object.entries(monacoThemes).map(([themeId, themeName]) => ({
         label: themeName,
         value: themeId,
         key: themeId,
       }))}
-      value={theme.value}
+      value={theme?.value}
       theme={(theme) => ({
         ...theme,
         borderRadius: 10,
         // https://react-select.com/styles#overriding-the-theme
         colors: {
           ...theme.colors,
-          // primary: "black",
-          // primary75: "blue",
-          // primary50: "red",
-          primary25: "green", // highlight color
+          primary: "#5433FF", // box border color
+          // primary75: "#5433FF",
+          primary50: "#20BDFF",// select highlight color
+          primary25: "#5433FF", // highlight color
           // danger: "pink",
           // dangerLight: "purple",
-          neutral0: "black", // background color
-          // neutral5: "blue",
+          neutral0: "#0B0024", // background color
+          // neutral5: "#5433FF",
           // neutral10: "red",
-          // neutral20: "green", //box border color
-          // neutral30: "pink",
-          // neutral40: "purple",
+          neutral20: "#5433FF", // box divider color
+          neutral30: "#20BDFF", // box border hover color
+          neutral40: "purple", // down arrow hover color
           // neutral50: "grey",
-          // neutral60: "blanchedalmond",
+          neutral60: "#20BDFF", // menu selected down arrow color
           // neutral70: "red",
-          // neutral80: "orange",
+          neutral80: "#20BDFF", // font color
           // neutral90: "cyan",
         },
       })}
-      onChange={handleThemeChange}
+      defaultValue={'vs-dark'}
+      onChange={(selectedOption) => handleThemeChange(selectedOption)}
     />
   );
 }

@@ -18,7 +18,6 @@ export default function ScriptideProvider({ children }) {
   const [localRaisedHand, setLocalRaisedHand] = useState(false);
   const [excalActive, setExcalActive] = useState(false);
   const [transitionState, setTransitionState] = useState(false);
-  const [opacity, setOpacity] = useState(true);
   const [meetingTitle, setMeetingTitle] = useState("");
   const [attendeeName, setName] = useState("");
   const [keyPressed, setKeyPressed] = useState(false);
@@ -31,6 +30,7 @@ export default function ScriptideProvider({ children }) {
   const [showLanguage, setShowLanguage] = useState(false);
   const [showTheme, setShowTheme] = useState(false);
   const [userNotionId, setUserNotionId] = useState(null);
+  const [excalState, setExcalState] = useState([])
 
   return (
     <ScriptideContext.Provider
@@ -67,8 +67,6 @@ export default function ScriptideProvider({ children }) {
         setExcalActive,
         transitionState,
         setTransitionState,
-        opacity,
-        setOpacity,
         meetingTitle,
         setMeetingTitle,
         attendeeName,
@@ -91,6 +89,11 @@ export default function ScriptideProvider({ children }) {
         setShowTheme,
         userNotionId,
         setUserNotionId,
+        excalState,
+        setExcalState
+
+
+
       }}
     >
       {children}
