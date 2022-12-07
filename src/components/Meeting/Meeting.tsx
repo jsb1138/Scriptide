@@ -479,7 +479,8 @@ const Meeting: FC = () => {
                 )}
               </div>
             </div>
-            <div className='getitcentered'>
+            <div className="getitcentered">
+
             <div id="meeting-ctrls">
               {meetingStatus === MeetingStatus.Succeeded ? (
                 <>
@@ -499,7 +500,7 @@ const Meeting: FC = () => {
                 <div />
                 )}
             </div>
-            </div>
+                </div>
             <MenuBar />
 
             {!camActive ? (
@@ -578,7 +579,9 @@ const Meeting: FC = () => {
           </div>
         )}
         <ExcalComponent />
-        <NotionModal />
+        <NotionModal meetingLoaded={
+            meetingStatus === MeetingStatus.Succeeded ? true : false
+          }/>
       </NotificationProvider>
     </>
   );

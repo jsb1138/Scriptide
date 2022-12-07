@@ -4,6 +4,7 @@ import NotionLogo from '../../assets/Notion_app_logo.png';
 
 function SendToNotion() {
   const { notionModalIsOpen, setNotionModalIsOpen } = useScriptideContext();
+  
 
   function handleClick() {
     setNotionModalIsOpen(!notionModalIsOpen);
