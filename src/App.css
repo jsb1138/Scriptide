@@ -129,7 +129,7 @@ button {
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
 } */
 
-/* 
+/*
 .hr-btn-not-raised:hover {
   background-color: rgba(77, 199, 55, 0.4);
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
@@ -390,39 +390,16 @@ h3 {
   transform: rotate(-30deg);
 }
 
-.monaco-scrollable-element {
-  border-radius: 1rem;
-  /* border: 5px solid red; */
-}
 
-.monaco-editor-background {
-  border-radius: 1rem;
-  /* border: 5px solid blue; */
-}
-
-.margin {
-  border-radius: 1rem;
-  /* border: 5px solid green; */
-}
 
 .ide-output {
   border-radius: 1rem;
   /* border: 5px solid purple; */
 }
 
-.overflow-guard {
-  border-radius: 1rem;
-  /* border: 5px solid yellow; */
-  width: 10%;
-  opacity: 1;
-  
-}
 
-.monaco-editor {
-  border-radius: 1rem;
-  width: 10%;
-  /* border: 5px solid darksalmon; */
-}
+
+
 
 .sc-kMjNwy .lcJRGE .sc-ilhmMj .eOSYqn {
   z-index: 1000000000000000000;

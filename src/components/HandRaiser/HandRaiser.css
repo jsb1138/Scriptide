@@ -1,0 +1,47 @@
+#hand-raise-btn {
+  position: absolute;
+  margin-left: 20px;
+  margin-top: 0px;
+  /* right: 15px;
+  top: 550px; */
+  /* width: 140px;
+  height: 140px; */
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: rgba(77, 199, 55, 0.2);
+  z-index: 10000000000;
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.hr-btn-not-raised:hover {
+  background-color: rgba(77, 199, 55, 0.4);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  border: none;
+}
+
+.hr-btn-raised:hover {
+  background-color: rgba(77, 199, 55, 0.2);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  border: none;
+}
+
+.hr-btn-not-raised {
+  padding-top: 20px;
+  right: 45px;
+  bottom: 48px;
+  width: 70px;
+  height: 70px;
+  background-color: rgba(77, 199, 55, 0.2);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+}
+
+.hr-btn-raised {
+  padding-top: 20px;
+  right: 15px;
+  bottom: 20px;
+  width: 130px;
+  height: 130px;
+  background-color: rgba(77, 199, 55, 0.2);
+  transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
+  /* pointer-events: none; */
+}
