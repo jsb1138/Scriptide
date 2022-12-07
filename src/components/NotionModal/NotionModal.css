@@ -97,23 +97,3 @@
   font-weight: bold;
 }
 
-.modal-dont-show {
-  opacity: 0;
-  transition: 0.05s;
-}
-
-.item-dont-show {
-  visibility: hidden;
-  transition: 0.05s linear;
-}
-
-.modal-show {
-  opacity: 1;
-  transition: 0s;
-}
-
-#close-cross-dont-show {
-  width: 10px;
-  opacity: 0;
-  transition: 0.05s;
-}
