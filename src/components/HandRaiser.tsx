@@ -22,6 +22,7 @@ export default function HandRaiser() {
     isClicked,
     setIsClicked,
     thisUser,
+    thisUserName,
     setUserIsMuted,
     initiator,
     userIsMuted,
@@ -72,7 +73,7 @@ export default function HandRaiser() {
     };
 
     const addNotification = (e: any) => {
-      updateHands({ name: "ff", id: thisUser });
+      updateHands({ name: thisUserName, id: thisUser });
       setLocalRaisedHand(!localRaisedHand);
       dispatch({
         type: ActionType.ADD,

@@ -62,6 +62,7 @@ const Meeting: FC = () => {
     userIsLocked,
     setUserIsLocked,
     setThisUser,
+    setThisUserName,
     localRaisedHand,
     setLocalRaisedHand,
     showLanguage,
@@ -82,7 +83,6 @@ const Meeting: FC = () => {
     }
   };
 
-
   const { roster } = useRosterState();
   const attendees = Object.values(roster);
   let currentUserId: string = "";
@@ -95,6 +95,7 @@ const Meeting: FC = () => {
     // @ts-ignore
     currentUserName = name;
     setThisUser(currentUserId);
+    setThisUserName(currentUserName);
   });
 
   ///////// COULD IMPORT THESE FUNCTIONS FROM ELSEWHERE... AS HELPERS??
@@ -176,7 +177,6 @@ const Meeting: FC = () => {
         useEffect(() => {
           toggleVideo();
         }, []);
-
       }
     : console.log("TOO SOON");
 
@@ -451,11 +451,6 @@ const Meeting: FC = () => {
               <div
                 style={{
                   margin: "0",
-                  backgroundColor: `${
-                    currentUserId.length > 0 && currentUserId === initiator
-                      ? "red"
-                      : "pink"
-                  }`,
                   height: "2rem",
                   display: "flex",
                   flexDirection: "column",
@@ -468,11 +463,7 @@ const Meeting: FC = () => {
               >
                 {currentUserId.length > 0 ? (
                   <>
-                    <h6 onClick={startVid}>
-                      {currentUserId === initiator
-                        ? `Instructor + ${others.count} others in meeting: ${meetingIdentifier}`
-                        : `Student + ${others.count} others in meeting: ${meetingIdentifier}`}
-                    </h6>
+                    <h6>Meeting ID: ${meetingIdentifier}</h6>
                   </>
                 ) : (
                   <></>
@@ -480,27 +471,26 @@ const Meeting: FC = () => {
               </div>
             </div>
             <div className="getitcentered">
-
-            <div id="meeting-ctrls">
-              {meetingStatus === MeetingStatus.Succeeded ? (
-                <>
-                  <ControlBar layout="undocked-horizontal" showLabels>
-                    <AudioInputControl />
-                    <VideoInputControl />
-                    <AudioOutputControl />
-                    <ControlBarButton
-                      icon={<Phone />}
-                      onClick={clickedEndMeeting}
-                      label="End"
-                    />
-                  </ControlBar>
+              <div id="meeting-ctrls">
+                {meetingStatus === MeetingStatus.Succeeded ? (
+                  <>
+                    <ControlBar layout="undocked-horizontal" showLabels>
+                      <AudioInputControl />
+                      <VideoInputControl />
+                      <AudioOutputControl />
+                      <ControlBarButton
+                        icon={<Phone />}
+                        onClick={clickedEndMeeting}
+                        label="End"
+                      />
+                    </ControlBar>
+                    <div />
+                  </>
+                ) : (
                   <div />
-                </>
-              ) : (
-                <div />
                 )}
+              </div>
             </div>
-                </div>
             <MenuBar />
 
             {!camActive ? (
@@ -579,9 +569,11 @@ const Meeting: FC = () => {
           </div>
         )}
         <ExcalComponent />
-        <NotionModal meetingLoaded={
+        <NotionModal
+          meetingLoaded={
             meetingStatus === MeetingStatus.Succeeded ? true : false
-          }/>
+          }
+        />
       </NotificationProvider>
     </>
   );
