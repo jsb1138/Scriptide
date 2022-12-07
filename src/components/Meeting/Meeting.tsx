@@ -1,8 +1,10 @@
+
 import { FC, useEffect, useState, useRef } from "react";
 import { useScriptideContext } from "../../contexts/ScriptideProvider";
 import { IDE } from "../../components/IDE/IDE.tsx";
 import NotionModal from "../../components/NotionModal/NotionModal";
 import "./Meeting.css";
+
 
 import {
   AudioInputControl,
@@ -34,10 +36,10 @@ import Notifications from "../../containers/Notifications";
 import ExcalComponent from "../excalidrawComponent/ExcalComponent";
 import HandRaiseManager from "../HandRaiseManager";
 
-import { useOthers, useStorage, useMutation } from "../../liveblocks.config.js";
-import MenuBar from "../MenuBar/MenuBar";
-import { LanguageDropdown } from "../LanguageDropdown/LanguageDropdown";
-import { ThemeDropdown } from "../ThemeDropdown/ThemeDropdown";
+import { useOthers, useStorage, useMutation } from '../../liveblocks.config.js';
+import MenuBar from '../MenuBar/MenuBar';
+import { LanguageDropdown } from '../LanguageDropdown/LanguageDropdown';
+import { ThemeDropdown } from '../ThemeDropdown/ThemeDropdown';
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
@@ -85,8 +87,8 @@ const Meeting: FC = () => {
 
   const { roster } = useRosterState();
   const attendees = Object.values(roster);
-  let currentUserId: string = "";
-  let currentUserName: string | undefined = "";
+  let currentUserId: string = '';
+  let currentUserName: string | undefined = '';
 
   //redundant variable
   const attendeeItems = attendees.splice(0, 1).map((attendee) => {
@@ -157,6 +159,7 @@ const Meeting: FC = () => {
     toggleVideo();
   }
 
+
   const getLocalPreview = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
@@ -191,7 +194,6 @@ const Meeting: FC = () => {
   const toggleMenu = () => {
     setMenuState(!menuState);
   };
-
   //////////////////////////////////////////////////////////////////////////////////////////liveblocks
   const removeRaisedHand = (index: number) => {
     deleteHand(index);
@@ -208,9 +210,10 @@ const Meeting: FC = () => {
   // Define mutation
   const updateHands = useMutation(({ storage }: any, student: any) => {
     // @ts-ignore
-    const mutableHandsList = storage.get("raisedHandsX");
+    const mutableHandsList = storage.get('raisedHandsX');
     mutableHandsList.push(student);
   }, []);
+
 
   const deleteHand = useMutation(({ storage }: any, handIndex: any) => {
     const mutableHandsList = storage.get("raisedHandsX");
@@ -222,7 +225,7 @@ const Meeting: FC = () => {
 
     const payload: any = {
       severity: Severity.INFO,
-      message: "Your hand is raised and the instructor has been notified.",
+      message: 'Your hand is raised and the instructor has been notified.',
     };
 
     const addNotification = (e: any) => {
@@ -440,44 +443,44 @@ const Meeting: FC = () => {
                 <ThemeDropdown />
               </div>
             ) : (
-              <div className="dropdown theme-dropdown-hidden">
+              <div className='dropdown theme-dropdown-hidden'>
                 <ThemeDropdown />
               </div>
             )}
             {showLanguage && ideActive ? (
-              <div className="dropdown lang-dropdown">
+              <div className='dropdown lang-dropdown'>
                 <LanguageDropdown />
               </div>
             ) : (
-              <div className="dropdown lang-dropdown-hidden">
+              <div className='dropdown lang-dropdown-hidden'>
                 <LanguageDropdown />
               </div>
             )}
             <div
               style={{
-                height: "100vh",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
+                height: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               <div
                 style={{
-                  margin: "0",
+                  margin: '0',
                   backgroundColor: `${
                     currentUserId.length > 0 && currentUserId === initiator
-                      ? "red"
-                      : "pink"
+                      ? 'red'
+                      : 'pink'
                   }`,
-                  height: "2rem",
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  position: "absolute",
-                  top: "33px",
-                  zIndex: "10000000000",
+                  height: '2rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  position: 'absolute',
+                  top: '33px',
+                  zIndex: '10000000000',
                 }}
               >
                 {currentUserId.length > 0 ? (
@@ -518,18 +521,18 @@ const Meeting: FC = () => {
 
             {!camActive ? (
               <>
-                <div onClick={handleCamClick} id="cam-view-closed"></div>
+                <div onClick={handleCamClick} id='cam-view-closed'></div>
                 <div
                   onClick={handleCamClick}
-                  id={camActive ? "cam-view-open" : "cam-view-closed"}
+                  id={camActive ? 'cam-view-open' : 'cam-view-closed'}
                 >
                   <LocalVideo />
                 </div>
               </>
             ) : (
               <>
-                <div onClick={handleCamClick} id="cam-view-closed"></div>
-                <div id={camActive ? "cam-view-open" : "cam-view-closed"}>
+                <div onClick={handleCamClick} id='cam-view-closed'></div>
+                <div id={camActive ? 'cam-view-open' : 'cam-view-closed'}>
                   <LocalVideo />
                 </div>
               </>
@@ -537,10 +540,10 @@ const Meeting: FC = () => {
 
             {!ideActive ? (
               <>
-                <div onClick={handleIdeClick} id="empty-porthole-invis"></div>
+                <div onClick={handleIdeClick} id='empty-porthole-invis'></div>
                 <div
                   onClick={handleIdeClick}
-                  id={ideActive ? "ide-view-open" : "ide-view-closed"}
+                  id={ideActive ? 'ide-view-open' : 'ide-view-closed'}
                 >
                   <div className="ide-pos-closed">
                     <IDE currentUserId={currentUserId} />
@@ -549,9 +552,9 @@ const Meeting: FC = () => {
               </>
             ) : (
               <>
-                <div onClick={handleIdeClick} id="empty-porthole"></div>
-                <div id={ideActive ? "ide-view-open" : "ide-view-closed"}>
-                  <div className="ide-pos-open">
+                <div onClick={handleIdeClick} id='empty-porthole'></div>
+                <div id={ideActive ? 'ide-view-open' : 'ide-view-closed'}>
+                  <div className='ide-pos-open'>
                     <IDE />
                   </div>
                 </div>
@@ -560,18 +563,18 @@ const Meeting: FC = () => {
 
             {!gridActive ? (
               <>
-                <div onClick={handleGridClick} id="grid-view-closed"></div>
+                <div onClick={handleGridClick} id='grid-view-closed'></div>
                 <div
                   onClick={handleGridClick}
-                  id={gridActive ? "grid-view-open" : "grid-view-closed"}
+                  id={gridActive ? 'grid-view-open' : 'grid-view-closed'}
                 >
                   <RemoteVideos />
                 </div>
               </>
             ) : (
               <>
-                <div onClick={handleGridClick} id="grid-view-closed"></div>
-                <div id={gridActive ? "grid-view-open" : "grid-view-closed"}>
+                <div onClick={handleGridClick} id='grid-view-closed'></div>
+                <div id={gridActive ? 'grid-view-open' : 'grid-view-closed'}>
                   <RemoteVideos />
                 </div>
               </>
@@ -584,15 +587,19 @@ const Meeting: FC = () => {
             )}
           </>
         ) : (
-          <div id="center-flex">
+          <div id='center-flex'>
             <h3>
               Joining<code> {meetingIdentifier} </code>meeting
             </h3>
-            <h3 className="ellipsis"></h3>
+            <h3 className='ellipsis'></h3>
           </div>
         )}
         <ExcalComponent />
-        <NotionModal />
+        <NotionModal
+          meetingLoaded={
+            meetingStatus === MeetingStatus.Succeeded ? true : false
+          }
+        />
       </NotificationProvider>
     </>
   );
