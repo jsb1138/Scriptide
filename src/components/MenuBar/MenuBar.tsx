@@ -5,6 +5,9 @@ import { LanguageDropdown } from "./LanguageDropdown";
 import SendToNotion from "../SendToNotion/SendToNotion";
 import Tooltip from "../Tooltip/Tooltip";
 import "./MenuBar.css";
+import ExcaliLogo from "../../assets/excalidraw4.png"
+import ThemeLogo from "../../assets/theme.svg"
+import LanguageLogo from "../../assets/lang-select.svg"
 
 const MenuBar: FC = () => {
   const {
@@ -58,7 +61,7 @@ const MenuBar: FC = () => {
         <Tooltip content="Sketch diagrams with Excalidraw">
           <div className="menu-item" onClick={handleExcali}>
             <img
-              src="src/assets/excalidraw4.png"
+              src={ExcaliLogo}
               className="excali-logo"
               title="open excalidraw"
             />
@@ -94,7 +97,7 @@ const MenuBar: FC = () => {
       >
         <Tooltip content="Sketch diagrams with Excalidraw">
           <div className="menu-item" onClick={handleExcali}>
-            <img src="src/assets/excalidraw4.png" className="excali-logo" alt='excalilogo'/>
+            <img src={ExcaliLogo} className="excali-logo" alt='excalilogo'/>
 
           </div>
         </Tooltip>
@@ -106,12 +109,12 @@ const MenuBar: FC = () => {
         <div className='show-me'>
         <Tooltip content='Choose an IDE theme'>
           <div className='menu-item' onClick={handleTheme}>
-            <img src='src/assets/theme.svg' className='theme-logo'alt='theme icon'/>
+            <img src={ThemeLogo} className='theme-logo'alt='theme icon'/>
           </div>
         </Tooltip>
         <Tooltip content='Choose a programming language'>
           <div className='menu-item' onClick={handleLanguage}>
-          <img src='src/assets/lang-select.svg' className='lang-logo' alt='language logo'/>
+          <img src={LanguageLogo} className='lang-logo' alt='language logo'/>
           </div>
         </Tooltip>
         </div>
