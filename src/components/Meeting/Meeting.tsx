@@ -1,10 +1,8 @@
-
 import { FC, useEffect, useState, useRef } from "react";
 import { useScriptideContext } from "../../contexts/ScriptideProvider";
 import { IDE } from "../../components/IDE/IDE.tsx";
 import NotionModal from "../../components/NotionModal/NotionModal";
 import "./Meeting.css";
-
 
 import {
   AudioInputControl,
@@ -36,10 +34,10 @@ import Notifications from "../../containers/Notifications";
 import ExcalComponent from "../excalidrawComponent/ExcalComponent";
 import HandRaiseManager from "../HandRaiseManager";
 
-import { useOthers, useStorage, useMutation } from '../../liveblocks.config.js';
-import MenuBar from '../MenuBar/MenuBar';
-import { LanguageDropdown } from '../LanguageDropdown/LanguageDropdown';
-import { ThemeDropdown } from '../ThemeDropdown/ThemeDropdown';
+import { useOthers, useStorage, useMutation } from "../../liveblocks.config.js";
+import MenuBar from "../MenuBar/MenuBar";
+import { LanguageDropdown } from "../LanguageDropdown/LanguageDropdown";
+import { ThemeDropdown } from "../ThemeDropdown/ThemeDropdown";
 
 const Meeting: FC = () => {
   const meetingManager = useMeetingManager();
@@ -83,12 +81,11 @@ const Meeting: FC = () => {
     }
   };
 
-  console.log("this is it------->>", meetingManager);
 
   const { roster } = useRosterState();
   const attendees = Object.values(roster);
-  let currentUserId: string = '';
-  let currentUserName: string | undefined = '';
+  let currentUserId: string = "";
+  let currentUserName: string | undefined = "";
 
   //redundant variable
   const attendeeItems = attendees.splice(0, 1).map((attendee) => {
@@ -156,9 +153,9 @@ const Meeting: FC = () => {
   };
   const { devices, selectedDevice } = useVideoInputs();
   function activateVid() {
+
     toggleVideo();
   }
-
 
   const getLocalPreview = async () => {
     try {
@@ -179,10 +176,7 @@ const Meeting: FC = () => {
         useEffect(() => {
           toggleVideo();
         }, []);
-        // setTimeout(() => {
-        //   toggleVideo();
-        //   console.log("TOGGLER");
-        // }, 5000);
+
       }
     : console.log("TOO SOON");
 
@@ -194,6 +188,7 @@ const Meeting: FC = () => {
   const toggleMenu = () => {
     setMenuState(!menuState);
   };
+
   //////////////////////////////////////////////////////////////////////////////////////////liveblocks
   const removeRaisedHand = (index: number) => {
     deleteHand(index);
@@ -210,10 +205,9 @@ const Meeting: FC = () => {
   // Define mutation
   const updateHands = useMutation(({ storage }: any, student: any) => {
     // @ts-ignore
-    const mutableHandsList = storage.get('raisedHandsX');
+    const mutableHandsList = storage.get("raisedHandsX");
     mutableHandsList.push(student);
   }, []);
-
 
   const deleteHand = useMutation(({ storage }: any, handIndex: any) => {
     const mutableHandsList = storage.get("raisedHandsX");
@@ -225,7 +219,7 @@ const Meeting: FC = () => {
 
     const payload: any = {
       severity: Severity.INFO,
-      message: 'Your hand is raised and the instructor has been notified.',
+      message: "Your hand is raised and the instructor has been notified.",
     };
 
     const addNotification = (e: any) => {
@@ -305,8 +299,6 @@ const Meeting: FC = () => {
 
   const unmutedUsers = useStorage((root: any) => root.unmutedAttendees);
   const unlockedUsers = useStorage((root: any) => root.unlockedAttendees);
-  console.log("unmuted users --->", unmutedUsers);
-  console.log("unlocked users --->", unlockedUsers);
 
   // Define mutation
 
@@ -344,19 +336,15 @@ const Meeting: FC = () => {
       //////
       if (unmutedUsers.includes(currentUserId) && !userIsMuted) {
         // toggleMute();
-        console.log("1 this should be false ->", userIsMuted);
       } else if (!unmutedUsers.includes(currentUserId) && !userIsMuted) {
         toggleMute();
         setUserIsMuted(true);
-        console.log("2 You have been MUTED!");
       } else if (unmutedUsers.includes(currentUserId) && userIsMuted) {
         toggleMute();
         setUserIsMuted(false);
-        console.log("3 You have been UN-MUTED!");
       } else if (!unmutedUsers.includes(currentUserId) && userIsMuted) {
         // toggleMute();
         // setUserIsMuted(false);
-        console.log("4 this should be false ->", userIsMuted);
       }
       //////
       //////
@@ -401,19 +389,15 @@ const Meeting: FC = () => {
       //////
       if (unlockedUsers.includes(currentUserId) && !userIsLocked) {
         // toggleMute();
-        console.log("1 this should be false ->", userIsLocked);
       } else if (!unlockedUsers.includes(currentUserId) && !userIsLocked) {
         // toggleMute();
         setUserIsLocked(true);
-        console.log("2 You have been LOCKED!");
       } else if (unlockedUsers.includes(currentUserId) && userIsLocked) {
         // toggleMute();
         setUserIsLocked(false);
-        console.log("3 You have been UN-LOCKED!");
       } else if (!unlockedUsers.includes(currentUserId) && userIsLocked) {
         // toggleMute();
         // setUserIsMuted(false);
-        console.log("4 this should be true ->", userIsLocked);
       }
       //////
       //////
@@ -425,7 +409,6 @@ const Meeting: FC = () => {
   }, [unlockedUsers]);
 
   const startVid = () => {
-    console.log("START!");
     toggleVideo();
   };
 
@@ -438,49 +421,49 @@ const Meeting: FC = () => {
         {/* <AddNotificationButton /> */}
         {meetingStatus === MeetingStatus.Succeeded ? (
           <>
-            {showTheme && ideActive ? (
+           {showTheme && ideActive ? (
               <div className="dropdown theme-dropdown">
                 <ThemeDropdown />
               </div>
             ) : (
-              <div className='dropdown theme-dropdown-hidden'>
+              <div className="dropdown theme-dropdown-hidden">
                 <ThemeDropdown />
               </div>
             )}
             {showLanguage && ideActive ? (
-              <div className='dropdown lang-dropdown'>
+              <div className="dropdown lang-dropdown">
                 <LanguageDropdown />
               </div>
             ) : (
-              <div className='dropdown lang-dropdown-hidden'>
+              <div className="dropdown lang-dropdown-hidden">
                 <LanguageDropdown />
               </div>
             )}
             <div
               style={{
-                height: '100vh',
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
+                height: "100vh",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
               }}
             >
               <div
                 style={{
-                  margin: '0',
+                  margin: "0",
                   backgroundColor: `${
                     currentUserId.length > 0 && currentUserId === initiator
-                      ? 'red'
-                      : 'pink'
+                      ? "red"
+                      : "pink"
                   }`,
-                  height: '2rem',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  position: 'absolute',
-                  top: '33px',
-                  zIndex: '10000000000',
+                  height: "2rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  position: "absolute",
+                  top: "33px",
+                  zIndex: "10000000000",
                 }}
               >
                 {currentUserId.length > 0 ? (
@@ -496,43 +479,43 @@ const Meeting: FC = () => {
                 )}
               </div>
             </div>
-            <div className="getitcentered">
-              <div id="meeting-ctrls">
-                {meetingStatus === MeetingStatus.Succeeded ? (
-                  <>
-                    <ControlBar layout="undocked-horizontal" showLabels>
-                      <AudioInputControl />
-                      <VideoInputControl />
-                      <AudioOutputControl />
-                      <ControlBarButton
-                        icon={<Phone />}
-                        onClick={clickedEndMeeting}
-                        label="End"
-                      />
-                    </ControlBar>
-                    <div />
-                  </>
-                ) : (
+            <div className='getitcentered'>
+            <div id="meeting-ctrls">
+              {meetingStatus === MeetingStatus.Succeeded ? (
+                <>
+                  <ControlBar layout="undocked-horizontal" showLabels>
+                    <AudioInputControl />
+                    <VideoInputControl />
+                    <AudioOutputControl />
+                    <ControlBarButton
+                      icon={<Phone />}
+                      onClick={clickedEndMeeting}
+                      label="End"
+                    />
+                  </ControlBar>
                   <div />
+                </>
+              ) : (
+                <div />
                 )}
-              </div>
+            </div>
             </div>
             <MenuBar />
 
             {!camActive ? (
               <>
-                <div onClick={handleCamClick} id='cam-view-closed'></div>
+                <div onClick={handleCamClick} id="cam-view-closed"></div>
                 <div
                   onClick={handleCamClick}
-                  id={camActive ? 'cam-view-open' : 'cam-view-closed'}
+                  id={camActive ? "cam-view-open" : "cam-view-closed"}
                 >
                   <LocalVideo />
                 </div>
               </>
             ) : (
               <>
-                <div onClick={handleCamClick} id='cam-view-closed'></div>
-                <div id={camActive ? 'cam-view-open' : 'cam-view-closed'}>
+                <div onClick={handleCamClick} id="cam-view-closed"></div>
+                <div id={camActive ? "cam-view-open" : "cam-view-closed"}>
                   <LocalVideo />
                 </div>
               </>
@@ -540,10 +523,10 @@ const Meeting: FC = () => {
 
             {!ideActive ? (
               <>
-                <div onClick={handleIdeClick} id='empty-porthole-invis'></div>
+                <div onClick={handleIdeClick} id="empty-porthole-invis"></div>
                 <div
                   onClick={handleIdeClick}
-                  id={ideActive ? 'ide-view-open' : 'ide-view-closed'}
+                  id={ideActive ? "ide-view-open" : "ide-view-closed"}
                 >
                   <div className="ide-pos-closed">
                     <IDE currentUserId={currentUserId} />
@@ -552,9 +535,9 @@ const Meeting: FC = () => {
               </>
             ) : (
               <>
-                <div onClick={handleIdeClick} id='empty-porthole'></div>
-                <div id={ideActive ? 'ide-view-open' : 'ide-view-closed'}>
-                  <div className='ide-pos-open'>
+                <div onClick={handleIdeClick} id="empty-porthole"></div>
+                <div id={ideActive ? "ide-view-open" : "ide-view-closed"}>
+                  <div className="ide-pos-open">
                     <IDE />
                   </div>
                 </div>
@@ -563,18 +546,18 @@ const Meeting: FC = () => {
 
             {!gridActive ? (
               <>
-                <div onClick={handleGridClick} id='grid-view-closed'></div>
+                <div onClick={handleGridClick} id="grid-view-closed"></div>
                 <div
                   onClick={handleGridClick}
-                  id={gridActive ? 'grid-view-open' : 'grid-view-closed'}
+                  id={gridActive ? "grid-view-open" : "grid-view-closed"}
                 >
                   <RemoteVideos />
                 </div>
               </>
             ) : (
               <>
-                <div onClick={handleGridClick} id='grid-view-closed'></div>
-                <div id={gridActive ? 'grid-view-open' : 'grid-view-closed'}>
+                <div onClick={handleGridClick} id="grid-view-closed"></div>
+                <div id={gridActive ? "grid-view-open" : "grid-view-closed"}>
                   <RemoteVideos />
                 </div>
               </>
@@ -587,19 +570,15 @@ const Meeting: FC = () => {
             )}
           </>
         ) : (
-          <div id='center-flex'>
+          <div id="center-flex">
             <h3>
               Joining<code> {meetingIdentifier} </code>meeting
             </h3>
-            <h3 className='ellipsis'></h3>
+            <h3 className="ellipsis"></h3>
           </div>
         )}
         <ExcalComponent />
-        <NotionModal
-          meetingLoaded={
-            meetingStatus === MeetingStatus.Succeeded ? true : false
-          }
-        />
+        <NotionModal />
       </NotificationProvider>
     </>
   );

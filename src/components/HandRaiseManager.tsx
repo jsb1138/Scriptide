@@ -31,9 +31,7 @@ export default function HandRaiseManager() {
 
   const unmutedUsers = useStorage((root: any) => root.unmutedAttendees);
   const unlockedUsers = useStorage((root: any) => root.unlockedAttendees);
-  console.log("unmuted users --->", unmutedUsers);
-  console.log("unlocked users --->", unlockedUsers);
-  console.log("THIS user --->", currentUserId);
+
 
   //////////////////////////////////////////////////////////////////////////////////////////liveblocks
   const removeRaisedHand = (index: number) => {
@@ -94,19 +92,15 @@ export default function HandRaiseManager() {
       //////
       if (unmutedUsers.includes(currentUserId) && !userIsMuted) {
         // toggleMute();
-        console.log("1 this should be false ->", userIsMuted);
       } else if (!unmutedUsers.includes(currentUserId) && !userIsMuted) {
         toggleMute();
         setUserIsMuted(true);
-        console.log("2 You have been MUTED!");
       } else if (unmutedUsers.includes(currentUserId) && userIsMuted) {
         toggleMute();
         setUserIsMuted(false);
-        console.log("3 You have been UN-MUTED!");
       } else if (!unmutedUsers.includes(currentUserId) && userIsMuted) {
         // toggleMute();
         // setUserIsMuted(false);
-        console.log("4 this should be false ->", userIsMuted);
       }
       //////
       //////
@@ -151,19 +145,15 @@ export default function HandRaiseManager() {
       //////
       if (unlockedUsers.includes(currentUserId) && !userIsLocked) {
         // toggleMute();
-        console.log("1 this should be false ->", userIsLocked);
       } else if (!unlockedUsers.includes(currentUserId) && !userIsLocked) {
         // toggleMute();
         setUserIsLocked(true);
-        console.log("2 You have been LOCKED!");
       } else if (unlockedUsers.includes(currentUserId) && userIsLocked) {
         // toggleMute();
         setUserIsLocked(false);
-        console.log("3 You have been UN-LOCKED!");
       } else if (!unlockedUsers.includes(currentUserId) && userIsLocked) {
         // toggleMute();
         // setUserIsMuted(false);
-        console.log("4 this should be true ->", userIsLocked);
       }
       //////
       //////

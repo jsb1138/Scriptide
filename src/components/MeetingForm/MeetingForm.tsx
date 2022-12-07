@@ -50,8 +50,7 @@ const MeetingForm: FC = () => {
         const processedLocalStorageMeetingTitle = JSON.parse(localMeetingTitle);
         const processedLocalStorageAttendeeName =
           JSON.parse(localAttendeeName);
-        console.log(processedLocalStorageMeetingTitle);
-        console.log(processedLocalStorageAttendeeName);
+
         setName(processedLocalStorageAttendeeName);
         setMeetingTitle(processedLocalStorageMeetingTitle);
         setTimeout(() => {
@@ -81,7 +80,6 @@ const MeetingForm: FC = () => {
     const title = meetingTitle.trim().toLocaleLowerCase();
     const name = attendeeName.trim();
     setMeetingIdentifier(title);
-    console.log("meeting manager", meetingManager);
 
     const meetingResponse: any = await getMeetingFromDB(title);
     const meetingJson = meetingResponse.data.getMeeting;
@@ -90,7 +88,7 @@ const MeetingForm: FC = () => {
         setMeetingActive(true);
         const meetingData = JSON.parse(meetingJson.data);
         const joinInfo = await joinMeeting(meetingData.MeetingId, name);
-        
+
         await addAttendeeToDB(joinInfo.Attendee.AttendeeId, name);
         const meetingSessionConfiguration = new MeetingSessionConfiguration(
           meetingData,
@@ -125,7 +123,7 @@ const MeetingForm: FC = () => {
 
     const videoDevice =
       await meetingManager.audioVideo?.listVideoInputDevices();
-    console.log("9900", videoDevice);
+
 
     let localVideoDevice;
     const videoStuff = videoDevice.map((info) => {
@@ -134,21 +132,14 @@ const MeetingForm: FC = () => {
     });
 
     await meetingManager.audioVideo?.startVideoInput(localVideoDevice);
-    console.log("888", localVideoDevice);
 
-    // await meetingManager.audioVideo?.realtimeMuteLocalAudio();
-    // await meetingManager.audioVideo?.realtimeSetCanUnmuteLocalAudio(false);
-    // await meetingManager.audioVideo?.startVideoInput(audioInputDeviceInfo.deviceId);
-    // await meetingManager.audioVideo?.start();
-    console.log("???", isVideoEnabled);
+
     if (localVideoDevice && !isVideoEnabled) {
-      console.log("TURN ON VIDEO!!!!");
       setTimeout(() => {
         toggleVideo();
       }, 3000);
       toggleVideo();
     }
-    console.log("AUDIO VIDEO STUFF --> ", meetingManager.audioVideo);
   };
   toggleVideo();
 

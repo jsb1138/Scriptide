@@ -61,7 +61,6 @@ export function IDE() {
       source_code: btoa(code),
       stdin: btoa(""),
     };
-    console.log(formData);
     const options = {
       method: "POST",
       url: submissions,
@@ -78,13 +77,10 @@ export function IDE() {
     axios
       .request(options)
       .then(function (response: { data: { token: any } }) {
-        console.log("res.data: ", response.data);
         const token = response.data.token;
-        console.log("token: ", token);
         checkStatus(token);
       })
       .catch((err: { response: { data: any } }) => {
-        console.log(options);
         let error = err.response ? err.response.data : err;
         //@ts-ignore
         setProcessing(false);
