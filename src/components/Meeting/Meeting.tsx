@@ -33,6 +33,7 @@ import { endMeeting } from "../../utils/api";
 import Notifications from "../../containers/Notifications";
 import ExcalComponent from "../excalidrawComponent/ExcalComponent";
 import HandRaiseManager from "../HandRaiseManager";
+import HandRaiser from "../HandRaiser";
 
 import { useOthers, useStorage, useMutation } from "../../liveblocks.config.js";
 import MenuBar from "../MenuBar/MenuBar";
@@ -154,7 +155,6 @@ const Meeting: FC = () => {
   };
   const { devices, selectedDevice } = useVideoInputs();
   function activateVid() {
-
     toggleVideo();
   }
 
@@ -218,88 +218,88 @@ const Meeting: FC = () => {
     mutableHandsList.delete(handIndex);
   }, []);
 
-  const HandRaiser = () => {
-    const dispatch = useNotificationDispatch();
+  // const HandRaiser = () => {
+  //   const dispatch = useNotificationDispatch();
 
-    const payload: any = {
-      severity: Severity.INFO,
-      message: "Your hand is raised and the instructor has been notified.",
-    };
+  //   const payload: any = {
+  //     severity: Severity.INFO,
+  //     message: "Your hand is raised and the instructor has been notified.",
+  //   };
 
-    const addNotification = (e: any) => {
-      updateHands({ name: currentUserName, id: currentUserId });
-      setLocalRaisedHand(!localRaisedHand);
-      dispatch({
-        type: ActionType.ADD,
-        payload: payload,
-      });
-    };
+  //   const addNotification = (e: any) => {
+  //     updateHands({ name: currentUserName, id: currentUserId });
+  //     setLocalRaisedHand(!localRaisedHand);
+  //     dispatch({
+  //       type: ActionType.ADD,
+  //       payload: payload,
+  //     });
+  //   };
 
-    return (
-      <>
-        {localRaisedHand ? (
-          <button
-            id="hand-raise-btn"
-            className="hr-btn-raised cf"
-            onClick={addNotification}
-          >
-            <div>
-              <h2>
-                <HandRaise width="6rem" height="6rem" color="green" />
-              </h2>
-            </div>
-          </button>
-        ) : (
-          <button
-            id="hand-raise-btn"
-            className="hr-btn-not-raised cf"
-            onClick={addNotification}
-          >
-            <div>
-              <h2>
-                <HandRaise width="3rem" height="3rem" color="white" />
-              </h2>
-            </div>
-          </button>
-        )}
-      </>
-    );
-  };
+  //   return (
+  //     <>
+  //       {localRaisedHand ? (
+  //         <button
+  //           id="hand-raise-btn"
+  //           className="hr-btn-raised cf"
+  //           onClick={addNotification}
+  //         >
+  //           <div>
+  //             <h2>
+  //               <HandRaise width="6rem" height="6rem" color="green" />
+  //             </h2>
+  //           </div>
+  //         </button>
+  //       ) : (
+  //         <button
+  //           id="hand-raise-btn"
+  //           className="hr-btn-not-raised cf"
+  //           onClick={addNotification}
+  //         >
+  //           <div>
+  //             <h2>
+  //               <HandRaise width="3rem" height="3rem" color="white" />
+  //             </h2>
+  //           </div>
+  //         </button>
+  //       )}
+  //     </>
+  //   );
+  // };
 
-  const HandRaiseManager = () => {
-    return (
-      <div id="hands">
-        <ul>
-          {hands.map((student: any, i: number) => (
-            <li>
-              {student.name}
-              <div id="hand-ctrls">
-                <button
-                  onClick={() => updateUnmutedList(student.id)}
-                  className="cf"
-                >
-                  {unmutedUsers.includes(student.id) ? (
-                    <Microphone muted />
-                  ) : (
-                    <Microphone />
-                  )}
-                </button>
-                <button
-                  onClick={() => updateUnlockedList(student.id)}
-                  className="cf"
-                >
-                  {unlockedUsers.includes(student.id) ? <Lock /> : <Lock />}
-                </button>
-                <button onClick={() => removeRaisedHand(i)} className="cf">
-                  <Clear />
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  };
+  // const HandRaiseManager = () => {
+  //   return (
+  //     <div id="hands">
+  //       <ul>
+  //         {hands.map((student: any, i: number) => (
+  //           <li>
+  //             {student.name}
+  //             <div id="hand-ctrls">
+  //               <button
+  //                 onClick={() => updateUnmutedList(student.id)}
+  //                 className="cf"
+  //               >
+  //                 {unmutedUsers.includes(student.id) ? (
+  //                   <Microphone muted />
+  //                 ) : (
+  //                   <Microphone />
+  //                 )}
+  //               </button>
+  //               <button
+  //                 onClick={() => updateUnlockedList(student.id)}
+  //                 className="cf"
+  //               >
+  //                 {unlockedUsers.includes(student.id) ? <Lock /> : <Lock />}
+  //               </button>
+  //               <button onClick={() => removeRaisedHand(i)} className="cf">
+  //                 <Clear />
+  //               </button>
+  //             </div>
+  //           </li>
+  //         ))}
+  //       </ul>
+  //     </div>
+  //   );
+  // };
 
   const unmutedUsers = useStorage((root: any) => root.unmutedAttendees);
   const unlockedUsers = useStorage((root: any) => root.unlockedAttendees);
@@ -436,7 +436,7 @@ const Meeting: FC = () => {
         {/* <AddNotificationButton /> */}
         {meetingStatus === MeetingStatus.Succeeded ? (
           <>
-           {showTheme && ideActive ? (
+            {showTheme && ideActive ? (
               <div className="dropdown theme-dropdown">
                 <ThemeDropdown />
               </div>

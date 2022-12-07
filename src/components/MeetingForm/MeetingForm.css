@@ -25,34 +25,3 @@
     );
   }
 
-
-  #meeting-ctrls .sc-gswNZR {
-    border: none;
-    transition: 0.4s;
-}
-
-#meeting-ctrls .sc-gswNZR:hover {
-  background-image: linear-gradient(
-    150deg,
-    hsl(250deg 100% 60%) 0%,
-    hsl(217deg 100% 50%) 5%,
-    hsl(210deg 100% 50%) 17%,
-    hsl(205deg 100% 50%) 32%,
-    hsl(200deg 100% 50%) 47%,
-    hsl(198deg 100% 56%) 62%,
-    hsl(196deg 96% 63%) 75%,
-    hsl(193deg 91% 70%) 86%,
-    hsl(189deg 84% 76%) 94%,
-    hsl(184deg 77% 82%) 99%,
-    hsl(176deg 85% 90%) 100%
-    );
-    border: none;
-    transition: 0.4s;
-}
-
-#meeting-ctrls {
-position: absolute;
-bottom: 40px;
-width: 100vw;
-z-index: 10000000000;
-}

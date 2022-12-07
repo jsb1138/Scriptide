@@ -10,6 +10,8 @@ import { LanguageDropdown } from "../LanguageDropdown/LanguageDropdown";
 import { OutputWindow } from "../OutputWindow/OutputWindow";
 import { ThemeDropdown } from "../ThemeDropdown/ThemeDropdown";
 
+import BigLock from "../../assets/big-lock-icn.png";
+
 //liveblocks
 
 import { useMutation, useStorage } from "../../liveblocks.config.js";
@@ -180,8 +182,13 @@ export function IDE() {
           {userIsLocked ? (
             <div id="lock" className="shield-up">
               <img
-                style={{ height: "80px", width: "80px", position: "relative" }}
-                src="src/assets/lock.png"
+                style={{
+                  height: "80px",
+                  width: "65px",
+                  position: "relative",
+                  opacity: 0.8,
+                }}
+                src={BigLock}
                 alt="lock"
               />
             </div>
