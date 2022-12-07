@@ -1,6 +1,6 @@
-import { ChangeEvent, FC, FormEvent } from "react";
-import { useScriptideContext } from "../../contexts/ScriptideProvider";
-import "./MeetingForm.css"
+import { ChangeEvent, FC, FormEvent, useEffect, useRef } from 'react';
+import { useScriptideContext } from '../../contexts/ScriptideProvider';
+import './MeetingForm.css';
 
 import {
   FormField,
@@ -17,8 +17,8 @@ import {
   createMeeting,
   getAttendeeFromDB,
   getMeetingFromDB,
-  joinMeeting
-} from "../../utils/api";
+  joinMeeting,
+} from '../../utils/api';
 
 const MeetingForm: FC = () => {
   const meetingManager = useMeetingManager();
@@ -33,6 +33,34 @@ const MeetingForm: FC = () => {
     meetingTitle,
     setMeetingTitle,
   } = useScriptideContext();
+
+  // START: Code for Notion automatic re-login after granting access
+  useEffect(() => {
+    const params = new URL(location.href).searchParams;
+    const code = params.get('code');
+    if (!code) {
+      return;
+    } else {
+      const localMeetingTitle = window.localStorage.getItem('meetingTitle');
+      const localAttendeeName = window.localStorage.getItem('attendeeName');
+      if (
+        typeof localMeetingTitle === 'string' &&
+        typeof localAttendeeName === 'string'
+      ) {
+        const processedLocalStorageMeetingTitle = JSON.parse(localMeetingTitle);
+        const processedLocalStorageAttendeeName =
+          JSON.parse(localAttendeeName);
+
+        setName(processedLocalStorageAttendeeName);
+        setMeetingTitle(processedLocalStorageMeetingTitle);
+        setTimeout(() => {
+          // @ts-ignore
+          document.getElementById('primary-button').click();
+        }, 200);
+      }
+    }
+  }, []);
+  // END: Code for Notion automatic re-login after granting access
 
   function getAttendeeCallback() {
     return async (chimeAttendeeId: string, externalUserId?: string) => {
@@ -52,7 +80,6 @@ const MeetingForm: FC = () => {
     const title = meetingTitle.trim().toLocaleLowerCase();
     const name = attendeeName.trim();
     setMeetingIdentifier(title);
-    console.log("meeting manager", meetingManager);
 
     const meetingResponse: any = await getMeetingFromDB(title);
     const meetingJson = meetingResponse.data.getMeeting;
@@ -61,7 +88,7 @@ const MeetingForm: FC = () => {
         setMeetingActive(true);
         const meetingData = JSON.parse(meetingJson.data);
         const joinInfo = await joinMeeting(meetingData.MeetingId, name);
-        
+
         await addAttendeeToDB(joinInfo.Attendee.AttendeeId, name);
         const meetingSessionConfiguration = new MeetingSessionConfiguration(
           meetingData,
@@ -73,7 +100,7 @@ const MeetingForm: FC = () => {
         // await meetingManager.audioVideo?.startVideoInput();
       } else {
         setMeetingActive(true);
-        const joinInfo = await createMeeting(title, name, "us-east-1");
+        const joinInfo = await createMeeting(title, name, 'us-east-1');
         await addMeetingToDB(
           title,
           joinInfo.Meeting.MeetingId,
@@ -96,7 +123,7 @@ const MeetingForm: FC = () => {
 
     const videoDevice =
       await meetingManager.audioVideo?.listVideoInputDevices();
-    console.log("9900", videoDevice);
+
 
     let localVideoDevice;
     const videoStuff = videoDevice.map((info) => {
@@ -105,52 +132,57 @@ const MeetingForm: FC = () => {
     });
 
     await meetingManager.audioVideo?.startVideoInput(localVideoDevice);
-    console.log("888", localVideoDevice);
 
-    // await meetingManager.audioVideo?.realtimeMuteLocalAudio();
-    // await meetingManager.audioVideo?.realtimeSetCanUnmuteLocalAudio(false);
-    // await meetingManager.audioVideo?.startVideoInput(audioInputDeviceInfo.deviceId);
-    // await meetingManager.audioVideo?.start();
-    console.log("???", isVideoEnabled);
+
     if (localVideoDevice && !isVideoEnabled) {
-      console.log("TURN ON VIDEO!!!!");
       setTimeout(() => {
         toggleVideo();
       }, 3000);
       toggleVideo();
     }
-    console.log("AUDIO VIDEO STUFF --> ", meetingManager.audioVideo);
   };
   toggleVideo();
 
   return (
-    <div className="form-container">
+    <div className='form-container'>
       <form>
         <FormField
           field={Input}
-          label="Meeting ID"
+          label='Meeting ID'
           value={meetingTitle}
           fieldProps={{
-            name: "Meeting ID",
-            placeholder: "Enter a Meeting ID",
+            name: 'Meeting ID',
+            placeholder: 'Enter a Meeting ID',
           }}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setMeetingTitle(e.target.value);
+            window.localStorage.setItem(
+              'meetingTitle',
+              JSON.stringify(e.target.value)
+            );
           }}
         />
         <FormField
           field={Input}
-          label="Name"
+          label='Name'
           value={attendeeName}
           fieldProps={{
-            name: "Name",
-            placeholder: "Enter your Attendee Name",
+            name: 'Name',
+            placeholder: 'Enter your Attendee Name',
           }}
           onChange={(e: ChangeEvent<HTMLInputElement>) => {
             setName(e.target.value);
+            window.localStorage.setItem(
+              'attendeeName',
+              JSON.stringify(e.target.value)
+            );
           }}
         />
-        <PrimaryButton label="Join Meeting" onClick={clickedJoinMeeting} />
+        <PrimaryButton
+          label='Join Meeting'
+          id='primary-button'
+          onClick={clickedJoinMeeting}
+        />
       </form>
     </div>
   );

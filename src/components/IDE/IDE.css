@@ -26,18 +26,7 @@
       );
 }
 
-/* 
-.monaco-editor {
-  border-radius: 10px; 
-}
 
-.overflow-guard {
-  border-top:18px solid rgb(28 28 28);
-  border-right:18px solid rgb(28 28 28);
-  border-bottom:18px solid rgb(28 28 28);
-  padding: 2rem;
-  border-radius: 10px;
-} */
 
 #lock {
   width: 100vw;
@@ -53,4 +42,44 @@
   justify-content: center;
   align-items: center;
   opacity: 1;
+}
+
+/* Dropdown CSS */
+.dropdown {
+  color: '#A5FECB';
+  height: 3rem;
+  position: absolute;
+  left: 7%;
+}
+
+.lang-dropdown-hidden {
+  bottom: 83.1%;
+  left: 12.9%;
+  opacity: 0;
+  transition: .2s;
+
+}
+
+.lang-dropdown {
+  bottom: 83.1%;
+  left: 12.9%;
+  opacity: 1;
+  z-index: 100000;
+  transition: .2s;
+}
+
+.theme-dropdown {
+  bottom: 83.1%;
+  left: 12.9%;
+  opacity: 1;
+  z-index: 100000;
+  transition: .2s;
+}
+
+.theme-dropdown-hidden {
+  bottom: 83.1%;
+  left: 12.9%;
+  opacity: 0;
+  z-index: 100000;
+  transition: .2s;
 }

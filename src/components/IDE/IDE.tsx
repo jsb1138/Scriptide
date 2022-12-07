@@ -63,7 +63,6 @@ export function IDE() {
       source_code: btoa(code),
       stdin: btoa(""),
     };
-    console.log(formData);
     const options = {
       method: "POST",
       url: submissions,
@@ -80,13 +79,10 @@ export function IDE() {
     axios
       .request(options)
       .then(function (response: { data: { token: any } }) {
-        console.log("res.data: ", response.data);
         const token = response.data.token;
-        console.log("token: ", token);
         checkStatus(token);
       })
       .catch((err: { response: { data: any } }) => {
-        console.log(options);
         let error = err.response ? err.response.data : err;
         //@ts-ignore
         setProcessing(false);
@@ -141,6 +137,7 @@ export function IDE() {
 
   function handleChange(value: any) {
     updateIDE("content", value);
+    onChange('code', value);
   }
 
   //liveblocks
@@ -164,9 +161,9 @@ export function IDE() {
         width="74vw"
         onMount={handleEditorDidMount}
         onChange={handleChange}
-        language={language?.value}
+        language={language?.value || 'javascript'}
         value={ide.content}
-        theme={theme.value}
+        theme={theme?.value || 'vs-dark'}
       />
 
       <div className="ide-output">

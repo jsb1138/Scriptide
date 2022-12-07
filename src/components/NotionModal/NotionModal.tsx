@@ -4,8 +4,11 @@ import { useState, useEffect } from 'react';
 import { useScriptideContext } from '../../contexts/ScriptideProvider';
 import CloseCross from '../../assets/close.png';
 
+interface Props {
+  meetingLoaded: boolean;
+}
 
-function NotionModal() {
+function NotionModal({meetingLoaded}: Props) {
   const { notionModalIsOpen, setNotionModalIsOpen, userNotionId, setUserNotionId } = useScriptideContext();
 
   function handleClick() {
@@ -16,13 +19,13 @@ function NotionModal() {
     const params = new URL(location.href).searchParams;
     const code = params.get('code');
     if (!code) return;
-    setNotionModalIsOpen(true);
     const res = await fetch(
       `https://zi0hht29th.execute-api.eu-central-1.amazonaws.com/default/ScriptideNotionLogin?code=${code}`
-    );
-    const data = await res.json();
-    if (data) {
-      setUserNotionId(data);
+      );
+      const data = await res.json();
+      if (data) {
+        setUserNotionId(data);
+        setNotionModalIsOpen(true);
     }
   };
 
@@ -59,16 +62,15 @@ function NotionModal() {
     event.currentTarget.notionBulletPoint.value = "";
   }
 
-  if (notionModalIsOpen) {
     return (
-      <div className='notion-modal'>
+      <div className={`${notionModalIsOpen ? "notion-modal" : "notion-modal-closed"}`} style={{visibility: `${meetingLoaded ? "visible" : "hidden"}`}} >
         <div onClick={handleClick} className='cross'>
           <img id='close-cross-show' src={CloseCross} alt=' closing cross' />
         </div>
         {!userNotionId ? (
-          <h3 className="nodal-show">Grant Access to Notion</h3>
+          <h3 className={`${!notionModalIsOpen && "header-dont-show" }`}>Grant Access to Notion</h3>
         ) : (
-          <h3 className="nodal-show">Post to Notion
+          <h3 className={`${!notionModalIsOpen && "header-dont-show" }`}>Post to Notion
             </h3>
         )}
         {!userNotionId ? (
@@ -97,44 +99,5 @@ function NotionModal() {
         )}
       </div>
     );
-  } else {
-    return (
-       <div className='notion-modal-closed'>
-        <div onClick={handleClick} className='cross'>
-          <img id='close-cross-dont-show' src={CloseCross} alt=' closing cross' />
-        </div>
-        {!userNotionId ? (
-          <h3 className='nodal-dont-show'>Grant Access to Notion</h3>
-        ) : (
-          <h3 className='nodal-dont-show'>Post to Notion
-            </h3>
-        )}
-        {!userNotionId ? (
-          <a href='https://api.notion.com/v1/oauth/authorize?client_id=08b1c623-a965-4750-9a1e-11042ef8700f&response_type=code&owner=user&redirect_uri=http%3A%2F%2Flocalhost%3A5173%2Fauth%2Fnotion%2Fcallback'>
-            <button className='nodal-dont-show'>Connect to Notion</button>
-          </a>
-        ) : (
-          <form onSubmit={handleSubmit} id='notion-form'>
-            <input
-              type='text'
-              id='notionPageTitle'
-              name='notionPageTitle'
-              placeholder='Enter Page Title'
-            />
-            <textarea
-              name='notionBulletPoint'
-              id='notionBulletPoint'
-              cols={28}
-              rows={5}
-              placeholder='This text will be added as a bulletpoint'
-            ></textarea>
-            <button id='notion-submit-button' type='submit'>
-              Send
-            </button>
-          </form>
-        )}
-      </div>  );
-  }
-}
-
+        }
 export default NotionModal;
