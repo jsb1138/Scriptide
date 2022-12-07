@@ -157,9 +157,9 @@
   padding: 240px 200px 300px 200px;
   z-index: 9999;
   transition: 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-  
-  
-  
+
+
+
   /* overflow: scroll; */
   display: flex;
   align-content: center;
@@ -309,7 +309,7 @@
   hsl(200deg 56% 60% / 40%) 94%,
   hsl(200deg 56% 58% / 40%) 100%
 );
-} 
+}
 
 #hands button {
   padding: 0;
@@ -402,31 +402,34 @@
 }
 
 .lang-dropdown-hidden {
-  bottom: 57%;
+  bottom: 83.1%;
+  left: 12.9%;
   opacity: 0;
   transition: .2s;
 
 }
 
 .lang-dropdown {
-  bottom: 57%;
+  bottom: 83.1%;
+  left: 12.9%;
   opacity: 1;
   z-index: 100000;
   transition: .2s;
 }
 
 .theme-dropdown {
-  bottom: 50%;
-  left: 140px;
+  bottom: 83.1%;
+  left: 12.9%;
   opacity: 1;
   z-index: 100000;
   transition: .2s;
 }
 
 .theme-dropdown-hidden {
-  bottom: 67%;
-  left: -200px;
+  bottom: 83.1%;
+  left: 12.9%;
   opacity: 0;
+  z-index: 100000;
   transition: .2s;
 }
 

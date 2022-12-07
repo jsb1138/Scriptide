@@ -44,9 +44,9 @@ const MenuBar: FC = () => {
   };
   const handleTheme = () => {
     if (showLanguage) setShowLanguage(!showLanguage);
-
     setShowTheme(!showTheme);
   };
+  
   const handleLanguage = () => {
     if (showTheme) setShowTheme(!showTheme);
     setShowLanguage(!showLanguage);
