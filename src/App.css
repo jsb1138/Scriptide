@@ -412,14 +412,26 @@ h3 {
 .overflow-guard {
   border-radius: 1rem;
   /* border: 5px solid yellow; */
-
+  width: 10%;
+  opacity: 1;
+  
 }
 
 .monaco-editor {
   border-radius: 1rem;
+  width: 10%;
   /* border: 5px solid darksalmon; */
 }
 
+.mini-slider-horizontal {
+  border-radius: 1rem;
+  border: 5px solid blanchedalmond;
+  opacity: 0;
+  width: 10%;
+}
+
+
+/* 
 .sc-kMjNwy .lcJRGE .sc-ilhmMj .eOSYqn {
   z-index: 1000000000000000000;
-}
+} */

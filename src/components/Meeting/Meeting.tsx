@@ -62,6 +62,7 @@ const Meeting: FC = () => {
     userIsLocked,
     setUserIsLocked,
     setThisUser,
+    setThisUserName,
     localRaisedHand,
     setLocalRaisedHand,
     showLanguage,
@@ -96,6 +97,7 @@ const Meeting: FC = () => {
     // @ts-ignore
     currentUserName = name;
     setThisUser(currentUserId);
+    setThisUserName(currentUserName);
   });
 
   ///////// COULD IMPORT THESE FUNCTIONS FROM ELSEWHERE... AS HELPERS??
