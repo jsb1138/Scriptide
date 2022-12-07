@@ -33,8 +33,6 @@ export default function HandRaiser() {
 
   const unmutedUsers = useStorage((root: any) => root.unmutedAttendees);
   const unlockedUsers = useStorage((root: any) => root.unlockedAttendees);
-  console.log("unmuted users --->", unmutedUsers);
-  console.log("unlocked users --->", unlockedUsers);
 
   //////////////////////////////////////////////////////////////////////////////////////////liveblocks
   const removeRaisedHand = (index: number) => {
