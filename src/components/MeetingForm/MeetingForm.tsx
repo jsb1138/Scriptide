@@ -9,8 +9,8 @@ import {
   useMeetingManager,
   useLocalVideo,
   getDeviceId,
-} from "amazon-chime-sdk-component-library-react";
-import { MeetingSessionConfiguration } from "amazon-chime-sdk-js";
+} from 'amazon-chime-sdk-component-library-react';
+import { MeetingSessionConfiguration } from 'amazon-chime-sdk-js';
 import {
   addAttendeeToDB,
   addMeetingToDB,
@@ -43,13 +43,16 @@ const MeetingForm: FC = () => {
     } else {
       const localMeetingTitle = window.localStorage.getItem('meetingTitle');
       const localAttendeeName = window.localStorage.getItem('attendeeName');
+      const meetingIsEnded = window.localStorage.getItem('meetingIsEnded');
+      if (meetingIsEnded) {
+        return;
+      }
       if (
         typeof localMeetingTitle === 'string' &&
         typeof localAttendeeName === 'string'
       ) {
         const processedLocalStorageMeetingTitle = JSON.parse(localMeetingTitle);
-        const processedLocalStorageAttendeeName =
-          JSON.parse(localAttendeeName);
+        const processedLocalStorageAttendeeName = JSON.parse(localAttendeeName);
 
         setName(processedLocalStorageAttendeeName);
         setMeetingTitle(processedLocalStorageMeetingTitle);
@@ -124,7 +127,6 @@ const MeetingForm: FC = () => {
     const videoDevice =
       await meetingManager.audioVideo?.listVideoInputDevices();
 
-
     let localVideoDevice;
     const videoStuff = videoDevice.map((info) => {
       const { deviceId } = info;
@@ -132,7 +134,6 @@ const MeetingForm: FC = () => {
     });
 
     await meetingManager.audioVideo?.startVideoInput(localVideoDevice);
-
 
     if (localVideoDevice && !isVideoEnabled) {
       setTimeout(() => {
