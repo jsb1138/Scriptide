@@ -25,8 +25,8 @@ Scriptide is written with the React frontend framework and Typescript and is bun
 
 ## Contributors
 
-Alexander Scharpf
-Brent Curriden
-Joel Boychuk
-Konstantin Richter
+Alexander Scharpf \
+Brent Curriden \
+Joel Boychuk \
+Konstantin Richter \
 Nicholas Larson
