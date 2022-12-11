@@ -1,6 +1,6 @@
 # Scriptide
 
-Scriptide is an all-in-one solution for video conferencing, realtime IDE collaboration, note taking and whiteboarding. Scriptide allows for teams of up to 250 users to meet, as well as enter and run code all from the comfort of a single, platform agnostic desktop application. Designed with education in mind, Scriptide gives educators a simple to use platform to host and manage realtime lessons with students in an engaging and streamlined environment, enabling instructors to offer or revoke the ability of students to contribute in realtime to the IDE.
+Scriptide is an all-in-one solution for video conferencing, realtime IDE collaboration, note taking and whiteboarding. Scriptide allows for teams of up to 250 users to meet, as well as enter and run code all from the comfort of a single, platform agnostic desktop application. Designed primarily for educational purposes, Scriptide gives educators a simple to use platform to host and manage realtime lessons with students in an engaging and streamlined environment, enabling instructors to offer or revoke the ability of students to contribute in realtime to the IDE.
 
 ## Getting Started
 
