@@ -21,7 +21,7 @@ It correctly bundles the app in production mode and optimizes the build for the 
 
 ## Tech Stack
 
-Scriptide is written with the React frontend framework and Typescript and is bundled using Tauri, which relies on Rust. Tauri delivers application builds with platform native functionality for Mac OS, Windows and Linux. Scriptide employs AWS Chime and Amplify for its video conferencing capabilities. It utilizes the Monaco Editor and Judge0 for its code input and execution capabilites. The app uses Liveblocks to enable end-to-end multiplayer functionality and the app relies on AWS Lambda and DynamoDB to manage and deliver backend services for the app.
+Scriptide is written with the React frontend framework and Typescript and is bundled using Tauri, which relies on Rust. Tauri delivers application builds with platform native functionality for Mac OS, Windows and Linux. Scriptide employs AWS Chime and Amplify for its video conferencing capabilities. It utilizes the Monaco Editor and Judge0 for its code input and execution capabilites. The app uses Liveblocks to enable end-to-end multiplayer functionality and the app relies on AWS Lambda and DynamoDB to manage and deliver backend services.
 
 ## Contributors
 
